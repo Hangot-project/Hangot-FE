@@ -1,0 +1,66 @@
+.container {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+  padding: 2.75rem 8rem;
+
+  background-color: #003b71;
+
+  display: flex;
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .container {
+    padding: 2.75rem 12rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .container {
+    padding: 2.75rem 20rem;
+  }
+}
+
+.navContainer {
+  display: flex;
+  align-items: center;
+}
+
+.navContainer > * {
+  font-size: 0.75rem;
+}
+
+.divisionLine {
+  background-color: #bdbdbb;
+}
+
+.infoContainer {
+  color: #bdbdbd;
+}
+
+.infoContainer > * {
+  font-size: 0.75rem;
+}
+
+.infoContainer > * {
+  margin-top: 8px;
+}
+
+.infoContainer > *:first-child {
+  margin-top: 0;
+}
+
+.snsContainer {
+  margin-left: auto;
+
+  display: flex;
+}
+
+.snsContainer > * {
+  margin-left: 1rem;
+}
+
+.snsContainer > *:first-child {
+  margin-left: 0;
+}

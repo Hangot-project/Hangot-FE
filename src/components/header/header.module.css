@@ -1,0 +1,61 @@
+.container {
+  padding: 2.125rem 8rem;
+
+  background-color: #003b71;
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .container {
+    padding: 2.125rem 12rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .container {
+    padding: 2.125rem 20rem;
+  }
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.navWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navWrapper > li {
+  color: white;
+  font-size: 0.813rem;
+}
+
+.headerWrapper {
+  margin-top: 0.906rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuWrapper {
+  /* width: 60vw; */
+  flex-grow: 1;
+  height: 100%;
+
+  margin-left: auto;
+
+  display: table;
+  table-layout: fixed;
+}
+
+.menuWrapper > li {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+
+  color: white;
+  font-size: 1.125rem;
+  font-weight: bold;
+}
