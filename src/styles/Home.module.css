@@ -1,3 +1,7 @@
+.main {
+  padding: 2.625rem 0 8.625rem 0;
+}
+
 .serviceTitle {
   font-size: 1.5rem;
   font-family: "NotoSansBold";
@@ -9,6 +13,50 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   column-gap: 1.5rem;
+}
+
+@media screen and (max-width: 640px) {
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1007px) {
+  .serviceGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.listboardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2.5rem;
+}
+
+.dataListWrapper {
+  display: flex;
+  align-items: center;
+
+  padding: 0.5rem 0;
+}
+
+.dataListTitle {
+  font-size: 0.875rem;
+}
+
+.dataLabel {
+  display: inline-block;
+
+  width: 4.125rem;
+  padding: 0.125rem 0;
+  margin-right: 0.625rem;
+
+  background-color: #ffd361;
+  border-radius: 0.25rem;
+  border: solid 1px #000000;
+
+  text-align: center;
+  font-size: 0.75rem;
 }
 
 .container {

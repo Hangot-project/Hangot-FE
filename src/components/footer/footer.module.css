@@ -1,6 +1,6 @@
 .container {
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
 
   width: 100%;
   padding: 2.75rem 8rem;
@@ -63,4 +63,15 @@
 
 .snsContainer > *:first-child {
   margin-left: 0;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .snsContainer {
+    margin: 0;
+    margin-top: 2rem;
+  }
 }

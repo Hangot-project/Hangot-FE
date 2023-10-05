@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { Layout, MainServiceCard } from "../components";
+import { Layout, ListBoard, MainServiceCard } from "../components";
 import {
   ServiceAI,
   ServiceDaily,
@@ -8,6 +8,8 @@ import {
   ServicePopluar,
   ServiceTop,
 } from "../../public/svgs";
+import { currentOpenDataDummy } from "../dummy-data/main-datas";
+import Link from "next/link";
 
 const MAIN_SERVICES = [
   {
@@ -37,31 +39,88 @@ const MAIN_SERVICES = [
   },
 ];
 
-export default function Home() {
+export default function Home({ listDataDummy }) {
   return (
     <Layout>
       <Head>
         <title>HYU Data Portal with CKAN</title>
       </Head>
-      {/* //* section1 - 검색 */}
+      <main className={styles.main}>
+        {/* //* section1 - 검색 */}
 
-      {/* //* section2 - 데이터 정보 및 배너 */}
+        {/* //* section2 - 데이터 정보 및 배너 */}
 
-      {/* //* section3 - 유형별 데이터 목록 */}
+        {/* //* section3 - 유형별 데이터 목록 */}
+        <section>
+          <div className={styles.listboardGrid}>
+            {/* //? 유형 1 */}
+            <ListBoard title="새로 개방한 데이터">
+              {listDataDummy.map((value, index) => (
+                <Link
+                  href={"/"}
+                  key={value.dataId}
+                  className={styles.dataListWrapper}
+                >
+                  <label className={styles.dataLabel}>{value.label}</label>
+                  <p className={styles.dataListTitle}>{value.title}</p>
+                </Link>
+              ))}
+            </ListBoard>
 
-      {/* //* section4 - 주요 서비스 */}
-      <h1 style={{ marginTop: "1.5rem" }} className={styles.serviceTitle}>
-        주요 서비스
-      </h1>
-      <div className={styles.serviceGrid}>
-        {MAIN_SERVICES.map((service) => (
-          <MainServiceCard
-            image={service.src}
-            title={service.title}
-            subtitle={service.subtitle}
-          />
-        ))}
-      </div>
+            {/* //? 유형 2 */}
+            <ListBoard title="데이터 소식">
+              {listDataDummy.map((value, index) => (
+                <Link
+                  href={"/"}
+                  key={value.dataId}
+                  className={styles.dataListWrapper}
+                >
+                  <label className={styles.dataLabel}>{value.label}</label>
+                  <p className={styles.dataListTitle}>{value.title}</p>
+                </Link>
+              ))}
+            </ListBoard>
+
+            {/* //? 유형 3 */}
+            <ListBoard title="통계분석">
+              {listDataDummy.map((value, index) => (
+                <Link
+                  href={"/"}
+                  key={value.dataId}
+                  className={styles.dataListWrapper}
+                >
+                  <label className={styles.dataLabel}>{value.label}</label>
+                  <p className={styles.dataListTitle}>{value.title}</p>
+                </Link>
+              ))}
+            </ListBoard>
+          </div>
+        </section>
+
+        {/* //* section4 - 주요 서비스 */}
+        <section style={{ marginTop: "1.5rem" }}>
+          <h1 className={styles.serviceTitle}>주요 서비스</h1>
+          <div className={styles.serviceGrid}>
+            {MAIN_SERVICES.map((service) => (
+              <MainServiceCard
+                image={service.src}
+                title={service.title}
+                subtitle={service.subtitle}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
     </Layout>
   );
 }
+
+// ! 메인 페이지는 유형별 데이터 리스트에 의존성을 가짐 - section3 (유형별 데이터 리스트)
+// ? -> 따라서 NextJS가 메인 페이지를 Pre-Rendering 하기 전에, 'listData(Dummy)를 먼저 fetch 해야함'을 알려준다.
+export const getStaticProps = async () => {
+  const listDataDummy = currentOpenDataDummy;
+
+  return {
+    props: { listDataDummy },
+  };
+};

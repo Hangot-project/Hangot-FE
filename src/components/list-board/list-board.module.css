@@ -1,0 +1,28 @@
+.container {
+  display: inline-block;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-family: "NotoSansBold";
+}
+
+.more {
+  font-size: 0.875rem;
+  font-family: "NotoSansMedium";
+
+  color: #181818;
+}
+
+.divider {
+  height: 2px;
+  background-color: #003b71;
+
+  margin: 1rem 0;
+}
