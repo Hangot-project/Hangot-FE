@@ -1,0 +1,38 @@
+.searchbox_container {
+    width: 600px;
+    height: auto;
+
+    border-radius: 25px;
+    border: solid 2.5px #003b71;
+
+    text-align: center;
+    padding: 4px opx 4px 20px;
+
+    margin: 0 auto;
+}
+
+.searchbox_input {
+    position: relative;
+    display: inline;
+    width: 500px;
+    height: 45px;
+    
+    vertical-align: middle;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    font-size: 18px;
+    color: #757575;
+}
+
+.searchbox_img {
+    position: relative;
+    display: inline;
+    width: 27px;
+    height: 27px;
+    
+    margin-left: 10px;
+    vertical-align: middle;
+}

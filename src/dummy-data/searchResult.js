@@ -1,0 +1,42 @@
+export const DataBoxDummy = [
+    {
+      dataId: 1,
+      title: "Amendment to MP2014 Rail Station Text",
+      subtitle: "Annotation of MRT and LRT station name.",
+      num: 2,
+      type: "JSON",
+      from: "Urban Redevelopment Authority (URA)",
+    },
+    {
+      dataId: 2,
+      title: "Amendment to MP2014 Rail Station Text",
+      subtitle: "Annotation of MRT and LRT station name.",
+      num: 2,
+      type: "JSON",
+      from: "Urban Redevelopment Authority (URA)",
+    },
+    {
+      dataId: 3,
+      title: "Amendment to MP2014 Rail Station Text",
+      subtitle: "Annotation of MRT and LRT station name.",
+      num: 2,
+      type: "JSON",
+      from: "Urban Redevelopment Authority (URA)",
+    },
+    {
+      dataId: 4,
+      title: "Amendment to MP2014 Rail Station Text",
+      subtitle: "Annotation of MRT and LRT station name.",
+      num: 2,
+      type: "JSON",
+      from: "Urban Redevelopment Authority (URA)",
+    },
+    {
+      dataId: 5,
+      title: "Amendment to MP2014 Rail Station Text",
+      subtitle: "Annotation of MRT and LRT station name.",
+      num: 2,
+      type: "JSON",
+      from: "Urban Redevelopment Authority (URA)",
+    },
+  ];

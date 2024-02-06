@@ -13,5 +13,11 @@ import ServiceDaily from "./ex_service_daily.svg";
 import ServicePopluar from "./ex_service_popular.svg";
 import ServiceTop from "./ex_service_100.svg";
 
+import SearchSymbol from "./search_symbol.svg";
+import CheckSymbol from "./check_symbol.svg";
+import DataType from "./data_type.svg";
+import DataOrganization from "./data_organization.svg";
+
 export { SymbolLogo, MainLogo, HYU, Instagram, Youtube, Facebook, Twitter };
 export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
+export { SearchSymbol, CheckSymbol, DataType, DataOrganization };
