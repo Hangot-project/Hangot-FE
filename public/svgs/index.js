@@ -13,5 +13,8 @@ import ServiceDaily from "./ex_service_daily.svg";
 import ServicePopluar from "./ex_service_popular.svg";
 import ServiceTop from "./ex_service_100.svg";
 
+import ArrowDown from "./arrow_down.png";
+
 export { SymbolLogo, MainLogo, HYU, Instagram, Youtube, Facebook, Twitter };
 export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
+export { ArrowDown };
