@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 import styles from "./search-sort-dropdown.module.css";
 import { useOutsideClick } from "../../hooks";
 import Image from "next/image";
-import { ArrowDown } from "../../../public/images";
+import { ArrowDown } from "../../../public/svgs";
 
 /**
  * @param {{selectedItem: string; setSelectedItem: React.Dispatch<React.SetStateAction<string>>; items: string[]; style?: React.CSSProperties;}}
