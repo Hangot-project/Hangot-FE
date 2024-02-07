@@ -9,7 +9,6 @@ import {
   ServiceTop,
 } from "../../public/svgs";
 import { currentOpenDataDummy } from "../dummy-data/main-datas";
-import Link from "next/link";
 
 const MAIN_SERVICES = [
   {
@@ -54,46 +53,28 @@ export default function Home({ listDataDummy }) {
         <section>
           <div className={styles.listboardGrid}>
             {/* //? 유형 1 */}
-            <ListBoard title="새로 개방한 데이터">
-              {listDataDummy.map((value, index) => (
-                <Link
-                  href={"/"}
-                  key={value.dataId}
-                  className={styles.dataListWrapper}
-                >
-                  <label className={styles.dataLabel}>{value.label}</label>
-                  <p className={styles.dataListTitle}>{value.title}</p>
-                </Link>
-              ))}
-            </ListBoard>
+            <ListBoard
+              title="새로 개방한 데이터"
+              dataList={listDataDummy}
+              // TODO: url 변경
+              url={"search-result"}
+            />
 
             {/* //? 유형 2 */}
-            <ListBoard title="데이터 소식">
-              {listDataDummy.map((value, index) => (
-                <Link
-                  href={"/"}
-                  key={value.dataId}
-                  className={styles.dataListWrapper}
-                >
-                  <label className={styles.dataLabel}>{value.label}</label>
-                  <p className={styles.dataListTitle}>{value.title}</p>
-                </Link>
-              ))}
-            </ListBoard>
+            <ListBoard
+              title="데이터 소식"
+              dataList={listDataDummy}
+              // TODO: url 변경
+              url={"search-result"}
+            />
 
             {/* //? 유형 3 */}
-            <ListBoard title="통계분석">
-              {listDataDummy.map((value, index) => (
-                <Link
-                  href={"/"}
-                  key={value.dataId}
-                  className={styles.dataListWrapper}
-                >
-                  <label className={styles.dataLabel}>{value.label}</label>
-                  <p className={styles.dataListTitle}>{value.title}</p>
-                </Link>
-              ))}
-            </ListBoard>
+            <ListBoard
+              title="통계분석"
+              dataList={listDataDummy}
+              // TODO: url 변경
+              url={"search-result"}
+            />
           </div>
         </section>
 
