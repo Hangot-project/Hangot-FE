@@ -2,16 +2,21 @@ import React, { useCallback, useRef } from "react";
 import styles from "./search-sort-dropdown.module.css";
 import { useOutsideClick } from "../../hooks";
 import Image from "next/image";
-import { ArrowDown } from "../../../public/svgs";
+import { ArrowDown } from "../../../public/images";
 
 /**
- *
+ * @param {{selectedItem: string; setSelectedItem: React.Dispatch<React.SetStateAction<string>>; items: string[]; style?: React.CSSProperties;}}
  * @param {string} selectedItem - 선택된 항목(문자열)
  * @param {*} setSelectedItem - 선택 항목을 변경하는 setState 함수
  * @param {string[]} items - 드롭다운 항목 배열(문자열 배열)
- * @returns
+ * @param {} style - 드롭다운 박스에 입힐 스타일 객체
  */
-export const SearchSortDropdown = ({ selectedItem, setSelectedItem, items }) => {
+export const SearchSortDropdown = ({
+  selectedItem,
+  setSelectedItem,
+  items,
+  style,
+}) => {
   const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useOutsideClick(dropdownRef, false);
@@ -22,17 +27,17 @@ export const SearchSortDropdown = ({ selectedItem, setSelectedItem, items }) => 
 
   const selectedContainerStyle = isActive
     ? {
-        borderBottom: 0,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        borderBottomColor: "transparent",
       }
     : {};
 
+  const containerStyle = Object.assign({}, selectedContainerStyle, style);
+
   return (
-    <>
+    <div>
       <div
         className={styles.selectedContainer}
-        style={selectedContainerStyle}
+        style={containerStyle}
         onClick={handleButtonClick}
         ref={dropdownRef}
       >
@@ -53,10 +58,10 @@ export const SearchSortDropdown = ({ selectedItem, setSelectedItem, items }) => 
               </li>
             ))
           ) : (
-            <li>항목이 존재하지 않습니다.</li>
+            <li className={styles.listItem}>항목 없음</li>
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 };
