@@ -20,10 +20,19 @@ export const SearchSortDropdown = ({ selectedItem, setSelectedItem, items }) => 
     setIsActive((prev) => !prev);
   }, [setIsActive]);
 
+  const selectedContainerStyle = isActive
+    ? {
+        borderBottom: 0,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+      }
+    : {};
+
   return (
     <>
       <div
         className={styles.selectedContainer}
+        style={selectedContainerStyle}
         onClick={handleButtonClick}
         ref={dropdownRef}
       >
@@ -32,7 +41,7 @@ export const SearchSortDropdown = ({ selectedItem, setSelectedItem, items }) => 
       </div>
 
       {isActive && (
-        <ul className={styles.listContaer}>
+        <ul className={styles.listContainer}>
           {items?.length ? (
             items.map((value, index) => (
               <li
