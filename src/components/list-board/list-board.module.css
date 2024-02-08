@@ -29,6 +29,7 @@
 
 .dataListWrapper {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   padding: 0.5rem 0;
@@ -36,12 +37,17 @@
 
 .dataListTitle {
   font-size: 0.875rem;
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dataLabel {
   display: inline-block;
 
-  width: 4.125rem;
+  max-width: 5rem;
+  width: 20%;
   padding: 0.125rem 0;
   margin-right: 0.625rem;
 

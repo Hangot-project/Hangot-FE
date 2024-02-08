@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./vertical-divider.module.css";
 
 export function VerticalDivider(props) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SearchSortDropdown } from "../components";
+import { SearchSortDropdown } from "../../components";
 
 const FilterOptions = ["인기순", "최신순"];
 

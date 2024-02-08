@@ -1,33 +1,29 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { Layout, SearchSortDropdown } from "../components";
-import styles from "../styles/searchResult.module.css";
+"use client";
+
+import React, { useState } from "react";
+import { SearchSortDropdown } from "../../components";
+import styles from "./searchResult.module.css";
 import Image from "next/image";
-import { ResetIcon } from "../../public/svgs";
-import { StickHorizonSmall } from "../../public/svgs";
+import { ResetIcon } from "../../../public/svgs";
+import { StickHorizonSmall } from "../../../public/svgs";
+import { Dataset } from "../../api/search-result";
 
-export const dynamic = "force-dynamic";
-
-export default function SearchResult() {
-  const searchParams = useSearchParams();
-
-  const [keyword, setKeyword] = useState("");
-  const [resultCount, setResultCount] = useState(0);
-
+/**
+ *
+ * @param {{keyword: string | null; results: Dataset[]; totalPage: number;}} param0
+ * @returns
+ */
+export default async function SearchResult({ keyword, results, totalPage }) {
   //TODO: reset button event handler
-  const handleResetClick = useCallback(() => {
+  const handleResetClick = () => {
     alert("초기화 버튼 클릭");
-  }, []);
+  };
 
-  //* url에서 검색어 쿼리 추출
-  useEffect(() => {
-    if (searchParams.has("search")) {
-      setKeyword(searchParams.get("search"));
-    }
-  }, [searchParams]);
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedPagination, setSelectedPagination] = useState(1);
 
   return (
-    <Layout>
+    <>
       {/* //* navigate info box */}
       <div className={styles.navigateInfoContainer}>
         <p>Home {" > "} 데이터 찾기</p>
@@ -39,12 +35,12 @@ export default function SearchResult() {
       {/* //* 검색어 안내 문구 */}
       {keyword ? (
         <h1 className={styles.keywordTitle}>
-          <span>' {keyword} '</span> 에 대한 {resultCount.toLocaleString()}개의 검색
-          결과
+          <span>' {keyword} '</span> 에 대한 {results.length.toLocaleString()}개의
+          검색 결과
         </h1>
       ) : (
         <h1 className={styles.keywordTitle}>
-          {resultCount.toLocaleString()}개의 데이터 열람 가능
+          {results.length.toLocaleString()}개의 데이터 열람 가능
         </h1>
       )}
 
@@ -77,22 +73,32 @@ export default function SearchResult() {
             <h2 className={styles.sectionTitle}>
               전체{" "}
               <span className={styles.highlightText}>
-                {resultCount.toLocaleString()}
+                {results.length.toLocaleString()}
               </span>
               건
             </h2>
 
             {/* //* 검색 필터 */}
             <div className={styles.rowWrapper}>
-              <SearchSortDropdown />
+              <SearchSortDropdown
+                selectedItem={selectedFilter}
+                setSelectedItem={setSelectedFilter}
+              />
               <SearchSortDropdown style={{ marginLeft: "0.25rem" }} />
             </div>
           </div>
 
           {/* //? division line */}
           <div className={styles.divisionLine} />
+          {results.map((dataset) => (
+            <div key={dataset.datasetId}>
+              <h1>{dataset.title}</h1>
+              <p>{dataset.description}</p>
+              <h5>조회수: {dataset.view}</h5>
+            </div>
+          ))}
         </section>
       </main>
-    </Layout>
+    </>
   );
 }

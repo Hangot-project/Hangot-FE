@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./header.module.css";
 import { MainLogo } from "../../../public/svgs";
 import Image from "next/image";
