@@ -13,7 +13,7 @@ import { Dataset } from "../../api/search-result";
  * @param {{keyword: string | null; results: Dataset[]; totalPage: number;}} param0
  * @returns
  */
-export default async function SearchResult({ keyword, results, totalPage }) {
+export default function SearchResult({ keyword = null, results, totalPage }) {
   //TODO: reset button event handler
   const handleResetClick = () => {
     alert("초기화 버튼 클릭");
@@ -51,7 +51,7 @@ export default async function SearchResult({ keyword, results, totalPage }) {
           <div className={styles.sectionTitleWrapper}>
             <h2 className={styles.sectionTitle}>필터</h2>
             <div className={styles.resetTextContainer} onClick={handleResetClick}>
-              <Image src={ResetIcon} />
+              <Image src={ResetIcon} alt="초기화 버튼 이미지" />
               <p className={styles.resetText}>초기화</p>
             </div>
           </div>
@@ -62,7 +62,7 @@ export default async function SearchResult({ keyword, results, totalPage }) {
           {/* //? 주제별 */}
           <div className={styles.sectionTitleWrapper}>
             <h2 className={styles.sectionSubtitle}>주제별</h2>
-            <Image src={StickHorizonSmall} />
+            <Image src={StickHorizonSmall} alt="" />
           </div>
         </section>
 
