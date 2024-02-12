@@ -7,7 +7,7 @@ import { CheckRadioBlue, CheckRadioGray } from "../../../public/svgs";
 
 /**
  *
- * @param {{ isSelected: boolean; text: string; handleClick: React.MouseEventHandler<HTMLLabelElement; style: React.CSSProperties; }}
+ * @param {{ isSelected: boolean; text: string; handleClick: React.MouseEventHandler<HTMLDivElement; style: React.CSSProperties; }}
  * @param isSelected - 선택여부
  * @param text - 라벨 텍스트
  * @param handleClick - 선택여부 변경시 실행할 이벤트 핸들러 함수
@@ -16,13 +16,13 @@ import { CheckRadioBlue, CheckRadioGray } from "../../../public/svgs";
  */
 export function FilterCheckButton({ isSelected, text, handleClick, style }) {
   return (
-    <label className={styles.root} style={style} onClick={handleClick}>
+    <div className={styles.root} style={style} onClick={handleClick}>
       {isSelected ? (
         <Image src={CheckRadioBlue} alt="선택 취소 버튼" />
       ) : (
         <Image src={CheckRadioGray} alt="선택 버튼" />
       )}
       <p className={styles.labelText}>{text}</p>
-    </label>
+    </div>
   );
 }

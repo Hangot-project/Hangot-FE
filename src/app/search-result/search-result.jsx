@@ -54,7 +54,7 @@ export default function SearchResult({
 
   const keyword = searchParams.get("keyword");
 
-  const [selectedSort, setSelectedSort] = useState("");
+  const [selectedSort, setSelectedSort] = useState();
 
   /**
    * 쿼리 파라미터를 수정할 때 수정하는 함수
@@ -122,7 +122,11 @@ export default function SearchResult({
    * 정렬 필터 조건이 변경될 때마다 서버측에 다시 요청
    */
   useEffect(() => {
-    router.push(`${pathName}?${updateQueryString("create", "sort", selectedSort)}`);
+    if (selectedSort) {
+      router.push(
+        `${pathName}?${updateQueryString("create", "sort", selectedSort)}`,
+      );
+    }
   }, [selectedSort]);
 
   return (
@@ -169,8 +173,9 @@ export default function SearchResult({
           </div>
 
           <div>
-            {THEME_VALUES.map((value) => (
+            {THEME_VALUES.map((value, index) => (
               <FilterCheckButton
+                key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
                 value={value}
@@ -189,8 +194,9 @@ export default function SearchResult({
           </div>
 
           <div>
-            {ORGANIZATION_VALUES.map((value) => (
+            {ORGANIZATION_VALUES.map((value, index) => (
               <FilterCheckButton
+                key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
                 value={value}
