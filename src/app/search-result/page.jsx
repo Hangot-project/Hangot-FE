@@ -1,6 +1,7 @@
 import React from "react";
 import SearchResult from "./search-result";
 import { getSearchResults } from "../../api/search-result";
+import { notFound } from "next/navigation";
 
 export default async function Page({ searchParams }) {
   const pageStr = searchParams["page"];
@@ -9,8 +10,8 @@ export default async function Page({ searchParams }) {
   const organization = searchParams["organization"];
   const sort = searchParams["sort"];
 
-  if (pageStr && /^[^0]\d*/.test(pageStr)) {
-    // TODO: 404 page
+  if (pageStr && !/^[^0]\d*/.test(pageStr)) {
+    notFound();
   }
 
   // TODO:
