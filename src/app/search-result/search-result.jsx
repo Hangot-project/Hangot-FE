@@ -9,6 +9,7 @@ import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
 import { StickHorizonSmall } from "../../../public/svgs";
 import { Dataset } from "../../api/search-result";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const THEME_VALUES = ["입학", "취업"];
 const ORGANIZATION_VALUES = [
@@ -26,6 +27,7 @@ const ORGANIZATION_VALUES = [
   "관재팀",
 ];
 const DATA_TYPES = ["SHEET", "CHART", "FILE", "MAP", "LINK", "LOD"];
+const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"];
 
 /**
  *
@@ -52,7 +54,7 @@ export default function SearchResult({
 
   const keyword = searchParams.get("keyword");
 
-  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
 
   /**
    * 쿼리 파라미터를 수정할 때 수정하는 함수
@@ -115,6 +117,13 @@ export default function SearchResult({
 
     router.push(`${pathName}?${params.toString()}`);
   }, [searchParams]);
+
+  /**
+   * 정렬 필터 조건이 변경될 때마다 서버측에 다시 요청
+   */
+  useEffect(() => {
+    router.push(`${pathName}?${updateQueryString("create", "sort", selectedSort)}`);
+  }, [selectedSort]);
 
   return (
     <>
@@ -209,10 +218,10 @@ export default function SearchResult({
             {/* //* 검색 필터 */}
             <div className={styles.rowWrapper}>
               <SearchSortDropdown
-                selectedItem={selectedFilter}
-                setSelectedItem={setSelectedFilter}
+                items={SORT_VALUES}
+                selectedItem={selectedSort}
+                setSelectedItem={setSelectedSort}
               />
-              <SearchSortDropdown style={{ marginLeft: "0.25rem" }} />
             </div>
           </div>
 
