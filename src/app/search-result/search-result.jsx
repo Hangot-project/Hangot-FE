@@ -1,15 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { SearchSortDropdown } from "../../components";
+import React, { useState, useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { FilterCheckButton, SearchSortDropdown } from "../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
 import { StickHorizonSmall } from "../../../public/svgs";
 import { Dataset } from "../../api/search-result";
 import Link from "next/link";
-import { useCallback } from "react";
+
+const THEME_VALUES = ["입학", "취업"];
+const ORGANIZATION_VALUES = [
+  "경영대학",
+  "국문대학",
+  "예체능대학",
+  "디자인대학",
+  "공과대학",
+  "소프트웨어융합대학",
+  "경상대학",
+  "학술정보관",
+  "커리어개발센터",
+  "학생지원팀",
+  "총무인사처",
+  "관재팀",
+];
+const DATA_TYPES = ["SHEET", "CHART", "FILE", "MAP", "LINK", "LOD"];
 
 /**
  *
@@ -32,30 +48,73 @@ export default function SearchResult({
 
   const searchParams = useSearchParams();
   const pathName = usePathname();
+  const router = useRouter();
 
   const keyword = searchParams.get("keyword");
 
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  //TODO: reset button event handler
-  const handleResetClick = () => {
-    alert("초기화 버튼 클릭");
-  };
-
   /**
-   * 원하는 쿼리 문자열을 생성하는 함수
-   * @param {string} name
-   * @param {string} value
+   * 쿼리 파라미터를 수정할 때 수정하는 함수
+   * @returns {string}
    */
-  const createQueryString = useCallback(
-    (name, value) => {
+  const updateQueryString = useCallback(
+    /**
+     *
+     * @param {"create" | "append" | "remove"} type - 수정할 작업
+     * @param {string} name - 수정할 파라미터의 이름
+     * @param {any} value - 수정할 파라미터의 값
+     * @returns
+     */
+    (type, name, value) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
 
-      return params.toString();
+      switch (type) {
+        case "create":
+          params.set(name, value);
+          return params.toString();
+
+        case "append":
+          params.append(name, value);
+          return params.toString();
+
+        case "remove":
+          params.delete(name, value);
+          return params.toString();
+
+        default:
+          return "";
+      }
     },
     [searchParams],
   );
+
+  /**
+   * 필터 버튼 클릭시 실행되는 함수
+   */
+  const handleFilterClick = useCallback(
+    (queryName, value) => {
+      if (!Array.from(searchParams.values()).includes(value)) {
+        router.push(`${pathName}?${updateQueryString("append", queryName, value)}`);
+        return;
+      }
+
+      router.push(`${pathName}?${updateQueryString("remove", queryName, value)}`);
+    },
+    [searchParams, updateQueryString],
+  );
+
+  /**
+   * 초기화 버튼 클릭시 실행되는 함수
+   */
+  const handleResetClick = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.delete("theme");
+    params.delete("organization");
+
+    router.push(`${pathName}?${params.toString()}`);
+  }, [searchParams]);
 
   return (
     <>
@@ -95,10 +154,44 @@ export default function SearchResult({
           <div className={styles.divisionLine} />
 
           {/* //? 주제별 */}
-          <div className={styles.sectionTitleWrapper}>
+          <div className={styles.filterTitleWrapper}>
             <h2 className={styles.sectionSubtitle}>주제별</h2>
-            <Image src={StickHorizonSmall} alt="" />
+            <Image src={StickHorizonSmall} alt="-" />
           </div>
+
+          <div>
+            {THEME_VALUES.map((value) => (
+              <FilterCheckButton
+                isSelected={Array.from(searchParams.values()).includes(value)}
+                text={value}
+                value={value}
+                handleClick={() => handleFilterClick("theme", value)}
+              />
+            ))}
+          </div>
+
+          {/* //? division line */}
+          <div className={styles.divisionLine} />
+
+          {/* //? 조직별 */}
+          <div className={styles.filterTitleWrapper}>
+            <h2 className={styles.sectionSubtitle}>조직별</h2>
+            <Image src={StickHorizonSmall} alt="-" />
+          </div>
+
+          <div>
+            {ORGANIZATION_VALUES.map((value) => (
+              <FilterCheckButton
+                isSelected={Array.from(searchParams.values()).includes(value)}
+                text={value}
+                value={value}
+                handleClick={() => handleFilterClick("organization", value)}
+              />
+            ))}
+          </div>
+
+          {/* //? division line */}
+          <div className={styles.divisionLine} />
         </section>
 
         {/* //? 검색 결과 리스트 */}
@@ -146,7 +239,8 @@ export default function SearchResult({
             <div className={styles.pagesWrapper}>
               {/* //? 이전 페이지 버튼 */}
               <Link
-                href={`${pathName}?${createQueryString(
+                href={`${pathName}?${updateQueryString(
+                  "create",
                   "page",
                   Math.max(1, parseInt(_initPage) - 1),
                 )}`}
@@ -157,7 +251,11 @@ export default function SearchResult({
               {/* //? 페이지 버튼 목록 */}
               {new Array(totalPage).fill(0).map((_, index) => (
                 <Link
-                  href={`${pathName}?${createQueryString("page", index + 1)}`}
+                  href={`${pathName}?${updateQueryString(
+                    "create",
+                    "page",
+                    index + 1,
+                  )}`}
                   key={index}
                   className={styles.pageButton}
                   style={
@@ -175,7 +273,8 @@ export default function SearchResult({
 
               {/* //? 다음 페이지 버튼 */}
               <Link
-                href={`${pathName}?${createQueryString(
+                href={`${pathName}?${updateQueryString(
+                  "create",
                   "page",
                   Math.min(totalPage, parseInt(_initPage) + 1),
                 )}`}

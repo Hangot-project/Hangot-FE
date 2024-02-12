@@ -28,6 +28,7 @@ interface DatasetListResponse {
 export async function getSearchResults(
   keyword: string | undefined,
   page: string | undefined,
+  theme: string[],
 ): Promise<DatasetListResponse | null> {
   try {
     const params = new URLSearchParams();
@@ -44,10 +45,15 @@ export async function getSearchResults(
       params.append("_page", "1");
     }
 
+    // TODO: 주제 파라미터 추가
+    // theme.forEach((themeStr) => {
+    //   params.append("theme", themeStr);
+    // });
+
     //! 마찬가지로 실제 백엔드 api에서는 불필요함
     params.append("_per_page", "10");
 
-    console.log(`${process.env.SERVER_URL}/posts?${params.toString()}`);
+    // console.log(`${process.env.SERVER_URL}/posts?${params.toString()}`);
 
     const res = await fetch(`${process.env.SERVER_URL}/posts?${params.toString()}`, {
       cache: "no-store",

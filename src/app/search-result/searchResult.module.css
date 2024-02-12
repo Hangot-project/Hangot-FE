@@ -68,10 +68,16 @@
   height: 3.5rem;
 }
 
+.filterTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .divisionLine {
   background-color: #d5d5d5;
   height: 0.8px;
-  margin: 0.625rem 0;
+  margin: 1rem 0;
 }
 
 .pagesContainer,
