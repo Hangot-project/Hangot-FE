@@ -53,7 +53,7 @@ a * {
   font-family: "NotoSansRegular", "Apple SD Gothic Neo";
 }
 
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
+@media screen and (min-width: 1280px) and (max-width: 1919px) {
   * {
     font-size: 14px;
   }

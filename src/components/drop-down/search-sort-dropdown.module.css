@@ -1,4 +1,6 @@
 .selectedContainer {
+  cursor: pointer;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -15,12 +17,15 @@
 
 .listContainer {
   position: absolute;
-  display: none;
 }
 
 .listItem {
   width: 7.5rem;
 
   background-color: white;
-  padding: 0.2rem;
+  padding: 0.875rem;
+}
+
+.listItem:hover {
+  background-color: #e5e5e5;
 }

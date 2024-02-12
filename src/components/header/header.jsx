@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./header.module.css";
 import { MainLogo } from "../../../public/svgs";
 import Image from "next/image";
@@ -38,11 +40,20 @@ export function Header() {
 
           {/* //* navigation list */}
           <ul className={styles.menuWrapper}>
-            <li>데이터 찾기</li>
-            <li>주제별 데이터</li>
-            <li>조직별 데이터</li>
-            <li>데이터 요청</li>
-            <li>이용안내</li>
+            {/* <li>주제별 데이터</li>
+            <li>조직별 데이터</li> */}
+            <li>
+              <Link href={"/search-result"}>데이터 찾기</Link>
+            </li>
+            <li>
+              <Link href={""}>데이터 요청</Link>
+            </li>
+            <li>
+              <Link href={""}>이용안내</Link>
+            </li>
+            <li>
+              <Link href={""}>마이페이지</Link>
+            </li>
           </ul>
         </div>
       </header>

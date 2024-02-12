@@ -1,0 +1,106 @@
+.rowWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigateInfoContainer {
+  padding: 1.125rem 0;
+}
+
+.navigateInfoContainer > p {
+  color: #181818;
+  font-size: 0.875rem;
+}
+
+.keywordTitle {
+  font-size: 1.5rem;
+  font-family: "NotoSansBold";
+}
+
+.keywordTitle > span {
+  font-size: inherit;
+  font-family: inherit;
+  color: #003b71;
+}
+
+.mainContainer {
+  margin-top: 2.5rem;
+
+  display: grid;
+  grid-template-columns: 1fr 5.84fr;
+  column-gap: 2.25rem;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-family: "NotosansBold";
+}
+
+.sectionTitle > .highlightText {
+  font-size: inherit;
+  font-family: inherit;
+  color: #003b71;
+}
+
+.sectionSubtitle {
+  font-size: 0.875rem;
+  font-family: "NotosansBold";
+}
+
+.resetTextContainer {
+  display: flex;
+  cursor: pointer;
+}
+
+.resetText {
+  margin-left: 0.25rem;
+
+  font-size: 0.75rem;
+  color: #767676;
+}
+
+.sectionTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 3.5rem;
+}
+
+.filterTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.divisionLine {
+  background-color: #d5d5d5;
+  height: 0.8px;
+  margin: 1rem 0;
+}
+
+.pagesContainer,
+.pagesWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageButton {
+  border-radius: 50%;
+  color: #767676;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 8px;
+}
+
+.pageButton:hover {
+  color: rgb(219, 219, 219);
+}

@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  align-items: center;
+
+  margin: 10px 0;
+
+  cursor: pointer;
+}
+
+.labelText {
+  margin-left: 5px;
+
+  font-family: "NotoSansLight";
+  font-size: 1rem;
+}
