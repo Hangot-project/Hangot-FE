@@ -28,7 +28,9 @@ interface DatasetListResponse {
 export async function getSearchResults(
   keyword: string | undefined,
   page: string | undefined,
-  theme: string[],
+  theme: string[] | undefined,
+  organization: string[] | undefined,
+  sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
     const params = new URLSearchParams();
@@ -49,6 +51,16 @@ export async function getSearchResults(
     // theme.forEach((themeStr) => {
     //   params.append("theme", themeStr);
     // });
+
+    // TODO: 조직 파라미터 추가
+    // organization?.forEach((orgStr) => {
+    //   params.append("organization", orgStr);
+    // });
+
+    // TODO: 정렬 파라미터 추가
+    // if (sort) {
+    //   params.append("sort", sort);
+    // }
 
     //! 마찬가지로 실제 백엔드 api에서는 불필요함
     params.append("_per_page", "10");
