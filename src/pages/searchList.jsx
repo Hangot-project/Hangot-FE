@@ -1,8 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/searchList.module.css";
-import { Layout, SearchBox } from "../components";
-import { DataType, DataOrganization } from "../../public/svgs";
+import { Layout, SearchBox, DataBox } from "../components";
 import { DataBoxDummy } from "../dummy-data/searchResult";
 import Link from "next/link";
 
@@ -15,6 +14,20 @@ export default function searchList( {listDataDummy} ) {
       <section>
         <div className={styles.main}>
           <SearchBox />
+        </div>
+      </section>
+
+      <section>
+        <div className={styles.databox_stack}>
+            {listDataDummy.map((value, index) => (
+              <DataBox
+                title={value.title}
+                subtitle={value.subtitle}
+                num={value.num}
+                type={value.type}
+                from={value.from}
+              />
+            ))}
         </div>
       </section>
     </Layout>
