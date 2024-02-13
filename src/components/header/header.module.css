@@ -40,8 +40,8 @@
 }
 
 .menuWrapper {
-  /* width: 60vw; */
-  flex-grow: 1;
+  width: 46rem;
+  /* flex-grow: 1; */
   height: 100%;
 
   margin-left: auto;
@@ -54,8 +54,19 @@
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+}
 
+.menuWrapper > li > a {
   color: white;
   font-size: 1.125rem;
   font-weight: bold;
+
+  -moz-transition: all 0.12s ease-in;
+  -o-transition: all 0.12s ease-in;
+  -webkit-transition: all 0.12s ease-in;
+  transition: all 0.12s ease-in;
+}
+
+.menuWrapper > li > a:hover {
+  font-size: 1.3rem;
 }

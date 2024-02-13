@@ -1,26 +1,26 @@
 export const currentOpenDataDummy = [
   {
-    dataId: 1,
+    id: 1,
     label: "일반행정",
     title: "서울시 본청 업무추진비 목록",
   },
   {
-    dataId: 2,
+    id: 2,
     label: "교육",
     title: "서울물연구원연구관리_실용화관련",
   },
   {
-    dataId: 3,
+    id: 3,
     label: "교육",
     title: "서울물연구원연구관리_심의관련",
   },
   {
-    dataId: 4,
+    id: 4,
     label: "교육",
     title: "서울물연구원연구관리_연구과제관련",
   },
   {
-    dataId: 5,
+    id: 5,
     label: "교육",
     title: "서울물연구원연구관리_최종보고관련",
   },
