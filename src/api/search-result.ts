@@ -33,6 +33,7 @@ export async function getSearchResults(
   sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
+    console.log("다음 키워드로 검색 api 호출됨 >>>", keyword);
     const params = new URLSearchParams();
 
     if (keyword) {

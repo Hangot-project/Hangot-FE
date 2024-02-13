@@ -1,0 +1,16 @@
+.main {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 32rem;
+}
+
+.databox_stack {
+    display: flex;
+    flex-direction: column;
+}
+
+.databox_stack > div {
+    margin-bottom: 30px;
+}

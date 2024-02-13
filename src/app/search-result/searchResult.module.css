@@ -27,9 +27,20 @@
 .mainContainer {
   margin-top: 2.5rem;
 
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 5.84fr;
-  column-gap: 2.25rem;
+  column-gap: 2.25rem; */
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContainer > section:first-child {
+  width: 15%;
+}
+
+.mainContainer > section:nth-child(2) {
+  width: 80%;
 }
 
 .sectionTitle {

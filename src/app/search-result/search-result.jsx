@@ -2,7 +2,12 @@
 
 import React, { useState, useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FilterCheckButton, SearchSortDropdown } from "../../components";
+import {
+  FilterCheckButton,
+  SearchBox,
+  SearchSortDropdown,
+  SimpleDatasetCard,
+} from "../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
@@ -118,6 +123,28 @@ export default function SearchResult({
     router.push(`${pathName}?${params.toString()}`);
   }, [searchParams]);
 
+  const handleSearchSubmit = useCallback(
+    /**
+     * 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
+     * @param {FormEvent<HTMLFormElement>} event - form 태그의 onSubmit 함수 이벤트 객체
+     * @param {string} keyword - 사용자가 입력한 검색 키워드
+     * @returns
+     */
+    (event, keyword) => {
+      event.preventDefault();
+
+      if (keyword) {
+        router.push(
+          `${pathName}?${updateQueryString("create", "keyword", keyword)}`,
+        );
+        return;
+      }
+
+      router.push(`${pathName}?${updateQueryString("remove", "keyword")}`);
+    },
+    [updateQueryString],
+  );
+
   /**
    * 정렬 필터 조건이 변경될 때마다 서버측에 다시 요청
    */
@@ -138,6 +165,14 @@ export default function SearchResult({
 
       {/* //* 검색창 */}
       {/* //TODO */}
+      <SearchBox
+        style={{
+          marginTop: "3.75rem",
+          marginBottom: "6rem",
+        }}
+        handleSubmit={handleSearchSubmit}
+        initKeyword={searchParams.get("keyword")}
+      />
 
       {/* //* 검색어 안내 문구 */}
       {keyword ? (
@@ -236,12 +271,18 @@ export default function SearchResult({
 
           {/* //* 검색 결과 리스트 */}
           {/* //TODO: 실제 데이터 정보에 맞게 변경 */}
-          {results.map((dataset) => (
-            <div key={dataset.datasetId}>
-              <h1>{dataset.title}</h1>
-              <p>{dataset.description}</p>
-              <h5>조회수: {dataset.view}</h5>
-            </div>
+          {results.map((dataset, index) => (
+            <SimpleDatasetCard
+              key={dataset.datasetId}
+              title={dataset.title}
+              subtitle={dataset.description}
+              from={"입학처"}
+              type={"EXCEL"}
+              style={{
+                marginTop: "1rem",
+                cursor: "pointer",
+              }}
+            />
           ))}
 
           {/* //* 페이지 리스트 */}

@@ -4,6 +4,7 @@ import { getSearchResults } from "../../api/search-result";
 import { notFound } from "next/navigation";
 
 export default async function Page({ searchParams }) {
+  const keyword = searchParams["keyword"];
   const pageStr = searchParams["page"];
   const theme = searchParams["theme"];
   // console.log(theme); // ex. [ '입학', '취업' ]
@@ -16,7 +17,7 @@ export default async function Page({ searchParams }) {
 
   // TODO:
   const response = await getSearchResults(
-    searchParams["keyword"],
+    keyword,
     pageStr,
     theme,
     organization,

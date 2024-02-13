@@ -21,6 +21,9 @@ import CheckRadioGray from "./check_radio_gray.svg";
 import CheckRadioBlue from "./check_radio_blue.svg";
 import NextButton from "./next_button.svg";
 import PreviousButton from "./previous_button.svg";
+import SearchSymbol from "./search_symbol.svg";
+import DataType from "./data_type.svg";
+import DataOrganization from "./data_organization.svg";
 
 export { SymbolLogo, MainLogo, HYU, Instagram, Youtube, Facebook, Twitter };
 export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
@@ -32,4 +35,7 @@ export {
   StickHorizonSmall,
   NextButton,
   PreviousButton,
+  SearchSymbol, 
+  DataType, 
+  DataOrganization
 };
