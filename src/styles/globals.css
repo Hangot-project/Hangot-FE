@@ -23,6 +23,20 @@ a * {
   cursor: pointer;
 }
 
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
 @font-face {
   font-family: "NotoSansRegular";
   src: url("../../public/fonts/NotoSansKR-Regular.ttf");
