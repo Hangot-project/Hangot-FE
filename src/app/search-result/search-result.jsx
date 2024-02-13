@@ -2,7 +2,11 @@
 
 import React, { useState, useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FilterCheckButton, SearchSortDropdown } from "../../components";
+import {
+  FilterCheckButton,
+  SearchSortDropdown,
+  SimpleDatasetCard,
+} from "../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
@@ -236,12 +240,17 @@ export default function SearchResult({
 
           {/* //* 검색 결과 리스트 */}
           {/* //TODO: 실제 데이터 정보에 맞게 변경 */}
-          {results.map((dataset) => (
-            <div key={dataset.datasetId}>
-              <h1>{dataset.title}</h1>
-              <p>{dataset.description}</p>
-              <h5>조회수: {dataset.view}</h5>
-            </div>
+          {results.map((dataset, index) => (
+            <SimpleDatasetCard
+              key={dataset.datasetId}
+              title={dataset.title}
+              subtitle={dataset.description}
+              from={"입학처"}
+              type={"EXCEL"}
+              style={{
+                marginTop: "1rem",
+              }}
+            />
           ))}
 
           {/* //* 페이지 리스트 */}

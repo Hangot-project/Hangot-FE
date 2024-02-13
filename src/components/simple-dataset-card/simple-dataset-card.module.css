@@ -1,0 +1,49 @@
+.container {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+
+  padding: 1.5rem;
+}
+
+.title {
+  color: #003b71;
+  font-size: 1.125rem;
+  font-family: "NotoSansBold";
+}
+
+.subtitle {
+  margin: 1rem 0;
+
+  color: #2e2e2e;
+  font-size: 0.875rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+
+  color: #686868;
+}
+
+.infoContainer p {
+  font-size: 0.75rem;
+}
+
+.infoContainer > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.infoContainer > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.imageContainer {
+  width: 8px;
+  height: 8px;
+}
