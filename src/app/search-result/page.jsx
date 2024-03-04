@@ -25,7 +25,7 @@ export default async function Page({ searchParams }) {
   );
   return (
     <SearchResult
-      results={response.simpleDatasetList}
+      results={response.data}
       totalElement={response.totalElement}
       totalPage={response.totalPage}
       initPage={pageStr}

@@ -15,7 +15,7 @@ export interface Dataset {
 interface DatasetListResponse {
   totalPage: number;
   totalElement: number;
-  simpleDatasetList: Dataset[];
+  data: Dataset[];
 }
 
 // TODO: theme, organization, sort 파라미터 추가
@@ -76,7 +76,7 @@ export async function getSearchResults(
     const result = {
       totalPage: 10,
       totalElement: 100,
-      simpleDatasetList: _results.map(
+      data: _results.map(
         (value): Dataset => ({
           datasetId: value.id,
           title: value.title,

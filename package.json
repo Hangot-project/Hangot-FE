@@ -15,6 +15,7 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@types/node": "^20.11.24",
     "babel-eslint": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
