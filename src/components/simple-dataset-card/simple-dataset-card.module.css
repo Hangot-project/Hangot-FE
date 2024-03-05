@@ -3,6 +3,42 @@
   border-radius: 10px;
 
   padding: 1.5rem;
+
+  position: relative;
+}
+
+.hoverContainer {
+  position: absolute;
+  border-radius: 10px;
+
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+
+  color: white;
+
+  transition: all 0.3s ease;
+}
+
+.container:hover .hoverContainer {
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.hoverContainer > p {
+  font-family: "NotoSansBold";
+}
+
+.hoverContainer > p > * {
+  vertical-align: middle;
 }
 
 .title {
