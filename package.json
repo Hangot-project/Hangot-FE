@@ -7,8 +7,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chart.js": "^4.4.2",
+    "lodash": "^4.17.21",
     "next": "14.1.0",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"
   },
   "engines": {
@@ -18,8 +21,8 @@
     "@types/node": "^20.11.24",
     "babel-eslint": "^10.1.0",
     "eslint": "^8",
-    "eslint-config-next": "14.1.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "14.1.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-babel": "^5.3.1",
     "eslint-plugin-import": "^2.28.1",
