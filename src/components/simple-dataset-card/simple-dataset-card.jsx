@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./simple-dataset-card.module.css";
-import { DataType, DataOrganization } from "../../../public/svgs";
+import { DataType, DataOrganization, LikeEmpty } from "../../../public/svgs";
 
 /**
  *
@@ -32,6 +32,12 @@ export function SimpleDatasetCard({ title, subtitle, type, from, onClick, style 
           />
           <p>{from}</p>
         </div>
+      </div>
+
+      <div className={styles.hoverContainer}>
+        <p>
+          <Image src={LikeEmpty} alt="스크랩 아이콘" /> 5 조회수 10
+        </p>
       </div>
     </div>
   );
