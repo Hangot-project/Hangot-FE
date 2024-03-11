@@ -16,7 +16,17 @@ import { Dataset } from "../../api/search-result";
 import Link from "next/link";
 import { useEffect } from "react";
 
-const THEME_VALUES = ["입학", "취업"];
+const THEME_VALUES = [
+  "입학",
+  "취창업",
+  "학생",
+  "학사",
+  "국제",
+  "복지",
+  "재정",
+  "학술",
+  "장학",
+];
 const ORGANIZATION_VALUES = [
   "경영대학",
   "국문대학",
@@ -31,7 +41,7 @@ const ORGANIZATION_VALUES = [
   "총무인사처",
   "관재팀",
 ];
-const DATA_TYPES = ["SHEET", "CHART", "FILE", "MAP", "LINK", "LOD"];
+const DATA_TYPES = ["CSV", "XLS", "XLSX", "PDF", "DOCX", "JSON"];
 const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"];
 
 /**
@@ -242,6 +252,27 @@ export default function SearchResult({
 
           {/* //? division line */}
           <div className={styles.divisionLine} />
+
+          {/* //? 파일 유형별 */}
+          <div className={styles.filterTitleWrapper}>
+            <h2 className={styles.sectionSubtitle}>제공유형</h2>
+            <Image src={StickHorizonSmall} alt="-" />
+          </div>
+
+          <div>
+            {DATA_TYPES.map((value, index) => (
+              <FilterCheckButton
+                key={index}
+                isSelected={Array.from(searchParams.values()).includes(value)}
+                text={value}
+                value={value}
+                handleClick={() => handleFilterClick("organization", value)}
+              />
+            ))}
+          </div>
+
+          {/* //? division line */}
+          <div className={styles.divisionLine} />
         </section>
 
         {/* //? 검색 결과 리스트 */}
@@ -278,6 +309,7 @@ export default function SearchResult({
               subtitle={dataset.description}
               from={"입학처"}
               type={"EXCEL"}
+              onClick={() => router.push(`search-result/${dataset.datasetId}`)}
               style={{
                 marginTop: "1rem",
                 cursor: "pointer",
