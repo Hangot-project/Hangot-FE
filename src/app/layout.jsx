@@ -11,13 +11,13 @@ export default function Layout({ children }) {
   return (
     <html lang="ko">
       <body>
-        <div className={styles.container}>
-          <Header />
-          <div className={styles.content}>
-            <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <div className={styles.container}>
+            <Header />
+            <div className={styles.content}>{children}</div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </ReduxProvider>
       </body>
     </html>
   );

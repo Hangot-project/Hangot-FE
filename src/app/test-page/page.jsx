@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/lib/hooks";
-import { login, logout, updateToken } from "@/lib/slice/auth-slice";
+import { login, logout } from "@/lib/slice/auth-slice";
 import { dataset as result } from "@/dummy-data/datasets";
 import { BarChart } from "@/components";
 
@@ -45,7 +45,6 @@ export default function Test() {
           유저 정보 삭제 submit
         </button>
       </div>
-      <BarChart x_axis_name={result.x_axis_name} dataset={result} />
     </>
   );
 }
