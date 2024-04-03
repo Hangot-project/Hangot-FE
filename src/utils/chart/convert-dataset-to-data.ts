@@ -1,6 +1,6 @@
 "use client";
 
-import { Dataset } from "@/api/dataset";
+import { Dataset } from "../../api/dataset";
 import { ChartData } from "chart.js";
 import _ from "lodash";
 

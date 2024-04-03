@@ -1,7 +1,7 @@
 import { Header, Footer } from "../components";
 import styles from "../styles/layout.module.css";
 import "../styles/globals.css";
-import ReduxProvider from "@/lib/provider";
+import ReduxProvider from "../lib/provider";
 
 export const metadata = {
   title: "한양대학교 데이터 포털",
