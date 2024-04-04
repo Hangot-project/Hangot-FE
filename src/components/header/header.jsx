@@ -5,9 +5,10 @@ import { MainLogo } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppSelector } from "../../lib/hooks";
 import { useDispatch } from "react-redux";
-import { logout } from "@/lib/slice/auth-slice";
+import { login, logout } from "../../lib/slice/auth-slice";
+import { useEffect } from "react";
 
 export function Header() {
   const { isActive, accessToken, role } = useAppSelector(
@@ -19,6 +20,13 @@ export function Header() {
     //TODO: logout api 호출
     dispatch(logout());
   };
+
+  //? 새로고침시 토큰이 사라지는 버그
+  useEffect(() => {
+    // token api로 access token 발급 요청
+    // -> 401 에러(REFRESH_EXPIRED)가 발생하는 경우: 비로그인 상태로 설정
+    // -> 정상 응답: login reducer 호출하여 로그인 상태로 전환
+  }, []);
 
   return (
     <>
@@ -41,7 +49,7 @@ export function Header() {
               </>
             )}
             <VerticalDivider />
-            <Link href={"/"}>
+            <Link href={"/test-page"}>
               <li>사이트맵</li>
             </Link>
             <VerticalDivider />
