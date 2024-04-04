@@ -15,40 +15,18 @@ import { StickHorizonSmall } from "../../../public/svgs";
 import { Dataset } from "../../api/search-result";
 import Link from "next/link";
 import { useEffect } from "react";
-
-const THEME_VALUES = [
-  "입학",
-  "취창업",
-  "학생",
-  "학사",
-  "국제",
-  "복지",
-  "재정",
-  "학술",
-  "장학",
-];
-const ORGANIZATION_VALUES = [
-  "경영대학",
-  "국문대학",
-  "예체능대학",
-  "디자인대학",
-  "공과대학",
-  "소프트웨어융합대학",
-  "경상대학",
-  "학술정보관",
-  "커리어개발센터",
-  "학생지원팀",
-  "총무인사처",
-  "관재팀",
-];
-const DATA_TYPES = ["CSV", "XLS", "XLSX", "PDF", "DOCX", "JSON"];
-const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"];
+import {
+  THEME_VALUES,
+  ORGANIZATION_VALUES,
+  DATA_TYPES,
+  SORT_VALUES,
+} from "../../constants";
 
 /**
  *
  * @param {{
- *    keyword: string | null;
  *    results: Dataset[];
+ *    totalElement: number;
  *    totalPage: number;
  *    initPage: number;
  * }}
@@ -129,6 +107,7 @@ export default function SearchResult({
 
     params.delete("theme");
     params.delete("organization");
+    params.delete("type");
 
     router.push(`${pathName}?${params.toString()}`);
   }, [searchParams]);
@@ -266,7 +245,7 @@ export default function SearchResult({
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
                 value={value}
-                handleClick={() => handleFilterClick("organization", value)}
+                handleClick={() => handleFilterClick("type", value)}
               />
             ))}
           </div>
