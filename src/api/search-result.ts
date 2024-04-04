@@ -1,90 +1,93 @@
-interface JsonPlaceholderPost {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { SERVER_PARAMS_KEY } from "../constants/dataset-search-params";
+import { GeneralResponse } from "./config";
 
 export interface Dataset {
   datasetId: number;
   title: string;
   description: string;
+  organization: string;
   view: number;
+  type: string;
+  themeList: string[];
 }
 
-interface DatasetListResponse {
+type DatasetResult = {
   totalPage: number;
   totalElement: number;
   data: Dataset[];
+};
+
+interface DatasetListResponse extends GeneralResponse {
+  result: DatasetResult;
 }
 
 // TODO: theme, organization, sort 파라미터 추가
 /**
  * 검색 키워드에 해당하는 데이터셋 리스트를 불러온다.
  * @param keyword 검색 키워드
- * @param page 검색 페이지
+ * @param page 요청 페이지
+ * @param theme 주제별 항목에서 선택한 내역
+ * @param type 파일 유형 항목에서 선택한 내역
+ * @param organization 조직 항목에서 선택한 내역
+ * @param sort 정렬 기준
  * @returns
  */
 export async function getSearchResults(
   keyword: string | undefined,
   page: string | undefined,
   theme: string[] | undefined,
+  type: string[] | undefined,
   organization: string[] | undefined,
   sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
-    console.log("다음 키워드로 검색 api 호출됨 >>>", keyword);
     const params = new URLSearchParams();
 
     if (keyword) {
-      params.append("keyword", keyword);
+      params.append(SERVER_PARAMS_KEY.KEYWORD, keyword);
     }
 
     if (page) {
-      params.append("_page", page);
-    }
-    //! 실제 백엔드 api에서는 불필요한 코드
-    else {
-      params.append("_page", "1");
+      params.append(SERVER_PARAMS_KEY.PAGE, page);
     }
 
-    // TODO: 주제 파라미터 추가
-    // theme.forEach((themeStr) => {
-    //   params.append("theme", themeStr);
-    // });
-
-    // TODO: 조직 파라미터 추가
-    // organization?.forEach((orgStr) => {
-    //   params.append("organization", orgStr);
-    // });
-
-    // TODO: 정렬 파라미터 추가
-    // if (sort) {
-    //   params.append("sort", sort);
-    // }
-
-    //! 마찬가지로 실제 백엔드 api에서는 불필요함
-    params.append("_per_page", "10");
-
-    // console.log(`${process.env.SERVER_URL}/posts?${params.toString()}`);
-
-    const res = await fetch(`${process.env.SERVER_URL}/posts?${params.toString()}`, {
-      cache: "no-store",
+    theme?.forEach((themeStr) => {
+      params.append(SERVER_PARAMS_KEY.THEME, themeStr);
     });
-    const _results: JsonPlaceholderPost[] = await res.json();
 
-    const result = {
-      totalPage: 10,
-      totalElement: 100,
-      data: _results.map(
-        (value): Dataset => ({
-          datasetId: value.id,
-          title: value.title,
-          description: value.body,
-          view: 0,
-        }),
-      ),
-    };
+    type?.forEach((typeStr) => {
+      params.append(SERVER_PARAMS_KEY.TYPE, typeStr.toLowerCase());
+    });
+
+    organization?.forEach((orgStr) => {
+      params.append(SERVER_PARAMS_KEY.ORGANIZATION, orgStr);
+    });
+
+    if (sort) {
+      if (sort[sort.length - 1] == "순") {
+        sort = sort.slice(0, sort.length - 1);
+      }
+      params.append(SERVER_PARAMS_KEY.SORT, sort);
+    }
+
+    console.log(
+      "api >>> ",
+      `${process.env.NEXT_PUBLIC_SERVER_API}/api/datasets?${params.toString()}`,
+    );
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_API}/api/datasets?${params.toString()}`,
+      {
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      },
+    );
+    const result: DatasetListResponse = await res.json();
+
+    console.log("result :", result);
 
     return result;
   } catch (error) {
