@@ -1,6 +1,6 @@
 import React from "react";
 import SearchResult from "./search-result";
-import { getSearchResults } from "../../api/search-result";
+import { getSearchResults } from "../../api/dataset";
 import { notFound } from "next/navigation";
 import { ParamToSearchResultProps } from "../../utils/param-to-search-result-props";
 

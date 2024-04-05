@@ -12,7 +12,7 @@ import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
 import { StickHorizonSmall } from "../../../public/svgs";
-import { Dataset } from "../../api/search-result";
+import { DatasetInfo } from "../../api/dataset";
 import Link from "next/link";
 import { useEffect } from "react";
 import {
@@ -25,7 +25,7 @@ import {
 /**
  *
  * @param {{
- *    results: Dataset[];
+ *    results: DatasetInfo[];
  *    totalElement: number;
  *    totalPage: number;
  *    initPage: number;
