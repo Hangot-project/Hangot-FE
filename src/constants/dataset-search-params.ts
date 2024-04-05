@@ -23,6 +23,8 @@ export const ORGANIZATION_VALUES = Object.freeze([
   "입학처",
 ]);
 
+export type Organization = (typeof ORGANIZATION_VALUES)[number];
+
 export const DATA_TYPES = Object.freeze([
   "CSV",
   "XLS",
