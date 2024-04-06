@@ -54,12 +54,12 @@ export async function getAllDatasets(): Promise<DatasetInfo[]> {
     ).then((res) => res.json());
 
     if (!response.success) {
-      console.log(response.msg);
+      console.error(response.msg);
       return null;
     }
     return response.result.data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }
@@ -112,18 +112,23 @@ export async function getSearchResults(
       params.append(SERVER_PARAMS_KEY.SORT, sort);
     }
 
-    console.log("api >>> ", `${SERVER_API}/api/datasets?${params.toString()}`);
-
-    const res = await fetch(`${SERVER_API}/api/datasets?${params.toString()}`, {
-      cache: "no-store",
-      headers: {
-        "Content-Type": "application/json",
+    const result: DatasetListResponse = await fetch(
+      `${SERVER_API}/api/datasets?${params.toString()}`,
+      {
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
       },
-      method: "GET",
-    });
-    const result: DatasetListResponse = await res.json();
+    ).then((res) => res.json());
 
-    console.log("result :", result);
+    console.log("search result:", result);
+
+    if (!result.success) {
+      console.error(result.msg);
+      return null;
+    }
 
     return result;
   } catch (error) {
@@ -137,6 +142,8 @@ export async function getDatasetDetail(id: number): Promise<DatasetDetail> {
     const result: DatasetDetailResponse = await fetch(
       `${SERVER_API}/api/dataset/${id}`,
     ).then((res) => res.json());
+
+    console.log("detail result:", result);
 
     if (!result.success) {
       console.error(result.msg);
