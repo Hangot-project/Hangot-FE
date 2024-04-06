@@ -27,7 +27,7 @@ export interface DatasetInfo {
   datasetId: number;
   title: string;
   description: string;
-  organization: string;
+  organization: Organization;
   view: number;
   type: string;
   themeList: string[];
