@@ -2,12 +2,12 @@ import { SERVER_PARAMS_KEY } from "../constants/dataset-search-params";
 import { GeneralResponse, SERVER_API } from "./config";
 import { Organization } from "../constants/dataset-search-params";
 
-export interface Dataset {
+export type Dataset = {
   x_axis_name: string;
   x_label: string[];
   dataName: string[];
   dataList: Array<Array<string>>;
-}
+};
 
 export interface DatasetDetail {
   datasetId: number;
