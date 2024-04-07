@@ -1,4 +1,4 @@
-import { DatasetViewer } from "../../../components";
+import { DatasetTypeIcon, DatasetViewer } from "../../../components";
 import { dataset as _dataset } from "../../../dummy-data/datasets";
 import Loading from "../../loading";
 import { getAllDatasets, getDatasetDetail } from "../../../api/dataset";
@@ -24,10 +24,12 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className={styles.mainInfoContainer}>
         <div className={styles.titleContainer}>
           <h1 className={styles.title}>{datasetDetail.title}</h1>
-          <div className={styles.typeBox}>JSON</div>
+          <DatasetTypeIcon type="xlsx" />
         </div>
         <p className={styles.description}>{datasetDetail.description}</p>
-        <button className={styles.downloadBtn}>데이터 다운로드</button>
+        <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
+          데이터 다운로드
+        </a>
       </div>
 
       {/* //? 데이터 정보 표시 */}
