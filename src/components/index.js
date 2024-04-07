@@ -9,3 +9,4 @@ export * from "./drop-down/search-sort-dropdown";
 export * from "./filter-check-button/filter-check-button";
 export * from "./bar-chart/bar-chart";
 export * from "./dataset-table/dataset-table";
+export * from "./dataset-viewer/dataset-viewer";
