@@ -25,6 +25,10 @@ import SearchSymbol from "./search_symbol.svg";
 import DataType from "./data_type.svg";
 import DataOrganization from "./data_organization.svg";
 import LikeEmpty from "./like_empty.svg";
+import GraphActive from "./graph_active.svg";
+import GraphInactive from "./graph_inactive.svg";
+import TableActive from "./table_active.svg";
+import TableInactive from "./table_inactive.svg";
 
 export { SymbolLogo, MainLogo, HYU, Instagram, Youtube, Facebook, Twitter };
 export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
@@ -40,4 +44,8 @@ export {
   DataType,
   DataOrganization,
   LikeEmpty,
+  GraphActive,
+  GraphInactive,
+  TableActive,
+  TableInactive,
 };
