@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         {/* 2번 행 */}
         <tr>
           <th>주제</th>
-          <td>{datasetDetail.theme}</td>
+          <td>{datasetDetail.theme.join(", ")}</td>
           <th>제공기관</th>
           <td>{datasetDetail.organization}</td>
         </tr>
