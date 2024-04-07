@@ -1,7 +1,7 @@
 import { Dataset } from "../../api/dataset";
 import styles from "./dataset-table.module.css";
 
-function DatasetTable({ dataset }: { dataset: Dataset }) {
+export function DatasetTable({ dataset }: { dataset: Dataset }) {
   const colWidthPercent = 100 / (dataset.x_label.length + 1);
   return (
     <>
@@ -31,5 +31,3 @@ function DatasetTable({ dataset }: { dataset: Dataset }) {
     </>
   );
 }
-
-export default DatasetTable;
