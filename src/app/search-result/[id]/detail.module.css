@@ -1,3 +1,7 @@
+.root {
+  padding-bottom: 8rem;
+}
+
 .mainInfoContainer {
   padding: 3rem 0;
   background-color: #182531;
@@ -87,10 +91,4 @@
 
   height: 0.8px;
   background-color: #cccccc;
-}
-
-.sheetSubtitle {
-  font-family: "NotoSansMedium";
-  font-size: 1.25rem;
-  color: #474747;
 }

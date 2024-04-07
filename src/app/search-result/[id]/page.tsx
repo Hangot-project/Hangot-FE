@@ -1,4 +1,4 @@
-import { BarChart } from "../../../components";
+import { DatasetViewer } from "../../../components";
 import { dataset as _dataset } from "../../../dummy-data/datasets";
 import Loading from "../../loading";
 import { getAllDatasets, getDatasetDetail } from "../../../api/dataset";
@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const dataset = { ..._dataset };
 
   return (
-    <div>
+    <div className={styles.root}>
       {/* //? 기본 정보 표시 */}
       <div className={styles.mainInfoContainer}>
         <div className={styles.titleContainer}>
@@ -98,20 +98,16 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h2>
 
       <div className={styles.divisionLine} />
-
-      <h3
-        style={{
-          marginTop: "3rem",
-          marginBottom: "2.5rem",
-        }}
-        className={styles.sheetSubtitle}
-      >
-        {datasetDetail.title}
-      </h3>
-
-      {/* //? 데이터 시각화 */}
       <Suspense fallback={<Loading />}>
-        {dataset && <BarChart x_axis_name={dataset.x_axis_name} dataset={dataset} />}
+        {dataset && datasetDetail && (
+          <DatasetViewer
+            title={datasetDetail.title}
+            dataset={dataset}
+            style={{
+              marginTop: "3rem",
+            }}
+          />
+        )}
       </Suspense>
     </div>
   );
