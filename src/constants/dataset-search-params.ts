@@ -34,6 +34,8 @@ export const DATA_TYPES = Object.freeze([
   "JSON",
 ]);
 
+export type DataType = (typeof DATA_TYPES)[number];
+
 export const SORT_VALUES = Object.freeze([
   "최신순",
   "스크랩순",
