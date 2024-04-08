@@ -1,0 +1,9 @@
+.sheetSubtitle {
+  font-family: "NotoSansMedium";
+  font-size: 1.25rem;
+  color: #474747;
+}
+
+.selectBtn {
+  cursor: pointer;
+}

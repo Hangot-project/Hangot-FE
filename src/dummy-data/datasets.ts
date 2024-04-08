@@ -1,9 +1,4 @@
-interface Dataset {
-  x_axis_name: string;
-  x_label: string[];
-  dataName: string[];
-  dataList: Array<Array<string>>;
-}
+import { Dataset } from "../api/dataset";
 
 export const dataset: Dataset = {
   x_axis_name: "공시연도",

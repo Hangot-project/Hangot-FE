@@ -5,13 +5,13 @@ const nextConfig = {
   },
 };
 
-module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: `${process.env.NEXT_PUBLIC_SERVER_API}/:path*`,
-      },
-    ];
-  },
-};
+// module.exports = {
+//   async rewrites() {
+//     return [
+//       {
+//         source: "/:path*",
+//         destination: `${process.env.NEXT_PUBLIC_SERVER_API}/:path*`,
+//       },
+//     ];
+//   },
+// };
