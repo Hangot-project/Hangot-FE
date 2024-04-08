@@ -11,3 +11,4 @@ export * from "./bar-chart/bar-chart";
 export * from "./dataset-table/dataset-table";
 export * from "./dataset-viewer/dataset-viewer";
 export * from "./dataset-type-icon/dataset-type-icon";
+export * from "./scrap-button/scrap-button";
