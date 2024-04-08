@@ -25,6 +25,7 @@ import SearchSymbol from "./search_symbol.svg";
 import DataType from "./data_type.svg";
 import DataOrganization from "./data_organization.svg";
 import LikeEmpty from "./like_empty.svg";
+import LikeFilled from "./like_filled.svg";
 import GraphActive from "./graph_active.svg";
 import GraphInactive from "./graph_inactive.svg";
 import TableActive from "./table_active.svg";
@@ -44,6 +45,7 @@ export {
   DataType,
   DataOrganization,
   LikeEmpty,
+  LikeFilled,
   GraphActive,
   GraphInactive,
   TableActive,
