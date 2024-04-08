@@ -18,6 +18,7 @@ export interface DatasetDetail {
   createdDate: string;
   updateDate: string;
   view: number;
+  scrap: number;
   download: number;
   resourceName: string;
   resourceUrl: string;
