@@ -1,20 +1,21 @@
-import { DatasetTypeIcon, DatasetViewer } from "../../../components";
+import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../components";
 import { dataset as _dataset } from "../../../dummy-data/datasets";
 import Loading from "../../loading";
 import { getAllDatasets, getDatasetDetail } from "../../../api/dataset";
 import { Suspense } from "react";
 import styles from "./detail.module.css";
 
-export async function generateStaticParams() {
-  const datasets = await getAllDatasets();
+// export async function generateStaticParams() {
+//   const datasets = await getAllDatasets();
 
-  return datasets.map((dataset) => ({
-    id: dataset.datasetId.toString(),
-  }));
-}
+//   return datasets.map((dataset) => ({
+//     id: dataset.datasetId.toString(),
+//   }));
+// }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const datasetDetail = await getDatasetDetail(parseInt(params.id));
+  const datasetId = parseInt(params.id);
+  const datasetDetail = await getDatasetDetail(datasetId);
   // TODO: 데이터셋 시각화 api 연결
   const dataset = { ..._dataset };
 
@@ -22,10 +23,14 @@ export default async function Page({ params }: { params: { id: string } }) {
     <div className={styles.root}>
       {/* //? 기본 정보 표시 */}
       <div className={styles.mainInfoContainer}>
-        <div className={styles.titleContainer}>
-          <h1 className={styles.title}>{datasetDetail.title}</h1>
-          <DatasetTypeIcon type="xlsx" />
+        <div className={styles.basicInfoContainer}>
+          <div className={styles.titleContainer}>
+            <h1 className={styles.title}>{datasetDetail.title}</h1>
+            <DatasetTypeIcon type="xlsx" />
+          </div>
+          <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
         </div>
+
         <p className={styles.description}>{datasetDetail.description}</p>
         <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
           데이터 다운로드
