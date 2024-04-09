@@ -1,6 +1,5 @@
-import Cookies from "js-cookie";
 import { decrypt } from "../utils/secure/token";
-import { GeneralResponse } from "./config";
+import { GeneralResponse, SERVER_API } from "./config";
 
 export type LoginInput = {
   email: string;
@@ -24,17 +23,14 @@ interface LoginResponse extends GeneralResponse {
  */
 export async function userLogin(params: LoginInput): Promise<LoginResponse> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_API}/api/user/login`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(params),
-        credentials: "include",
+    const response = await fetch(`${SERVER_API}/api/user/login`, {
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      method: "POST",
+      body: JSON.stringify(params),
+      credentials: "include",
+    });
 
     const result = await response.json();
 
@@ -51,16 +47,13 @@ export async function userLogin(params: LoginInput): Promise<LoginResponse> {
 export async function userLogout(): Promise<GeneralResponse> {
   try {
     const decryptedToken = decrypt(localStorage.getItem("session"));
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_API}/api/user/logout`,
-      {
-        headers: {
-          Authorization: decryptedToken,
-        },
-        method: "POST",
-        credentials: "include",
+    const response = await fetch(`${SERVER_API}/api/user/logout`, {
+      headers: {
+        Authorization: decryptedToken,
       },
-    );
+      method: "POST",
+      credentials: "include",
+    });
 
     const result = await response.json();
     return result;
@@ -76,16 +69,13 @@ export async function userLogout(): Promise<GeneralResponse> {
 export async function reissueToken(): Promise<LoginResponse> {
   try {
     const decryptedToken = decrypt(localStorage.getItem("session"));
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_API}/api/user/token`,
-      {
-        headers: {
-          Authorization: decryptedToken,
-        },
-        method: "POST",
-        credentials: "include",
+    const response = await fetch(`${SERVER_API}/api/user/token`, {
+      headers: {
+        Authorization: decryptedToken,
       },
-    );
+      method: "POST",
+      credentials: "include",
+    });
 
     const result = await response.json();
     return result;
