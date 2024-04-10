@@ -282,18 +282,19 @@ export default function SearchResult({
           {/* //* 검색 결과 리스트 */}
           {/* //TODO: 실제 데이터 정보에 맞게 변경 */}
           {results.map((dataset, index) => (
-            <SimpleDatasetCard
-              key={dataset.datasetId}
-              title={dataset.title}
-              subtitle={dataset.description}
-              from={"입학처"}
-              type={"EXCEL"}
-              onClick={() => router.push(`search-result/${dataset.datasetId}`)}
-              style={{
-                marginTop: "1rem",
-                cursor: "pointer",
-              }}
-            />
+            <Link href={`/search-result/${dataset.datasetId}`}>
+              <SimpleDatasetCard
+                key={dataset.datasetId}
+                title={dataset.title}
+                subtitle={dataset.description}
+                from={dataset.organization}
+                type={dataset.type}
+                style={{
+                  marginTop: "1rem",
+                  cursor: "pointer",
+                }}
+              />
+            </Link>
           ))}
 
           {/* //* 페이지 리스트 */}
