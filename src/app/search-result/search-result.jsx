@@ -39,7 +39,7 @@ export default function SearchResult({
   initPage,
 }) {
   // ? 페이지 값 없이 렌더링하는 경우 -> 1페이지를 기본 페이지로 설정
-  const _initPage = initPage ? initPage : "1";
+  const _initPage = initPage ? initPage : "0";
 
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -277,12 +277,14 @@ export default function SearchResult({
           </div>
 
           {/* //? division line */}
-          <div className={styles.divisionLine} />
+          <div className={styles.divisionLine} style={{ marginBottom: "2rem" }} />
 
           {/* //* 검색 결과 리스트 */}
-          {/* //TODO: 실제 데이터 정보에 맞게 변경 */}
           {results.map((dataset, index) => (
-            <Link href={`/search-result/${dataset.datasetId}`}>
+            <Link
+              href={`/search-result/${dataset.datasetId}`}
+              key={`result${index}`}
+            >
               <SimpleDatasetCard
                 key={dataset.datasetId}
                 title={dataset.title}
@@ -291,66 +293,76 @@ export default function SearchResult({
                 type={dataset.type}
                 style={{
                   marginTop: "1rem",
-                  cursor: "pointer",
                 }}
               />
             </Link>
           ))}
 
           {/* //* 페이지 리스트 */}
-          <div
-            className={styles.pagesContainer}
-            style={{
-              margin: "0.75rem 0 2.25rem 0",
-            }}
-          >
-            <div className={styles.pagesWrapper}>
-              {/* //? 이전 페이지 버튼 */}
-              <Link
-                href={`${pathName}?${updateQueryString(
-                  "create",
-                  "page",
-                  Math.max(1, parseInt(_initPage) - 1),
-                )}`}
-              >
-                <Image src={PreviousButton} alt="이전 페이지 버튼" />
-              </Link>
+          {totalPage > 0 && (
+            <div
+              className={styles.pagesContainer}
+              style={{
+                margin: "5.625rem 0 2.25rem 0",
+              }}
+            >
+              <div className={styles.pagesWrapper}>
+                {/* //? 이전 페이지 버튼 */}
+                {parseInt(_initPage) > 0 && (
+                  <Link
+                    href={
+                      _initPage == 1
+                        ? `${pathName}?${updateQueryString("remove", "page")}`
+                        : `${pathName}?${updateQueryString(
+                            "create",
+                            "page",
+                            Math.max(1, parseInt(_initPage) - 1),
+                          )}`
+                    }
+                  >
+                    <Image src={PreviousButton} alt="이전 페이지 버튼" />
+                  </Link>
+                )}
 
-              {/* //? 페이지 버튼 목록 */}
-              {new Array(totalPage).fill(0).map((_, index) => (
-                <Link
-                  href={`${pathName}?${updateQueryString(
-                    "create",
-                    "page",
-                    index + 1,
-                  )}`}
-                  key={index}
-                  className={styles.pageButton}
-                  style={
-                    _initPage == index + 1
-                      ? {
-                          backgroundColor: "#767676",
-                          color: "white",
-                        }
-                      : {}
-                  }
-                >
-                  {index + 1}
-                </Link>
-              ))}
+                {/* //? 페이지 버튼 목록 */}
+                {new Array(totalPage).fill(0).map((_, index) => (
+                  <Link
+                    // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
+                    href={
+                      index !== 0
+                        ? `${pathName}?${updateQueryString("create", "page", index)}`
+                        : `${pathName}?${updateQueryString("remove", "page")}`
+                    }
+                    key={index}
+                    className={styles.pageButton}
+                    style={
+                      _initPage == index
+                        ? {
+                            backgroundColor: "#767676",
+                            color: "white",
+                          }
+                        : {}
+                    }
+                  >
+                    {index + 1}
+                  </Link>
+                ))}
 
-              {/* //? 다음 페이지 버튼 */}
-              <Link
-                href={`${pathName}?${updateQueryString(
-                  "create",
-                  "page",
-                  Math.min(totalPage, parseInt(_initPage) + 1),
-                )}`}
-              >
-                <Image src={NextButton} alt="다음 페이지 버튼" />
-              </Link>
+                {/* //? 다음 페이지 버튼 */}
+                {parseInt(_initPage) < totalPage - 1 && (
+                  <Link
+                    href={`${pathName}?${updateQueryString(
+                      "create",
+                      "page",
+                      Math.min(totalPage, parseInt(_initPage) + 1),
+                    )}`}
+                  >
+                    <Image src={NextButton} alt="다음 페이지 버튼" />
+                  </Link>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </section>
       </main>
     </>
