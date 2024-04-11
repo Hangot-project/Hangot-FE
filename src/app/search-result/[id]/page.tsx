@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <div className={styles.root}>
       {/* //? 기본 정보 표시 */}
-      <div className={styles.mainInfoContainer}>
+      <div className={`noLayoutPadding ${styles.mainInfoContainer}`}>
         <div className={styles.basicInfoContainer}>
           <div className={styles.titleContainer}>
             <h1 className={styles.title}>{datasetDetail.title}</h1>

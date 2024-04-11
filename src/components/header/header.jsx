@@ -21,17 +21,17 @@ export function Header() {
     dispatch(logout());
   };
 
-  //? 새로고침시 토큰이 사라지는 버그
-  useEffect(() => {
-    // token api로 access token 발급 요청
-    // -> 401 에러(REFRESH_EXPIRED)가 발생하는 경우: 비로그인 상태로 설정
-    // -> 정상 응답: login reducer 호출하여 로그인 상태로 전환
-  }, []);
-
   return (
     <>
       {/* //* 네비게이션 바 */}
-      <header className={styles.container}>
+      <header
+        className="layoutPadding"
+        style={{
+          paddingTop: "2.125rem",
+          paddingBottom: "2.125rem",
+          backgroundColor: "#003b71",
+        }}
+      >
         {/* //* 상단바 */}
         <nav className={styles.topBar}>
           <ul className={styles.navWrapper}>
