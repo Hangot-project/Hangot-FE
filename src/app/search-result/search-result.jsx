@@ -290,6 +290,7 @@ export default function SearchResult({
                 title={dataset.title}
                 subtitle={dataset.description}
                 from={dataset.organization}
+                view={dataset.view}
                 type={dataset.type}
                 style={{
                   marginTop: "1rem",

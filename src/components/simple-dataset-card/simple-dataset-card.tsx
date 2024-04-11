@@ -13,6 +13,7 @@ interface SimpleDatasetCardProps {
   subtitle: string;
   type: DataType;
   from: Organization;
+  view: number;
   onClick?: () => any;
   style?: CSSProperties;
 }
@@ -27,6 +28,7 @@ export function SimpleDatasetCard({
   subtitle,
   type,
   from,
+  view,
   onClick,
   style,
 }: SimpleDatasetCardProps) {
@@ -58,7 +60,7 @@ export function SimpleDatasetCard({
 
       <div className={styles.hoverContainer}>
         <p>
-          <Image src={LikeEmpty} alt="스크랩 아이콘" /> 5 조회수 10
+          조회수 {view} <Image src={LikeEmpty} alt="스크랩 아이콘" /> 5
         </p>
       </div>
     </div>
