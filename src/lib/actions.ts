@@ -11,11 +11,6 @@ import { encrypt } from "../utils/secure/token";
  */
 export async function handleToken(grantType: string, token: string) {
   const encryptedToken = encrypt(grantType + " " + token);
-  const accessExpiredInSeconds = process.env.NEXT_PUBLIC_ACCESS_EXPIRE;
-
-  if (!accessExpiredInSeconds) {
-    return process.env.EXPIRE_ENV_NOT_EXIST;
-  }
 
   localStorage.setItem("session", encryptedToken);
 

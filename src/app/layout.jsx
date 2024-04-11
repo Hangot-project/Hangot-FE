@@ -14,7 +14,7 @@ export default function Layout({ children }) {
         <ReduxProvider>
           <div className={styles.container}>
             <Header />
-            <div className={styles.content}>{children}</div>
+            <div className="layoutPadding">{children}</div>
             <Footer />
           </div>
         </ReduxProvider>

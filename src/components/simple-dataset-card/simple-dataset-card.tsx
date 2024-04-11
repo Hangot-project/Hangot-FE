@@ -1,13 +1,35 @@
 import Image from "next/image";
 import styles from "./simple-dataset-card.module.css";
-import { DataType, DataOrganization, LikeEmpty } from "../../../public/svgs";
+import {
+  DataType as DataTypeImage,
+  DataOrganization,
+  LikeEmpty,
+} from "../../../public/svgs";
+import { DataType, Organization } from "../../constants/dataset-search-params";
+import { CSSProperties } from "react";
+
+interface SimpleDatasetCardProps {
+  title: string;
+  subtitle: string;
+  type: DataType;
+  from: Organization;
+  onClick?: () => any;
+  style?: CSSProperties;
+}
 
 /**
  *
- * @param {{title: string; subtitle: string; type: string; from: string; onClick?: MouseEventHandler<HTMLDivElement>; style?: CSSProperties }} param0
+ * @param param0
  * @returns
  */
-export function SimpleDatasetCard({ title, subtitle, type, from, onClick, style }) {
+export function SimpleDatasetCard({
+  title,
+  subtitle,
+  type,
+  from,
+  onClick,
+  style,
+}: SimpleDatasetCardProps) {
   return (
     <div onClick={onClick} className={styles.container} style={style}>
       <p className={styles.title}>{title}</p>
@@ -16,7 +38,7 @@ export function SimpleDatasetCard({ title, subtitle, type, from, onClick, style 
         <div>
           <Image
             className={styles.imageContainer}
-            src={DataType}
+            src={DataTypeImage}
             alt="파일 아이콘"
           />
           <p>{type}</p>

@@ -36,14 +36,14 @@ export function ScrapButton({
       return;
     }
 
-    await getDatasetDetail(datasetId).then((res) => setScrapCnt(res.scrap));
+    getDatasetDetail(datasetId).then((res) => setScrapCnt(res.scrap));
     setLike(!like);
   }, [like]);
 
   //* 첫 렌더링시 유저의 스크랩 여부 확인
   useEffect(() => {
     async function fetchLike() {
-      await getIsScrap(datasetId).then((res) => {
+      getIsScrap(datasetId).then((res) => {
         if (res === null) alert("스크랩 정보를 불러오는데 실패했습니다.");
         else setLike(res);
       });
