@@ -12,7 +12,7 @@ export default async function Page({ searchParams }) {
   const organization = ParamToSearchResultProps(searchParams["organization"]);
   const sort = searchParams["sort"];
 
-  if (pageStr && !/^[^0]\d*/.test(pageStr)) {
+  if (pageStr && pageStr !== "0" && !/^[1-9]\d*$/.test(pageStr)) {
     notFound();
   }
 
