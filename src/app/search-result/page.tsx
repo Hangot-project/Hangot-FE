@@ -36,7 +36,7 @@ export default async function Page({ searchParams }) {
       results={result.data}
       totalElement={result.totalElement}
       totalPage={result.totalPage}
-      initPage={pageStr}
+      initPage={pageStr ? parseInt(pageStr) : 0}
     />
   );
 }

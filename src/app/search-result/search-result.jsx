@@ -41,7 +41,6 @@ export default function SearchResult({
   initPage,
 }) {
   // ? 페이지 값 없이 렌더링하는 경우 -> 1페이지를 기본 페이지로 설정
-  const _initPage = initPage ? initPage : "0";
 
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -295,45 +294,37 @@ export default function SearchResult({
             >
               <div className={"pagesWrapper"}>
                 {/* //? 이전 페이지 버튼 */}
-                {parseInt(_initPage) > 0 && (
+                {initPage > 0 && (
                   <Link
-                    href={
-                      _initPage == 1
-                        ? `${pathName}?${updateQuery("remove", "page")}`
-                        : `${pathName}?${updateQuery(
-                            "create",
-                            "page",
-                            Math.max(1, parseInt(_initPage) - 1),
-                          )}`
-                    }
+                    href={`${pathName}?${updateQuery(
+                      "create",
+                      "page",
+                      Math.max(0, initPage - 1),
+                    )}`}
                   >
                     <Image src={PreviousButton} alt="이전 페이지 버튼" />
                   </Link>
                 )}
 
                 {/* //? 페이지 버튼 목록 */}
-                {getPageArray(parseInt(_initPage), totalPage, 10).map(
-                  (num, index) => (
-                    <Link
-                      // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
-                      href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
-                      key={`page${num}`}
-                      className={`pageButton ${
-                        _initPage == num - 1 ? "active" : ""
-                      }`}
-                    >
-                      {num}
-                    </Link>
-                  ),
-                )}
+                {getPageArray(initPage, totalPage, 10).map((num, index) => (
+                  <Link
+                    // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
+                    href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
+                    key={`page${num}`}
+                    className={`pageButton ${initPage == num - 1 ? "active" : ""}`}
+                  >
+                    {num}
+                  </Link>
+                ))}
 
                 {/* //? 다음 페이지 버튼 */}
-                {parseInt(_initPage) < totalPage - 1 && (
+                {initPage < totalPage - 1 && (
                   <Link
                     href={`${pathName}?${updateQuery(
                       "create",
                       "page",
-                      Math.min(totalPage, parseInt(_initPage) + 1),
+                      Math.min(totalPage, initPage + 1),
                     )}`}
                   >
                     <Image src={NextButton} alt="다음 페이지 버튼" />
