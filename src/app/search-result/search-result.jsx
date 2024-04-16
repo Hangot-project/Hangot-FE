@@ -21,6 +21,8 @@ import {
   DATA_TYPES,
   SORT_VALUES,
 } from "../../constants";
+import { updateQueryString } from "../../utils";
+import { getPageArray } from "../../utils/search/get-page-array";
 
 /**
  *
@@ -53,7 +55,7 @@ export default function SearchResult({
    * 쿼리 파라미터를 수정할 때 수정하는 함수
    * @returns {string}
    */
-  const updateQueryString = useCallback(
+  const updateQuery = useCallback(
     /**
      *
      * @param {"create" | "append" | "remove"} type - 수정할 작업
@@ -62,26 +64,14 @@ export default function SearchResult({
      * @returns
      */
     (type, name, value) => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      switch (type) {
-        case "create":
-          params.set(name, value);
-          return params.toString();
-
-        case "append":
-          params.append(name, value);
-          return params.toString();
-
-        case "remove":
-          params.delete(name, value);
-          return params.toString();
-
-        default:
-          return "";
-      }
+      return updateQueryString({
+        type,
+        name,
+        value,
+        searchParams,
+      });
     },
-    [searchParams],
+    [updateQueryString, searchParams],
   );
 
   /**
@@ -90,13 +80,13 @@ export default function SearchResult({
   const handleFilterClick = useCallback(
     (queryName, value) => {
       if (!Array.from(searchParams.values()).includes(value)) {
-        router.push(`${pathName}?${updateQueryString("append", queryName, value)}`);
+        router.push(`${pathName}?${updateQuery("append", queryName, value)}`);
         return;
       }
 
-      router.push(`${pathName}?${updateQueryString("remove", queryName, value)}`);
+      router.push(`${pathName}?${updateQuery("remove", queryName, value)}`);
     },
-    [searchParams, updateQueryString],
+    [searchParams, updateQuery],
   );
 
   /**
@@ -123,15 +113,13 @@ export default function SearchResult({
       event.preventDefault();
 
       if (keyword) {
-        router.push(
-          `${pathName}?${updateQueryString("create", "keyword", keyword)}`,
-        );
+        router.push(`${pathName}?${updateQuery("create", "keyword", keyword)}`);
         return;
       }
 
-      router.push(`${pathName}?${updateQueryString("remove", "keyword")}`);
+      router.push(`${pathName}?${updateQuery("remove", "keyword")}`);
     },
-    [updateQueryString],
+    [updateQuery],
   );
 
   /**
@@ -139,9 +127,7 @@ export default function SearchResult({
    */
   useEffect(() => {
     if (selectedSort) {
-      router.push(
-        `${pathName}?${updateQueryString("create", "sort", selectedSort)}`,
-      );
+      router.push(`${pathName}?${updateQuery("create", "sort", selectedSort)}`);
     }
   }, [selectedSort]);
 
@@ -302,19 +288,19 @@ export default function SearchResult({
           {/* //* 페이지 리스트 */}
           {totalPage > 0 && (
             <div
-              className={styles.pagesContainer}
+              className={"pagesContainer"}
               style={{
                 margin: "5.625rem 0 2.25rem 0",
               }}
             >
-              <div className={styles.pagesWrapper}>
+              <div className={"pagesWrapper"}>
                 {/* //? 이전 페이지 버튼 */}
                 {parseInt(_initPage) > 0 && (
                   <Link
                     href={
                       _initPage == 1
-                        ? `${pathName}?${updateQueryString("remove", "page")}`
-                        : `${pathName}?${updateQueryString(
+                        ? `${pathName}?${updateQuery("remove", "page")}`
+                        : `${pathName}?${updateQuery(
                             "create",
                             "page",
                             Math.max(1, parseInt(_initPage) - 1),
@@ -326,33 +312,25 @@ export default function SearchResult({
                 )}
 
                 {/* //? 페이지 버튼 목록 */}
-                {new Array(totalPage).fill(0).map((_, index) => (
-                  <Link
-                    // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
-                    href={
-                      index !== 0
-                        ? `${pathName}?${updateQueryString("create", "page", index)}`
-                        : `${pathName}?${updateQueryString("remove", "page")}`
-                    }
-                    key={index}
-                    className={styles.pageButton}
-                    style={
-                      _initPage == index
-                        ? {
-                            backgroundColor: "#767676",
-                            color: "white",
-                          }
-                        : {}
-                    }
-                  >
-                    {index + 1}
-                  </Link>
-                ))}
+                {getPageArray(parseInt(_initPage), totalPage, 10).map(
+                  (num, index) => (
+                    <Link
+                      // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
+                      href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
+                      key={`page${num}`}
+                      className={`pageButton ${
+                        _initPage == num - 1 ? "active" : ""
+                      }`}
+                    >
+                      {num}
+                    </Link>
+                  ),
+                )}
 
                 {/* //? 다음 페이지 버튼 */}
                 {parseInt(_initPage) < totalPage - 1 && (
                   <Link
-                    href={`${pathName}?${updateQueryString(
+                    href={`${pathName}?${updateQuery(
                       "create",
                       "page",
                       Math.min(totalPage, parseInt(_initPage) + 1),
