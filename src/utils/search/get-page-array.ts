@@ -14,8 +14,6 @@ export function getPageArray(
   const index = Math.floor(currentPage / bound);
   const min = bound * index + 1;
   const max = Math.min(min + bound - 1, totalPage);
-  console.log("index: ", index);
-  console.log("page min: ", min, ", page max: ", max);
 
   return [...new Array(max - min + 1)].map((value, idx) => min + idx);
 }

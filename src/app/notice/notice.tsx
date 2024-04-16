@@ -24,8 +24,6 @@ export function Notice({
   const searchParams = useSearchParams().toString();
   const router = useRouter();
 
-  console.log(getPageArray(page, result.totalPage));
-
   const updateQuery = useCallback(
     (type: "create" | "append" | "remove", name: string, value?: any) => {
       return updateQueryString({

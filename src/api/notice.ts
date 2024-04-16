@@ -31,8 +31,6 @@ export async function getNotices(filter: NoticeParam): Promise<NoticeResult> {
     params.append("page", filter.page.toString());
     params.append("sort", filter.sort ? filter.sort : "최신순");
 
-    console.log("request uri >>>", `${SERVER_API}/api/notices?${params.toString()}`);
-
     const response: NoticesResponse = await fetch(
       `${SERVER_API}/api/notices?${params.toString()}`,
     ).then((res) => res.json());
@@ -41,8 +39,6 @@ export async function getNotices(filter: NoticeParam): Promise<NoticeResult> {
       console.error(response.msg);
       return null;
     }
-
-    console.log("notice response >>>", response);
 
     return response.result;
   } catch (e) {
