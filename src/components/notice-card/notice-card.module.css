@@ -1,0 +1,24 @@
+.root {
+  padding: 1rem;
+
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.125rem;
+  color: #212529;
+}
+
+.title > p {
+  display: inline-block;
+  color: #0066ff;
+
+  margin-right: 4px;
+}
+
+.info {
+  margin-top: 0.5rem;
+
+  font-size: 0.75rem;
+  color: #595959;
+}
