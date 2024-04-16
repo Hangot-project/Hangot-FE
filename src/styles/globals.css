@@ -150,3 +150,32 @@ li:hover {
     padding: 0 20rem;
   }
 }
+
+.pagesContainer,
+.pagesWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pageButton {
+  border-radius: 50%;
+  color: #767676;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 8px;
+}
+
+.pageButton.active {
+  background-color: #767676;
+  color: white;
+}
+
+.pageButton:hover {
+  color: rgb(219, 219, 219);
+}

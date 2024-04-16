@@ -80,7 +80,7 @@ export async function getSearchResults(
   page: string | undefined,
   theme: string[] | undefined,
   type: string[] | undefined,
-  organization: Organization[] | undefined,
+  organization: string[] | undefined,
   sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
@@ -124,8 +124,6 @@ export async function getSearchResults(
       },
     ).then((res) => res.json());
 
-    console.log("search result:", result);
-
     if (!result.success) {
       console.error(result.msg);
       return null;
@@ -144,8 +142,6 @@ export async function getDatasetDetail(id: number): Promise<DatasetDetail> {
       `${SERVER_API}/api/dataset/${id}`,
       { cache: "no-cache" },
     ).then((res) => res.json());
-
-    console.log("detail result:", result);
 
     if (!result.success) {
       console.error(result.msg);
