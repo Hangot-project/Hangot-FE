@@ -3,7 +3,7 @@ import { GeneralResponse, SERVER_API } from "./config";
 
 type NoticeParam = {
   sort: NOTICE_SORT_TYPES | undefined;
-  page: number | undefined;
+  page: number;
 };
 
 export type Notice = {
@@ -28,7 +28,7 @@ export async function getNotices(filter: NoticeParam): Promise<NoticeResult> {
   try {
     const params = new URLSearchParams();
 
-    params.append("page", filter.page ? `${filter.page}` : "0");
+    params.append("page", filter.page.toString());
     params.append("sort", filter.sort ? filter.sort : "최신순");
 
     console.log("request uri >>>", `${SERVER_API}/api/notices?${params.toString()}`);
