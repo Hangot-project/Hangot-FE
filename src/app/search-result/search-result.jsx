@@ -10,7 +10,7 @@ import {
 } from "../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
-import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
+import { ResetIcon } from "../../../public/svgs";
 import { StickHorizonSmall } from "../../../public/svgs";
 import { DatasetInfo } from "../../api/dataset";
 import Link from "next/link";
@@ -22,7 +22,7 @@ import {
   SORT_VALUES,
 } from "../../constants";
 import { updateQueryString } from "../../utils";
-import { getPageArray } from "../../utils/search/get-page-array";
+import { Pagination } from "../../components";
 
 /**
  *
@@ -67,7 +67,7 @@ export default function SearchResult({
         type,
         name,
         value,
-        searchParams,
+        searchParams: searchParams.toString(),
       });
     },
     [updateQueryString, searchParams],
@@ -286,52 +286,12 @@ export default function SearchResult({
 
           {/* //* 페이지 리스트 */}
           {totalPage > 0 && (
-            <div
-              className={"pagesContainer"}
-              style={{
-                margin: "5.625rem 0 2.25rem 0",
-              }}
-            >
-              <div className={"pagesWrapper"}>
-                {/* //? 이전 페이지 버튼 */}
-                {initPage > 0 && (
-                  <Link
-                    href={`${pathName}?${updateQuery(
-                      "create",
-                      "page",
-                      Math.max(0, initPage - 1),
-                    )}`}
-                  >
-                    <Image src={PreviousButton} alt="이전 페이지 버튼" />
-                  </Link>
-                )}
-
-                {/* //? 페이지 버튼 목록 */}
-                {getPageArray(initPage, totalPage, 10).map((num, index) => (
-                  <Link
-                    // 첫 페이지의 경우 page 파라미터를 넘기면 안 되므로, 파라미터 삭제
-                    href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
-                    key={`page${num}`}
-                    className={`pageButton ${initPage == num - 1 ? "active" : ""}`}
-                  >
-                    {num}
-                  </Link>
-                ))}
-
-                {/* //? 다음 페이지 버튼 */}
-                {initPage < totalPage - 1 && (
-                  <Link
-                    href={`${pathName}?${updateQuery(
-                      "create",
-                      "page",
-                      Math.min(totalPage, initPage + 1),
-                    )}`}
-                  >
-                    <Image src={NextButton} alt="다음 페이지 버튼" />
-                  </Link>
-                )}
-              </div>
-            </div>
+            <Pagination
+              pathName={pathName}
+              searchParams={searchParams.toString()}
+              currentPage={initPage}
+              totalPage={totalPage}
+            />
           )}
         </section>
       </main>

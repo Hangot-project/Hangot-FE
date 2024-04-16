@@ -13,3 +13,4 @@ export * from "./dataset-viewer/dataset-viewer";
 export * from "./dataset-type-icon/dataset-type-icon";
 export * from "./scrap-button/scrap-button";
 export * from "./notice-card/notice-card";
+export * from "./pagination/pagination";

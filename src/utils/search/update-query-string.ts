@@ -6,7 +6,7 @@ interface UpdateQueryStringProps {
   type: "create" | "append" | "remove";
   name: string;
   value?: any;
-  searchParams: ReadonlyURLSearchParams;
+  searchParams: string;
 }
 
 /**
@@ -18,7 +18,7 @@ interface UpdateQueryStringProps {
  */
 export function updateQueryString(props: UpdateQueryStringProps): string {
   const { type, name, value, searchParams } = props;
-  const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(searchParams);
 
   switch (type) {
     case "create":

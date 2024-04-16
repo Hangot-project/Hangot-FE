@@ -9,8 +9,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { updateQueryString } from "../../utils";
 import Link from "next/link";
 import { getPageArray } from "../../utils/search/get-page-array";
-import Image from "next/image";
-import { NextButton, PreviousButton } from "../../../public/svgs";
+import { Pagination } from "../../components";
 
 export function Notice({
   result,
@@ -22,7 +21,7 @@ export function Notice({
   const page = initPage ? initPage : 0;
   const [selectedSort, setSelectedSort] = useState<NOTICE_SORT_TYPES>("최신순");
   const pathName = usePathname();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams().toString();
   const router = useRouter();
 
   console.log(getPageArray(page, result.totalPage));
@@ -79,42 +78,12 @@ export function Notice({
         </div>
 
         {result.totalElement > 0 && (
-          <div
-            className="pagesContainer"
-            style={{
-              margin: "3.5rem 0 9.75rem 0",
-            }}
-          >
-            <div className="pagesWrapper">
-              <Link
-                href={`${pathName}?${updateQuery(
-                  "create",
-                  "page",
-                  Math.max(page - 1, 0),
-                )}`}
-              >
-                <Image src={PreviousButton} alt="이전 페이지 버튼" />
-              </Link>
-              {getPageArray(page, result.totalPage).map((num, index) => (
-                <Link
-                  href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
-                  key={`page${num}`}
-                  className={`pageButton ${page == num - 1 ? "active" : ""}`}
-                >
-                  {num}
-                </Link>
-              ))}
-              <Link
-                href={`${pathName}?${updateQuery(
-                  "create",
-                  "page",
-                  Math.min(result.totalPage - 1, page + 1),
-                )}`}
-              >
-                <Image src={NextButton} alt="다음 페이지 버튼" />
-              </Link>
-            </div>
-          </div>
+          <Pagination
+            pathName={pathName}
+            searchParams={searchParams}
+            currentPage={page}
+            totalPage={result.totalPage}
+          />
         )}
       </div>
     </div>
