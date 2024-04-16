@@ -80,7 +80,7 @@ export async function getSearchResults(
   page: string | undefined,
   theme: string[] | undefined,
   type: string[] | undefined,
-  organization: Organization[] | undefined,
+  organization: string[] | undefined,
   sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
