@@ -25,8 +25,7 @@ export default async function Page({ searchParams }) {
     sort,
   );
 
-  // TODO: 서버 에러에 대한 페이지 별도 추가 필요
-  if (!response.success) {
+  if (response === null) {
     notFound();
   }
 
