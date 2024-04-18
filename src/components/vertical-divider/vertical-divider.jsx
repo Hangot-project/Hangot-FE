@@ -2,8 +2,13 @@
 
 import styles from "./vertical-divider.module.css";
 
-export function VerticalDivider(props) {
+/**
+ * 
+ * @param {{style?: StyleSheet}} param0 
+ * @returns 
+ */
+export function VerticalDivider({style}) {
   return (
-    <div className={`${styles.divider} ${props.className}`} style={props.style} />
+    <div className={styles.divider} style={style} />
   );
 }
