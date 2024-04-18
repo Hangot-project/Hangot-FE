@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./header.module.css";
-import { MainLogo } from "../../../public/svgs";
+import { MainLogo, MainLogoBlue } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
@@ -31,7 +31,7 @@ export function Header() {
               {/* //? logo img */}
               <Image
                 className={styles.logoImg}
-                src={MainLogo}
+                src={MainLogoBlue}
                 width={286.15}
                 height={58.29}
               />
