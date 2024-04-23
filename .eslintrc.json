@@ -10,7 +10,8 @@
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "next/babel"
   ],
   "settings": {
     "react": {
