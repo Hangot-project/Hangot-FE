@@ -7,10 +7,8 @@
 export function getPageArray(
   currentPage: number,
   totalPage: number,
-  _bound?: number,
+  bound: number = 5,
 ): number[] {
-  const bound = _bound ? _bound : 5;
-
   const index = Math.floor(currentPage / bound);
   const min = bound * index + 1;
   const max = Math.min(min + bound - 1, totalPage);
