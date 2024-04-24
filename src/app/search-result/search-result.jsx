@@ -79,11 +79,15 @@ export default function SearchResult({
   const handleFilterClick = useCallback(
     (queryName, value) => {
       if (!Array.from(searchParams.values()).includes(value)) {
-        router.push(`${pathName}?${updateQuery("append", queryName, value)}`);
+        router.push(`${pathName}?${updateQuery("append", queryName, value)}`, {
+          scroll: false,
+        });
         return;
       }
 
-      router.push(`${pathName}?${updateQuery("remove", queryName, value)}`);
+      router.push(`${pathName}?${updateQuery("remove", queryName, value)}`, {
+        scroll: false,
+      });
     },
     [searchParams, updateQuery],
   );
@@ -98,7 +102,7 @@ export default function SearchResult({
     params.delete("organization");
     params.delete("type");
 
-    router.push(`${pathName}?${params.toString()}`);
+    router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }, [searchParams]);
 
   const handleSearchSubmit = useCallback(
@@ -126,7 +130,9 @@ export default function SearchResult({
    */
   useEffect(() => {
     if (selectedSort) {
-      router.push(`${pathName}?${updateQuery("create", "sort", selectedSort)}`);
+      router.push(`${pathName}?${updateQuery("create", "sort", selectedSort)}`, {
+        scroll: false,
+      });
     }
   }, [selectedSort]);
 
@@ -267,8 +273,9 @@ export default function SearchResult({
           {/* //* 검색 결과 리스트 */}
           {results.map((dataset, index) => (
             <Link
-              href={`/search-result/${dataset.datasetId}`}
               key={`result${index}`}
+              href={`/search-result/${dataset.datasetId}`}
+              prefetch={false}
             >
               <SimpleDatasetCard
                 key={dataset.datasetId}
