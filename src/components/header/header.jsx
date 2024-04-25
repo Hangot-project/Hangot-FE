@@ -1,14 +1,13 @@
 "use client";
 
 import styles from "./header.module.css";
-import { MainLogo } from "../../../public/svgs";
+import { MainLogo, MainLogoBlue } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
 import { useAppSelector } from "../../lib/hooks";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../../lib/slice/auth-slice";
-import { useEffect } from "react";
 
 export function Header() {
   const { isActive, accessToken, role } = useAppSelector(
@@ -24,14 +23,7 @@ export function Header() {
   return (
     <>
       {/* //* 네비게이션 바 */}
-      <header
-        className="layoutPadding"
-        style={{
-          paddingTop: "2.125rem",
-          paddingBottom: "2.125rem",
-          backgroundColor: "#003b71",
-        }}
-      >
+      <header className={`layoutPadding ${styles.container}`}>
         {/* //* 상단바 */}
         <nav className={styles.topBar}>
           <ul className={styles.navWrapper}>
@@ -39,7 +31,7 @@ export function Header() {
               <li onClick={onLogout}>로그아웃</li>
             ) : (
               <>
-                <Link href={"/"}>
+                <Link href={"/login"}>
                   <li>로그인</li>
                 </Link>
                 <VerticalDivider />
@@ -66,7 +58,7 @@ export function Header() {
               {/* //? logo img */}
               <Image
                 className={styles.logoImg}
-                src={MainLogo}
+                src={MainLogoBlue}
                 width={286.15}
                 height={58.29}
               />
