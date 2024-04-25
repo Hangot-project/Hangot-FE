@@ -102,9 +102,9 @@ export default function Login() {
 
       {/* //* 카카오 간편 로그인 연동 */}
       <div className={styles.social}>
-        <div className={styles.socialText}>
+        <div className={styles.socialTextContainer}>
           <div className={styles.divideLine} />
-          <p>다른 방법으로 로그인</p>
+          <p className={styles.socialText}>다른 방법으로 로그인</p>
           <div className={styles.divideLine} />
         </div>
 
@@ -112,8 +112,6 @@ export default function Login() {
           <Image alt="카카오 로그인" src={KakaoLoginLarge} />
         </Link>
       </div>
-
-      <Link href="/" style={{ display: "none" }} />
     </div>
   );
 }
