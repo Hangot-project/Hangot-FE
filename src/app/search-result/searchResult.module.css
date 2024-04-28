@@ -5,7 +5,11 @@
 }
 
 .navigateInfoContainer {
-  padding: 1.125rem 0;
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
+
+  background-color: #f8f8f8;
+  border-bottom: solid 0.8px #dddddd;
 }
 
 .navigateInfoContainer > p {
