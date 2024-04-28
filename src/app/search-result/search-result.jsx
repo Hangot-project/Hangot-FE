@@ -139,7 +139,7 @@ export default function SearchResult({
   return (
     <>
       {/* //* navigate info box */}
-      <div className={styles.navigateInfoContainer}>
+      <div className={`noLayoutPadding ${styles.navigateInfoContainer}`}>
         <p>Home {" > "} 데이터 찾기</p>
       </div>
 
