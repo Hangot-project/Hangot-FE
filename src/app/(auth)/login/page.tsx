@@ -1,4 +1,4 @@
-"use client"; //? client componet - NextJS 13
+"use client";
 
 import { useState } from "react";
 import styles from "./login.module.css";
@@ -8,17 +8,12 @@ import { ID, PW } from "../../../../public/svgs";
 import { VerticalDivider, FilterCheckButton } from "../../../components";
 import { userLogin } from "../../../api/user";
 import { handleToken } from "../../../lib/actions";
-import { useRouter } from "next/navigation";
 import { KakaoLoginLarge } from "../../../../public/images";
 
 export default function Login() {
-  console.log("this is Login client component");
-
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
-
-  const router = useRouter();
 
   const handleLogin = async () => {
     const response = await userLogin({
@@ -33,10 +28,8 @@ export default function Login() {
     }
     const result = response.result;
 
-    handleToken(result.grantType, result.accessToken);
-    console.log("!!!");
-    router.push("/");
-    router.refresh();
+    await handleToken(result.grantType, result.accessToken);
+    window.location.replace("/");
   };
 
   return (
