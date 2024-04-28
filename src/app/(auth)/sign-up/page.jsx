@@ -1,10 +1,10 @@
-"use client"; //? client componet - NextJS 13
+"use client";
 
 import React, { useState } from "react";
 import styles from "./sign-up.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { MainLogoBlue, Name, SID, SPW, Kakao } from "../../../../public/svgs";
+import { Name, SID, SPW } from "../../../../public/svgs";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
@@ -21,119 +21,96 @@ export default function SignUp() {
 
   return (
     <div className={styles.Wrapper}>
-      {/* 회원가입 헤더 */}
-      <div className={styles.header}>
-        <Image
-          className={styles.logoContainer}
-          src={MainLogoBlue}
-          alt="한양대 ERICA 데이터포털"
-        />
-      </div>
+      <div className={styles.signupWrapper}>
+        {/* //? 이름 입력 */}
+        <p className={styles.title}>이름</p>
+        <div className={styles.lineContainer}>
+          <Image src={Name} width={20} height={20} />
+          <input
+            className={styles.input}
+            placeholder="이름을 입력해 주세요"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
 
-      {/* 회원가입 메인 파트 */}
-      <div className={styles.main}>
-        {/* 회원가입 정보 입력, 로그인 화면 이동, 카카오 로그인 영역 */}
-        <div className={styles.signupWrapper}>
-          {/* 회원가입 정보 입력 (이름, 이메일, 인증번호, 비밀번호) */}
-          <form
-            id="signupForm"
-            className={styles.infoWrapper}
-            onSubmit={handleSignUp}
-          >
-            <p>이름</p>
-            <div className={styles.lineContainer}>
-              <Image src={Name} width={20} height={20} />
-              <input
-                className={styles.input}
-                placeholder="이름을 입력해 주세요"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </div>
-            <p>이메일</p>
-            <form
-              id="emailForm"
-              className={styles.emailWrapper}
-              onSubmit={handleEmail}
-            >
-              <div className={styles.lineContainer}>
-                <Image src={SID} width={20} height={20} />
-                <input
-                  className={styles.input}
-                  placeholder="이메일을 입력해 주세요"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <button className={styles.certificate_button} type="submit">
-                인증
-              </button>
-            </form>
-            <p>인증번호</p>
-            <form
-              id="verificationCodeForm"
-              className={styles.certificateWrapper}
-              onSubmit={handleVerificationCode}
-            >
-              <div className={styles.lineContainer}>
-                <Image src={SID} width={20} height={20} />
-                <input
-                  className={styles.input}
-                  placeholder="인증번호를 입력해주세요"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                />
-              </div>
-              <button className={styles.certificate_number_button} type="submit">
-                인증번호 확인
-              </button>
-            </form>
-            <p>비밀번호</p>
-            <div className={styles.lineContainer}>
-              <Image src={SPW} width={20} height={20} />
-              <input
-                className={styles.input}
-                placeholder="영문자, 숫자, 특수문자 포함 최소 8~20자"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className={styles.lineContainer}>
-              <Image src={SPW} width={20} height={20} />
-              <input
-                className={styles.input}
-                placeholder="비밀번호를 확인해 주세요"
-                value={confirmedPassword}
-                onChange={(e) => setConfirmedPassword(e.target.value)}
-              />
-            </div>
-
-            <button className={styles.signup_button} type="submit">
-              회원가입
-            </button>
-          </form>
-
-          {/* 로그인 화면 이동 */}
-          <div className={styles.loginLink}>
-            <p>이미 회원이신가요?</p>
-            <Link href="/login">
-              <p>로그인 하기</p>
-            </Link>
+        {/* //? 이메일 입력 */}
+        <p className={styles.title}>이메일</p>
+        <div className={styles.row}>
+          <div className={styles.lineContainer}>
+            <Image src={SID} width={20} height={20} />
+            <input
+              type="email"
+              name=""
+              id=""
+              className={styles.input}
+              placeholder="이메일을 입력해 주세요"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
+          <button className={styles.certificate_button} type="submit">
+            인증
+          </button>
+        </div>
 
-          {/* 카카오 소셜 로그인 */}
-          <div className={styles.social}>
-            <div className={styles.socialText}>
-              <div className={styles.divideLine} />
-              <p>다른 방법으로 회원가입</p>
-              <div className={styles.divideLine} />
-            </div>
-
-            <Link className={styles.kakaoContainer} href="">
-              <Image src={Kakao} />
-              <p>카카오로 간편 회원가입</p>
-            </Link>
+        {/* //? 인증번호 입력 */}
+        <p className={styles.title}>인증번호</p>
+        <div className={styles.row}>
+          <div className={styles.lineContainer}>
+            <Image src={SID} width={20} height={20} />
+            <input
+              type="number"
+              className={styles.input}
+              placeholder="인증번호를 입력해주세요"
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+            />
           </div>
+          <button className={styles.certificate_button} type="submit">
+            확인
+          </button>
+        </div>
+
+        {/* //? 비밀번호 */}
+        <p className={styles.title}>비밀번호</p>
+        <div className={styles.lineContainer}>
+          <Image src={SPW} width={20} height={20} />
+          <input
+            type="password"
+            name=""
+            id=""
+            className={styles.input}
+            placeholder="영문자, 숫자, 특수문자 포함 최소 8~20자"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        {/* //? 비밀번호 재입력 */}
+        <div style={{ marginTop: "6px" }} className={styles.lineContainer}>
+          <Image src={SPW} width={20} height={20} />
+          <input
+            type="password"
+            name=""
+            id=""
+            className={styles.input}
+            placeholder="비밀번호를 재입력 해주세요"
+            value={confirmedPassword}
+            onChange={(e) => setConfirmedPassword(e.target.value)}
+          />
+        </div>
+
+        <button className={styles.signup_button} type="submit">
+          회원가입
+        </button>
+
+        {/* //* 로그인 화면 이동 */}
+        <div className={styles.loginContainer}>
+          <p>이미 회원이신가요?</p>
+          <Link className={styles.loginLink} href="/login">
+            로그인 하기
+          </Link>
         </div>
       </div>
     </div>
