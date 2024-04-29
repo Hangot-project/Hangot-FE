@@ -46,7 +46,9 @@ export async function userLogin(params: LoginInput): Promise<LoginResponse> {
  */
 export async function userLogout(): Promise<GeneralResponse> {
   try {
-    const decryptedToken = decrypt(localStorage.getItem("session"));
+    const decryptedToken = decrypt(
+      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
+    );
     const response = await fetch(`${SERVER_API}/api/user/logout`, {
       headers: {
         Authorization: decryptedToken,
@@ -68,7 +70,9 @@ export async function userLogout(): Promise<GeneralResponse> {
  */
 export async function reissueToken(): Promise<LoginResponse> {
   try {
-    const decryptedToken = decrypt(localStorage.getItem("session"));
+    const decryptedToken = decrypt(
+      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
+    );
     const response = await fetch(`${SERVER_API}/api/user/token`, {
       headers: {
         Authorization: decryptedToken,
