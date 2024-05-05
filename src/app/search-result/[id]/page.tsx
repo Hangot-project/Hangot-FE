@@ -1,8 +1,6 @@
 import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../components";
 import { dataset as _dataset } from "../../../dummy-data/datasets";
-import Loading from "../../loading";
 import { getAllDatasets, getDatasetDetail } from "../../../api/dataset";
-import { Suspense } from "react";
 import styles from "./detail.module.css";
 
 // export async function generateStaticParams() {
@@ -105,17 +103,15 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h2>
 
       <div className={styles.divisionLine} />
-      <Suspense fallback={<Loading />}>
-        {dataset && datasetDetail && (
-          <DatasetViewer
-            title={datasetDetail.title}
-            dataset={dataset}
-            style={{
-              marginTop: "3rem",
-            }}
-          />
-        )}
-      </Suspense>
+      {dataset && datasetDetail && (
+        <DatasetViewer
+          title={datasetDetail.title}
+          dataset={dataset}
+          style={{
+            marginTop: "3rem",
+          }}
+        />
+      )}
     </div>
   );
 }
