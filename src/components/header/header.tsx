@@ -16,7 +16,7 @@ export function Header() {
       return;
     }
 
-    await signOut();
+    await signOut({ callbackUrl: "/" });
   };
 
   return (
