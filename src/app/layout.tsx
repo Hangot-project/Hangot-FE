@@ -18,8 +18,8 @@ export default function Layout({ children }) {
             <div className={styles.container}>
               <Header />
               <div className="layoutPadding">{children}</div>
-              <Footer />
             </div>
+            <Footer />
           </Providers>
         </Suspense>
       </body>
