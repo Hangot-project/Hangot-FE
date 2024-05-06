@@ -140,7 +140,7 @@ export async function getDatasetDetail(id: number): Promise<DatasetDetail> {
   try {
     const result: DatasetDetailResponse = await fetch(
       `${SERVER_API}/api/dataset/${id}`,
-      { cache: "no-cache" },
+      { cache: "no-store" },
     ).then((res) => res.json());
 
     if (!result.success) {
