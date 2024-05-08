@@ -78,3 +78,25 @@ export async function reissueToken(): Promise<LoginResponse> {
     console.error(error);
   }
 }
+
+type Provider = "kakao";
+type SocialLoginBody = {
+  code: string;
+};
+
+export async function socialLogin(provider: Provider, body: SocialLoginBody) {
+  try {
+    const response = await fetch(`${SERVER_API}/api/user/login/${provider}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
