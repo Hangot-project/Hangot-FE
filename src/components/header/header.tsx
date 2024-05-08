@@ -6,6 +6,7 @@ import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { userLogout } from "../../api/user";
 
 export function Header() {
   const { data: session, status } = useSession();
@@ -13,6 +14,15 @@ export function Header() {
   const onLogout = async () => {
     if (status === "unauthenticated") {
       alert("로그인 상태가 아닙니다.");
+      return;
+    }
+
+    const response = await userLogout(
+      session.user.grantType,
+      session.user.accessToken,
+    );
+    if (!response.success) {
+      alert("[error] 로그아웃 오류");
       return;
     }
 

@@ -2,8 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { LoginResponse, userLogin, userLogout } from "../api/user";
-import { ACCESS_EXPIRE_MESSAGE, REFRESH_EXPIRE_MESSAGE } from "../constants";
+import { LoginResponse, userLogin } from "../api/user";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -90,23 +89,8 @@ export const authOptions: NextAuthOptions = {
   },
 
   events: {
-    async signOut({ token }) {
-      const response = await userLogout(
-        //@ts-ignore
-        token.grantType,
-        token.accessToken,
-      );
-
-      if (
-        response.success ||
-        response.msg === ACCESS_EXPIRE_MESSAGE ||
-        response.msg === REFRESH_EXPIRE_MESSAGE
-      ) {
-        cookies().delete("refreshToken");
-        return;
-      }
-
-      throw new Error("로그아웃 실패");
+    signOut() {
+      cookies().delete("refreshToken");
     },
   },
 
