@@ -1,3 +1,4 @@
+import { decrypt } from "../utils/secure/token";
 import { GeneralResponse, SERVER_API } from "./config";
 
 export type LoginInput = {
@@ -11,7 +12,7 @@ type LoginResult = {
   accessToken: string;
 };
 
-export interface LoginResponse extends GeneralResponse {
+interface LoginResponse extends GeneralResponse {
   result: LoginResult;
 }
 
@@ -20,7 +21,7 @@ export interface LoginResponse extends GeneralResponse {
  * @param params
  * @returns
  */
-export async function userLogin(params: LoginInput): Promise<Response> {
+export async function userLogin(params: LoginInput): Promise<LoginResponse> {
   try {
     const response = await fetch(`${SERVER_API}/api/user/login`, {
       headers: {
@@ -31,7 +32,9 @@ export async function userLogin(params: LoginInput): Promise<Response> {
       credentials: "include",
     });
 
-    return response;
+    const result = await response.json();
+
+    return result;
   } catch (error) {
     return null;
   }
@@ -41,14 +44,14 @@ export async function userLogin(params: LoginInput): Promise<Response> {
  * 현재 로그인 중인 유저를 로그아웃 시키는 메서드
  * @returns
  */
-export async function userLogout(
-  grantType: string,
-  token: string,
-): Promise<GeneralResponse> {
+export async function userLogout(): Promise<GeneralResponse> {
   try {
+    const decryptedToken = decrypt(
+      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
+    );
     const response = await fetch(`${SERVER_API}/api/user/logout`, {
       headers: {
-        Authorization: grantType + " " + token,
+        Authorization: decryptedToken,
       },
       method: "POST",
       credentials: "include",
@@ -67,7 +70,13 @@ export async function userLogout(
  */
 export async function reissueToken(): Promise<LoginResponse> {
   try {
+    const decryptedToken = decrypt(
+      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
+    );
     const response = await fetch(`${SERVER_API}/api/user/token`, {
+      headers: {
+        Authorization: decryptedToken,
+      },
       method: "POST",
       credentials: "include",
     });

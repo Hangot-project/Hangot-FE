@@ -2,46 +2,51 @@
 
 import React, { useRef, useState } from "react";
 import { reissueToken, userLogin, userLogout } from "../../api/user";
-import { useSession } from "next-auth/react";
+import { handleToken } from "../../lib/actions";
+import { useDispatch } from "react-redux";
+import { logout } from "../../lib/slice/auth-slice";
 
 export default function Test() {
+  const dispatch = useDispatch();
   const yesRef = useRef<HTMLInputElement>();
 
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [message, setMessage] = useState<string>("");
 
-  const { data: session, update } = useSession();
-
-  const onLogoutSubmit = async () => {
-    // dispatch(logout());
-    const response = await userLogout(
-      session?.user?.grantType,
-      session?.user?.accessToken,
-    );
+  const onLoginSubmit = async () => {
+    const response = await userLogin({
+      email: username,
+      password,
+      autoLogin: yesRef.current.checked,
+    });
 
     if (!response.success) {
       setMessage(response.msg);
       return;
     }
     setMessage("");
+    const result = response.result;
+
+    await handleToken(result.grantType, result.accessToken);
+  };
+
+  const onLogoutSubmit = async () => {
+    // dispatch(logout());
+    const response = await userLogout();
+
+    if (!response.success) {
+      setMessage(response.msg);
+      return;
+    }
+    setMessage("");
+    dispatch(logout());
   };
 
   const onReissueClick = async () => {
     const response = await reissueToken();
-
-    if (!response.success) {
-      alert("액세스 토큰 재발급 실패");
-      return;
-    }
-
-    if (response.success) {
-      const result = response.result;
-      await update({
-        grantType: result.grantType,
-        accessToken: result.accessToken,
-      });
-    }
+    const result = response.result;
+    await handleToken(result.grantType, result.accessToken);
   };
 
   return (
@@ -77,9 +82,9 @@ export default function Test() {
         <label htmlFor="no">아니오</label>
       </div>
 
-      {/* <button type="button" onClick={onLoginSubmit}>
+      <button type="button" onClick={onLoginSubmit}>
         유저 로그인
-      </button> */}
+      </button>
       <hr />
       <button type="button" onClick={onLogoutSubmit}>
         유저 로그아웃

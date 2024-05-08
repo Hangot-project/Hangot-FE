@@ -6,37 +6,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { ID, PW } from "../../../../public/svgs";
 import { VerticalDivider, FilterCheckButton } from "../../../components";
+import { userLogin } from "../../../api/user";
+import { handleToken } from "../../../lib/actions";
 import { KakaoLoginLarge } from "../../../../public/images";
-import { signIn } from "next-auth/react";
 
 export default function Login() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-  // const handleLogin = async () => {
-  //   const response = await userLogin({
-  //     email: email,
-  //     password,
-  //     autoLogin: autoLogin,
-  //   });
-
-  //   if (!response.success) {
-  //     alert(response.msg);
-  //     return;
-  //   }
-
-  //   // window.location.replace("/");
-  // };
-
-  const handleLogin = () => {
-    signIn("credentials", {
-      username: email,
-      password: password,
-      isAuto: autoLogin,
-      redirect: true,
-      callbackUrl: "/",
+  const handleLogin = async () => {
+    const response = await userLogin({
+      email: email,
+      password,
+      autoLogin: autoLogin,
     });
+
+    if (!response.success) {
+      alert(response.msg);
+      return;
+    }
+    const result = response.result;
+
+    await handleToken(result.grantType, result.accessToken);
+    window.location.replace("/");
   };
 
   return (
