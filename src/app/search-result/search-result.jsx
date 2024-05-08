@@ -40,8 +40,6 @@ export default function SearchResult({
   totalPage,
   initPage,
 }) {
-  // ? 페이지 값 없이 렌더링하는 경우 -> 1페이지를 기본 페이지로 설정
-
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
