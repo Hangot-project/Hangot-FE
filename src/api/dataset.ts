@@ -116,7 +116,7 @@ export async function getSearchResults(
     const result: DatasetListResponse = await fetch(
       `${SERVER_API}/api/datasets?${params.toString()}`,
       {
-        cache: "no-cache",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
         },
@@ -140,7 +140,7 @@ export async function getDatasetDetail(id: number): Promise<DatasetDetail> {
   try {
     const result: DatasetDetailResponse = await fetch(
       `${SERVER_API}/api/dataset/${id}`,
-      { cache: "no-store" },
+      { cache: "no-cache" },
     ).then((res) => res.json());
 
     if (!result.success) {
