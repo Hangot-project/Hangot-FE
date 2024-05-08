@@ -2,7 +2,29 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { LoginResponse, userLogin } from "../api/user";
+import { LoginResponse, socialLogin, userLogin } from "../api/user";
+
+function setCookie(response: Response) {
+  const apiCookies = response.headers.getSetCookie();
+  if (apiCookies && apiCookies.length > 0) {
+    apiCookies.forEach((cookie) => {
+      const parsedCookie = parse(cookie);
+      const [cookieName, cookieValue] = Object.entries(parsedCookie)[0];
+
+      //@ts-ignore
+      cookies().set({
+        name: cookieName,
+        value: cookieValue,
+        httpOnly: true,
+        maxAge: parseInt(parsedCookie["Max-Age"]),
+        path: parsedCookie.path,
+        sameSite: "none",
+        expires: new Date(parsedCookie.expires),
+        secure: true,
+      });
+    });
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -19,6 +41,8 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
 
       credentials: {
+        provider: { label: "isSocial" },
+        code: { label: "code" },
         username: { label: "email", type: "text", placeholder: "아이디" },
         password: { label: "password", type: "password", placeholder: "비밀번호" },
         isAuto: { label: "isAuto" },
@@ -27,6 +51,26 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const _user = { id: credentials.username, name: credentials.username };
 
+        // * 소셜 로그인
+        if (credentials.provider) {
+          const response = await socialLogin("kakao", {
+            code: credentials.code,
+          });
+
+          const result: LoginResponse = await response.json();
+
+          if (result.success) {
+            setCookie(response);
+            return {
+              ..._user,
+              ...result.result,
+            };
+          } else {
+            return null;
+          }
+        }
+
+        // * 일반 로그인
         const response = await userLogin({
           email: credentials.username,
           password: credentials.password,
@@ -39,31 +83,9 @@ export const authOptions: NextAuthOptions = {
         if (result.success) {
           const user = { ..._user, ...result.result };
 
-          //* refresh token 쿠키 저장
-          const apiCookies = response.headers.getSetCookie();
-          if (apiCookies && apiCookies.length > 0) {
-            apiCookies.forEach((cookie) => {
-              const parsedCookie = parse(cookie);
-              const [cookieName, cookieValue] = Object.entries(parsedCookie)[0];
-
-              //@ts-ignore
-              cookies().set({
-                name: cookieName,
-                value: cookieValue,
-                httpOnly: true,
-                maxAge: parseInt(parsedCookie["Max-Age"]),
-                path: parsedCookie.path,
-                sameSite: "none",
-                expires: new Date(parsedCookie.expires),
-                secure: true,
-              });
-            });
-          }
-
-          // Any object returned will be saved in `user` property of the JWT
+          setCookie(response);
           return user;
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
           return null;
         }
       },
