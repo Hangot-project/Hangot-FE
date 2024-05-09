@@ -1,16 +1,29 @@
 "use client";
 
-import { useEffect } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { SERVER_API } from "../../api/config";
+import { useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
 import { reissueToken } from "../../api/user";
+import { Scrap, ScrapListResponse, getScrapList } from "../../api/scrap";
 
 function Page() {
   const { data: session, update } = useSession();
+  const [scrapList, setScrapList] = useState<Scrap[]>([]);
 
   useEffect(() => {
+    if (session === undefined) return;
+
     async function fetchData() {
-      const response = await fetch(`${SERVER_API}/api/scrap`);
+      const response = await getScrapList(
+        session.user.grantType,
+        session.user.accessToken,
+      );
+
+      if (response.ok) {
+        const result: ScrapListResponse = await response.json();
+        setScrapList(result.result);
+        return;
+      }
+
       if (response.status === 401) {
         const tokenResponse = await reissueToken();
         if (tokenResponse.success) {
@@ -18,18 +31,24 @@ function Page() {
             grantType: tokenResponse.result.grantType,
             accessToken: tokenResponse.result.accessToken,
           });
-
-          const response = await fetch(`${SERVER_API}/api/scrap`);
         } else {
-          alert("리프레시 토큰 재발급 실패");
+          alert("액세스가 만료되어 재로그인이 필요합니다.");
+          await signOut({ callbackUrl: "/login" });
         }
       }
     }
 
     fetchData();
-  }, []);
+  }, [session]);
 
-  return <div>마이페이지</div>;
+  return (
+    <div>
+      마이페이지
+      <p>id: {session?.user.id}</p>
+      <p>name: {session?.user.name}</p>
+      <p>token: {session?.user.accessToken}</p>
+    </div>
+  );
 }
 
 export default Page;
