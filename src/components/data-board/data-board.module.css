@@ -1,0 +1,143 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+  
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+  
+.title {
+    color: #0f1317;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    word-break: keep-all;
+}
+
+.headerContainer > a {
+    display: inline-flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+  
+.more {
+    color: #667380;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    transition: color .2s;
+}
+  
+.dataBoard {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dataCard {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    border: 1px solid #dce1e5;
+    border-radius: 16px;
+    transition: border-color .2s;
+}
+
+.dataCard > section {
+    display: flex;
+    min-height: 210px;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+.dataCard > section > div:first-of-type {
+    margin-bottom: 24px;
+}
+
+.dataTitle {
+    margin-bottom: 16px;
+    color: #0f1317;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+.dataCard > section > div:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #dce1e5;
+    margin-top: auto;
+}
+
+.dataFrom {
+    color: #0f1317;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+}
+
+.labelGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.boardLabel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-radius: 4px;
+}
+
+.labelColor1 {
+    color: #667380;
+    background-color: #dce1e5;
+}
+
+.labelColor2 {
+    color: #ff850a;
+    background-color: #fff7de;
+}
+
+.labelColor3 {
+    color: #3ab03f;
+    background-color: #ebfae8;
+}
+
+.dataConst {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    margin-top: auto;
+    border-top: 1px solid #dce1e5;
+}
+
+.dataConstText {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #0f1317;
+    letter-spacing: -0.01em;
+}
