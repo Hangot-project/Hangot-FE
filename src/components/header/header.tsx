@@ -5,8 +5,8 @@ import { MainLogoBlue } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
-import { userLogout } from "../../api/user";
+import { useSession } from "next-auth/react";
+import { logout } from "../../api/logout";
 
 export function Header() {
   const { data: session, status } = useSession();
@@ -17,16 +17,13 @@ export function Header() {
       return;
     }
 
-    const response = await userLogout(
-      session.user.grantType,
-      session.user.accessToken,
-    );
-    if (!response.success) {
-      alert("[error] 로그아웃 오류");
+    const success = await logout(session.user.grantType, session.user.accessToken);
+    if (success) {
+      window.location.reload();
       return;
     }
 
-    await signOut({ callbackUrl: "/" });
+    alert("[error] 로그아웃 오류");
   };
 
   return (

@@ -14,21 +14,6 @@ export default function Login() {
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-  // const handleLogin = async () => {
-  //   const response = await userLogin({
-  //     email: email,
-  //     password,
-  //     autoLogin: autoLogin,
-  //   });
-
-  //   if (!response.success) {
-  //     alert(response.msg);
-  //     return;
-  //   }
-
-  //   // window.location.replace("/");
-  // };
-
   const handleLogin = () => {
     signIn("credentials", {
       username: email,
@@ -108,7 +93,10 @@ export default function Login() {
           <div className={styles.divideLine} />
         </div>
 
-        <Link className={styles.kakaoContainer} href="">
+        <Link
+          className={styles.kakaoContainer}
+          href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`}
+        >
           <Image alt="카카오 로그인" src={KakaoLoginLarge} />
         </Link>
       </div>

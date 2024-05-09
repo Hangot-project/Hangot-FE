@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { LoginResponse, socialLogin, userLogin } from "../api/user";
+import { LoginResponse, Provider, socialLogin, userLogin } from "../api/user";
 
 function setCookie(response: Response) {
   const apiCookies = response.headers.getSetCookie();
@@ -53,7 +53,12 @@ export const authOptions: NextAuthOptions = {
 
         // * 소셜 로그인
         if (credentials.provider) {
-          const response = await socialLogin("kakao", {
+          //@ts-ignore
+          if (!Object.values(Provider).includes(credentials.provider)) {
+            throw new Error("지원하지 않는 소셜 로그인");
+          }
+          //@ts-ignore
+          const response = await socialLogin(credentials.provider, {
             code: credentials.code,
           });
 
