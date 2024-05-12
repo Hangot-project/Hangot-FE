@@ -1,4 +1,3 @@
-import { decrypt } from "../utils/secure/token";
 import { GeneralResponse, SERVER_API } from "./config";
 
 export type LoginInput = {
@@ -12,7 +11,7 @@ type LoginResult = {
   accessToken: string;
 };
 
-interface LoginResponse extends GeneralResponse {
+export interface LoginResponse extends GeneralResponse {
   result: LoginResult;
 }
 
@@ -21,7 +20,7 @@ interface LoginResponse extends GeneralResponse {
  * @param params
  * @returns
  */
-export async function userLogin(params: LoginInput): Promise<LoginResponse> {
+export async function userLogin(params: LoginInput): Promise<Response> {
   try {
     const response = await fetch(`${SERVER_API}/api/user/login`, {
       headers: {
@@ -32,9 +31,7 @@ export async function userLogin(params: LoginInput): Promise<LoginResponse> {
       credentials: "include",
     });
 
-    const result = await response.json();
-
-    return result;
+    return response;
   } catch (error) {
     return null;
   }
@@ -44,14 +41,14 @@ export async function userLogin(params: LoginInput): Promise<LoginResponse> {
  * 현재 로그인 중인 유저를 로그아웃 시키는 메서드
  * @returns
  */
-export async function userLogout(): Promise<GeneralResponse> {
+export async function userLogout(
+  grantType: string,
+  token: string,
+): Promise<GeneralResponse> {
   try {
-    const decryptedToken = decrypt(
-      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
-    );
     const response = await fetch(`${SERVER_API}/api/user/logout`, {
       headers: {
-        Authorization: decryptedToken,
+        Authorization: grantType + " " + token,
       },
       method: "POST",
       credentials: "include",
@@ -70,19 +67,38 @@ export async function userLogout(): Promise<GeneralResponse> {
  */
 export async function reissueToken(): Promise<LoginResponse> {
   try {
-    const decryptedToken = decrypt(
-      localStorage.getItem(process.env.NEXT_PUBLIC_TOKEN_KEY),
-    );
     const response = await fetch(`${SERVER_API}/api/user/token`, {
-      headers: {
-        Authorization: decryptedToken,
-      },
       method: "POST",
       credentials: "include",
     });
 
     const result = await response.json();
     return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const Provider = {
+  kakao: "kakao",
+} as const;
+export type ProviderType = (typeof Provider)[keyof typeof Provider];
+type SocialLoginBody = {
+  code: string;
+};
+
+export async function socialLogin(provider: ProviderType, body: SocialLoginBody) {
+  try {
+    const response = await fetch(`${SERVER_API}/api/user/login/${provider}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+      credentials: "include",
+    });
+
+    return response;
   } catch (error) {
     console.error(error);
   }

@@ -6,7 +6,7 @@ type IsScrap = {
   scrap: boolean;
 };
 
-type Scrap = {
+export type Scrap = {
   scrapId: number;
   datasetId: number;
   title: string;
@@ -21,6 +21,10 @@ interface IsScrapResponse extends GeneralResponse {
 
 interface ScrapResponse extends GeneralResponse {
   result: Scrap;
+}
+
+export interface ScrapListResponse extends GeneralResponse {
+  result: Scrap[];
 }
 
 /**
@@ -85,6 +89,27 @@ export async function deleteScrap(datasetId: number) {
       method: "DELETE",
       headers: {
         Authorization: decryptedToken,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+/**
+ * 로그인 유저의 모든 스크랩 내역을 불러오는 메서드
+ * @param grantType
+ * @param token
+ * @returns
+ */
+export async function getScrapList(grantType: string, token: string) {
+  try {
+    const response = await fetch(`${SERVER_API}/api/scrap`, {
+      headers: {
+        Authorization: `${grantType} ${token}`,
       },
     });
 

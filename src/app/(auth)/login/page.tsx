@@ -6,30 +6,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { ID, PW } from "../../../../public/svgs";
 import { VerticalDivider, FilterCheckButton } from "../../../components";
-import { userLogin } from "../../../api/user";
-import { handleToken } from "../../../lib/actions";
 import { KakaoLoginLarge } from "../../../../public/images";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-  const handleLogin = async () => {
-    const response = await userLogin({
-      email: email,
-      password,
-      autoLogin: autoLogin,
+  const handleLogin = () => {
+    signIn("credentials", {
+      username: email,
+      password: password,
+      isAuto: autoLogin,
+      redirect: true,
+      callbackUrl: "/",
     });
-
-    if (!response.success) {
-      alert(response.msg);
-      return;
-    }
-    const result = response.result;
-
-    await handleToken(result.grantType, result.accessToken);
-    window.location.replace("/");
   };
 
   return (
@@ -101,7 +93,10 @@ export default function Login() {
           <div className={styles.divideLine} />
         </div>
 
-        <Link className={styles.kakaoContainer} href="">
+        <Link
+          className={styles.kakaoContainer}
+          href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`}
+        >
           <Image alt="카카오 로그인" src={KakaoLoginLarge} />
         </Link>
       </div>

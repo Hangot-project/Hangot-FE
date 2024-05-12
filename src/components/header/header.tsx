@@ -1,23 +1,29 @@
 "use client";
 
 import styles from "./header.module.css";
-import { MainLogo, MainLogoBlue } from "../../../public/svgs";
+import { MainLogoBlue } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
-import { useAppSelector } from "../../lib/hooks";
-import { useDispatch } from "react-redux";
-import { login, logout } from "../../lib/slice/auth-slice";
+import { useSession } from "next-auth/react";
+import { logout } from "../../api/logout";
 
 export function Header() {
-  const { isActive, accessToken, role } = useAppSelector(
-    (state) => state.authReducer.value,
-  );
-  const dispatch = useDispatch();
+  const { data: session, status } = useSession();
 
-  const onLogout = () => {
-    //TODO: logout api 호출
-    dispatch(logout());
+  const onLogout = async () => {
+    if (status === "unauthenticated") {
+      alert("로그인 상태가 아닙니다.");
+      return;
+    }
+
+    const success = await logout(session.user.grantType, session.user.accessToken);
+    if (success) {
+      window.location.reload();
+      return;
+    }
+
+    alert("[error] 로그아웃 오류");
   };
 
   return (
@@ -27,7 +33,7 @@ export function Header() {
         {/* //* 상단바 */}
         <nav className={styles.topBar}>
           <ul className={styles.navWrapper}>
-            {isActive ? (
+            {status === "authenticated" ? (
               <li onClick={onLogout}>로그아웃</li>
             ) : (
               <>
@@ -35,7 +41,7 @@ export function Header() {
                   <li>로그인</li>
                 </Link>
                 <VerticalDivider />
-                <Link href={"/"}>
+                <Link href={"/sign-up"}>
                   <li>회원가입</li>
                 </Link>
               </>
@@ -57,6 +63,7 @@ export function Header() {
             <Link href="/">
               {/* //? logo img */}
               <Image
+                alt="메인 로고"
                 className={styles.logoImg}
                 src={MainLogoBlue}
                 width={286.15}
