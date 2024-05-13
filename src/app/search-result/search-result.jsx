@@ -45,8 +45,9 @@ export default function SearchResult({
   const router = useRouter();
 
   const keyword = searchParams.get("keyword");
+  const initSort = searchParams.get("sort");
 
-  const [selectedSort, setSelectedSort] = useState();
+  const [selectedSort, setSelectedSort] = useState(initSort);
 
   /**
    * 쿼리 파라미터를 수정할 때 수정하는 함수
