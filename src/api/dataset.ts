@@ -1,4 +1,4 @@
-import { SERVER_PARAMS_KEY } from "../constants/dataset-search-params";
+import { DataType, SERVER_PARAMS_KEY } from "../constants/dataset-search-params";
 import { GeneralResponse, SERVER_API } from "./config";
 import { Organization } from "../constants/dataset-search-params";
 
@@ -148,6 +148,61 @@ export async function getDatasetDetail(id: number): Promise<DatasetDetail> {
       return null;
     }
     return result.result;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export type DatasetBanner = {
+  datasetId: number;
+  title: string;
+  type: string;
+  organization: Organization;
+};
+
+interface DatasetBannerResponse extends GeneralResponse {
+  result: {
+    dataset: DatasetBanner[];
+  };
+}
+
+export async function getPopularDataset() {
+  try {
+    const result: DatasetBannerResponse = await fetch(
+      `${SERVER_API}/api/dataset/popular`,
+      {
+        cache: "no-cache",
+      },
+    ).then((res) => res.json());
+
+    if (!result.success) {
+      console.error(result.msg);
+      return null;
+    }
+
+    return result.result.dataset;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+export async function getNewDataset() {
+  try {
+    const result: DatasetBannerResponse = await fetch(
+      `${SERVER_API}/api/dataset/new`,
+      {
+        cache: "no-cache",
+      },
+    ).then((res) => res.json());
+
+    if (!result.success) {
+      console.error(result.msg);
+      return null;
+    }
+
+    return result.result.dataset;
   } catch (error) {
     console.error(error);
     return null;
