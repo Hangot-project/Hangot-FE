@@ -13,6 +13,19 @@ export default function Test() {
 
   const { data: session, update } = useSession();
 
+  const onLoginSubmit = async () => {
+    const response = await userLogin({
+      email: username,
+      password: password,
+      autoLogin: yesRef.current.checked,
+    });
+
+    if (!response.ok) {
+      alert(`로그인 실패`);
+      return;
+    }
+  };
+
   const onLogoutSubmit = async () => {
     // dispatch(logout());
     const response = await userLogout(
@@ -77,9 +90,9 @@ export default function Test() {
         <label htmlFor="no">아니오</label>
       </div>
 
-      {/* <button type="button" onClick={onLoginSubmit}>
+      <button type="button" onClick={onLoginSubmit}>
         유저 로그인
-      </button> */}
+      </button>
       <hr />
       <button type="button" onClick={onLogoutSubmit}>
         유저 로그아웃
