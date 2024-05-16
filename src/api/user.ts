@@ -31,8 +31,6 @@ export async function userLogin(params: LoginInput): Promise<Response> {
       credentials: "include",
     });
 
-    console.log(`response:`, response);
-
     return response;
   } catch (error) {
     return null;
@@ -99,6 +97,8 @@ export async function socialLogin(provider: ProviderType, body: SocialLoginBody)
       body: JSON.stringify(body),
       credentials: "include",
     });
+
+    console.log("response.status", response.status);
 
     return response;
   } catch (error) {
