@@ -31,6 +31,8 @@ export async function userLogin(params: LoginInput): Promise<Response> {
       credentials: "include",
     });
 
+    console.log(`response:`, response);
+
     return response;
   } catch (error) {
     return null;
