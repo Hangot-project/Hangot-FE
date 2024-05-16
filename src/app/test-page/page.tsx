@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { reissueToken, userLogin, userLogout } from "../../api/user";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Test() {
   const yesRef = useRef<HTMLInputElement>();
@@ -14,19 +14,26 @@ export default function Test() {
   const { data: session, update } = useSession();
 
   const onLoginSubmit = async () => {
-    const response = await userLogin({
-      email: username,
-      password: password,
-      autoLogin: yesRef.current.checked,
+    signIn("credentials", {
+      username,
+      password,
+      isAuto: yesRef.current.checked,
+      redirect: false,
     });
+    // const response = await userLogin({
+    //   email: username,
+    //   password: password,
+    //   autoLogin: yesRef.current.checked,
+    // });
 
-    if (!response.ok) {
-      alert(`로그인 실패`);
-      return;
-    }
+    // if (!response.ok) {
+    //   alert(`로그인 실패`);
+    //   return;
+    // }
   };
 
   const onLogoutSubmit = async () => {
+    console.log(`session: `, session);
     // dispatch(logout());
     const response = await userLogout(
       session?.user?.grantType,
