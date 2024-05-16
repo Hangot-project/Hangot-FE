@@ -14,9 +14,12 @@ export async function logout(grantType: string, token: string) {
     });
 
     if (response.ok || response.status === 401) {
-      await signOut();
+      await signOut({
+        redirect: false,
+      });
+      return true;
     }
-    return true;
+    return false;
   } catch (error) {
     console.error(error);
     return false;
