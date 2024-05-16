@@ -33,7 +33,6 @@ export default function Test() {
   };
 
   const onLogoutSubmit = async () => {
-    console.log(`session: `, session);
     // dispatch(logout());
     const response = await userLogout(
       session?.user?.grantType,

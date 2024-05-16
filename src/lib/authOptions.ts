@@ -9,18 +9,17 @@ function setCookie(response: Response) {
   if (apiCookies && apiCookies.length > 0) {
     apiCookies.forEach((cookie) => {
       const parsedCookie = parse(cookie);
-      const [cookieName, cookieValue] = Object.entries(parsedCookie)[0];
+      const [cookieName, cookieValue] = Object.entries(parsedCookie)[0] as string[];
 
       //@ts-ignore
       cookies().set({
         name: cookieName,
         value: cookieValue,
-        httpOnly: true,
-        maxAge: parseInt(parsedCookie["Max-Age"]),
-        path: parsedCookie.path,
-        sameSite: "strict",
-        expires: new Date(parsedCookie.expires),
+        httpOnly: cookie.includes("HttpOnly;"),
+        path: parsedCookie.Path,
+        sameSite: parsedCookie.SameSite,
         secure: true,
+        domain: parsedCookie.Domain,
       });
     });
   }
@@ -87,7 +86,6 @@ export const authOptions: NextAuthOptions = {
 
         if (result.success) {
           const user = { ..._user, ...result.result };
-
           setCookie(response);
           return user;
         } else {
