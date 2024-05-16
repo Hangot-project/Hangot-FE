@@ -15,10 +15,10 @@ function setCookie(response: Response) {
       cookies().set({
         name: cookieName,
         value: cookieValue,
-        httpOnly: cookie.includes("httponly;"),
+        httpOnly: true,
         maxAge: parseInt(parsedCookie["Max-Age"]),
         path: parsedCookie.path,
-        sameSite: parsedCookie.samesite,
+        sameSite: "strict",
         expires: new Date(parsedCookie.expires),
         secure: true,
       });
