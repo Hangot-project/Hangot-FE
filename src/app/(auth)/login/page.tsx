@@ -19,8 +19,8 @@ export default function Login() {
       username: email,
       password: password,
       isAuto: autoLogin,
-      redirect: false,
-      // callbackUrl: "/",
+      redirect: true,
+      callbackUrl: "/",
     });
   };
 
