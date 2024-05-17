@@ -3,8 +3,8 @@
 import React from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
-import { Banner, Menu } from "../../public/svgs";
-import { SearchBox, QuickMenu, DataBoard } from "../components";
+import { Banner, Menu } from "../../../public/svgs";
+import { SearchBox, QuickMenu, DataBoard } from "../../components";
 
 const DATA_COUNT = 2379;
 

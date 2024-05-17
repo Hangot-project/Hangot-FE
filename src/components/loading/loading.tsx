@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import { Spinner } from "../../public/images";
+import { Spinner } from "../../../public/images";
 
-function Loading() {
+export function Loading() {
   return (
     <div
       style={{
@@ -13,9 +13,7 @@ function Loading() {
         alignItems: "center",
       }}
     >
-      <Image src={Spinner} />
+      <Image alt="spinner" src={Spinner} />
     </div>
   );
 }
-
-export default Loading;

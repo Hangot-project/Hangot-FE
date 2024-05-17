@@ -16,3 +16,4 @@ export * from "./notice-card/notice-card";
 export * from "./pagination/pagination";
 export * from "./quick-menu/quick-menu";
 export * from "./data-board/data-board";
+export * from "./loading/loading";

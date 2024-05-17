@@ -1,5 +1,5 @@
 import React from "react";
-import { getNotices } from "../../api/notice";
+import { getNotices } from "../../../api/notice";
 import { Notice } from "./notice";
 
 async function Page({ searchParams }) {

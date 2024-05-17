@@ -2,14 +2,14 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./notice.module.css";
-import { SearchSortDropdown, NoticeCard } from "../../components";
-import { NOTICE_SORT_TYPES, NOTICE_SORT_VALUES } from "../../constants";
-import { NoticeResult } from "../../api/notice";
+import { SearchSortDropdown, NoticeCard } from "../../../components";
+import { NOTICE_SORT_TYPES, NOTICE_SORT_VALUES } from "../../../constants";
+import { NoticeResult } from "../../../api/notice";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { updateQueryString } from "../../utils";
+import { updateQueryString } from "../../../utils";
 import Link from "next/link";
-import { getPageArray } from "../../utils/search/get-page-array";
-import { Pagination } from "../../components";
+import { getPageArray } from "../../../utils/search/get-page-array";
+import { Pagination } from "../../../components";
 
 export function Notice({
   result,

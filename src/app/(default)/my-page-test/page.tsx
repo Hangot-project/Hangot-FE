@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { reissueToken } from "../../api/user";
-import { Scrap, ScrapListResponse, getScrapList } from "../../api/scrap";
+import { reissueToken } from "../../../api/user";
+import { Scrap, ScrapListResponse, getScrapList } from "../../../api/scrap";
 
 function Page() {
   const { data: session, update } = useSession();

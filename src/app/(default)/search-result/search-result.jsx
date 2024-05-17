@@ -7,12 +7,12 @@ import {
   SearchBox,
   SearchSortDropdown,
   SimpleDatasetCard,
-} from "../../components";
+} from "../../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
-import { ResetIcon } from "../../../public/svgs";
-import { StickHorizonSmall } from "../../../public/svgs";
-import { DatasetInfo } from "../../api/dataset";
+import { ResetIcon } from "../../../../public/svgs";
+import { StickHorizonSmall } from "../../../../public/svgs";
+import { DatasetInfo } from "../../../api/dataset";
 import Link from "next/link";
 import { useEffect } from "react";
 import {
@@ -20,9 +20,9 @@ import {
   ORGANIZATION_VALUES,
   DATA_TYPES,
   SORT_VALUES,
-} from "../../constants";
-import { updateQueryString } from "../../utils";
-import { Pagination } from "../../components";
+} from "../../../constants";
+import { updateQueryString } from "../../../utils";
+import { Pagination } from "../../../components";
 
 /**
  *

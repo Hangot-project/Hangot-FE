@@ -1,4 +1,4 @@
-import { getNewDataset, getPopularDataset } from "../api/dataset";
+import { getNewDataset, getPopularDataset } from "../../api/dataset";
 import Main from "./main";
 
 async function getListData() {
