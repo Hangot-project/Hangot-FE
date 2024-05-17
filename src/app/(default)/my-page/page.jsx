@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from "./my-page.module.css";
 import Image from "next/image";
-import { SearchSymbol } from "../../../public/svgs";
+import { SearchSymbol } from "../../../../public/svgs";
 
 export default function MyPage() {
   const [selectedMenu, setSelectedMenu] = useState("계정 관리");
