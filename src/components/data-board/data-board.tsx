@@ -24,7 +24,7 @@ export function DataBoard({ title, url, dataList }: Props) {
 
       {/* 메인페이지 인기 및 신규데이터 파트 바디 */}
       <div className={styles.dataBoard}>
-        {dataList.map((dataset) => (
+        {dataList?.map((dataset) => (
           <Link
             href={`/${url}/${dataset.datasetId}`}
             key={dataset.datasetId}
