@@ -98,8 +98,6 @@ export async function socialLogin(provider: ProviderType, body: SocialLoginBody)
       credentials: "include",
     });
 
-    console.log("response.status", response.status);
-
     return response;
   } catch (error) {
     console.error(error);

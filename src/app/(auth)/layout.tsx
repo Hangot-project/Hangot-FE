@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { MainLogoBlue } from "../../../public/svgs";
 import styles from "./layout.module.css";
+import "../../styles/globals.css";
 
 export const metadata = {
   title: "한양대학교 데이터 포털 로그인",

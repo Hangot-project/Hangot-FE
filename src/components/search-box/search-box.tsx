@@ -3,14 +3,16 @@
 import Image from "next/image";
 import styles from "./search-box.module.css";
 import { SearchSymbol } from "../../../public/svgs";
-import { useCallback, useState } from "react";
+import { CSSProperties, FormEvent, useCallback, useState } from "react";
 
-/**
- *
- * @param {{handleSubmit: FormEventHandler<HTMLButtonElement>; style?: CSSProperties; initKeyword?: string}} param0
- * @returns
- */
-export function SearchBox({ handleSubmit, style, initKeyword }) {
+type Props = {
+  handleSubmit?: (event: FormEvent<HTMLFormElement>, keyword: string) => void;
+  style?: CSSProperties;
+  initKeyword?: string;
+  className?: string;
+};
+
+export function SearchBox({ handleSubmit, style, initKeyword, className }: Props) {
   const [input, setInput] = useState(initKeyword ? initKeyword : "");
 
   const handleChange = useCallback(
@@ -22,7 +24,7 @@ export function SearchBox({ handleSubmit, style, initKeyword }) {
 
   return (
     <form
-      className={styles.searchbox_container}
+      className={`${styles.searchbox_container} ${className}`}
       style={style}
       onSubmit={(e) => handleSubmit(e, input)}
     >
@@ -34,7 +36,7 @@ export function SearchBox({ handleSubmit, style, initKeyword }) {
         value={input}
       />
       <button type="submit">
-        <Image src={SearchSymbol} width={27} height={27} />
+        <Image alt="검색창 로고" src={SearchSymbol} width={27} height={27} />
       </button>
     </form>
   );

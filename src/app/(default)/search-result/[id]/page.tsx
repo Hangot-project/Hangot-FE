@@ -1,6 +1,6 @@
-import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../components";
-import { dataset as _dataset } from "../../../dummy-data/datasets";
-import { getAllDatasets, getDatasetDetail } from "../../../api/dataset";
+import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../../components";
+import { dataset as _dataset } from "../../../../dummy-data/datasets";
+import { getAllDatasets, getDatasetDetail } from "../../../../api/dataset";
 import styles from "./detail.module.css";
 
 // export async function generateStaticParams() {

@@ -12,16 +12,30 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # node 버전
       - name: Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
+      # env 파일 생성
+      - name: Generate env file
+        run: |
+          echo "NEXTAUTH_SECRET=$NEXTAUTH_SECRET" >> .env
+          echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env
+          echo "NEXT_PUBLIC_KAKAO_CLIENT_ID=$NEXT_PUBLIC_KAKAO_CLIENT_ID" >> .env
+          echo "NEXT_PUBLIC_KAKAO_REDIRECT_URI=$NEXT_PUBLIC_KAKAO_REDIRECT_URI" >> .env
+          echo "NEXT_PUBLIC_SERVER_API=$NEXT_PUBLIC_SERVER_API" >> .env
+        env:
+          NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+          NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
+          NEXT_PUBLIC_KAKAO_CLIENT_ID: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID}}
+          NEXT_PUBLIC_KAKAO_REDIRECT_URI: ${{secrets.NEXT_PUBLIC_KAKAO_REDIRECT_URI}}
+          NEXT_PUBLIC_SERVER_API: ${{secrets.NEXT_PUBLIC_SERVER_API}}
       # key를 사용하여 node modules 캐싱
       - name: Cache node modules
         id: cache-modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}

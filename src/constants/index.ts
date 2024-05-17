@@ -10,3 +10,5 @@ export { NOTICE_SORT_VALUES } from "./notice-sort-values";
 export { type NOTICE_SORT_TYPES } from "./notice-sort-values";
 
 export { ACCESS_EXPIRE_MESSAGE, REFRESH_EXPIRE_MESSAGE } from "./response-message";
+
+export { colorMatch } from "./dataset-color";

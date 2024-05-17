@@ -50,10 +50,6 @@ export function Header() {
             <Link href={"/test-page"}>
               <li>사이트맵</li>
             </Link>
-            <VerticalDivider />
-            <Link href={"/"}>
-              <li>ENGLISH</li>
-            </Link>
           </ul>
         </nav>
 
@@ -86,7 +82,7 @@ export function Header() {
               <Link href={""}>이용안내</Link>
             </li>
             <li>
-              <Link href={""}>마이페이지</Link>
+              <Link href={"/my-page"}>마이페이지</Link>
             </li>
           </ul>
         </div>

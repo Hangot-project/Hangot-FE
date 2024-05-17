@@ -1,11 +1,12 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { Provider } from "../../../../api/user";
+import { Loading } from "../../../../components";
 
-function Page() {
+function Social() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
@@ -25,6 +26,14 @@ function Page() {
   }, [searchParams]);
 
   return <div></div>;
+}
+
+function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Social />
+    </Suspense>
+  );
 }
 
 export default Page;
