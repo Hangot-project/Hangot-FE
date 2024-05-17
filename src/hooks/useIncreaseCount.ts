@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+// https://velog.io/@leejuhwan/ReactTSuseCountUp
 export function useIncreaseCount(
   end: number,
   start: number = 0,
