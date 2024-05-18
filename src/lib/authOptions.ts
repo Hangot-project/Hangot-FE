@@ -2,7 +2,9 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { LoginResponse, Provider, socialLogin, userLogin } from "../api/user";
+import { socialLogin } from "../api/user/socialLogin";
+import { LoginResponse } from "../api/user/type";
+import { userLogin } from "../api/user/userLogin";
 
 function setCookie(response: Response) {
   const apiCookies = response.headers.getSetCookie();

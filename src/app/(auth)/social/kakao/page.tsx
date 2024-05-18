@@ -3,8 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 import { signIn } from "next-auth/react";
-import { Provider } from "../../../../api/user";
 import { Loading } from "../../../../components";
+import { Provider } from "../../../../constants/oauth-provider";
 
 function Social() {
   const searchParams = useSearchParams();

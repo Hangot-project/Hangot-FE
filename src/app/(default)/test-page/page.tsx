@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { reissueToken, userLogin, userLogout } from "../../../api/user";
 import { signIn, useSession } from "next-auth/react";
+import { userLogout } from "../../../api/user/userLogout";
+import { reissueToken } from "../../../api/user/reissueToken";
 
 export default function Test() {
   const yesRef = useRef<HTMLInputElement>();
@@ -39,8 +40,7 @@ export default function Test() {
       session?.user?.accessToken,
     );
 
-    if (!response.success) {
-      setMessage(response.msg);
+    if (!response) {
       return;
     }
     setMessage("");

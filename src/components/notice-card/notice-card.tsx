@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Notice } from "../../api/notice";
 import styles from "./notice-card.module.css";
+import { Notice } from "../../types/notice";
 
 export function NoticeCard({ notice }: { notice: Notice }) {
   return (

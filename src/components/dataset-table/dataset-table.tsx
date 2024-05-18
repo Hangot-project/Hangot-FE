@@ -1,4 +1,4 @@
-import { Dataset } from "../../api/dataset";
+import { Dataset } from "../../types/dataset";
 import styles from "./dataset-table.module.css";
 
 export function DatasetTable({ dataset }: { dataset: Dataset }) {

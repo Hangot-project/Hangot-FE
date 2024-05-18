@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import styles from "./data-board.module.css";
-import { DatasetBanner } from "../../api/dataset";
 import { colorMatch } from "../../constants";
+import { DatasetInfoBanner } from "../../types/dataset";
 
 type Props = {
   title: string;
   url: string;
-  dataList: DatasetBanner[];
+  dataList: DatasetInfoBanner[];
 };
 
 export function DataBoard({ title, url, dataList }: Props) {
