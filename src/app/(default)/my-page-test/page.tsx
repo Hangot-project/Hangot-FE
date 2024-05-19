@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { reissueToken } from "../../../api/user";
-import { Scrap, ScrapListResponse, getScrapList } from "../../../api/scrap";
+import { reissueToken } from "../../../api/user/reissueToken";
+import { getAllScrap } from "../../../api/scrap/getAllScrap";
+import { ScrapListResponse } from "../../../api/scrap/type";
+import { Scrap } from "../../../types/scrap";
 
 function Page() {
   const { data: session, update } = useSession();
@@ -13,7 +15,7 @@ function Page() {
     if (session === undefined) return;
 
     async function fetchData() {
-      const response = await getScrapList(
+      const response = await getAllScrap(
         session.user.grantType,
         session.user.accessToken,
       );

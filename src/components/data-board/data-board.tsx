@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import styles from "./data-board.module.css";
-import { DatasetBanner } from "../../api/dataset";
 import { colorMatch } from "../../constants";
+import { DatasetInfoBanner } from "../../types/dataset";
 
 type Props = {
   title: string;
   url: string;
-  dataList: DatasetBanner[];
+  dataList: DatasetInfoBanner[];
 };
 
 export function DataBoard({ title, url, dataList }: Props) {
@@ -24,7 +24,7 @@ export function DataBoard({ title, url, dataList }: Props) {
 
       {/* 메인페이지 인기 및 신규데이터 파트 바디 */}
       <div className={styles.dataBoard}>
-        {dataList.map((dataset) => (
+        {dataList?.map((dataset) => (
           <Link
             href={`/${url}/${dataset.datasetId}`}
             key={dataset.datasetId}

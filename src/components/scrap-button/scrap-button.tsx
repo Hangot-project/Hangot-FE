@@ -4,9 +4,12 @@ import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./scrap-button.module.css";
 import { LikeEmpty, LikeFilled } from "../../../public/svgs";
-import { deleteScrap, getIsScrap, setScrap } from "../../api/scrap";
 import { useRouter } from "next/navigation";
-import { getDatasetDetail } from "../../api/dataset";
+import { useSession } from "next-auth/react";
+import { getIsScrap } from "../../api/scrap/getIsScrap";
+import { getDatasetDetail } from "../../api/dataset/getDatasetDetail";
+import { createScrap } from "../../api/scrap/createScrap";
+import { deleteScrap } from "../../api/scrap/deleteScrap";
 
 export function ScrapButton({
   datasetId,
@@ -15,6 +18,8 @@ export function ScrapButton({
   datasetId: number;
   scrap: number;
 }) {
+  const { data: session, status } = useSession();
+
   const router = useRouter();
 
   const [like, setLike] = useState<boolean>();
@@ -22,16 +27,20 @@ export function ScrapButton({
 
   //* 스크랩 버튼을 클릭할 때마다 스크랩 수정 반영 및 스크랩 수 fetch
   const handleLike = useCallback(async () => {
-    const func = like ? deleteScrap : setScrap;
-
-    const response = await func(datasetId);
-
-    if (response.status === 401) {
+    if (status === "unauthenticated") {
       alert("로그인이 필요한 서비스입니다.");
       return router.push("/login");
     }
 
-    if (!response || response.status >= 400) {
+    const func = like ? deleteScrap : createScrap;
+
+    const response = await func(
+      datasetId,
+      session.user.grantType,
+      session.user.accessToken,
+    );
+
+    if (!response.ok) {
       alert("오류가 발생했습니다.\n다시 시도해주세요.");
       return;
     }
@@ -43,10 +52,12 @@ export function ScrapButton({
   //* 첫 렌더링시 유저의 스크랩 여부 확인
   useEffect(() => {
     async function fetchLike() {
-      getIsScrap(datasetId).then((res) => {
-        if (res === null) alert("스크랩 정보를 불러오는데 실패했습니다.");
-        else setLike(res);
-      });
+      getIsScrap(datasetId, session.user.grantType, session.user.accessToken).then(
+        (res) => {
+          if (res === null) alert("스크랩 정보를 불러오는데 실패했습니다.");
+          else setLike(res);
+        },
+      );
     }
     fetchLike();
   }, []);

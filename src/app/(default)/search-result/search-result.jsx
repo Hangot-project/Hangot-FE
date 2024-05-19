@@ -12,7 +12,6 @@ import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { ResetIcon } from "../../../../public/svgs";
 import { StickHorizonSmall } from "../../../../public/svgs";
-import { DatasetInfo } from "../../../api/dataset";
 import Link from "next/link";
 import { useEffect } from "react";
 import {
@@ -27,7 +26,7 @@ import { Pagination } from "../../../components";
 /**
  *
  * @param {{
- *    results: DatasetInfo[];
+ *    results: import("../../../types/dataset").DatasetInfo[];
  *    totalElement: number;
  *    totalPage: number;
  *    initPage: number;

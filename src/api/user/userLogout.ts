@@ -1,9 +1,7 @@
-"use client";
-
 import { signOut } from "next-auth/react";
-import { SERVER_API } from "./config";
+import { SERVER_API } from "../config";
 
-export async function logout(grantType: string, token: string) {
+export async function userLogout(grantType: string, token: string) {
   try {
     const response = await fetch(`${SERVER_API}/api/user/logout`, {
       headers: {

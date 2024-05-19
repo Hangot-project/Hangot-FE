@@ -1,30 +1,13 @@
-import { NOTICE_SORT_TYPES } from "../constants";
-import { GeneralResponse, SERVER_API } from "./config";
+import { NOTICE_SORT_TYPES } from "../../types/notice";
+import { SERVER_API } from "../config";
+import { NoticeResult, NoticesResponse } from "./type";
 
 type NoticeParam = {
   sort: NOTICE_SORT_TYPES | undefined;
   page: number;
 };
 
-export type Notice = {
-  noticeId: number;
-  title: string;
-  createDate: string;
-  view: number;
-  adminName: string;
-};
-
-export type NoticeResult = {
-  totalPage: number;
-  totalElement: number;
-  data: Notice[];
-};
-
-interface NoticesResponse extends GeneralResponse {
-  result: NoticeResult;
-}
-
-export async function getNotices(filter: NoticeParam): Promise<NoticeResult> {
+export async function getAllNotice(filter: NoticeParam): Promise<NoticeResult> {
   try {
     const params = new URLSearchParams();
 
