@@ -18,7 +18,7 @@ export default function MyPage() {
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={`noLayoutPadding ${styles.container}`}>
         {/* 마이페이지 메뉴 목록 (내 정보 관리, 데이터 관리, 문의) */}
         <div className={styles.listWrapper}>
           <div className={styles.list}>
