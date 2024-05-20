@@ -153,55 +153,6 @@ export default function MyPage() {
           {/* 데이터 다운로드 목록에 해당하는 섹션 */}
           {selectedMenu === "데이터 다운로드 목록" && (
             <div className={styles.mainBody}>
-              {/* 기관명, 기간, 키워드 필터 섹션 */}
-              {/* TODO : 드롭다운, 검색창 컴포넌트로 구현 */}
-              <div className={styles.filterWrapper}>
-                {/* 기관명, 기간 드롭다운 컴포넌트 */}
-                <div className={styles.dropdownFilter}>
-                  <div>
-                    <div disabled="false" id="menu_button1">
-                      <div className={`${styles.filter1} ${styles.filter2}`}>
-                        <button
-                          className={`${styles.button1} ${styles.button2}`}
-                          variant="light"
-                        >
-                          <div className={styles.buttonText}>기관명</div>
-                        </button>
-                      </div>
-                    </div>
-                    <div disabled="false" id="menu_button2">
-                      <div className={`${styles.filter1} ${styles.filter2}`}>
-                        <button
-                          className={`${styles.button1} ${styles.button2}`}
-                          variant="light"
-                        >
-                          <div className={styles.buttonText}>기간</div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 데이터명 키워드 검색창 컴포넌트 */}
-                <div className={styles.searchFilter}>
-                  <div className={styles.searchBox} id="search">
-                    <div>
-                      <div className={styles.searchBoxInner}>
-                        <input
-                          type="text"
-                          aria-invalid="false"
-                          placeholder="데이터명을 검색해보세요."
-                          className={`${styles.searchText1} ${styles.searchText2}`}
-                        />
-                      </div>
-                    </div>
-                    <button className={styles.searchButton}>
-                      <Image src={SearchSymbol} width={14} height={14} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
               {/* 데이터 검색 결과 개수 */}
               <div className={styles.resultNum}>
                 <div className={styles.resultNumText}>0개의 데이터</div>
