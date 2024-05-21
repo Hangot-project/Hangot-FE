@@ -52,45 +52,50 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const _user = { id: credentials.username, name: credentials.username };
 
-        // * 소셜 로그인
-        if (credentials.provider) {
-          //@ts-ignore
-          if (!Object.values(Provider).includes(credentials.provider)) {
-            throw new Error("지원하지 않는 소셜 로그인");
+        try {
+          // * 소셜 로그인
+          if (credentials.provider) {
+            //@ts-ignore
+            if (!Object.values(Provider).includes(credentials.provider)) {
+              throw new Error("지원하지 않는 소셜 로그인");
+            }
+            //@ts-ignore
+            const response = await socialLogin(credentials.provider, {
+              code: credentials.code,
+            });
+
+            const result: LoginResponse = await response.json();
+
+            if (result.success) {
+              setCookie(response);
+              return {
+                ..._user,
+                ...result.result,
+              };
+            } else {
+              return null;
+            }
           }
-          //@ts-ignore
-          const response = await socialLogin(credentials.provider, {
-            code: credentials.code,
+
+          // * 일반 로그인
+          const response = await userLogin({
+            email: credentials.username,
+            password: credentials.password,
+            //@ts-ignore
+            autoLogin: credentials.isAuto,
           });
 
           const result: LoginResponse = await response.json();
 
           if (result.success) {
+            const user = { ..._user, ...result.result };
             setCookie(response);
-            return {
-              ..._user,
-              ...result.result,
-            };
+            return user;
           } else {
             return null;
           }
-        }
-
-        // * 일반 로그인
-        const response = await userLogin({
-          email: credentials.username,
-          password: credentials.password,
-          //@ts-ignore
-          autoLogin: credentials.isAuto,
-        });
-
-        const result: LoginResponse = await response.json();
-
-        if (result.success) {
-          const user = { ..._user, ...result.result };
-          setCookie(response);
-          return user;
-        } else {
+        } catch (error) {
+          console.error(error);
           return null;
         }
       },

@@ -1,0 +1,80 @@
+.mainBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.resultNum {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.resultNum .resultNumText {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  color: #000;
+  letter-spacing: -0.144px;
+}
+
+.searchResult {
+  margin-bottom: 1.5rem;
+}
+
+.searchResultBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1.875rem;
+  margin-bottom: 4rem;
+  background-color: #fff;
+  border: 1px solid #d7e2eb;
+  border-radius: 0.5rem;
+}
+
+.searchResultBody table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+  empty-cells: show;
+}
+
+.searchResultBody table thead {
+  display: table-header-group;
+  vertical-align: middle;
+  unicode-bidi: isolate;
+  border-color: inherit;
+}
+
+.searchResultBody table thead tr,
+.searchResultBody table tbody tr {
+  display: table-row;
+  vertical-align: inherit;
+  unicode-bidi: isolate;
+  border-color: inherit;
+}
+
+.searchResultBody table thead tr th,
+.searchResultBody table tbody tr td {
+  height: 3rem;
+  padding: 2px 10px;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchResultBody table thead tr th {
+  height: 3rem;
+  text-align: center;
+  background-color: #f7f7f7;
+}

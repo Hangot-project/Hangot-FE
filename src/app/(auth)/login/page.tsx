@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import styles from "./login.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,8 +14,9 @@ export default function Login() {
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-  const handleLogin = () => {
-    signIn("credentials", {
+  const handleLogin = async (e: FormEvent) => {
+    e.preventDefault();
+    await signIn("credentials", {
       username: email,
       password: password,
       isAuto: autoLogin,
@@ -28,11 +29,12 @@ export default function Login() {
     <div className={styles.Wrapper}>
       {/* //* 로그인, 비밀번호 찾기, 회원가입, 간편로그인 영역 */}
       {/* 이메일 및 비밀번호 입력 */}
-      <div className={styles.inputContainer}>
+      <form className={styles.inputContainer} onSubmit={(e) => handleLogin(e)}>
         <div className={styles.inputWrapper}>
           <div className={styles.inputLine}>
             <Image alt="아이디 입력" src={ID} width={16} height={16} />
             <input
+              required
               className={styles.input}
               placeholder="이메일"
               value={email}
@@ -43,6 +45,7 @@ export default function Login() {
           <div className={styles.inputLine}>
             <Image alt="비밀번호 입력" src={PW} width={16} height={16} />
             <input
+              required
               className={styles.input}
               type="password"
               placeholder="비밀번호"
@@ -63,10 +66,10 @@ export default function Login() {
         </div>
 
         {/* 로그인 제출 버튼 */}
-        <button className={styles.button} type="button" onClick={handleLogin}>
+        <button className={styles.button} type="submit">
           로그인
         </button>
-      </div>
+      </form>
 
       {/* 비밀번호 찾기 및 회원가입 페이지 연결 */}
       <nav className={styles.bottomBar}>

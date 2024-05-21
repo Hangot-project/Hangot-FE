@@ -1,0 +1,17 @@
+.gridCol3 {
+  position: relative;
+  width: 100%;
+  max-width: 20%;
+}
+
+.gridCol4 {
+  position: relative;
+  width: 100%;
+  max-width: 20%;
+}
+
+.gridCol5 {
+  position: relative;
+  width: 100%;
+  max-width: 60%;
+}

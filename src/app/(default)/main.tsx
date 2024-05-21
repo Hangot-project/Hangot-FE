@@ -51,7 +51,7 @@ const QUICK_MENU = [
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
   return (
-    <>
+    <div>
       {/* 메인페이지 배너 */}
       <main className={`noLayoutPadding ${styles.main}`}>
         <div>
@@ -109,6 +109,6 @@ export default function Main({ populars, news }) {
           <DataBoard title="신규 데이터" dataList={news} url={"search-result"} />
         </div>
       </section>
-    </>
+    </div>
   );
 }
