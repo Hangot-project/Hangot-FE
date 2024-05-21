@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { FormEvent, useCallback, useState } from "react";
 import styles from "./sign-up.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -56,32 +56,37 @@ export default function SignUp() {
     setVerified(true);
   }, [email, verificationCode]);
 
-  const handleSubmit = useCallback(async () => {
-    const response = await userSignup({
-      email,
-      password,
-      name: username,
-    });
+  const handleSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      const response = await userSignup({
+        email,
+        password,
+        name: username,
+      });
 
-    if (!response.success) {
-      alert(`${response.msg}`);
-      return;
-    }
+      if (!response.success) {
+        alert(`${response.msg}`);
+        return;
+      }
 
-    router.push("/");
-  }, [email, password, username]);
+      router.push("/");
+    },
+    [email, password, username],
+  );
 
   const canSubmit =
     username !== "" && verified && isValidPassword && passwordMessage === "";
 
   return (
     <div className={styles.Wrapper}>
-      <div className={styles.signupWrapper}>
+      <form className={styles.signupWrapper} onSubmit={(e) => handleSubmit(e)}>
         {/* //? 이름 입력 */}
         <p className={styles.title}>이름</p>
         <div className={styles.lineContainer}>
           <Image alt="이름 로고" src={Name} width={20} height={20} />
           <input
+            required
             className={styles.input}
             placeholder="이름을 입력해 주세요"
             value={username}
@@ -98,6 +103,7 @@ export default function SignUp() {
           <div className={styles.lineContainer}>
             <Image alt="메일 로고" src={SID} width={20} height={20} />
             <input
+              required
               type="email"
               className={styles.input}
               placeholder="이메일을 입력해 주세요"
@@ -107,8 +113,8 @@ export default function SignUp() {
           </div>
 
           <EmailButton
-            disabled={!validFormEmail}
-            active={validFormEmail}
+            disabled={!validFormEmail || verified}
+            active={validFormEmail && !verified}
             onClick={handleEmail}
           >
             인증
@@ -145,6 +151,7 @@ export default function SignUp() {
         <div className={styles.lineContainer}>
           <Image alt="비밀번호 로고" src={SPW} width={20} height={20} />
           <input
+            required
             type="password"
             className={styles.input}
             placeholder="영문자, 숫자, 특수문자 포함 최소 8~20자"
@@ -157,6 +164,7 @@ export default function SignUp() {
         <div style={{ marginTop: "6px" }} className={styles.lineContainer}>
           <Image alt="비밀번호 로고" src={SPW} width={20} height={20} />
           <input
+            required
             type="password"
             className={styles.input}
             placeholder="비밀번호를 재입력 해주세요"
@@ -165,11 +173,7 @@ export default function SignUp() {
           />
         </div>
 
-        <SubmitButton
-          active={canSubmit}
-          disabled={!canSubmit}
-          onClick={handleSubmit}
-        >
+        <SubmitButton type="submit" active={canSubmit} disabled={!canSubmit}>
           회원가입
         </SubmitButton>
 
@@ -180,7 +184,7 @@ export default function SignUp() {
             로그인 하기
           </Link>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
