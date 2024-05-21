@@ -1,13 +1,22 @@
-import { SetPasswordRequestDto } from "../../types/user";
 import { GeneralResponse, SERVER_API } from "../config";
 
-export async function setPassword(body: SetPasswordRequestDto) {
+type Props = {
+  password: string;
+  grantType: string;
+  token: string;
+};
+
+export async function setPassword({ password, grantType, token }: Props) {
   try {
     const response: GeneralResponse = await fetch(
       `${SERVER_API}/api/user/password`,
       {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${grantType} ${token}`,
+        },
         method: "PUT",
-        body: JSON.stringify(body),
+        body: JSON.stringify({ password }),
       },
     ).then((res) => res.json());
 

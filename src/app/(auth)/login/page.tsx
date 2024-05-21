@@ -14,8 +14,8 @@ export default function Login() {
   const [password, setPassword] = useState<string>();
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
 
-  const handleLogin = () => {
-    signIn("credentials", {
+  const handleLogin = async () => {
+    await signIn("credentials", {
       username: email,
       password: password,
       isAuto: autoLogin,

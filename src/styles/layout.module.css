@@ -1,6 +1,13 @@
 .container {
-  position: relative;
   min-height: 100vh;
 
   background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

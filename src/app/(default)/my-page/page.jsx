@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react";
 import styles from "./my-page.module.css";
-import Image from "next/image";
-import { SearchSymbol } from "../../../../public/svgs";
+import { Admin } from "../../../page-src/my-page/admin/admin";
+import { DlownloadList } from "../../../page-src/my-page/download-list/dlownload-list";
+import { ScrapList } from "../../../page-src/my-page/scrap-list/scrap-list";
+import "../../../page-src/my-page/my-page.css";
+import { QnA } from "../../../page-src/my-page/qna/qna";
 
 export default function MyPage() {
   const [selectedMenu, setSelectedMenu] = useState("계정 관리");
@@ -28,8 +31,6 @@ export default function MyPage() {
                 <h3>내 정보 관리</h3>
                 <ol>
                   <li onClick={() => handleMenuClick("계정 관리")}>계정 관리</li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 2")}>세부 메뉴 2</li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 3")}>세부 메뉴 3</li>
                 </ol>
               </li>
 
@@ -46,7 +47,6 @@ export default function MyPage() {
                   <li onClick={() => handleMenuClick("데이터 요청 목록")}>
                     데이터 요청 목록
                   </li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 4")}>세부 메뉴 4</li>
                 </ol>
               </li>
 
@@ -55,9 +55,6 @@ export default function MyPage() {
                 <h3>문의</h3>
                 <ol>
                   <li onClick={() => handleMenuClick("Q&A")}>Q&A</li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 5")}>세부 메뉴 5</li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 6")}>세부 메뉴 6</li>
-                  <li onClick={() => handleMenuClick("세부 메뉴 7")}>세부 메뉴 7</li>
                 </ol>
               </li>
             </ol>
@@ -65,219 +62,20 @@ export default function MyPage() {
         </div>
 
         <div className={styles.mainWrapper}>
-          {/* 선택된 메뉴에 따라 다른 섹션 렌더링 */}
-          {/* TODO : 렌더링 부분 코드 간소화 */}
           <div className={styles.mainHeader}>{selectedMenu}</div>
-
           {/* 각 메뉴에 따른 섹션 조건부 렌더링 */}
 
           {/* 계정 관리에 해당하는 섹션 */}
-          {selectedMenu === "계정 관리" && (
-            <div className={styles.mainBody}>
-              {/* 기본 정보 */}
-              <div className={styles.bodyDetail}>
-                <div className={styles.bodyHeader}>기본정보</div>
-
-                <div className={styles.basicinfo}></div>
-              </div>
-
-              {/* 비밀번호 */}
-              <div className={styles.bodyDetail}>
-                <div className={styles.bodyHeader}>비밀번호</div>
-
-                <div className={styles.pwInfo}>
-                  <div className={styles.content}>
-                    <div>최근 업데이트 : 0000-00-00</div>
-                    <div>비밀번호</div>
-                  </div>
-                  <button>비밀번호 변경</button>
-                </div>
-              </div>
-
-              {/* 이메일 알림 */}
-              {/* TODO : 이메일 알림 설정 토글 버튼 컴포넌트로 구현 */}
-              <div className={styles.bodyDetail}>
-                <div className={styles.bodyHeader}>이메일 알림</div>
-
-                <div className={styles.basicinfo}>
-                  <div className={styles.email}>
-                    <div className={styles.emailText}>
-                      <div className={styles.emailText1}>알림</div>
-                      <div className={styles.emailText2}>
-                        내 질문의 답변이 등록되면 이메일로 알림을 받겠습니다.
-                      </div>
-                    </div>
-                    <label className={styles.emailLabel}>
-                      <input type="checkbox"></input>
-                      <span
-                        className={`${styles.emailLabel1} ${styles.emailLabel2}`}
-                      ></span>
-                    </label>
-                  </div>
-
-                  <div className={styles.emailDivide}></div>
-
-                  <div className={styles.email}>
-                    <div className={styles.emailText}>
-                      <div className={styles.emailText1}>
-                        마케팅 활용 동의 및 광고 수신 동의
-                      </div>
-                      <div className={styles.emailText2}>
-                        각종 이벤트, 회원 혜택, 할인 행사 등 마케팅 알림을
-                        받겠습니다.
-                      </div>
-                    </div>
-                    <label className={styles.emailLabel}>
-                      <input type="checkbox"></input>
-                      <span
-                        className={`${styles.emailLabel1} ${styles.emailLabel2}`}
-                      ></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* 계정 탈퇴 */}
-              <div className={styles.bodyDetail}>
-                <div className={styles.bodyHeader}>계정 탈퇴</div>
-                <div className={styles.pwInfo}>
-                  <div className={styles.content}>
-                    <div>계정을 탈퇴합니다.</div>
-                  </div>
-                  <button>계정 탈퇴</button>
-                </div>
-              </div>
-            </div>
-          )}
+          {selectedMenu === "계정 관리" && <Admin />}
 
           {/* 데이터 다운로드 목록에 해당하는 섹션 */}
-          {selectedMenu === "데이터 다운로드 목록" && (
-            <div className={styles.mainBody}>
-              {/* 데이터 검색 결과 개수 */}
-              <div className={styles.resultNum}>
-                <div className={styles.resultNumText}>0개의 데이터</div>
-              </div>
-
-              {/* 데이터 검색 결과 */}
-              {/* TODO : 데이터 검색 결과 불러오기 */}
-              <div className={styles.searchResult}>
-                <div className={styles.searchResultBody}>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th className={styles.gridCol3}>제목</th>
-                        <th className={styles.gridCol4}>데이터유형</th>
-                        <th className={styles.gridCol5}>데이터명</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>첫 번째 데이터 제목</td>
-                        <td>데이터 유형 A</td>
-                        <td>데이터명 A</td>
-                      </tr>
-                      <tr>
-                        <td>두 번째 데이터 제목</td>
-                        <td>데이터 유형 B</td>
-                        <td>데이터명 B</td>
-                      </tr>
-                      <tr>
-                        <td>세 번째 데이터 제목</td>
-                        <td>데이터 유형 C</td>
-                        <td>데이터명 C</td>
-                      </tr>
-                      <tr>
-                        <td>네 번째 데이터 제목</td>
-                        <td>데이터 유형 D</td>
-                        <td>데이터명 D</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
+          {selectedMenu === "데이터 다운로드 목록" && <DlownloadList />}
 
           {/* 데이터 관심 목록에 해당하는 섹션 */}
-          {selectedMenu === "데이터 관심 목록" && (
-            <div className={styles.mainBody}>
-              {/* 데이터 검색 결과 개수 */}
-              <div className={styles.resultNum}>
-                <div className={styles.resultNumText}>0개의 데이터</div>
-              </div>
-
-              {/* 데이터 검색 결과 */}
-              {/* TODO : 데이터 검색 결과 불러오기 */}
-              <div className={styles.searchResult}>
-                <div className={styles.searchResultBody}>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th className={styles.gridCol1}>처리상태</th>
-                        <th className={styles.gridCol2}>데이터명</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td colSpan={2}>
-                          데이터가 없습니다. 다른 검색 조건을 선택해주세요.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
+          {selectedMenu === "데이터 관심 목록" && <ScrapList />}
 
           {/* Q&A에 해당하는 섹션 */}
-          {selectedMenu === "Q&A" && (
-            <div className={styles.mainBody}>
-              {/* 데이터 검색 결과 개수 */}
-              <div className={styles.resultNum}>
-                <div className={styles.resultNumText}>0개의 데이터</div>
-              </div>
-
-              {/* 데이터 검색 결과 */}
-              {/* TODO : 데이터 검색 결과 불러오기 */}
-              <div className={styles.searchResult}>
-                <div className={styles.searchResultBody}>
-                  <table>
-                    <colgroup>
-                      <col
-                        style={{ width: "5.5%" }}
-                        className={styles.tableCol}
-                      ></col>
-                      <col style={{ width: "15%" }}></col>
-                      <col></col>
-                      <col style={{ width: "10%" }}></col>
-                      <col style={{ width: "10%" }}></col>
-                      <col style={{ width: "10%" }}></col>
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th scope="col" className={styles.tableCol}>
-                          NO.
-                        </th>
-                        <th scope="col">문의유형</th>
-                        <th scope="col">제목</th>
-                        <th scope="col">등록자</th>
-                        <th scope="col">등록일</th>
-                        <th scope="col">답변현황</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td colSpan={6}>
-                          데이터가 없습니다. 다른 검색 조건을 선택해주세요.
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
+          {selectedMenu === "Q&A" && <QnA />}
         </div>
       </div>
     </>

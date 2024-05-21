@@ -135,7 +135,7 @@ export default function SearchResult({
   }, [selectedSort]);
 
   return (
-    <>
+    <div>
       {/* //* navigate info box */}
       <div className={`noLayoutPadding ${styles.navigateInfoContainer}`}>
         <p>Home {" > "} 데이터 찾기</p>
@@ -300,6 +300,6 @@ export default function SearchResult({
           )}
         </section>
       </main>
-    </>
+    </div>
   );
 }
