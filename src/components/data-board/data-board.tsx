@@ -3,7 +3,7 @@
 import Link from "next/link";
 import styles from "./data-board.module.css";
 import { colorMatch } from "../../constants";
-import { DatasetInfoBanner } from "../../types/dataset";
+import { DatasetInfoBanner } from "../../shared/types/dataset";
 
 type Props = {
   title: string;
@@ -26,7 +26,7 @@ export function DataBoard({ title, url, dataList }: Props) {
       <div className={styles.dataBoard}>
         {dataList?.map((dataset) => (
           <Link
-            href={`/${url}/${dataset.datasetId}`}
+            href={`/search-result/${dataset.datasetId}`}
             key={dataset.datasetId}
             className={styles.dataCard}
           >

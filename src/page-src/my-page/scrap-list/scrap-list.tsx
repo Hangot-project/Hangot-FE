@@ -2,10 +2,10 @@ import React, { Suspense, useEffect, useState } from "react";
 import styles from "./scrap-list.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Scrap } from "../../../types/scrap";
-import { getAllScrap } from "../../../api/scrap/getAllScrap";
-import { ScrapListResponse } from "../../../api/scrap/type";
 import Link from "next/link";
+import { Scrap } from "../../../shared/types/scrap";
+import { ScrapListResponse } from "../../../shared/api/scrap/type";
+import { getAllScrap } from "../../../shared/api/scrap/getAllScrap";
 
 export function ScrapList() {
   const { data: session, status } = useSession();

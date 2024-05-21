@@ -1,4 +1,4 @@
-import { DATA_TYPES, ORGANIZATION_VALUES } from "../constants";
+import { DATA_TYPES, ORGANIZATION_VALUES } from "../../constants";
 
 export type Organization = (typeof ORGANIZATION_VALUES)[number];
 

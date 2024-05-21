@@ -6,7 +6,7 @@ import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { userLogout } from "../../api/user/userLogout";
+import { userLogout } from "../../shared/api/user/userLogout";
 
 export function Header() {
   const { data: session, status } = useSession();

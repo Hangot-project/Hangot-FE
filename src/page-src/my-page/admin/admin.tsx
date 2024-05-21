@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 import { useRef, useState } from "react";
 import styles from "./admin.module.css";
-import { setPassword } from "../../../api/user/setPassword";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { setPassword } from "../../../shared/api/user/setPassword";
 
 export function Admin() {
   const [passwordInput, setPasswordInput] = useState<string>("");

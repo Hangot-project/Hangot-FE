@@ -5,12 +5,12 @@ import styles from "./notice.module.css";
 import { usePathname, useSearchParams, useRouter, notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { NoticeResult } from "../../../api/notice/type";
-import { NOTICE_SORT_TYPES } from "../../../types/notice";
 import { getPageArray, updateQueryString } from "../../../utils";
 import { NoticeCard, SearchSortDropdown } from "../../../components";
 import { NOTICE_SORT_VALUES } from "../../../constants";
 import { NextButton, PreviousButton } from "../../../../public/svgs";
+import { NoticeResult } from "../../../shared/api/notice/type";
+import { NOTICE_SORT_TYPES } from "../../../shared/types/notice";
 
 export function Notice({
   result,
