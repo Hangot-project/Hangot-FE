@@ -1,8 +1,8 @@
 "use client";
 
-import { Dataset } from "../../api/dataset";
 import { ChartData } from "chart.js";
 import _ from "lodash";
+import { Dataset } from "../../types/dataset";
 
 /**
  * dataset 타입을 chartjs data 타입으로 변환하는 함수

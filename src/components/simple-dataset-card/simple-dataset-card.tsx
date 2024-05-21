@@ -5,8 +5,8 @@ import {
   DataOrganization,
   LikeEmpty,
 } from "../../../public/svgs";
-import { DataType, Organization } from "../../constants/dataset-search-params";
 import { CSSProperties } from "react";
+import { DataType, Organization } from "../../types/dataset";
 
 interface SimpleDatasetCardProps {
   title: string;

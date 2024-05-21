@@ -1,7 +1,6 @@
 "use client";
 
 import React, { CSSProperties, useCallback, useState } from "react";
-import { Dataset } from "../../api/dataset";
 import { BarChart } from "../bar-chart/bar-chart";
 import styles from "./dataset-viewer.module.css";
 import { DatasetTable } from "../dataset-table/dataset-table";
@@ -12,6 +11,7 @@ import {
   TableActive,
   TableInactive,
 } from "../../../public/svgs";
+import { Dataset } from "../../types/dataset";
 
 export function DatasetViewer({
   title,

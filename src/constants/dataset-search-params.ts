@@ -23,11 +23,7 @@ export const ORGANIZATION_VALUES = [
   "입학처",
 ] as const;
 
-export type Organization = (typeof ORGANIZATION_VALUES)[number];
-
 export const DATA_TYPES = ["CSV", "XLS", "XLSX", "PDF", "DOCX", "JSON"] as const;
-
-export type DataType = (typeof DATA_TYPES)[number];
 
 export const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"] as const;
 

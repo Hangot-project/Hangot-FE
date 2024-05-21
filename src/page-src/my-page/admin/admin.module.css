@@ -1,0 +1,135 @@
+.bodyDetail {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 3rem;
+  row-gap: 1.5rem;
+}
+
+.bodyHeader {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.basicinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: auto;
+
+  padding: 2.5rem;
+  border: #d7e2eb solid 1px;
+  border-radius: 1rem;
+  background-color: #fff;
+  row-gap: 1rem;
+}
+
+.pwInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2.5rem;
+  border: #d7e2eb solid 1px;
+  border-radius: 1rem;
+  background-color: #fff;
+  line-height: 1.5rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+.content:first-child {
+  color: #606060;
+  font-size: 0.8125rem;
+}
+
+.content:nth-child(2) {
+  color: #424242;
+  font-size: 0.9375rem;
+}
+
+.basicinfo .email {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.basicinfo .email .emailText {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  color: #424242;
+  word-break: keep-all;
+}
+
+.basicinfo .email .emailText .emailText1 {
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.basicinfo .email .emailText .emailText2 {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+.emailLabel {
+  position: relative;
+  display: inline-block;
+  width: 4.25rem;
+  height: 2rem;
+  margin: auto 0;
+}
+
+.emailLabel input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.emailLabel1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.emailLabel1.emailLabel2 {
+  border-radius: 2.125rem;
+}
+
+input:checked + .emailLabel1 {
+  background-color: #2196f3;
+}
+
+.emailLabel1:before {
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  content: "";
+  background-color: #fff;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.emailLabel1.emailLabel2:before {
+  border-radius: 50%;
+}
+
+input:checked + .emailLabel1:before {
+  -webkit-transform: translateX(2.25rem);
+  -ms-transform: translateX(2.25rem);
+  transform: translateX(2.25rem);
+}
