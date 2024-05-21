@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from "react";
 import { signIn, useSession } from "next-auth/react";
-import { userLogout } from "../../../api/user/userLogout";
-import { reissueToken } from "../../../api/user/reissueToken";
+import { userLogout } from "../../../shared/api/user/userLogout";
+import { reissueToken } from "../../../shared/api/user/reissueToken";
 
 export default function Test() {
   const yesRef = useRef<HTMLInputElement>();

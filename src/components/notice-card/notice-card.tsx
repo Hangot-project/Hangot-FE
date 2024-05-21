@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "./notice-card.module.css";
-import { Notice } from "../../types/notice";
+import { Notice } from "../../shared/types/notice";
 
 export function NoticeCard({ notice }: { notice: Notice }) {
   return (

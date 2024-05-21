@@ -11,7 +11,7 @@ import {
   TableActive,
   TableInactive,
 } from "../../../public/svgs";
-import { Dataset } from "../../types/dataset";
+import { Dataset } from "../../shared/types/dataset";
 
 export function DatasetViewer({
   title,

@@ -1,4 +1,4 @@
-import { Dataset } from "../types/dataset";
+import { Dataset } from "../shared/types/dataset";
 
 export const dataset: Dataset = {
   x_axis_name: "공시연도",
