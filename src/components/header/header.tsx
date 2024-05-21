@@ -6,7 +6,7 @@ import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { logout } from "../../api/logout";
+import { userLogout } from "../../api/user/userLogout";
 
 export function Header() {
   const { data: session, status } = useSession();
@@ -17,7 +17,10 @@ export function Header() {
       return;
     }
 
-    const success = await logout(session.user.grantType, session.user.accessToken);
+    const success = await userLogout(
+      session.user.grantType,
+      session.user.accessToken,
+    );
     if (success) {
       window.location.reload();
       return;

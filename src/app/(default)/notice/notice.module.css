@@ -1,0 +1,41 @@
+.title {
+  margin-top: 6rem;
+  font-family: "NotoSansBold";
+  font-size: 2rem;
+}
+
+.contents {
+  margin-top: 2.5rem;
+}
+
+.nav > p {
+  display: inline-block;
+
+  font-size: 1.25rem;
+  font-family: "NotoSansBold";
+  color: #0078ff;
+
+  border-bottom: solid 2.4px #0078ff;
+  padding-bottom: 9px;
+}
+
+.filterContainer {
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.noticeList {
+  margin-top: 0.75rem;
+  padding: 1.25rem;
+
+  border: solid 1px #d7e2eb;
+  border-radius: 8px;
+}
+
+.divisionLine {
+  background-color: #dbdbdb;
+  height: 0.8px;
+}

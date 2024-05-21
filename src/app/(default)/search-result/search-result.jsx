@@ -12,7 +12,6 @@ import styles from "./searchResult.module.css";
 import Image from "next/image";
 import { ResetIcon } from "../../../../public/svgs";
 import { StickHorizonSmall } from "../../../../public/svgs";
-import { DatasetInfo } from "../../../api/dataset";
 import Link from "next/link";
 import { useEffect } from "react";
 import {
@@ -27,7 +26,7 @@ import { Pagination } from "../../../components";
 /**
  *
  * @param {{
- *    results: DatasetInfo[];
+ *    results: import("../../../types/dataset").DatasetInfo[];
  *    totalElement: number;
  *    totalPage: number;
  *    initPage: number;
@@ -136,7 +135,7 @@ export default function SearchResult({
   }, [selectedSort]);
 
   return (
-    <>
+    <div>
       {/* //* navigate info box */}
       <div className={`noLayoutPadding ${styles.navigateInfoContainer}`}>
         <p>Home {" > "} 데이터 찾기</p>
@@ -301,6 +300,6 @@ export default function SearchResult({
           )}
         </section>
       </main>
-    </>
+    </div>
   );
 }

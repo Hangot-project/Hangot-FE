@@ -1,8 +1,9 @@
-import { getNewDataset, getPopularDataset } from "../../api/dataset";
+import { getNewDataset } from "../../api/dataset/getNewDatasetInfo";
+import { getPopularDatasetInfo } from "../../api/dataset/getPopularDatasetInfo";
 import Main from "./main";
 
 async function getListData() {
-  const popularDatasets = await getPopularDataset();
+  const popularDatasets = await getPopularDatasetInfo();
   const newDatasets = await getNewDataset();
   return { popularDatasets, newDatasets };
 }
