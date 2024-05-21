@@ -12,3 +12,9 @@ export interface LoginResponseDto {
 export interface SetPasswordRequestDto {
   password: string;
 }
+
+export interface SignupResponseDto {
+  userId: number;
+  name: string;
+  email: string;
+}
