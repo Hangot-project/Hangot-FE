@@ -5,6 +5,7 @@ import { parse } from "cookie";
 import { socialLogin } from "../shared/api/user/socialLogin";
 import { LoginResponse } from "../shared/api/user/type";
 import { userLogin } from "../shared/api/user/userLogin";
+import { Provider } from "../constants/oauth-provider";
 
 function setCookie(response: Response) {
   const apiCookies = response.headers.getSetCookie();
@@ -43,7 +44,9 @@ export const authOptions: NextAuthOptions = {
 
       credentials: {
         provider: { label: "isSocial" },
-        code: { label: "code" },
+        grantType: { label: "grantType", type: "text" },
+        token: { label: "token", type: "text" },
+
         username: { label: "email", type: "text", placeholder: "아이디" },
         password: { label: "password", type: "password", placeholder: "비밀번호" },
         isAuto: { label: "isAuto" },
@@ -52,50 +55,44 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const _user = { id: credentials.username, name: credentials.username };
 
-        try {
-          // * 소셜 로그인
-          if (credentials.provider) {
-            //@ts-ignore
-            if (!Object.values(Provider).includes(credentials.provider)) {
-              throw new Error("지원하지 않는 소셜 로그인");
-            }
-            //@ts-ignore
-            const response = await socialLogin(credentials.provider, {
-              code: credentials.code,
-            });
-
-            const result: LoginResponse = await response.json();
-
-            if (result.success) {
-              setCookie(response);
-              return {
-                ..._user,
-                ...result.result,
-              };
-            } else {
-              return null;
-            }
+        // * 소셜 로그인
+        if (credentials.provider) {
+          if (
+            credentials.grantType === undefined ||
+            credentials.token === undefined
+          ) {
+            throw new Error(`잘못된 접근`);
+          }
+          //@ts-ignore
+          if (!Object.values(Provider).includes(credentials.provider)) {
+            throw new Error("지원하지 않는 소셜 로그인");
           }
 
-          // * 일반 로그인
-          const response = await userLogin({
-            email: credentials.username,
-            password: credentials.password,
-            //@ts-ignore
-            autoLogin: credentials.isAuto,
-          });
+          return {
+            id: credentials.token,
+            name: credentials.provider,
+            grantType: credentials.grantType,
+            accessToken: credentials.token,
+          };
+        }
 
-          const result: LoginResponse = await response.json();
+        // * 일반 로그인
+        const response = await userLogin({
+          email: credentials.username,
+          password: credentials.password,
+          //@ts-ignore
+          autoLogin: credentials.isAuto,
+        });
 
-          if (result.success) {
-            const user = { ..._user, ...result.result };
-            setCookie(response);
-            return user;
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.error(error);
+        const result: LoginResponse = await response.json();
+
+        console.log(`authOptions auth res >>>`, result);
+
+        if (result.success) {
+          const user = { ..._user, ...result.result };
+          setCookie(response);
+          return user;
+        } else {
           return null;
         }
       },
