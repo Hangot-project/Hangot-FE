@@ -2,7 +2,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
 import { parse } from "cookie";
-import { socialLogin } from "../shared/api/user/socialLogin";
 import { LoginResponse } from "../shared/api/user/type";
 import { userLogin } from "../shared/api/user/userLogin";
 import { Provider } from "../constants/oauth-provider";
