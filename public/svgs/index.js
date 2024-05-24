@@ -33,8 +33,26 @@ import SID from "./sign_up_id.svg";
 import SPW from "./sign_up_pw.svg";
 import Banner from "./banner_logo.svg";
 import Menu from "./menu_icon.svg";
+import LikeEmpty from "./like_empty.svg";
+import LikeFilled from "./like_filled.svg";
+import GraphActive from "./graph_active.svg";
+import GraphInactive from "./graph_inactive.svg";
+import TableActive from "./table_active.svg";
+import TableInactive from "./table_inactive.svg";
+import ScreenClose from "./screen_close.svg";
 
-export { SymbolLogo, MainLogo, MainLogoBlue, HYU, Banner, Instagram, Youtube, Facebook, Twitter, Kakao };
+export {
+  SymbolLogo,
+  MainLogo,
+  MainLogoBlue,
+  HYU,
+  Banner,
+  Instagram,
+  Youtube,
+  Facebook,
+  Twitter,
+  Kakao,
+};
 export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
 export {
   ArrowDown,
@@ -44,13 +62,20 @@ export {
   StickHorizonSmall,
   NextButton,
   PreviousButton,
-  SearchSymbol, 
-  DataType, 
+  SearchSymbol,
+  DataType,
   DataOrganization,
   ID,
   PW,
   Name,
   SID,
-  SPW
+  SPW,
+  LikeEmpty,
+  LikeFilled,
+  GraphActive,
+  GraphInactive,
+  TableActive,
+  TableInactive,
+  ScreenClose,
 };
 export { Menu };

@@ -16,7 +16,7 @@ body {
 
   height: 100%;
 
-  background-color: #003b71;
+  background-color: white;
 }
 
 a * {
@@ -95,4 +95,87 @@ ul {
 
 li:hover {
   cursor: pointer;
+}
+
+/** padding */
+.layoutPadding {
+  padding: 0 8rem;
+}
+
+.noLayoutPadding {
+  margin: 0 -8rem;
+  padding: 0 8rem;
+}
+
+@media screen and (max-width: 680px) {
+  .layoutPadding {
+    padding: 0 2.5rem;
+  }
+
+  .noLayoutPadding {
+    margin: 0 -2.5rem;
+    padding: 0 2.5rem;
+  }
+}
+
+@media screen and (min-width: 681px) and (max-width: 1439px) {
+  .layoutPadding {
+    padding: 0 6rem;
+  }
+
+  .noLayoutPadding {
+    margin: 0 -6rem;
+    padding: 0 6rem;
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .layoutPadding {
+    padding: 0 12rem;
+  }
+
+  .noLayoutPadding {
+    margin: 0 -12rem;
+    padding: 0 12rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .layoutPadding {
+    padding: 0 20rem;
+  }
+
+  .noLayoutPadding {
+    margin: 0 -20rem;
+    padding: 0 20rem;
+  }
+}
+
+.pagesContainer,
+.pagesWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pageButton {
+  border-radius: 50%;
+  color: #767676;
+
+  width: 24px;
+  height: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 8px;
+}
+
+.pageButton.active {
+  background-color: #767676;
+  color: white;
+}
+
+.pageButton:hover {
+  color: rgb(219, 219, 219);
 }

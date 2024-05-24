@@ -5,22 +5,49 @@ import { MainLogo, MainLogoBlue } from "../../../public/svgs";
 import Image from "next/image";
 import { VerticalDivider } from "../vertical-divider/vertical-divider";
 import Link from "next/link";
+import { useAppSelector } from "../../lib/hooks";
+import { useDispatch } from "react-redux";
+import { login, logout } from "../../lib/slice/auth-slice";
 
 export function Header() {
+  const { isActive, accessToken, role } = useAppSelector(
+    (state) => state.authReducer.value,
+  );
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    //TODO: logout api 호출
+    dispatch(logout());
+  };
+
   return (
     <>
       {/* //* 네비게이션 바 */}
-      <header className={styles.container}>
+      <header className={`layoutPadding ${styles.container}`}>
         {/* //* 상단바 */}
         <nav className={styles.topBar}>
           <ul className={styles.navWrapper}>
-            <li>로그인</li>
+            {isActive ? (
+              <li onClick={onLogout}>로그아웃</li>
+            ) : (
+              <>
+                <Link href={"/login"}>
+                  <li>로그인</li>
+                </Link>
+                <VerticalDivider />
+                <Link href={"/"}>
+                  <li>회원가입</li>
+                </Link>
+              </>
+            )}
             <VerticalDivider />
-            <li>회원가입</li>
+            <Link href={"/test-page"}>
+              <li>사이트맵</li>
+            </Link>
             <VerticalDivider />
-            <li>사이트맵</li>
-            <VerticalDivider />
-            <li>ENGLISH</li>
+            <Link href={"/"}>
+              <li>ENGLISH</li>
+            </Link>
           </ul>
         </nav>
 

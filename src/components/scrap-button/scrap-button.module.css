@@ -1,0 +1,13 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  vertical-align: middle;
+}
+
+.scrapText {
+  color: white;
+  font-size: 1rem;
+}

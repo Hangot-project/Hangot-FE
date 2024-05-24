@@ -17,6 +17,7 @@
 
 .listContainer {
   position: absolute;
+  z-index: 99;
 }
 
 .listItem {

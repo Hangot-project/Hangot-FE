@@ -10,35 +10,25 @@ import {
 } from "../../components";
 import styles from "./searchResult.module.css";
 import Image from "next/image";
-import { NextButton, PreviousButton, ResetIcon } from "../../../public/svgs";
+import { ResetIcon } from "../../../public/svgs";
 import { StickHorizonSmall } from "../../../public/svgs";
-import { Dataset } from "../../api/search-result";
+import { DatasetInfo } from "../../api/dataset";
 import Link from "next/link";
 import { useEffect } from "react";
-
-const THEME_VALUES = ["입학", "취업"];
-const ORGANIZATION_VALUES = [
-  "경영대학",
-  "국문대학",
-  "예체능대학",
-  "디자인대학",
-  "공과대학",
-  "소프트웨어융합대학",
-  "경상대학",
-  "학술정보관",
-  "커리어개발센터",
-  "학생지원팀",
-  "총무인사처",
-  "관재팀",
-];
-const DATA_TYPES = ["SHEET", "CHART", "FILE", "MAP", "LINK", "LOD"];
-const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"];
+import {
+  THEME_VALUES,
+  ORGANIZATION_VALUES,
+  DATA_TYPES,
+  SORT_VALUES,
+} from "../../constants";
+import { updateQueryString } from "../../utils";
+import { Pagination } from "../../components";
 
 /**
  *
  * @param {{
- *    keyword: string | null;
- *    results: Dataset[];
+ *    results: DatasetInfo[];
+ *    totalElement: number;
  *    totalPage: number;
  *    initPage: number;
  * }}
@@ -51,7 +41,6 @@ export default function SearchResult({
   initPage,
 }) {
   // ? 페이지 값 없이 렌더링하는 경우 -> 1페이지를 기본 페이지로 설정
-  const _initPage = initPage ? initPage : "1";
 
   const searchParams = useSearchParams();
   const pathName = usePathname();
@@ -65,7 +54,7 @@ export default function SearchResult({
    * 쿼리 파라미터를 수정할 때 수정하는 함수
    * @returns {string}
    */
-  const updateQueryString = useCallback(
+  const updateQuery = useCallback(
     /**
      *
      * @param {"create" | "append" | "remove"} type - 수정할 작업
@@ -74,26 +63,14 @@ export default function SearchResult({
      * @returns
      */
     (type, name, value) => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      switch (type) {
-        case "create":
-          params.set(name, value);
-          return params.toString();
-
-        case "append":
-          params.append(name, value);
-          return params.toString();
-
-        case "remove":
-          params.delete(name, value);
-          return params.toString();
-
-        default:
-          return "";
-      }
+      return updateQueryString({
+        type,
+        name,
+        value,
+        searchParams: searchParams.toString(),
+      });
     },
-    [searchParams],
+    [updateQueryString, searchParams],
   );
 
   /**
@@ -102,13 +79,17 @@ export default function SearchResult({
   const handleFilterClick = useCallback(
     (queryName, value) => {
       if (!Array.from(searchParams.values()).includes(value)) {
-        router.push(`${pathName}?${updateQueryString("append", queryName, value)}`);
+        router.push(`${pathName}?${updateQuery("append", queryName, value)}`, {
+          scroll: false,
+        });
         return;
       }
 
-      router.push(`${pathName}?${updateQueryString("remove", queryName, value)}`);
+      router.push(`${pathName}?${updateQuery("remove", queryName, value)}`, {
+        scroll: false,
+      });
     },
-    [searchParams, updateQueryString],
+    [searchParams, updateQuery],
   );
 
   /**
@@ -119,8 +100,9 @@ export default function SearchResult({
 
     params.delete("theme");
     params.delete("organization");
+    params.delete("type");
 
-    router.push(`${pathName}?${params.toString()}`);
+    router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }, [searchParams]);
 
   const handleSearchSubmit = useCallback(
@@ -134,15 +116,13 @@ export default function SearchResult({
       event.preventDefault();
 
       if (keyword) {
-        router.push(
-          `${pathName}?${updateQueryString("create", "keyword", keyword)}`,
-        );
+        router.push(`${pathName}?${updateQuery("create", "keyword", keyword)}`);
         return;
       }
 
-      router.push(`${pathName}?${updateQueryString("remove", "keyword")}`);
+      router.push(`${pathName}?${updateQuery("remove", "keyword")}`);
     },
-    [updateQueryString],
+    [updateQuery],
   );
 
   /**
@@ -150,16 +130,16 @@ export default function SearchResult({
    */
   useEffect(() => {
     if (selectedSort) {
-      router.push(
-        `${pathName}?${updateQueryString("create", "sort", selectedSort)}`,
-      );
+      router.push(`${pathName}?${updateQuery("create", "sort", selectedSort)}`, {
+        scroll: false,
+      });
     }
   }, [selectedSort]);
 
   return (
     <>
       {/* //* navigate info box */}
-      <div className={styles.navigateInfoContainer}>
+      <div className={`noLayoutPadding ${styles.navigateInfoContainer}`}>
         <p>Home {" > "} 데이터 찾기</p>
       </div>
 
@@ -242,6 +222,27 @@ export default function SearchResult({
 
           {/* //? division line */}
           <div className={styles.divisionLine} />
+
+          {/* //? 파일 유형별 */}
+          <div className={styles.filterTitleWrapper}>
+            <h2 className={styles.sectionSubtitle}>제공유형</h2>
+            <Image src={StickHorizonSmall} alt="-" />
+          </div>
+
+          <div>
+            {DATA_TYPES.map((value, index) => (
+              <FilterCheckButton
+                key={index}
+                isSelected={Array.from(searchParams.values()).includes(value)}
+                text={value}
+                value={value}
+                handleClick={() => handleFilterClick("type", value)}
+              />
+            ))}
+          </div>
+
+          {/* //? division line */}
+          <div className={styles.divisionLine} />
         </section>
 
         {/* //? 검색 결과 리스트 */}
@@ -267,78 +268,38 @@ export default function SearchResult({
           </div>
 
           {/* //? division line */}
-          <div className={styles.divisionLine} />
+          <div className={styles.divisionLine} style={{ marginBottom: "2rem" }} />
 
           {/* //* 검색 결과 리스트 */}
-          {/* //TODO: 실제 데이터 정보에 맞게 변경 */}
           {results.map((dataset, index) => (
-            <SimpleDatasetCard
-              key={dataset.datasetId}
-              title={dataset.title}
-              subtitle={dataset.description}
-              from={"입학처"}
-              type={"EXCEL"}
-              style={{
-                marginTop: "1rem",
-                cursor: "pointer",
-              }}
-            />
+            <Link
+              key={`result${index}`}
+              href={`/search-result/${dataset.datasetId}`}
+              prefetch={false}
+            >
+              <SimpleDatasetCard
+                key={dataset.datasetId}
+                title={dataset.title}
+                subtitle={dataset.description}
+                from={dataset.organization}
+                view={dataset.view}
+                type={dataset.type}
+                style={{
+                  marginTop: "1rem",
+                }}
+              />
+            </Link>
           ))}
 
           {/* //* 페이지 리스트 */}
-          <div
-            className={styles.pagesContainer}
-            style={{
-              margin: "0.75rem 0 2.25rem 0",
-            }}
-          >
-            <div className={styles.pagesWrapper}>
-              {/* //? 이전 페이지 버튼 */}
-              <Link
-                href={`${pathName}?${updateQueryString(
-                  "create",
-                  "page",
-                  Math.max(1, parseInt(_initPage) - 1),
-                )}`}
-              >
-                <Image src={PreviousButton} alt="이전 페이지 버튼" />
-              </Link>
-
-              {/* //? 페이지 버튼 목록 */}
-              {new Array(totalPage).fill(0).map((_, index) => (
-                <Link
-                  href={`${pathName}?${updateQueryString(
-                    "create",
-                    "page",
-                    index + 1,
-                  )}`}
-                  key={index}
-                  className={styles.pageButton}
-                  style={
-                    _initPage == index + 1
-                      ? {
-                          backgroundColor: "#767676",
-                          color: "white",
-                        }
-                      : {}
-                  }
-                >
-                  {index + 1}
-                </Link>
-              ))}
-
-              {/* //? 다음 페이지 버튼 */}
-              <Link
-                href={`${pathName}?${updateQueryString(
-                  "create",
-                  "page",
-                  Math.min(totalPage, parseInt(_initPage) + 1),
-                )}`}
-              >
-                <Image src={NextButton} alt="다음 페이지 버튼" />
-              </Link>
-            </div>
-          </div>
+          {totalPage > 0 && (
+            <Pagination
+              pathName={pathName}
+              searchParams={searchParams.toString()}
+              currentPage={initPage}
+              totalPage={totalPage}
+            />
+          )}
         </section>
       </main>
     </>

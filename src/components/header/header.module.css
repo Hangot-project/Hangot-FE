@@ -1,5 +1,6 @@
 .container {
-  padding: 2.125rem 8rem;
+  padding-top: 2.125rem;
+  padding-bottom: 2.125rem;
 
   background-color: white;
 }
@@ -26,8 +27,8 @@
   align-items: center;
 }
 
-.navWrapper > li {
-  color: #003B71;
+.navWrapper li {
+  color: #003b71;
   font-size: 0.813rem;
 }
 
@@ -57,7 +58,7 @@
 }
 
 .menuWrapper > li > a {
-  color: #003B71;
+  color: #003b71;
   font-size: 1.125rem;
   font-weight: bold;
 
