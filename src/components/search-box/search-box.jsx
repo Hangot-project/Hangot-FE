@@ -10,7 +10,7 @@ import { useCallback, useState } from "react";
  * @param {{handleSubmit: FormEventHandler<HTMLButtonElement>; style?: CSSProperties; initKeyword?: string}} param0
  * @returns
  */
-export function SearchBox({ handleSubmit, style, initKeyword }) {
+export function SearchBox({ handleSubmit, boxstyle, placeholder, inputstyle, iconstyle, initKeyword }) {
   const [input, setInput] = useState(initKeyword ? initKeyword : "");
 
   const handleChange = useCallback(
@@ -23,18 +23,19 @@ export function SearchBox({ handleSubmit, style, initKeyword }) {
   return (
     <form
       className={styles.searchbox_container}
-      style={style}
+      style={boxstyle}
       onSubmit={(e) => handleSubmit(e, input)}
     >
       <input
         type="text"
-        placeholder="검색어를 입력해주세요."
+        placeholder={placeholder}
         className={styles.searchbox_input}
+        style={inputstyle}
         onChange={(e) => handleChange(e.target.value)}
         value={input}
       />
       <button type="submit">
-        <Image src={SearchSymbol} width={27} height={27} />
+        <Image src={SearchSymbol} style={iconstyle} />
       </button>
     </form>
   );

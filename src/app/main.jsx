@@ -68,12 +68,17 @@ export default function Main({ listData }) {
             <div className={styles.searchbox}>
                 <div className={styles.line} />
                 <SearchBox
-                  style={{
+                  boxstyle={{
                     position: "absolute",
                     backgroundColor: "#ffffff",
                     borderRadius: "75px",
                     zIndex: 1,
                   }} 
+                  iconstyle={{
+                    width: "27px",
+                    height: "27px",
+                  }}
+                  placeholder="검색어를 입력해주세요."
                 />
             </div>
 
