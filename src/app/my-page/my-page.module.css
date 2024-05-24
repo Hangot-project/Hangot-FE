@@ -1,45 +1,26 @@
 .container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-
-    width: 100%;
-    height: auto;
-
-    padding: 0 1.25rem;
-    margin: 0 auto;
-    
-    border: black;
-
-    background-color: #f9fafb;
+    padding: 1.25rem 0 4rem 0;
 }
 
 .listWrapper {
-    width: 300px;
-    height: auto;
-
     margin-top: 3rem;
 }
 
 .list {
-    width: 300px;
-
+    width: 18.75rem;
     border: .0625rem solid #d7e2eb;
     border-radius: .9375rem;
-
     background-color: white;
-
-    padding: 42px 24px;
+    padding: 2.625rem 2rem;
 }
 
 .list ol {
-
     list-style-type: none;
 }
 
 .detailList {
     width: 100%;
-
     margin-bottom: 2.5rem;
 }
 
@@ -49,7 +30,6 @@
 
 .detailList h3 {
     margin-bottom: 18px;
-
     color: #9b9b9b;
     font-size: .9375rem;
     font-weight: 700;
@@ -68,31 +48,27 @@
     line-height: 1.4375rem;
     color: black;
     font-weight: 700;
-
     background-color: white;
-}
+} 
 
 .detailList ol li:hover {
     background-color: #E6F2FF;
-
     color: #0078FF;
 }
 
 .mainWrapper {
     display: flex;
     flex-direction: column;
-
     flex-grow: 1;
-    padding-bottom: 40px;
-    padding-left: 60px;
-    margin-top: 48px;
+    padding-left: 3.75rem;
+    margin-top: 3rem;
 }
 
 .mainHeader {
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     font-size: 1.5625rem;
     font-weight: 700;
-    line-height: 44px;
+    line-height: 2.75rem;
 }
 
 .mainBody {
@@ -136,6 +112,51 @@
     border-radius: 15px;
     background-color: #fff;
     line-height: 24px;
+}
+
+.pwInfo .idInfo > div:first-child {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 50px;
+}
+
+.pwInfo .idInfo > div:first-child > p:first-child {
+    font-size: 20px;
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+.pwInfo .idInfo > div:first-child > p:nth-child(2) {
+    font-size: 20px;
+    font-weight: 400;
+    padding-right: 20px;
+}
+
+.pwInfo .idInfo > div:nth-child(2) {
+    display: flex;
+}
+
+.idInfo > div:nth-child(2) > button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 8rem;
+    height: 3rem;
+    padding: .5rem 1rem;
+    margin-right: 1.2rem;
+    background-color: #E6F2FF;
+    border-color: #E6F2FF;
+}
+
+.idInfo > div:nth-child(2) > button > p {
+    font-size: .875rem;
+    font-weight: 500;
+}
+
+.idInfo > div:nth-child(2) > button > p:nth-child(2) {
+    color: #0078FF;
+    font-weight: 600;
 }
 
 .content {
@@ -263,60 +284,6 @@
 
 .searchBox {
     position: relative;
-}
-
-.searchBoxInner {
-    position: relative;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    cursor: default;
-}
-
-.searchText1 {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    height: 40px;
-    padding: 0 13px;
-    overflow-x: hidden;
-    font-family: inherit;
-    font-size: 16px;
-    line-height: 24px;
-    color: #263747;
-    text-overflow: ellipsis;
-    appearance: none;
-    resize: vertical;
-    background-color: #fbfbfd;
-    border: 1px solid #d7e2eb;
-    border-radius: 4px;
-    outline: 0;
-    transition-delay: initial;
-    transition-timing-function: ease-in-out;
-    transition-duration: .08s;
-    transition-property: background-color, box-shadow, border-color, color;
-}
-
-.searchBox .searchText2 {
-    height: 40px;
-    padding: 0 30px 0 13px;
-    font-size: 16px;
-    line-height: 24px;
-    background-color: #fff;
-}
-
-.searchBox .searchButton {
-    position: absolute;
-    top: 6px;
-    right: 10px;
-    bottom: 6px;
-    display: flex;
-    align-items: center;
-    padding: 0;
-    appearance: none;
-    cursor: pointer;
-    background: none;
-    border: 0;
 }
 
 .resultNum {
@@ -573,4 +540,33 @@ input:checked+.emailLabel1:before {
     color: #263747;
     background-color: #fbfbfd;
     border: #e0e0e0 solid 1px;
+}
+
+.idInfoEditBtn {
+    display: flex;
+}
+
+.idInfoEditBtn > button {
+    width: 190px;
+    align-self: flex-end;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #0078FF;
+}
+
+.activeMenuItem {
+    background-color: #E6F2FF;
+
+    color: #0078FF;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
