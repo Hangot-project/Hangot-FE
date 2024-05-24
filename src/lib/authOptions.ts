@@ -85,13 +85,15 @@ export const authOptions: NextAuthOptions = {
 
         const result: LoginResponse = await response.json();
 
-        console.log(`authOptions auth res >>>`, result);
-
         if (result.success) {
           const user = { ..._user, ...result.result };
           setCookie(response);
           return user;
+        } else if (response.status === 401) {
+          alert(result.msg);
+          return null;
         } else {
+          alert("알 수 없는 오류가 발생했습니다.");
           return null;
         }
       },
