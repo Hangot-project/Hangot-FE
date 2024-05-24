@@ -75,13 +75,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           <th>제공기관</th>
           <td>{datasetDetail.organization}</td>
         </tr>
-        {/* 3번 행 */}
-        <tr>
-          <th>원본형태</th>
-          <td>DB</td>
-          <th>제3제작권자</th>
-          <td>없음</td>
-        </tr>
         {/* 4번 행 */}
         <tr>
           <th>라이선스</th>
@@ -105,6 +98,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className={styles.divisionLine} />
       {dataset && datasetDetail && (
         <DatasetViewer
+          datasetId={datasetDetail.datasetId}
           title={datasetDetail.title}
           dataset={dataset}
           style={{

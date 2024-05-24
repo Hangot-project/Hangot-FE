@@ -1,6 +1,6 @@
 "use client";
 
-import React, { CSSProperties, useCallback, useState } from "react";
+import React, { CSSProperties, useCallback, useEffect, useState } from "react";
 import { BarChart } from "../bar-chart/bar-chart";
 import styles from "./dataset-viewer.module.css";
 import { DatasetTable } from "../dataset-table/dataset-table";
@@ -12,17 +12,21 @@ import {
   TableInactive,
 } from "../../../public/svgs";
 import { Dataset } from "../../shared/types/dataset";
+import { getDatasetAxis } from "../../shared/api/dataset-visual/getDatasetAxis";
 
 export function DatasetViewer({
+  datasetId,
   title,
   dataset,
   style,
 }: {
+  datasetId: number;
   title: string;
   dataset: Dataset;
   style?: CSSProperties;
 }) {
   const [isBarActive, setIsBarActive] = useState<boolean>(true);
+  const [axis, setAxis] = useState<string[]>([]);
 
   //* 데이터 시각화 선택 버튼
   const Buttons = useCallback(() => {
@@ -67,6 +71,21 @@ export function DatasetViewer({
       </>
     );
   }, [isBarActive]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getDatasetAxis(datasetId);
+
+      if (result === null) {
+        alert(`데이터 시각화 정보를 불러오는데 실패했습니다.`);
+        return;
+      }
+
+      setAxis(result.axis);
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div style={{ ...style }}>
