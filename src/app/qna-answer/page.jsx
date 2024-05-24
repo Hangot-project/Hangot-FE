@@ -1,19 +1,26 @@
 "use client"; //? client componet - NextJS 13
 
 import { useState } from "react";
-import styles from "./news.module.css";
+import styles from "./qna-answer.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function News() {
+export default function QAnswer() {
+  const [detail, setDetail] = useState("");
+
+  const handleSubmit = (event) => {
+    e.preventDefault();
+  };
+
   return (
     <section className={styles.Container}>
       <div className={styles.main}>
         <header className={styles.header}>
-          <h2 className={styles.title}>공지사항</h2>
+          <h2 className={styles.title}>Q&A</h2>
         </header>
+
         <div className={styles.body}>
-          <div className={styles.contentHeader}>개인정보 처리방침 개정 안내</div>
+          <div className={styles.contentHeader}>데이터 요청 관련 문의 드립니다.</div>
           <div className={styles.content}>
             <div className={styles.article_body}>
                 <div className={styles.body1}>
@@ -35,6 +42,22 @@ export default function News() {
             </div>
           </div>     
         </div>
+
+        <form onSubmit={handleSubmit}>
+            <div className={styles.contentHeader}>Q&A 답변</div>
+            <textarea
+                title="공지사항 상세 내용 입력"
+                placeholder="공지사항 상세 내용을 입력하세요."
+                id="inputDetail"
+                className={styles.textArea}
+                value={detail}
+                onChange={(e) => setDetail(e.target.value)}
+            />
+
+            <div className={styles.requestBtn}>
+              <button type="submit" id="saveBtn" className={`${styles.button} ${styles.blue}`}>등록</button>
+            </div>
+        </form>
       </div>
     </section>
   );
