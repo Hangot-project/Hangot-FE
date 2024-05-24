@@ -105,6 +105,12 @@
     }
 }
 
+.required:before {
+  content: "*";
+  color: #D8265D;
+  padding-right: 5px;
+}
+
 .rowTable {
   margin-bottom: 20px;
 }
@@ -363,4 +369,10 @@
   background-color: #0066FF;
 
   margin: 0 2px;
+}
+
+.charCount {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
