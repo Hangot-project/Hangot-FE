@@ -37,6 +37,64 @@
   line-height: 1.5rem;
 }
 
+.pwInfo .idInfo > div:first-child {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 50px;
+}
+
+.pwInfo .idInfo > div:first-child > p:first-child {
+  font-size: 20px;
+  font-weight: 600;
+  padding-right: 5px;
+}
+
+.pwInfo .idInfo > div:first-child > p:nth-child(2) {
+  font-size: 20px;
+  font-weight: 400;
+  padding-right: 20px;
+}
+
+.pwInfo .idInfo > div:nth-child(2) {
+  display: flex;
+}
+
+.idInfo > div:nth-child(2) > button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 8rem;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+  margin-right: 1.2rem;
+  background-color: #e6f2ff;
+  border-color: #e6f2ff;
+}
+
+.idInfo > div:nth-child(2) > button > p {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.idInfo > div:nth-child(2) > button > p:nth-child(2) {
+  color: #0078ff;
+  font-weight: 600;
+}
+
+.idInfoEditBtn {
+  display: flex;
+}
+
+.idInfoEditBtn > button {
+  width: 190px;
+  align-self: flex-end;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: #0078ff;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -132,4 +190,14 @@ input:checked + .emailLabel1:before {
   -webkit-transform: translateX(2.25rem);
   -ms-transform: translateX(2.25rem);
   transform: translateX(2.25rem);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }

@@ -6,17 +6,17 @@ import { Admin } from "../../../page-src/my-page/admin/admin";
 import { DlownloadList } from "../../../page-src/my-page/download-list/dlownload-list";
 import { RequestList } from "../../../page-src/my-page/request-list/request-list";
 import "../../../page-src/my-page/my-page.css";
-import { QnA } from "../../../page-src/my-page/qna/qna";
 import { ScrapList } from "../../../page-src/my-page/scrap-list/scrap-list";
+import QnA from "../../../page-src/my-page/qna/qna";
 
 export default function MyPage() {
-  const [selectedMenu, setSelectedMenu] = useState("계정 관리");
+  const [selectedMenu, setSelectedMenu] = useState<string>("계정 관리");
 
   useEffect(() => {
     setSelectedMenu("계정 관리");
   }, []);
 
-  const handleMenuClick = (menu) => {
+  const handleMenuClick = (menu: string) => {
     setSelectedMenu(menu);
   };
 
@@ -66,7 +66,7 @@ export default function MyPage() {
         {/* 각 메뉴에 따른 섹션 조건부 렌더링 */}
 
         {/* 계정 관리에 해당하는 섹션 */}
-        {selectedMenu === "계정 관리" && <Admin />}
+        {selectedMenu === "계정 관리" && <Admin setMenu={setSelectedMenu} />}
 
         {/* 데이터 다운로드 목록에 해당하는 섹션 */}
         {selectedMenu === "데이터 다운로드 목록" && <DlownloadList />}

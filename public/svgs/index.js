@@ -41,6 +41,7 @@ import TableActive from "./table_active.svg";
 import TableInactive from "./table_inactive.svg";
 import PlusToggle from "./plus_toggle.svg";
 import MinusToggle from "./minus_toggle.svg";
+import ScreenClose from "./screen_close.svg";
 
 export {
   SymbolLogo,
@@ -79,5 +80,6 @@ export {
   TableInactive,
   PlusToggle,
   MinusToggle,
+  ScreenClose,
 };
 export { Menu };
