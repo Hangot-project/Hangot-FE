@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Name, SID, SPW } from "../../../../public/svgs";
 import styled from "@emotion/styled";
-import { sendEmail } from "../../../api/user/sendEmail";
-import { verifyCode } from "../../../api/user/verifyCode";
-import { userSignup } from "../../../api/user/userSignup";
 import { useRouter } from "next/navigation";
+import { sendEmail } from "../../../shared/api/user/sendEmail";
+import { verifyCode } from "../../../shared/api/user/verifyCode";
+import { userSignup } from "../../../shared/api/user/userSignup";
 
 const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
 const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6})*$/;

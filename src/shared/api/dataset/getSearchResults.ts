@@ -1,4 +1,4 @@
-import { SERVER_PARAMS_KEY } from "../../constants/dataset-search-params";
+import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
 import { SERVER_API } from "../config";
 import { DatasetListResponse } from "./type";
 

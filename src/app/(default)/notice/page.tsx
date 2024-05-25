@@ -1,4 +1,4 @@
-import { getAllNotice } from "../../../api/notice/getAllNotice";
+import { getAllNotice } from "../../../shared/api/notice/getAllNotice";
 import { Notice } from "./notice";
 
 async function Page({ searchParams }) {

@@ -2,7 +2,7 @@ import React from "react";
 import SearchResult from "./search-result";
 import { notFound } from "next/navigation";
 import { ParamToSearchResultProps } from "../../../utils/param-to-search-result-props";
-import { getSearchResults } from "../../../api/dataset/getSearchResults";
+import { getSearchResults } from "../../../shared/api/dataset/getSearchResults";
 
 export default async function Page({ searchParams }) {
   const keyword = searchParams["keyword"];

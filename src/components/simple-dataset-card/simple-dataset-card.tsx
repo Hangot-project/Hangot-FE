@@ -6,7 +6,7 @@ import {
   LikeEmpty,
 } from "../../../public/svgs";
 import { CSSProperties } from "react";
-import { DataType, Organization } from "../../types/dataset";
+import { DataType, Organization } from "../../shared/types/dataset";
 
 interface SimpleDatasetCardProps {
   title: string;
