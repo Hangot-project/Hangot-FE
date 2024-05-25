@@ -76,13 +76,14 @@ export default function Main({ populars, news }) {
           <div className={styles.searchbox}>
             <div className={styles.line} />
             <SearchBox
-              style={{
+              boxstyle={{
                 position: "absolute",
                 backgroundColor: "#ffffff",
                 borderRadius: "75px",
                 zIndex: 1,
                 width: "65.5rem",
               }}
+              placeholder="검색어를 입력해주세요."
             />
           </div>
 

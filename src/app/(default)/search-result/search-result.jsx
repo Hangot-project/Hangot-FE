@@ -144,7 +144,7 @@ export default function SearchResult({
       {/* //* 검색창 */}
       {/* //TODO */}
       <SearchBox
-        style={{
+        boxstyle={{
           marginTop: "3.75rem",
           marginBottom: "6rem",
         }}

@@ -1,48 +1,27 @@
 import styled from "@emotion/styled";
 
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./admin.module.css";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { setPassword } from "../../../shared/api/user/setPassword";
+import Nickname from "./nickname/nickname";
+import Password from "./password/password";
 
-export function Admin() {
-  const [passwordInput, setPasswordInput] = useState<string>("");
-  const pwRef = useRef<HTMLInputElement>();
+interface Props {
+  setMenu?: Dispatch<SetStateAction<string>>;
+}
 
-  const { data: session, status } = useSession();
+export function Admin({ setMenu }: Props) {
+  const [selectedPopup, setSelectedPopup] = useState(null);
 
-  const router = useRouter();
+  const handleNameChangeClick = () => {
+    setSelectedPopup("nickname");
+  };
 
-  const handleChangePWClick = async () => {
-    if (status === "unauthenticated") {
-      alert(`로그인 후 이용해주세요.`);
-      router.push("/login");
-      return;
-    }
+  const handlePasswordChangeClick = () => {
+    setSelectedPopup("password");
+  };
 
-    if (passwordInput === "") {
-      alert(`비밀번호가 입력되지 않았습니다.`);
-      return;
-    }
-
-    if (pwRef.current.value !== passwordInput) {
-      alert(`비밀번호가 일치하지 않습니다.`);
-      return;
-    }
-
-    const response = await setPassword({
-      password: passwordInput,
-      grantType: session.user.grantType,
-      token: session.user.accessToken,
-    });
-
-    if (!response.success) {
-      alert(`[SERVER ERROR] 비밀번호 변경에 실패했습니다. 다시 시도해주세요.`);
-      return;
-    }
-
-    alert(`비밀번호가 변경되었습니다.`);
+  const handleCloseModal = () => {
+    setSelectedPopup(null);
   };
 
   return (
@@ -50,8 +29,28 @@ export function Admin() {
       {/* 기본 정보 */}
       <div className={styles.bodyDetail}>
         <div className={styles.bodyHeader}>기본정보</div>
-
-        <div className={styles.basicinfo}></div>
+        <div className={styles.pwInfo}>
+          <div className={styles.idInfo}>
+            <div>
+              <p>이정민</p>
+              <p>님</p>
+              <p>dalnimjm@naver.com</p>
+            </div>
+            <div>
+              <button onClick={() => setMenu("데이터 다운로드 목록")}>
+                <p>다운로드</p>
+                <p>2건</p>
+              </button>
+              <button onClick={() => setMenu("데이터 관심 목록")}>
+                <p>관심</p>
+                <p>2건</p>
+              </button>
+            </div>
+          </div>
+          <ChangeSubmitBtn onClick={handleNameChangeClick}>
+            회원정보 수정
+          </ChangeSubmitBtn>
+        </div>
       </div>
 
       {/* 비밀번호 */}
@@ -59,25 +58,10 @@ export function Admin() {
         <div className={styles.bodyHeader}>비밀번호</div>
 
         <div className={styles.pwInfo}>
-          <div className={styles.content}>
-            <PasswordInput
-              type="password"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-              placeholder="변경할 비밀번호 입력"
-            />
-            <PasswordInput
-              ref={pwRef}
-              style={{
-                marginTop: "4px",
-              }}
-              type="password"
-              placeholder="변경할 비밀번호 재입력"
-            />
-          </div>
-          <ChangePasswordBtn onClick={handleChangePWClick}>
+          <div className={styles.content}></div>
+          <ChangeSubmitBtn onClick={handlePasswordChangeClick}>
             비밀번호 변경
-          </ChangePasswordBtn>
+          </ChangeSubmitBtn>
         </div>
       </div>
 
@@ -126,9 +110,21 @@ export function Admin() {
           <div className={styles.content}>
             <div>계정을 탈퇴합니다.</div>
           </div>
-          <ChangePasswordBtn>계정 탈퇴</ChangePasswordBtn>
+          <ChangeSubmitBtn>계정 탈퇴</ChangeSubmitBtn>
         </div>
       </div>
+
+      {/* 회원정보 수정, 비밀번호 변경 팝업 스크린 */}
+      {selectedPopup === "nickname" && (
+        <div className={styles.overlay}>
+          <Nickname onClose={handleCloseModal} />
+        </div>
+      )}
+      {selectedPopup === "password" && (
+        <div className={styles.overlay}>
+          <Password onClose={handleCloseModal} />
+        </div>
+      )}
     </div>
   );
 }
@@ -141,7 +137,7 @@ const PasswordInput = styled.input`
   padding: 0.5rem;
 `;
 
-const ChangePasswordBtn = styled.button`
+const ChangeSubmitBtn = styled.button`
   width: 8.125rem;
   height: 2.875rem;
   padding: 0;

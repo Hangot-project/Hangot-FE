@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./scrap-list.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -63,7 +63,10 @@ export function ScrapList() {
                 scrapList.map((scrap) => (
                   <tr>
                     <td>
-                      <Link href={`/search-result/${scrap.datasetId}`}>
+                      <Link
+                        className={styles.dataTitle}
+                        href={`/search-result/${scrap.datasetId}`}
+                      >
                         {scrap.title}
                       </Link>
                     </td>

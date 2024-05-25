@@ -1,4 +1,6 @@
-export function QnA() {
+"use client";
+
+export default function QnA() {
   return (
     <div className={"mainBody"}>
       {/* 데이터 검색 결과 개수 */}
