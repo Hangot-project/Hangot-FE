@@ -1,18 +1,18 @@
-export function QnA() {
-  return (
-    <div className={"mainBody"}>
-      {/* 데이터 검색 결과 개수 */}
-      <div className={"resultNum"}>
-        <div className={"resultNumText"}>0개의 데이터</div>
-      </div>
+"use client";
 
-      {/* 데이터 검색 결과 */}
-      {/* TODO : 데이터 검색 결과 불러오기 */}
-      <div className={"searchResult"}>
-        <div className={"searchResultBody"}>
+import styles from "./my-page.module.css";
+
+export default function QnA() {
+  return (
+    <div className={styles.mainBody}>
+      <div className={styles.resultNum}>
+        <div className={styles.resultNumText}>0개의 데이터</div>
+      </div>
+      <div className={styles.searchResult}>
+        <div className={styles.searchResultBody}>
           <table>
             <colgroup>
-              <col style={{ width: "10%" }}></col>
+              <col style={{ width: "5.5%" }} className={styles.tableCol}></col>
               <col style={{ width: "15%" }}></col>
               <col></col>
               <col style={{ width: "10%" }}></col>
@@ -21,7 +21,9 @@ export function QnA() {
             </colgroup>
             <thead>
               <tr>
-                <th scope="col">NO.</th>
+                <th scope="col" className={styles.tableCol}>
+                  NO.
+                </th>
                 <th scope="col">문의유형</th>
                 <th scope="col">제목</th>
                 <th scope="col">등록자</th>
