@@ -3,19 +3,9 @@ import { dataset as _dataset } from "../../../../dummy-data/datasets";
 import { getDatasetDetail } from "../../../../shared/api/dataset/getDatasetDetail";
 import styles from "./detail.module.css";
 
-// export async function generateStaticParams() {
-//   const datasets = await getAllDatasets();
-
-//   return datasets.map((dataset) => ({
-//     id: dataset.datasetId.toString(),
-//   }));
-// }
-
 export default async function Page({ params }: { params: { id: string } }) {
   const datasetId = parseInt(params.id);
   const datasetDetail = await getDatasetDetail(datasetId);
-  // TODO: 데이터셋 시각화 api 연결
-  const dataset = { ..._dataset };
 
   return (
     <div className={styles.root}>
@@ -96,16 +86,14 @@ export default async function Page({ params }: { params: { id: string } }) {
       </h2>
 
       <div className={styles.divisionLine} />
-      {dataset && datasetDetail && (
-        <DatasetViewer
-          datasetId={datasetDetail.datasetId}
-          title={datasetDetail.title}
-          dataset={dataset}
-          style={{
-            marginTop: "3rem",
-          }}
-        />
-      )}
+
+      <DatasetViewer
+        datasetId={datasetDetail.datasetId}
+        title={datasetDetail.title}
+        style={{
+          marginTop: "3rem",
+        }}
+      />
     </div>
   );
 }

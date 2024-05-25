@@ -11,22 +11,37 @@ import {
   TableActive,
   TableInactive,
 } from "../../../public/svgs";
-import { Dataset } from "../../shared/types/dataset";
 import { getDatasetAxis } from "../../shared/api/dataset-visual/getDatasetAxis";
+import { SearchSortDropdown } from "../drop-down/search-sort-dropdown";
 
 export function DatasetViewer({
   datasetId,
   title,
-  dataset,
   style,
 }: {
   datasetId: number;
   title: string;
-  dataset: Dataset;
   style?: CSSProperties;
 }) {
   const [isBarActive, setIsBarActive] = useState<boolean>(true);
   const [axis, setAxis] = useState<string[]>([]);
+  const [selectedAxis, setSelectedAxis] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getDatasetAxis(datasetId);
+
+      if (result === null) {
+        alert(`데이터 시각화 정보를 불러오는데 실패했습니다.`);
+        return;
+      }
+
+      setAxis(result.axis);
+      setSelectedAxis(result.axis[0]);
+    }
+
+    fetchData();
+  }, []);
 
   //* 데이터 시각화 선택 버튼
   const Buttons = useCallback(() => {
@@ -72,21 +87,6 @@ export function DatasetViewer({
     );
   }, [isBarActive]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await getDatasetAxis(datasetId);
-
-      if (result === null) {
-        alert(`데이터 시각화 정보를 불러오는데 실패했습니다.`);
-        return;
-      }
-
-      setAxis(result.axis);
-    }
-
-    fetchData();
-  }, []);
-
   return (
     <div style={{ ...style }}>
       {/* //* 제목 & 버튼 */}
@@ -105,15 +105,26 @@ export function DatasetViewer({
             display: "flex",
           }}
         >
+          {isBarActive && (
+            <SearchSortDropdown
+              items={axis}
+              selectedItem={selectedAxis}
+              setSelectedItem={setSelectedAxis}
+              width={"20rem"}
+              style={{
+                marginRight: "1rem",
+              }}
+            />
+          )}
           <Buttons />
         </div>
       </div>
 
       {/* //* 그래프 */}
       {isBarActive ? (
-        <BarChart x_axis_name={dataset.x_axis_name} dataset={dataset} />
+        <BarChart datasetId={datasetId} colName={selectedAxis} />
       ) : (
-        <DatasetTable dataset={dataset} />
+        <DatasetTable datasetId={datasetId} />
       )}
     </div>
   );
