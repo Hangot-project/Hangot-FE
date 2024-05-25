@@ -6,10 +6,10 @@ import styles from "./scrap-button.module.css";
 import { LikeEmpty, LikeFilled } from "../../../public/svgs";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { getIsScrap } from "../../api/scrap/getIsScrap";
-import { getDatasetDetail } from "../../api/dataset/getDatasetDetail";
-import { createScrap } from "../../api/scrap/createScrap";
-import { deleteScrap } from "../../api/scrap/deleteScrap";
+import { deleteScrap } from "../../shared/api/scrap/deleteScrap";
+import { createScrap } from "../../shared/api/scrap/createScrap";
+import { getDatasetDetail } from "../../shared/api/dataset/getDatasetDetail";
+import { getIsScrap } from "../../shared/api/scrap/getIsScrap";
 
 export function ScrapButton({
   datasetId,

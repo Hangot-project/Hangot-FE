@@ -1,5 +1,5 @@
-import { getNewDataset } from "../../api/dataset/getNewDatasetInfo";
-import { getPopularDatasetInfo } from "../../api/dataset/getPopularDatasetInfo";
+import { getNewDataset } from "../../shared/api/dataset/getNewDatasetInfo";
+import { getPopularDatasetInfo } from "../../shared/api/dataset/getPopularDatasetInfo";
 import Main from "./main";
 
 async function getListData() {

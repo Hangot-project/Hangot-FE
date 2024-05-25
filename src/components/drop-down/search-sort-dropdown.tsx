@@ -1,31 +1,31 @@
 "use client";
 
-import React, { useCallback, useRef } from "react";
+import { CSSProperties, Dispatch, SetStateAction, useCallback, useRef } from "react";
 import styles from "./search-sort-dropdown.module.css";
 import { useOutsideClick } from "../../hooks";
 import Image from "next/image";
 import { ArrowDown } from "../../../public/svgs";
 
-/**
- * @param {{selectedItem: string; setSelectedItem: React.Dispatch<React.SetStateAction<string>>; items: string[]; style?: React.CSSProperties;}}
- * @param {string} selectedItem - 선택된 항목(문자열)
- * @param {*} setSelectedItem - 선택 항목을 변경하는 setState 함수
- * @param {string[]} items - 드롭다운 항목 배열(문자열 배열)
- * @param {} style - 드롭다운 박스에 입힐 스타일 객체
- */
+interface Props {
+  selectedItem: string;
+  setSelectedItem: Dispatch<SetStateAction<string>>;
+  items: string[];
+  defaultText?: string;
+  style?: CSSProperties;
+  width?: string | number;
+}
+
 export const SearchSortDropdown = ({
   selectedItem,
   setSelectedItem,
   items,
+  defaultText,
   style,
-}) => {
+  width,
+}: Props) => {
   const dropdownRef = useRef(null);
 
   const [isActive, setIsActive] = useOutsideClick(dropdownRef, false);
-
-  const handleButtonClick = useCallback(() => {
-    setIsActive((prev) => !prev);
-  }, [setIsActive]);
 
   const selectedContainerStyle = isActive
     ? {
@@ -33,7 +33,19 @@ export const SearchSortDropdown = ({
       }
     : {};
 
-  const containerStyle = Object.assign({}, selectedContainerStyle, style);
+  const itemsWidth = typeof width === "number" ? `${width}px` : width;
+  const containerStyle = Object.assign({}, selectedContainerStyle, style, {
+    width: itemsWidth,
+  });
+
+  const handleButtonClick = useCallback(() => {
+    setIsActive((prev) => !prev);
+  }, [setIsActive]);
+
+  const handleItemClick = useCallback((item: string) => {
+    setSelectedItem(item);
+    setIsActive(false);
+  }, []);
 
   return (
     <div>
@@ -43,18 +55,21 @@ export const SearchSortDropdown = ({
         onClick={handleButtonClick}
         ref={dropdownRef}
       >
-        <p>{selectedItem || "항목선택"}</p>
-        <Image src={ArrowDown} style={styles.arrow} />
+        <p>{selectedItem || defaultText || "항목선택"}</p>
+        <Image alt="드롭다운 화살표" src={ArrowDown} className={styles.arrow} />
       </div>
 
       {isActive && (
-        <ul className={styles.listContainer}>
+        <ul className={styles.listContainer} style={{ width: itemsWidth }}>
           {items?.length ? (
             items.map((value, index) => (
               <li
                 key={index}
                 className={styles.listItem}
-                onClick={() => setSelectedItem(value)}
+                onClick={() => handleItemClick(value)}
+                style={{
+                  width: itemsWidth,
+                }}
               >
                 {value}
               </li>

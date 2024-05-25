@@ -1,4 +1,4 @@
-import { Provider } from "../constants/oauth-provider";
+import { Provider } from "../../constants/oauth-provider";
 
 export type ProviderType = (typeof Provider)[keyof typeof Provider];
 

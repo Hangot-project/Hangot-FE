@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
-import { reissueToken } from "../../../api/user/reissueToken";
-import { getAllScrap } from "../../../api/scrap/getAllScrap";
-import { ScrapListResponse } from "../../../api/scrap/type";
-import { Scrap } from "../../../types/scrap";
+import { getAllScrap } from "../../../shared/api/scrap/getAllScrap";
+import { Scrap } from "../../../shared/types/scrap";
+import { ScrapListResponse } from "../../../shared/api/scrap/type";
+import { reissueToken } from "../../../shared/api/user/reissueToken";
 
 function Page() {
   const { data: session, update } = useSession();

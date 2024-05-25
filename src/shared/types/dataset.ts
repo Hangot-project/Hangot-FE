@@ -1,14 +1,19 @@
-import { DATA_TYPES, ORGANIZATION_VALUES } from "../constants";
+import { DATA_TYPES, ORGANIZATION_VALUES } from "../../constants";
 
 export type Organization = (typeof ORGANIZATION_VALUES)[number];
 
 export type DataType = (typeof DATA_TYPES)[number];
 
-export interface Dataset {
+export interface DatasetChartType {
   x_axis_name: string;
   x_label: string[];
   dataName: string[];
   dataList: Array<Array<string>>;
+}
+
+export interface DatasetTableType {
+  label: string[];
+  dataList: string[][];
 }
 
 export interface DatasetInfoDetail {
