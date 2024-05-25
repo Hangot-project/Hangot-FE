@@ -10,9 +10,7 @@ import { useRouter } from "next/navigation";
 import { sendEmail } from "../../../shared/api/user/sendEmail";
 import { verifyCode } from "../../../shared/api/user/verifyCode";
 import { userSignup } from "../../../shared/api/user/userSignup";
-
-const pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/;
-const emailRegex = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6})*$/;
+import { REGEX } from "../../../constants/regex";
 
 export default function SignUp() {
   const router = useRouter();
@@ -21,13 +19,13 @@ export default function SignUp() {
 
   const [email, setEmail] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
-  const [verified, setVerified] = useState<boolean>(true);
-  const validFormEmail = email !== "" && emailRegex.test(email);
+  const [verified, setVerified] = useState<boolean>(false);
+  const validFormEmail = email !== "" && REGEX.EMAIL.test(email);
   const emailMessage = validFormEmail ? "" : `이메일 형식이 올바르지 않습니다.`;
 
   const [password, setPassword] = useState<string>("");
   const [checkPassword, setCheckPassword] = useState<string>("");
-  const isValidPassword = pwRegex.test(password);
+  const isValidPassword = REGEX.PASSWORD.test(password);
   const passwordMessage =
     password !== checkPassword ? `입력한 비밀번호가 서로 다릅니다.` : "";
 
@@ -80,7 +78,7 @@ export default function SignUp() {
 
   return (
     <div className={styles.Wrapper}>
-      <form className={styles.signupWrapper} onSubmit={(e) => handleSubmit(e)}>
+      <div className={styles.signupWrapper}>
         {/* //? 이름 입력 */}
         <p className={styles.title}>이름</p>
         <div className={styles.lineContainer}>
@@ -173,7 +171,12 @@ export default function SignUp() {
           />
         </div>
 
-        <SubmitButton type="submit" active={canSubmit} disabled={!canSubmit}>
+        <SubmitButton
+          type="submit"
+          active={canSubmit}
+          disabled={!canSubmit}
+          onClick={(e) => handleSubmit(e)}
+        >
           회원가입
         </SubmitButton>
 
@@ -184,7 +187,7 @@ export default function SignUp() {
             로그인 하기
           </Link>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
