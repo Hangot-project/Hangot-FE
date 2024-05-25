@@ -1,5 +1,4 @@
 import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../../components";
-import { dataset as _dataset } from "../../../../dummy-data/datasets";
 import { getDatasetDetail } from "../../../../shared/api/dataset/getDatasetDetail";
 import styles from "./detail.module.css";
 
