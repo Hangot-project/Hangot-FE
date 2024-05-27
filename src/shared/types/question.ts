@@ -1,4 +1,4 @@
-export interface Question {
+export interface QuestionDetail {
   questionId: number;
   title: string;
   date: string;

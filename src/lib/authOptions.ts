@@ -5,6 +5,8 @@ import { parse } from "cookie";
 import { LoginResponse } from "../shared/api/user/type";
 import { userLogin } from "../shared/api/user/userLogin";
 import { Provider } from "../constants/oauth-provider";
+import { ROLE } from "../constants/role";
+import { getRole } from "../utils/jwt/get-role";
 
 function setCookie(response: Response) {
   const apiCookies = response.headers.getSetCookie();
@@ -48,6 +50,7 @@ export const authOptions: NextAuthOptions = {
 
         username: { label: "email", type: "text", placeholder: "아이디" },
         password: { label: "password", type: "password", placeholder: "비밀번호" },
+        role: { label: "role", type: "text" },
         isAuto: { label: "isAuto" },
       },
 
@@ -72,6 +75,7 @@ export const authOptions: NextAuthOptions = {
             name: credentials.provider,
             grantType: credentials.grantType,
             accessToken: credentials.token,
+            role: ROLE.USER,
           };
         }
 
@@ -85,10 +89,12 @@ export const authOptions: NextAuthOptions = {
 
         const result: LoginResponse = await response.json();
 
-        console.log(`authOptions auth res >>>`, result);
-
         if (result.success) {
-          const user = { ..._user, ...result.result };
+          const user = {
+            ..._user,
+            role: getRole(result.result.accessToken),
+            ...result.result,
+          };
           setCookie(response);
           return user;
         } else {

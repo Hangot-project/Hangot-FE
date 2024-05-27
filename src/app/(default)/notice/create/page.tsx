@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import styles from "./news-upload.module.css";
+import styles from "./notice-create.module.css";
 
 export default function NewsUpload() {
   const [title, setTitle] = useState("");

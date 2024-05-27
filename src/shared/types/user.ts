@@ -1,3 +1,5 @@
+import { ROLE } from "../../constants/role";
+
 export interface LoginInput {
   email: string;
   password: string;
@@ -18,3 +20,5 @@ export interface SignupResponseDto {
   name: string;
   email: string;
 }
+
+export type UserRole = (typeof ROLE)[keyof typeof ROLE];

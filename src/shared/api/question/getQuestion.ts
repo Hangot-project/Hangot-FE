@@ -1,9 +1,9 @@
 import { SERVER_API } from "../config";
-import { QuestionResponse } from "./type";
+import { QuestionDetailResponse } from "./type";
 
 export async function getQuestion(questionId: number) {
   try {
-    const response: QuestionResponse = await fetch(
+    const response: QuestionDetailResponse = await fetch(
       `${SERVER_API}/api/question/${questionId}`,
     ).then((res) => res.json());
 
