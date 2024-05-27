@@ -3,7 +3,7 @@ import styles from "./simple-dataset-card.module.css";
 import {
   DataType as DataTypeImage,
   DataOrganization,
-  LikeEmpty,
+  LikeFilled,
 } from "../../../public/svgs";
 import { CSSProperties } from "react";
 import { DataType, Organization } from "../../shared/types/dataset";
@@ -14,6 +14,7 @@ interface SimpleDatasetCardProps {
   type: DataType;
   from: Organization;
   view: number;
+  scrap: number;
   onClick?: () => any;
   style?: CSSProperties;
 }
@@ -29,6 +30,7 @@ export function SimpleDatasetCard({
   type,
   from,
   view,
+  scrap,
   onClick,
   style,
 }: SimpleDatasetCardProps) {
@@ -60,7 +62,7 @@ export function SimpleDatasetCard({
 
       <div className={styles.hoverContainer}>
         <p>
-          조회수 {view} <Image src={LikeEmpty} alt="스크랩 아이콘" /> 5
+          조회수 {view} <Image src={LikeFilled} alt="스크랩 아이콘" /> {scrap}
         </p>
       </div>
     </div>
