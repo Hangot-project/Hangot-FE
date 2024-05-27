@@ -83,6 +83,19 @@ export function Header() {
             </li>
             <li>
               <Link href={""}>이용안내</Link>
+              <div>
+                <ul>
+                  <li>
+                    <Link href={"/faq"}>FAQ</Link>
+                  </li>
+                  <li>
+                    <Link href={"/qna"}>QNA</Link>
+                  </li>
+                  <li>
+                    <Link href={"/notice"}>공지사항</Link>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li>
               <Link href={"/my-page"}>마이페이지</Link>
