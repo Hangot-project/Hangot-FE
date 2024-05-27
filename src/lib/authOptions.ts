@@ -85,8 +85,6 @@ export const authOptions: NextAuthOptions = {
 
         const result: LoginResponse = await response.json();
 
-        console.log(`authOptions auth res >>>`, result);
-
         if (result.success) {
           const user = { ..._user, ...result.result };
           setCookie(response);
