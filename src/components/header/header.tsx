@@ -79,7 +79,11 @@ export function Header() {
               <Link href={"/search-result"}>데이터 찾기</Link>
             </li>
             <li>
-              <Link href={"/dataset/request"}>데이터 요청</Link>
+              {status !== "authenticated" || session.user.role === "ROLE_USER" ? (
+                <Link href={"/dataset/request"}>데이터 요청</Link>
+              ) : (
+                <Link href={"/dataset/create"}>데이터 등록</Link>
+              )}
             </li>
             <li>
               <Link href={""}>이용안내</Link>
