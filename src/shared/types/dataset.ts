@@ -29,6 +29,8 @@ export interface DatasetInfoDetail {
   download: number;
   resourceName: string;
   resourceUrl: string;
+  type: DataType;
+  license: string;
 }
 
 export interface DatasetInfo {
@@ -37,8 +39,9 @@ export interface DatasetInfo {
   description: string;
   organization: Organization;
   view: number;
-  type: string;
+  type: DataType;
   themeList: string[];
+  scrap: number;
 }
 
 export interface DatasetInfoBanner {

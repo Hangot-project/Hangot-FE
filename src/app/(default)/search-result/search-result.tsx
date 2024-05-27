@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FormEvent } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   FilterCheckButton,
@@ -22,23 +22,21 @@ import {
 } from "../../../constants";
 import { updateQueryString } from "../../../utils";
 import { Pagination } from "../../../components";
+import { DatasetInfo } from "../../../shared/types/dataset";
 
-/**
- *
- * @param {{
- *    results: import("../../../types/dataset").DatasetInfo[];
- *    totalElement: number;
- *    totalPage: number;
- *    initPage: number;
- * }}
- * @returns
- */
+interface Props {
+  results: DatasetInfo[];
+  totalElement: number;
+  totalPage: number;
+  initPage: number;
+}
+
 export default function SearchResult({
   results,
   totalElement,
   totalPage,
   initPage,
-}) {
+}: Props) {
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const router = useRouter();
@@ -53,14 +51,7 @@ export default function SearchResult({
    * @returns {string}
    */
   const updateQuery = useCallback(
-    /**
-     *
-     * @param {"create" | "append" | "remove"} type - 수정할 작업
-     * @param {string} name - 수정할 파라미터의 이름
-     * @param {any} value - 수정할 파라미터의 값
-     * @returns
-     */
-    (type, name, value) => {
+    (type: "create" | "append" | "remove", name: string, value?: any) => {
       return updateQueryString({
         type,
         name,
@@ -75,7 +66,7 @@ export default function SearchResult({
    * 필터 버튼 클릭시 실행되는 함수
    */
   const handleFilterClick = useCallback(
-    (queryName, value) => {
+    (queryName: string, value: any) => {
       if (!Array.from(searchParams.values()).includes(value)) {
         router.push(`${pathName}?${updateQuery("append", queryName, value)}`, {
           scroll: false,
@@ -103,14 +94,9 @@ export default function SearchResult({
     router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }, [searchParams]);
 
+  // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
   const handleSearchSubmit = useCallback(
-    /**
-     * 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
-     * @param {FormEvent<HTMLFormElement>} event - form 태그의 onSubmit 함수 이벤트 객체
-     * @param {string} keyword - 사용자가 입력한 검색 키워드
-     * @returns
-     */
-    (event, keyword) => {
+    (event: FormEvent<HTMLFormElement>, keyword: string) => {
       event.preventDefault();
 
       if (keyword) {
@@ -191,7 +177,6 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                value={value}
                 handleClick={() => handleFilterClick("theme", value)}
               />
             ))}
@@ -212,7 +197,6 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                value={value}
                 handleClick={() => handleFilterClick("organization", value)}
               />
             ))}
@@ -233,7 +217,6 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                value={value}
                 handleClick={() => handleFilterClick("type", value)}
               />
             ))}
@@ -258,7 +241,7 @@ export default function SearchResult({
             {/* //* 검색 필터 */}
             <div className={styles.rowWrapper}>
               <SearchSortDropdown
-                items={SORT_VALUES}
+                items={[...SORT_VALUES]}
                 selectedItem={selectedSort}
                 setSelectedItem={setSelectedSort}
               />
@@ -282,6 +265,7 @@ export default function SearchResult({
                 from={dataset.organization}
                 view={dataset.view}
                 type={dataset.type}
+                scrap={dataset.scrap}
                 style={{
                   marginTop: "1rem",
                 }}
