@@ -1,22 +1,21 @@
 "use client";
 
-import React, { useCallback } from "react";
-import styles from "./notice.module.css";
-import { usePathname, useSearchParams, notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
+import { notFound, usePathname, useSearchParams } from "next/navigation";
+import { QuestionListResult } from "../../../shared/api/question/type";
+import { useCallback } from "react";
 import { getPageArray, updateQueryString } from "../../../utils";
+import Link from "next/link";
 import { PostListCard } from "../../../components";
+import Image from "next/image";
 import { NextButton, PreviousButton } from "../../../../public/svgs";
-import { NoticeResult } from "../../../shared/api/notice/type";
+import styles from "./question-list.module.css";
 
-export function Notice({
-  result,
-  initPage,
-}: {
-  result: NoticeResult;
+interface Props {
+  result: QuestionListResult;
   initPage: number;
-}) {
+}
+
+export function QuestionList({ result, initPage }: Props) {
   if (result === null) return notFound();
 
   const page = initPage ? initPage : 0;
@@ -38,7 +37,7 @@ export function Notice({
   return (
     <div>
       {/* //* 제목 */}
-      <h1 className={styles.title}>공지사항</h1>
+      <h1 className={styles.title}>QnA</h1>
       <div className={styles.contents}>
         {/* //* 주제 항목 */}
         <div className={styles.nav}>
@@ -46,18 +45,18 @@ export function Notice({
         </div>
         {/* //* 검색결과 수 & 정렬 */}
         <div className={styles.filterContainer}>
-          <p>{result.totalElement.toLocaleString()}개의 공지</p>
+          <p>{result.totalElement.toLocaleString()}개의 질문</p>
         </div>
 
         {/* //* 검색 결과 리스트 */}
         <div className={styles.noticeList}>
-          {result.data.map((notice, index) => (
+          {result.data.map((question, index) => (
             <div key={index}>
-              <Link href={`/notice/${notice.noticeId}`}>
+              <Link href={`/qna/${question.questionId}`}>
                 <PostListCard
-                  id={notice.noticeId}
-                  title={notice.title}
-                  date={notice.createDate}
+                  id={question.questionId}
+                  title={question.title}
+                  date={question.createDate}
                 />
               </Link>
               {index !== result.data.length - 1 && (
@@ -84,7 +83,7 @@ export function Notice({
               >
                 <Image src={PreviousButton} alt="이전 페이지 버튼" />
               </Link>
-              {getPageArray(page, result.totalPage).map((num, index) => (
+              {getPageArray(page, result.totalPage).map((num) => (
                 <Link
                   href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
                   key={`page${num}`}

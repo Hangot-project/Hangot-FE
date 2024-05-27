@@ -12,7 +12,7 @@ export * from "./dataset-table/dataset-table";
 export * from "./dataset-viewer/dataset-viewer";
 export * from "./dataset-type-icon/dataset-type-icon";
 export * from "./scrap-button/scrap-button";
-export * from "./notice-card/notice-card";
+export * from "./post-list-card/post-list-card";
 export * from "./pagination/pagination";
 export * from "./quick-menu/quick-menu";
 export * from "./data-board/data-board";

@@ -1,8 +1,8 @@
-import { Question, QuestionSimple } from "../../types/question";
+import { QuestionDetail, QuestionSimple } from "../../types/question";
 import { GeneralResponse } from "../config";
 
-export interface QuestionResponse extends GeneralResponse {
-  result: Question;
+export interface QuestionDetailResponse extends GeneralResponse {
+  result: QuestionDetail;
 }
 
 export interface MyQuestionResponse extends GeneralResponse {
@@ -11,4 +11,14 @@ export interface MyQuestionResponse extends GeneralResponse {
     totalElement: number;
     data: QuestionSimple[];
   };
+}
+
+export interface QuestionListResult {
+  totalPage: number;
+  totalElement: number;
+  data: QuestionSimple[];
+}
+
+export interface QuestionListResponse extends GeneralResponse {
+  result: QuestionListResult;
 }
