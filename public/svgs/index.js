@@ -32,7 +32,6 @@ import Name from "./sign_up_name.svg";
 import SID from "./sign_up_id.svg";
 import SPW from "./sign_up_pw.svg";
 import Banner from "./banner_logo.svg";
-import Menu from "./menu_icon.svg";
 import LikeEmpty from "./like_empty.svg";
 import LikeFilled from "./like_filled.svg";
 import GraphActive from "./graph_active.svg";
@@ -42,6 +41,15 @@ import TableInactive from "./table_inactive.svg";
 import PlusToggle from "./plus_toggle.svg";
 import MinusToggle from "./minus_toggle.svg";
 import ScreenClose from "./screen_close.svg";
+import MenuSchool from "./menu_school.svg";
+import MenuStudent from "./menu_student.svg";
+import MenuSchedule from "./menu_schedule.svg";
+import MenuWorld from "./menu_world.svg";
+import MenuWelfare from "./menu_welfare.svg";
+import MenuFinance from "./menu_finance.svg"
+import MenuEmploy from "./menu_employ.svg";
+import MenuStudy from "./menu_study.svg";
+import MenuGraduate from "./menu_graduate.svg";
 
 export {
   SymbolLogo,
@@ -82,4 +90,14 @@ export {
   MinusToggle,
   ScreenClose,
 };
-export { Menu };
+export {  
+  MenuSchool, 
+  MenuStudent, 
+  MenuSchedule,
+  MenuWorld,
+  MenuWelfare,
+  MenuFinance,
+  MenuEmploy,
+  MenuStudy,
+  MenuGraduate 
+};

@@ -3,7 +3,18 @@
 import React from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
-import { Banner, Menu } from "../../../public/svgs";
+import { 
+  Banner,  
+  MenuSchool, 
+  MenuStudent ,
+  MenuSchedule,
+  MenuWorld,
+  MenuWelfare,
+  MenuFinance,
+  MenuEmploy,
+  MenuStudy,
+  MenuGraduate
+} from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
 
@@ -11,39 +22,39 @@ const DATA_COUNT = 2379;
 
 const QUICK_MENU = [
   {
-    src: Menu,
+    src: MenuSchool,
     title: "입학",
   },
   {
-    src: Menu,
+    src: MenuStudent,
     title: "학생",
   },
   {
-    src: Menu,
+    src: MenuSchedule,
     title: "학사",
   },
   {
-    src: Menu,
+    src: MenuWorld,
     title: "국제",
   },
   {
-    src: Menu,
+    src: MenuWelfare,
     title: "복지",
   },
   {
-    src: Menu,
+    src: MenuFinance,
     title: "재정",
   },
   {
-    src: Menu,
+    src: MenuEmploy,
     title: "취창업",
   },
   {
-    src: Menu,
+    src: MenuStudy,
     title: "학술",
   },
   {
-    src: Menu,
+    src: MenuGraduate,
     title: "장학",
   },
 ];
