@@ -69,24 +69,23 @@ export default function Main({ populars, news }) {
         <Image alt="메인 배너" src={Banner} />
       </main>
 
-      {/* 검색창 및 퀵메뉴 */}
+      {/* 검색창 */}
+      <div className={`noLayout ${styles.searchbox}`}>
+        <div className={`${styles.line}`} />
+        <SearchBox
+          boxstyle={{
+            position: "absolute",
+            backgroundColor: "#ffffff",
+            borderRadius: "75px",
+            zIndex: 1,
+            width: "65.5rem",
+          }}
+        />
+      </div>
+
+      {/* 퀵메뉴 */}
       <section>
         <div className={styles.search}>
-          {/* 검색창 */}
-          <div className={styles.searchbox}>
-            <div className={styles.line} />
-            <SearchBox
-              boxstyle={{
-                position: "absolute",
-                backgroundColor: "#ffffff",
-                borderRadius: "75px",
-                zIndex: 1,
-                width: "65.5rem",
-              }}
-              placeholder="검색어를 입력해주세요."
-            />
-          </div>
-
           {/* 퀵메뉴 */}
           <div className={styles.menuGrid}>
             {QUICK_MENU.map((menu) => (
