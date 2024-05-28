@@ -1,0 +1,26 @@
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .container {
+    padding: 2.125rem 12rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .container {
+    padding: 2.125rem 20rem;
+  }
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.navWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.navWrapper li {
+  color: #003b71;
+  font-size: 0.813rem;
+}
