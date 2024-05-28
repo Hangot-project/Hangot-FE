@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
 import { Banner, Menu } from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
+import { useRouter } from "next/navigation";
 
 const DATA_COUNT = 2379;
 
@@ -50,6 +51,22 @@ const QUICK_MENU = [
 
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
+
+  const router = useRouter();
+
+  // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
+  const handleSearchSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>, keyword: string) => {
+      event.preventDefault();
+
+      if (keyword) {
+        router.push(`search-result?keyword=${keyword}`);
+        return;
+      }
+    },
+    [],
+  );
+
   return (
     <div>
       {/* 메인페이지 배너 */}
@@ -78,8 +95,9 @@ export default function Main({ populars, news }) {
             backgroundColor: "#ffffff",
             borderRadius: "75px",
             zIndex: 1,
-            width: "65.5rem",
+            width: "70%",
           }}
+          handleSubmit={handleSearchSubmit}
         />
       </div>
 
