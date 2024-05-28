@@ -1,7 +1,5 @@
 "use client";
 
-import { ReadonlyURLSearchParams } from "next/navigation";
-
 interface UpdateQueryStringProps {
   type: "create" | "append" | "remove";
   name: string;

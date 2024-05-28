@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
 import { 
@@ -17,6 +17,7 @@ import {
 } from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
+import { useRouter } from "next/navigation";
 
 const DATA_COUNT = 2379;
 
@@ -61,6 +62,22 @@ const QUICK_MENU = [
 
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
+
+  const router = useRouter();
+
+  // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
+  const handleSearchSubmit = useCallback(
+    (event: FormEvent<HTMLFormElement>, keyword: string) => {
+      event.preventDefault();
+
+      if (keyword) {
+        router.push(`search-result?keyword=${keyword}`);
+        return;
+      }
+    },
+    [],
+  );
+
   return (
     <div>
       {/* 메인페이지 배너 */}
@@ -80,24 +97,24 @@ export default function Main({ populars, news }) {
         <Image alt="메인 배너" src={Banner} />
       </main>
 
-      {/* 검색창 및 퀵메뉴 */}
+      {/* 검색창 */}
+      <div className={`noLayout ${styles.searchbox}`}>
+        <div className={`${styles.line}`} />
+        <SearchBox
+          boxstyle={{
+            position: "absolute",
+            backgroundColor: "#ffffff",
+            borderRadius: "75px",
+            zIndex: 1,
+            width: "70%",
+          }}
+          handleSubmit={handleSearchSubmit}
+        />
+      </div>
+
+      {/* 퀵메뉴 */}
       <section>
         <div className={styles.search}>
-          {/* 검색창 */}
-          <div className={styles.searchbox}>
-            <div className={styles.line} />
-            <SearchBox
-              boxstyle={{
-                position: "absolute",
-                backgroundColor: "#ffffff",
-                borderRadius: "75px",
-                zIndex: 1,
-                width: "65.5rem",
-              }}
-              placeholder="검색어를 입력해주세요."
-            />
-          </div>
-
           {/* 퀵메뉴 */}
           <div className={styles.menuGrid}>
             {QUICK_MENU.map((menu) => (

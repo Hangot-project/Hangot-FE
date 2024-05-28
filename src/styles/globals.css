@@ -107,6 +107,10 @@ li:hover {
   padding: 0 8rem;
 }
 
+.noLayout {
+  margin: 0 -8rem;
+}
+
 @media screen and (max-width: 680px) {
   .layoutPadding {
     padding: 0 2.5rem;
@@ -115,6 +119,10 @@ li:hover {
   .noLayoutPadding {
     margin: 0 -2.5rem;
     padding: 0 2.5rem;
+  }
+
+  .noLayout {
+    margin: 0 -2.5rem;
   }
 }
 
@@ -127,6 +135,10 @@ li:hover {
     margin: 0 -6rem;
     padding: 0 6rem;
   }
+
+  .noLayout {
+    margin: 0 -6rem;
+  }
 }
 
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
@@ -138,6 +150,10 @@ li:hover {
     margin: 0 -12rem;
     padding: 0 12rem;
   }
+
+  .noLayout {
+    margin: 0 -12rem;
+  }
 }
 
 @media screen and (min-width: 1920px) {
@@ -148,6 +164,10 @@ li:hover {
   .noLayoutPadding {
     margin: 0 -20rem;
     padding: 0 20rem;
+  }
+
+  .noLayout {
+    margin: 0 -20rem;
   }
 }
 
