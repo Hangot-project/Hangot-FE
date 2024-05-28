@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import styles from "./footer.module.css";
-import { VerticalDivider } from "../vertical-divider/vertical-divider";
-import { Facebook, HYU, Instagram, Twitter, Youtube } from "../../../public/svgs";
+import { VerticalDivider } from "../../../components";
+import { Facebook, HYU, Instagram, Twitter, Youtube } from "../../../../public/svgs";
 
 export function Footer() {
   return (
@@ -11,13 +11,25 @@ export function Footer() {
       <div className={styles.infoContainer}>
         <ul className={styles.navContainer}>
           <li>
-            <Image src={HYU} />
+            <Image alt="footer logo" src={HYU} />
           </li>
-          <VerticalDivider className={styles.divisionLine} />
+          <VerticalDivider
+            style={{
+              backgroundColor: "#bdbdbb",
+            }}
+          />
           <li>개인정보처리방침</li>
-          <VerticalDivider className={styles.divisionLine} />
+          <VerticalDivider
+            style={{
+              backgroundColor: "#bdbdbb",
+            }}
+          />
           <li>이용약관</li>
-          <VerticalDivider className={styles.divisionLine} />
+          <VerticalDivider
+            style={{
+              backgroundColor: "#bdbdbb",
+            }}
+          />
           <li>대학 홈페이지</li>
         </ul>
 
@@ -30,13 +42,13 @@ export function Footer() {
         <p>© 꿀떡. ALL RIGHTS RESERVED</p>
       </div>
       <div className={styles.snsContainer}>
-        <Image src={Instagram} />
+        <Image alt="인스타그램 로고" src={Instagram} />
 
-        <Image src={Youtube} />
+        <Image alt="유튜브 로고" src={Youtube} />
 
-        <Image src={Facebook} />
+        <Image alt="페이스북 로고" src={Facebook} />
 
-        <Image src={Twitter} />
+        <Image alt="트위터 로고" src={Twitter} />
       </div>
     </div>
   );
