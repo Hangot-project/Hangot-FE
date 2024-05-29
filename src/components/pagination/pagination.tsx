@@ -26,7 +26,7 @@ export function Pagination({
         searchParams,
       });
     },
-    [updateQueryString],
+    [searchParams, updateQueryString],
   );
 
   return (
