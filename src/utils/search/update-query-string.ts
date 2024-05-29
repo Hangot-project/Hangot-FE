@@ -1,5 +1,7 @@
 "use client";
 
+import { SERVER_PARAMS_KEY } from "../../constants/dataset-search-params";
+
 interface UpdateQueryStringProps {
   type: "create" | "append" | "remove";
   name: string;
@@ -23,7 +25,8 @@ export function updateQueryString(props: UpdateQueryStringProps): string {
       params.set(name, value);
       return params.toString();
 
-    case "append":
+    case "append": // 주제 필터 추가 -> 첫 번째 페이지로 리셋
+      params.set(SERVER_PARAMS_KEY.PAGE, `0`);
       params.append(name, value);
       return params.toString();
 

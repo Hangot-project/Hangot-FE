@@ -12,8 +12,11 @@ import {
   QUICK_MENU,
   SERVER_PARAMS_KEY,
 } from "../../constants/dataset-search-params";
+import { SortValueType } from "../../shared/types/dataset";
 
 const DATA_COUNT = 2379;
+
+const POPULAR_SORT_VALUE: SortValueType = "인기순";
 
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
@@ -88,7 +91,7 @@ export default function Main({ populars, news }) {
           <DataBoard
             title="인기 데이터"
             dataList={populars}
-            url={`search-result?${SERVER_PARAMS_KEY.SORT}=스크랩순`}
+            url={`search-result?${SERVER_PARAMS_KEY.SORT}=${POPULAR_SORT_VALUE}`}
           />
 
           {/* 신규데이터 */}
