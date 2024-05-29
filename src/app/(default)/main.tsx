@@ -3,51 +3,17 @@
 import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
-import { Banner, Menu } from "../../../public/svgs";
+import { Banner } from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  QUICK_MENU,
+  SERVER_PARAMS_KEY,
+} from "../../constants/dataset-search-params";
 
 const DATA_COUNT = 2379;
-
-const QUICK_MENU = [
-  {
-    src: Menu,
-    title: "입학",
-  },
-  {
-    src: Menu,
-    title: "학생",
-  },
-  {
-    src: Menu,
-    title: "학사",
-  },
-  {
-    src: Menu,
-    title: "국제",
-  },
-  {
-    src: Menu,
-    title: "복지",
-  },
-  {
-    src: Menu,
-    title: "재정",
-  },
-  {
-    src: Menu,
-    title: "취창업",
-  },
-  {
-    src: Menu,
-    title: "학술",
-  },
-  {
-    src: Menu,
-    title: "장학",
-  },
-];
 
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
@@ -60,7 +26,7 @@ export default function Main({ populars, news }) {
       event.preventDefault();
 
       if (keyword) {
-        router.push(`search-result?keyword=${keyword}`);
+        router.push(`search-result?${SERVER_PARAMS_KEY.KEYWORD}=${keyword}`);
         return;
       }
     },
@@ -107,7 +73,9 @@ export default function Main({ populars, news }) {
           {/* 퀵메뉴 */}
           <div className={styles.menuGrid}>
             {QUICK_MENU.map((menu) => (
-              <QuickMenu image={menu.src} title={menu.title} />
+              <Link href={`search-result?${SERVER_PARAMS_KEY.THEME}=${menu.title}`}>
+                <QuickMenu image={menu.src} title={menu.title} />
+              </Link>
             ))}
           </div>
         </div>
@@ -120,7 +88,7 @@ export default function Main({ populars, news }) {
           <DataBoard
             title="인기 데이터"
             dataList={populars}
-            url={`search-result?sort=스크랩순`}
+            url={`search-result?${SERVER_PARAMS_KEY.SORT}=스크랩순`}
           />
 
           {/* 신규데이터 */}
