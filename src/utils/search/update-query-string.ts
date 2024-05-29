@@ -7,6 +7,7 @@ interface UpdateQueryStringProps {
   name: string;
   value?: any;
   searchParams: string;
+  resetPage?: boolean;
 }
 
 /**
@@ -17,16 +18,17 @@ interface UpdateQueryStringProps {
  * @returns
  */
 export function updateQueryString(props: UpdateQueryStringProps): string {
-  const { type, name, value, searchParams } = props;
+  const { type, name, value, searchParams, resetPage = false } = props;
   const params = new URLSearchParams(searchParams);
+
+  if (resetPage) params.delete(SERVER_PARAMS_KEY.PAGE);
 
   switch (type) {
     case "create":
       params.set(name, value);
       return params.toString();
 
-    case "append": // 주제 필터 추가 -> 첫 번째 페이지로 리셋
-      params.set(SERVER_PARAMS_KEY.PAGE, `0`);
+    case "append":
       params.append(name, value);
       return params.toString();
 

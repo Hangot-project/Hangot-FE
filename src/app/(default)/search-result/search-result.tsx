@@ -23,6 +23,7 @@ import {
 import { updateQueryString } from "../../../utils";
 import { Pagination } from "../../../components";
 import { DatasetInfo } from "../../../shared/types/dataset";
+import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
 
 interface Props {
   results: DatasetInfo[];
@@ -51,12 +52,18 @@ export default function SearchResult({
    * @returns {string}
    */
   const updateQuery = useCallback(
-    (type: "create" | "append" | "remove", name: string, value?: any) => {
+    (
+      type: "create" | "append" | "remove",
+      name: string,
+      value?: any,
+      resetPage?: boolean,
+    ) => {
       return updateQueryString({
         type,
         name,
         value,
         searchParams: searchParams.toString(),
+        resetPage,
       });
     },
     [updateQueryString, searchParams],
@@ -68,13 +75,13 @@ export default function SearchResult({
   const handleFilterClick = useCallback(
     (queryName: string, value: any) => {
       if (!Array.from(searchParams.values()).includes(value)) {
-        router.push(`${pathName}?${updateQuery("append", queryName, value)}`, {
+        router.push(`${pathName}?${updateQuery("append", queryName, value, true)}`, {
           scroll: false,
         });
         return;
       }
 
-      router.push(`${pathName}?${updateQuery("remove", queryName, value)}`, {
+      router.push(`${pathName}?${updateQuery("remove", queryName, value, true)}`, {
         scroll: false,
       });
     },
@@ -87,9 +94,9 @@ export default function SearchResult({
   const handleResetClick = useCallback(() => {
     const params = new URLSearchParams(searchParams.toString());
 
-    params.delete("theme");
-    params.delete("organization");
-    params.delete("type");
+    params.delete(SERVER_PARAMS_KEY.THEME);
+    params.delete(SERVER_PARAMS_KEY.ORGANIZATION);
+    params.delete(SERVER_PARAMS_KEY.TYPE);
 
     router.push(`${pathName}?${params.toString()}`, { scroll: false });
   }, [searchParams]);
@@ -100,11 +107,18 @@ export default function SearchResult({
       event.preventDefault();
 
       if (keyword) {
-        router.push(`${pathName}?${updateQuery("create", "keyword", keyword)}`);
+        router.push(
+          `${pathName}?${updateQuery(
+            "create",
+            SERVER_PARAMS_KEY.KEYWORD,
+            keyword,
+            true,
+          )}`,
+        );
         return;
       }
 
-      router.push(`${pathName}?${updateQuery("remove", "keyword")}`);
+      router.push(`${pathName}?${updateQuery("remove", SERVER_PARAMS_KEY.KEYWORD)}`);
     },
     [updateQuery],
   );
@@ -114,9 +128,12 @@ export default function SearchResult({
    */
   useEffect(() => {
     if (selectedSort) {
-      router.push(`${pathName}?${updateQuery("create", "sort", selectedSort)}`, {
-        scroll: false,
-      });
+      router.push(
+        `${pathName}?${updateQuery("create", SERVER_PARAMS_KEY.SORT, selectedSort)}`,
+        {
+          scroll: false,
+        },
+      );
     }
   }, [selectedSort]);
 
@@ -135,7 +152,7 @@ export default function SearchResult({
           marginBottom: "6rem",
         }}
         handleSubmit={handleSearchSubmit}
-        initKeyword={searchParams.get("keyword")}
+        initKeyword={searchParams.get(SERVER_PARAMS_KEY.KEYWORD)}
       />
 
       {/* //* 검색어 안내 문구 */}
@@ -177,7 +194,7 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                handleClick={() => handleFilterClick("theme", value)}
+                handleClick={() => handleFilterClick(SERVER_PARAMS_KEY.THEME, value)}
               />
             ))}
           </div>
@@ -197,7 +214,9 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                handleClick={() => handleFilterClick("organization", value)}
+                handleClick={() =>
+                  handleFilterClick(SERVER_PARAMS_KEY.ORGANIZATION, value)
+                }
               />
             ))}
           </div>
@@ -217,7 +236,7 @@ export default function SearchResult({
                 key={index}
                 isSelected={Array.from(searchParams.values()).includes(value)}
                 text={value}
-                handleClick={() => handleFilterClick("type", value)}
+                handleClick={() => handleFilterClick(SERVER_PARAMS_KEY.TYPE, value)}
               />
             ))}
           </div>
