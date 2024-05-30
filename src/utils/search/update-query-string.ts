@@ -1,10 +1,13 @@
 "use client";
 
+import { SERVER_PARAMS_KEY } from "../../constants/dataset-search-params";
+
 interface UpdateQueryStringProps {
   type: "create" | "append" | "remove";
   name: string;
   value?: any;
   searchParams: string;
+  resetPage?: boolean;
 }
 
 /**
@@ -15,8 +18,10 @@ interface UpdateQueryStringProps {
  * @returns
  */
 export function updateQueryString(props: UpdateQueryStringProps): string {
-  const { type, name, value, searchParams } = props;
+  const { type, name, value, searchParams, resetPage = false } = props;
   const params = new URLSearchParams(searchParams);
+
+  if (resetPage) params.delete(SERVER_PARAMS_KEY.PAGE);
 
   switch (type) {
     case "create":

@@ -3,62 +3,20 @@
 import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import Image from "next/image";
-import { 
-  Banner,  
-  MenuSchool, 
-  MenuStudent ,
-  MenuSchedule,
-  MenuWorld,
-  MenuWelfare,
-  MenuFinance,
-  MenuEmploy,
-  MenuStudy,
-  MenuGraduate
-} from "../../../public/svgs";
+import { Banner } from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  QUICK_MENU,
+  SERVER_PARAMS_KEY,
+} from "../../constants/dataset-search-params";
+import { SortValueType } from "../../shared/types/dataset";
 
 const DATA_COUNT = 2379;
 
-const QUICK_MENU = [
-  {
-    src: MenuSchool,
-    title: "입학",
-  },
-  {
-    src: MenuStudent,
-    title: "학생",
-  },
-  {
-    src: MenuSchedule,
-    title: "학사",
-  },
-  {
-    src: MenuWorld,
-    title: "국제",
-  },
-  {
-    src: MenuWelfare,
-    title: "복지",
-  },
-  {
-    src: MenuFinance,
-    title: "재정",
-  },
-  {
-    src: MenuEmploy,
-    title: "취창업",
-  },
-  {
-    src: MenuStudy,
-    title: "학술",
-  },
-  {
-    src: MenuGraduate,
-    title: "장학",
-  },
-];
+const POPULAR_SORT_VALUE: SortValueType = "인기순";
 
 export default function Main({ populars, news }) {
   const dataCount = useIncreaseCount(DATA_COUNT);
@@ -71,7 +29,7 @@ export default function Main({ populars, news }) {
       event.preventDefault();
 
       if (keyword) {
-        router.push(`search-result?keyword=${keyword}`);
+        router.push(`search-result?${SERVER_PARAMS_KEY.KEYWORD}=${keyword}`);
         return;
       }
     },
@@ -118,7 +76,9 @@ export default function Main({ populars, news }) {
           {/* 퀵메뉴 */}
           <div className={styles.menuGrid}>
             {QUICK_MENU.map((menu) => (
-              <QuickMenu image={menu.src} title={menu.title} />
+              <Link href={`search-result?${SERVER_PARAMS_KEY.THEME}=${menu.title}`}>
+                <QuickMenu image={menu.src} title={menu.title} />
+              </Link>
             ))}
           </div>
         </div>
@@ -131,7 +91,7 @@ export default function Main({ populars, news }) {
           <DataBoard
             title="인기 데이터"
             dataList={populars}
-            url={`search-result?sort=스크랩순`}
+            url={`search-result?${SERVER_PARAMS_KEY.SORT}=${POPULAR_SORT_VALUE}`}
           />
 
           {/* 신규데이터 */}

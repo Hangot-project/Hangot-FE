@@ -1,14 +1,55 @@
-export const THEME_VALUES = [
-  "입학",
-  "학생",
-  "학사",
-  "국제",
-  "복지",
-  "재정",
-  "취창업",
-  "학술",
-  "장학",
+import {
+  MenuEmploy,
+  MenuFinance,
+  MenuGraduate,
+  MenuSchedule,
+  MenuSchool,
+  MenuStudent,
+  MenuStudy,
+  MenuWelfare,
+  MenuWorld,
+} from "../../public/svgs";
+
+export const QUICK_MENU = [
+  {
+    src: MenuSchool,
+    title: "입학",
+  },
+  {
+    src: MenuStudent,
+    title: "학생",
+  },
+  {
+    src: MenuSchedule,
+    title: "학사",
+  },
+  {
+    src: MenuWorld,
+    title: "국제",
+  },
+  {
+    src: MenuWelfare,
+    title: "복지",
+  },
+  {
+    src: MenuFinance,
+    title: "재정",
+  },
+  {
+    src: MenuEmploy,
+    title: "취창업",
+  },
+  {
+    src: MenuStudy,
+    title: "학술",
+  },
+  {
+    src: MenuGraduate,
+    title: "장학",
+  },
 ] as const;
+
+export const THEME_VALUES = QUICK_MENU.map((menu) => menu.title);
 
 export const ORGANIZATION_VALUES = [
   "소프트융합대학",
@@ -25,7 +66,13 @@ export const ORGANIZATION_VALUES = [
 
 export const DATA_TYPES = ["csv", "xls", "xlsx", "pdf", "docx", "json"] as const;
 
-export const SORT_VALUES = ["최신순", "스크랩순", "조회순", "다운로드순"] as const;
+export const SORT_VALUES = [
+  "최신순",
+  "스크랩순",
+  "조회순",
+  "다운로드순",
+  "인기순",
+] as const;
 
 export const SERVER_PARAMS_KEY = {
   KEYWORD: "keyword",
