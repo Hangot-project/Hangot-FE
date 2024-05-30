@@ -59,7 +59,6 @@
 
 .dataCard:hover {
   border-color: #003b71;
-  border-width: 2px;
 }
 
 .dataCard > section {
