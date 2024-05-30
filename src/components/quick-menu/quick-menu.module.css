@@ -1,16 +1,8 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  width: 6.25rem;
-  height: 8.125rem;
-}
-
 .image {
   width: 70%;
   height: auto;
+
+  transition: opacity 0.2s;
 }
 
 .title {
