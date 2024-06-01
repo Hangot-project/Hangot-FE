@@ -28,7 +28,7 @@ export default function DataUpload() {
     <section className={styles.Container}>
       <div className={styles.main}>
         <header className={styles.header}>
-          <h2 className={styles.title}>공공데이터 등록</h2>
+          <h2>공공데이터 등록</h2>
         </header>
 
         {/* 공공데이터 등록 양식 */}
@@ -38,9 +38,6 @@ export default function DataUpload() {
             <div className={styles.content}>
               <div className={styles.rowTable}>
                 <table>
-                  <colgroup>
-                    <col />
-                  </colgroup>
                   <tbody>
                     {/* 공공데이터 명 */}
                     <tr>
@@ -57,7 +54,7 @@ export default function DataUpload() {
                           <input
                             type="text"
                             title="공공데이터 명칭 입력"
-                            placeholder="공공데이터의 명칭을 구체적으로 명시하여 기재합니다. (예:기상청 동네예보정보, 교육부 교육기본통계 등)"
+                            placeholder="공공데이터의 명칭을 구체적으로 명시하여 기재합니다."
                             id="inputDataName"
                             className={styles.inputText}
                             maxLength={100}
@@ -78,13 +75,10 @@ export default function DataUpload() {
                       </th>
                       <td>
                         <textarea
-                          rows={5}
-                          cols={10}
                           title="공공데이터 상세 내용 입력"
                           placeholder="공공데이터의 구체적인 내용을 상세하게 기재해주시기 바랍니다."
                           id="inputDetail"
-                          className={`${styles.inputTextArea} ${styles.dataContPlaceholder}`}
-                          style={{ height: 160 }}
+                          className={`${styles.inputTextArea}`}
                           maxLength={4000}
                           value={detailText}
                           onChange={handleDetailChange}
@@ -136,50 +130,22 @@ export default function DataUpload() {
                         </label>
                       </th>
                       <td>
-                        <div
-                          className={`${styles.inputType} ${styles.inputInsttName}`}
-                        >
+                        <div className={`${styles.inputType} ${styles.inputInsttName}`}>
                           <input
                             type="text"
                             title="기관명 입력"
                             placeholder="기관 검색 버튼을 클릭해주세요."
                             id="inputInsttName"
-                            className={`${styles.inputText} ${styles.inttName}`}
+                            className={`${styles.inputText}`}
                           />
-                          <div className={styles.insttSearchList}>
-                            <button
-                              id="insttSearchBtn"
-                              className={`${styles.button} ${styles.white} ${styles.insttSearchBtn}`}
-                              style={{ marginLeft: 0 }}
-                            >
-                              기관검색
-                            </button>
-                          </div>
                         </div>
-                      </td>
-                    </tr>
-
-                    {/* 공공데이터 제3저작권자 */}
-                    <tr>
-                      <th scope="row">
-                        <label
-                          htmlFor="inputCopyRight"
-                          className={`${styles.required} ${styles.label}`}
+                        <button
+                          id="insttSearchBtn"
+                          className={`${styles.button} ${styles.white} ${styles.insttSearchBtn}`}
+                          style={{ marginLeft: 0 }}
                         >
-                          공공데이터 제3저작권자
-                        </label>
-                      </th>
-                      <td>
-                        <div className={styles.inputType}>
-                          <input
-                            type="text"
-                            title="공공데이터 명칭 입력"
-                            placeholder="공공데이터의 제3저작권자를 명시하여 기재합니다."
-                            id="inputCopyRight"
-                            className={styles.inputText}
-                            maxLength={50}
-                          />
-                        </div>
+                        기관검색
+                        </button>
                       </td>
                     </tr>
 
@@ -233,7 +199,7 @@ export default function DataUpload() {
                         </label>
                       </th>
                       <td>
-                        <div className={styles.insttSearchList}>
+                        <div>
                           <input
                             type="file"
                             id="inputFile"

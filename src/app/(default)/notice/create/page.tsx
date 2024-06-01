@@ -16,7 +16,7 @@ export default function NewsUpload() {
     <section className={styles.Container}>
       <div className={styles.main}>
         <header className={styles.header}>
-          <h2 className={styles.title}>공지사항 등록</h2>
+          <h2>공지사항 등록</h2>
         </header>
 
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -25,9 +25,6 @@ export default function NewsUpload() {
             <div className={styles.content}>
               <div className={styles.rowTable}>
                 <table>
-                  <colgroup>
-                    <col></col>
-                  </colgroup>
                   <tbody>
                     {/* 공지사항 제목 */}
                     <tr>

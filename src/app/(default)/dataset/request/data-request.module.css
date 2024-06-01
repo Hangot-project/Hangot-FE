@@ -1,27 +1,22 @@
 .Container {
-    display: block;
-    padding-top: 3rem;
-    padding-bottom: 0.125rem;
+  display: block;
+  padding: 3rem 5rem 7rem 5rem;
 }
 
 @media (max-width: 767px) {
   .Container {
-    padding-top: 2rem;
-    padding-bottom: 12rem;
+    padding: 2rem 0 9rem 0;
   }
 }
 
 @media (max-width: 991px) {
   .Container {
-    padding-bottom: 18.375rem;
+    padding: 3rem 1rem 11rem 1rem;
   }
 }
 
 .main {
-    display: block;
-    max-width: 75rem;
-    margin: 0px auto;
-    padding: 0px 1rem;
+  display: block; 
 }
 
 @media (max-width: 767px) {
@@ -37,149 +32,87 @@
 }
 
 .header {
-    display: block;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  display: block;
+  box-sizing: border-box;
 }
 
-.header .title {
-    font-weight: 700;
-    font-size: 2rem;
-    line-height: 140%;
-    letter-spacing: -0.009em;
-    color: rgb(0, 0, 0);
+.header > h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 140%;
+  letter-spacing: -0.009em;
+  color: black
 }
 
 @media (max-width: 991px) {
-  .header .title {
+  .header > h2 {
     font-size: 1.625rem;
   }
 }
 
-.title {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
+.body {
+  margin-top: 3.5rem;
 }
 
 @media (max-width: 991px) {
-    .body {
-        margin-top: 2rem;
-    }
-}
-
-.body {
+  .body {
     margin-top: 2.5rem;
+  }
 }
 
 .contentHeader {
-    display: block;
-    width: fit-content;
-    padding-bottom: 0.4375rem;
-    font-weight: 700;
-    font-size: 1.25rem;
-    line-height: 1.8125rem;
-    color: rgb(0, 120, 255);
-    border-color: rgb(0, 120, 255);
-    letter-spacing: -0.01875rem;
-    border-bottom: 0.1875rem solid rgb(0, 120, 255);
+  display: block;
+  width: fit-content;
+  padding-bottom: 0.4375rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.8125rem;
+  color: #0078FF;
+  border-color: #0078FF;
+  letter-spacing: -0.01875rem;
+  border-bottom: 0.1875rem solid #0078FF;
 }
 
 .content {
-    border: 0.0625rem solid rgb(215, 226, 235);
-    background: rgb(255, 255, 255);
-    border-radius: 0.75rem 0.5rem 0.875rem;
-    padding: 1.25rem;
-    margin: 1.5rem 0px 0.75rem;
+  border: 0.0625rem solid #D7E2EB;
+  border-radius: 0.75rem 0.5rem 0.875rem;
+  padding: 1.75rem 3rem 1.75rem 2rem;
+  margin: 1.5rem 0px 4rem;
 }
 
 @media (max-width: 767px) {
-    .content {
-        padding: 0px 0.75rem;
-        margin-top: 1.75rem;
-    }
+  .content {
+    padding: 0px 0.75rem;
+    margin-top: 1.75rem;
+  }
+}
+
+.rowTable table {
+  display: table;
+  width: 100%;
+  box-sizing: border-box;
+  border-color: gray;
+}
+
+.rowTable table tbody tr {
+  height: 3rem;
+}
+
+.rowTable table th {
+  width: 16rem;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #e0e0e0;
+  border-width: 0 0 1px 0;
+  padding: 1.2rem 10px;
+  background-color: white;
+  font-weight: 700;
 }
 
 .required:before {
   content: "*";
   color: #D8265D;
   padding-right: 5px;
-}
-
-.rowTable {
-  margin-bottom: 20px;
-}
-
-.rowTable table {
-  display: table;
-  border-collapse: separate;
-  box-sizing: border-box;
-  text-indent: initial;
-  border-spacing: 2px;
-  border-color: gray;
-}
-
-@media (max-width: 1024px) {
-  .rowTable table {
-      display: block;
-
-      width: 100%;
-      margin: 0;
-      border: 0;
-      border-collapse: collapse;
-      empty-cells: show;
-  }
-}
-
-.rowTable table colgroup {
-  display: table-column-group;
-}
-
-.rowTable table colgroup col {
-  display: table-column;
-}
-
-.rowTable table tbody {
-  display: table-row-group;
-}
-
-@media (max-width: 1024px) {
-  .rowTable table tbody {
-      display: block;
-  }
-}
-
-.rowTable table tbody tr {
-  display: table-row;
-}
-
-.rowTable table th {
-  height: 43px;
-  text-align: left;
-  vertical-align: top;
-  border: 1px solid #e0e0e0;
-  border-width: 0 0 1px 0;
-
-  padding: 10px 10px;
-  background-color: #fff;
-  font-weight: 700;
-}
-
-@media (max-width: 1024px) {
-  .rowTable table tbody tr th, 
-  .rowTable table tbody tr td {
-      display: block;
-      display: block;
-      height: auto;
-      padding: 5px 0 0 0;
-      text-align: left;
-      border: 0;
-  }
 }
 
 .rowTable table .label {
@@ -190,121 +123,78 @@
 }
 
 .rowTable table td {
-  height: 43px;
+  width: auto;
   text-align: left;
   vertical-align: top;
   border: 1px solid #e0e0e0;
   border-width: 0 0 1px 0;
-  padding: 10px 10px;
+  padding: 1.2rem 0;
 }
 
 @media (max-width: 1024px) {
   .rowTable table tbody tr td {
-      padding: 5px 0;
-      border-bottom: 1px solid #e0e0e0;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
   }
 }
 
-.rowTable table th:last-child,
-.rowTable table td:last-child {
-  padding-right: 0;
+.rowTable table tbody tr:last-child th,
+.rowTable table tbody tr:last-child td {
+  border-width: 0 0 0 0;
+}
+
+.inputType {
+  position: relative;
+  display: inline-block;
+  width: 30rem;
+}
+
+.inputName,
+.inputBirth {
+  width: 15rem;
+}
+
+.inputTelNum,
+.inputEmail {
+  width: 21.25rem;
+}
+
+.inputDataName {
+  width: 30.75rem;
+  margin-right: 0.75rem;
+}
+
+.inputInsttName {
+  display: inline-block;
+  width: 20rem;
+  margin-right: 0.75rem;
 }
 
 .inputText {
   display: inline-block;
   width: 100%;
-  height: 40px;
-  padding: 0 10px;
+  height: 3rem;
+  padding: 0 1rem;
   border: 1px solid #ccc;
   vertical-align: middle;
   text-align: left;
   outline: 0;
 }
 
-.inputExtext {
-  position: relative;
-  padding-right: 100px;
+.warningText {
+  display: block;
+  margin: 0.875rem 0;
+  color: #C24E01;
 }
 
-.inputExtext .exText {
+.exText {
   display: inline-block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  line-height: 40px;
-}
-
-.inputType {
-  position: relative;
-  display: inline-block;
-  margin-right: 10px;
-  padding-right: 110px;
-  width: 870px !important;
-}
-
-@media (max-width: 1024px) {
-  .inputType {
-      position: relative;
-      margin-right: 0;
-  }
-}
-
-.button {
-    overflow: hidden;
-    display: inline-block;
-    min-width: 100px;
-    height: 40px;
-    margin: 0;
-    padding: 0 20px;
-    line-height: 37px;
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    border: 1px solid #3671c8;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    background-color: #3671c8;
-}
-
-.inputType .button {
-  position: absolute;
-  width: 100px;
-  top: 0;
-  right: 0;
-  padding: 0 5px;
-  min-width: auto;
-}
-
-.button.white {
-  color: #333;
-  border: 1px solid #999;
-  background-color: #fff;
-}
-
-@media (max-width: 1024px) {
-  .inputType .button {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0 5px;
-  }
-}
-
-.inputInsttName {
-  width: 450px !important;
-  margin-bottom: 10px;
-  margin-right: 100px !important;
-}
-
-.insttSearchList {
-  margin-top: 10px;
+  margin-left: 1.5rem;
 }
 
 .inputTextArea {
   width: 100%;
-  height: 200px !important;
+  height: 12.5rem;
   border: 1px solid #ccc;
   padding: 10px;
   vertical-align: middle;
@@ -313,66 +203,85 @@
   outline: 0;
 }
 
-.dataContPlaceholder {
-  color: gray;
+.charCount {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
 
 .selection {
-  max-width: 200px;
-  height: 40px;
+  width: 12.5rem;
+  height: 3rem;
   padding: 0 0 0 5px;
   border: 1px solid #ccc;
-  font-family: inherit;
-  border-radius: 0;
   vertical-align: middle;
 }
 
 .selection option {
-  font-weight: normal;
   display: block;
   min-height: 1.2em;
   padding: 0px 2px 1px;
   white-space: nowrap;
 }
 
-.requestBtnText {
+.button {
+  display: inline-block;
+  min-width: 6.25rem;
+  padding: 0 20px;
+  line-height: 37px;
+  color: white;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  border-radius: 4px;
   text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
-.requestText1 {
-  margin: 0;
-  padding: 0;
+.button.white {
+  color: #333;
+  border: 1px solid #999;
+  background-color: #fff;
 }
 
-.requestText2 {
-  margin: 0;
-  padding: 0;
-  margin-top: 10px;
+.button.white:hover {
+  color: white;
+  border: 1px solid #0078FF;
+  background-color: #0078FF;
+}
+
+.SearchBtn {
+  width: 9rem;
+  height: 3rem;
+}
+
+.fileContainer {
+  display: inline-block;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.fileName {
+  margin-left: 5px;
+  font-size: 0.875rem;
+  color: #555;
 }
 
 .requestBtn {
-  margin: 30px 0 0;
-  text-align: center !important;
+  margin: 1.875rem 0 0;
+  text-align: center;
 }
 
 .gray {
   color: #fff;
   border: 1px solid #555555;
   background-color: #555555;
-
   margin: 0 2px;
 }
 
 .blue {
   color: #fff;
-  border: 1px solid #0066FF;
-  background-color: #0066FF;
-
+  border: 1px solid #0066ff;
+  background-color: #0066ff;
   margin: 0 2px;
-}
-
-.charCount {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
 }

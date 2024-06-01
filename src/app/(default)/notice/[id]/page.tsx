@@ -1,45 +1,17 @@
 "use client";
 
-import styles from "./notice-detail.module.css";
+import NoticeDetail from "./notice-detail";
 
-export default function News() {
+export default function Page() {
+  const contentHeader = "개인정보 처리방침 개정 안내.";
+  const Date = "2024년 05월 30일"
+  const contentBody = "2024년 6월 1일부터 하이데이터 개인정보 처리방침이 아래와 같이 개정될 예정이니 이용에 참고하여 주시기 바랍니다.\n이번 개정은 사용자 여러분의 개인정보 보호를 강화하고, 서비스 이용 경험을 개선하기 위해 이루어집니다. \n\n주요 변경 사항은 다음과 같습니다.\n\n첫째, 개인정보 수집 항목의 추가 및 변경입니다. 서비스 제공을 위해 필요한 최소한의 정보를 수집하는 원칙을 유지하되, 일부 서비스 기능 향상을 위해 추가 정보가 요청될 수 있습니다.\n\n둘째, 개인정보 보관 기간의 명확화입니다. 개인정보는 원칙적으로 이용 목적이 달성된 후 지체 없이 파기되며, 법령에 따라 일정 기간 보관이 필요한 정보는 별도로 안전하게 관리됩니다.\n\n셋째, 제3자 제공에 관한 사항입니다. 하이데이터는 원칙적으로 이용자의 동의 없이 개인정보를 외부에 제공하지 않습니다. 다만, 새로운 서비스 연동 및 기능 확장을 위해 신뢰할 수 있는 파트너사와의 데이터 공유가 불가피한 경우, 사전에 이용자에게 명확히 고지하고 동의를 받을 예정입니다.\n\n넷째, 개인정보 보호를 위한 기술적 및 관리적 조치 강화입니다. 하이데이터는 최신 보안 기술을 적용하고, 내부 관리 체계를 개선하여 이용자의 개인정보를 안전하게 보호할 것입니다.\n\n이번 개정된 개인정보 처리방침은 하이데이터 웹사이트 및 앱을 통해 확인하실 수 있으며, 궁금하신 사항은 고객센터로 문의해 주시기 바랍니다.\n\n앞으로도 하이데이터는 더욱 안전하고 신뢰할 수 있는 서비스를 제공하기 위해 최선을 다하겠습니다."
+
   return (
-    <section className={styles.Container}>
-      <div className={styles.main}>
-        <header className={styles.header}>
-          <h2 className={styles.title}>공지사항</h2>
-        </header>
-        <div className={styles.body}>
-          <div className={styles.contentHeader}>개인정보 처리방침 개정 안내</div>
-          <div className={styles.content}>
-            <div className={styles.article_body}>
-              <div className={styles.body1}>
-                <p>안녕하세요. HY-DATA 운영팀입니다.</p>
-                <p>
-                  HY-DATA (하이데이터)를 이용해 주시는 여러분께 항상 감사드립니다.
-                </p>{" "}
-                <br />
-                <p>
-                  2024년 5월 4일부터 하이데이터 개인정보 처리방침이 아래와 같이
-                  개정될 예정이니 이용에 참고하여 주시기 바랍니다.
-                </p>{" "}
-                <br />
-              </div>
-              <div className={styles.body2}>
-                <p className={styles.text}>
-                  <strong> ◾&nbsp;</strong>
-                  <strong>개정 사유 : </strong>
-                  하이데이터와 카카오의 간편 인증 통합을 위해 아래 내용을 개정함
-                </p>
-              </div>
-              <div className={styles.body3}>
-                <p>감사합니다.</p>
-                <p>하이데이터 팀 드림</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <NoticeDetail 
+      contentHeader={contentHeader} 
+      Date={Date}
+      contentBody={contentBody} 
+    />
   );
 }

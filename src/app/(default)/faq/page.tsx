@@ -79,7 +79,7 @@ export default function FAQ() {
             {selectedCategory}
           </p>
         </div>
-        <ul className={`${styles.accordions} ${styles.list}`}>
+        <ul className={`${styles.list}`}>
           {faqData[selectedCategory].map((item, index) => (
             <Accordion key={index} title={item.title} content={item.content} />
           ))}
