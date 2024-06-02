@@ -16,7 +16,7 @@
 }
 
 .main {
-  display: block; 
+  display: block;
 }
 
 @media (max-width: 767px) {
@@ -41,7 +41,7 @@
   font-size: 2rem;
   line-height: 140%;
   letter-spacing: -0.009em;
-  color: black
+  color: black;
 }
 
 @media (max-width: 991px) {
@@ -67,14 +67,14 @@
   font-weight: 700;
   font-size: 1.25rem;
   line-height: 1.8125rem;
-  color: #0078FF;
-  border-color: #0078FF;
+  color: #0078ff;
+  border-color: #0078ff;
   letter-spacing: -0.01875rem;
-  border-bottom: 0.1875rem solid #0078FF;
+  border-bottom: 0.1875rem solid #0078ff;
 }
 
 .content {
-  border: 0.0625rem solid #D7E2EB;
+  border: 0.0625rem solid #d7e2eb;
   border-radius: 0.75rem 0.5rem 0.875rem;
   padding: 1.75rem 3rem 1.75rem 2rem;
   margin: 1.5rem 0px 4rem;
@@ -178,6 +178,7 @@
 }
 
 .selection {
+  display: block;
   width: 12.5rem;
   height: 3rem;
   padding: 0 0 0 5px;
@@ -220,11 +221,12 @@
 
 .button.white:hover {
   color: white;
-  border: 1px solid #0078FF;
-  background-color: #0078FF;
+  border: 1px solid #0078ff;
+  background-color: #0078ff;
 }
 
 .insttSearchBtn {
+  cursor: pointer;
   width: 8rem;
   height: 3rem;
 }
