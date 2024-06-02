@@ -13,6 +13,9 @@ export async function getAllNotice(filter: NoticeParam): Promise<NoticeResult> {
 
     const response: NoticesResponse = await fetch(
       `${SERVER_API}/api/notices?${params.toString()}`,
+      {
+        cache: "no-cache",
+      },
     ).then((res) => res.json());
 
     if (!response.success) {
