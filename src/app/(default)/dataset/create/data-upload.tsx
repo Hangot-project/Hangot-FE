@@ -117,7 +117,7 @@ export default function DataUpload({
     }
 
     const selectedThemeList = themeSelectorRef.current
-      .filter((el) => el.value)
+      .filter((el) => el?.value)
       .map((el) => el.value);
 
     if (selectedThemeList.length === 0) {
