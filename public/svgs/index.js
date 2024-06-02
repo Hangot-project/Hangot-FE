@@ -50,6 +50,7 @@ import MenuFinance from "./menu_finance.svg"
 import MenuEmploy from "./menu_employ.svg";
 import MenuStudy from "./menu_study.svg";
 import MenuGraduate from "./menu_graduate.svg";
+import UpdatedDate from "./updated_date.svg";
 
 export {
   SymbolLogo,
@@ -89,6 +90,7 @@ export {
   PlusToggle,
   MinusToggle,
   ScreenClose,
+  UpdatedDate,
 };
 export {  
   MenuSchool, 

@@ -1,6 +1,6 @@
 "use client";
 
-import { notFound, usePathname, useSearchParams } from "next/navigation";
+import { notFound, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { QuestionListResult } from "../../../shared/api/question/type";
 import { useCallback } from "react";
 import { getPageArray, updateQueryString } from "../../../utils";
@@ -9,6 +9,7 @@ import { PostListCard } from "../../../components";
 import Image from "next/image";
 import { NextButton, PreviousButton } from "../../../../public/svgs";
 import styles from "./question-list.module.css";
+import { SimpleButton } from "../../../components/simple-button/simple-button";
 
 interface Props {
   result: QuestionListResult;
@@ -18,9 +19,15 @@ interface Props {
 export function QuestionList({ result, initPage }: Props) {
   if (result === null) return notFound();
 
+  const router = useRouter();
+
   const page = initPage ? initPage : 0;
   const pathName = usePathname();
   const searchParams = useSearchParams();
+
+  const handleWriteClick = useCallback(() => {
+    router.push("qna/create");
+  }, []);
 
   const updateQuery = useCallback(
     (type: "create" | "append" | "remove", name: string, value?: any) => {
@@ -46,6 +53,7 @@ export function QuestionList({ result, initPage }: Props) {
         {/* //* 검색결과 수 & 정렬 */}
         <div className={styles.filterContainer}>
           <p>{result.totalElement.toLocaleString()}개의 질문</p>
+          <SimpleButton onClick={handleWriteClick} isActive={true} text="작성하기" />
         </div>
 
         {/* //* 검색 결과 리스트 */}
@@ -54,7 +62,7 @@ export function QuestionList({ result, initPage }: Props) {
             <div key={index}>
               <Link href={`/qna/${question.questionId}`}>
                 <PostListCard
-                  id={question.questionId}
+                  id={index + 1}
                   title={question.title}
                   date={question.createDate}
                 />

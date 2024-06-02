@@ -126,7 +126,7 @@ const HeaderWrapper = styled.div`
 const MenuWrapper = styled.ul`
   width: 46rem;
   height: 100%;
-  margin-left: auto;
+  margin-left: 5rem;
   display: table;
   table-layout: fixed;
 `;

@@ -100,7 +100,7 @@
 }
 
 .accordionBody {
-  transition: none !important;
+  transition: none;
 }
 
 .accordion .accordion-header + .accordionBody {
