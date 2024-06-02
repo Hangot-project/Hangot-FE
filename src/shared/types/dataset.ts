@@ -61,3 +61,11 @@ export interface DatasetInfoBanner {
   themeList: ThemeType[];
   scrap: number;
 }
+
+export type CreateDatasetBody = {
+  title: string;
+  description: string;
+  organization: string;
+  license: string;
+  theme: string[];
+};

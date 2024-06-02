@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
-import React, { MouseEventHandler } from "react";
+import React, { CSSProperties, MouseEventHandler } from "react";
 
 interface Props {
   isActive: boolean;
   text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  style?: CSSProperties;
 }
 
-export function SimpleButton({ onClick, isActive, text }: Props) {
+export function SimpleButton({ onClick, isActive, text, style }: Props) {
   return (
-    <Container onClick={onClick} isActive={isActive}>
+    <Container style={style} onClick={onClick} isActive={isActive}>
       {text}
     </Container>
   );
