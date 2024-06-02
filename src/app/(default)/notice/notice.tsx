@@ -55,7 +55,7 @@ export function Notice({
             <div key={index}>
               <Link href={`/notice/${notice.noticeId}`}>
                 <PostListCard
-                  id={notice.noticeId}
+                  id={index + 1}
                   title={notice.title}
                   date={notice.createDate}
                 />
