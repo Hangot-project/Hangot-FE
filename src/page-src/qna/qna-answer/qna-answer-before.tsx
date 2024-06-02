@@ -3,12 +3,12 @@
 import { FormEvent, useState } from "react";
 import styles from "./qna-answer.module.css";
 import Image from "next/image";
-import { UpdatedDate } from "../../../../../public/svgs";
+import { UpdatedDate } from "../../../../public/svgs";
 
 export default function QAnswerB({ contentHeader, questionDate, questionBody }) {
   const [answer, setAnswer] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const formattedquestionBody = questionBody.split('\n').map((line, index) => (
+  const formattedquestionBody = questionBody.split("\n").map((line, index) => (
     <p key={index}>
       {line}
       <br />
@@ -32,25 +32,24 @@ export default function QAnswerB({ contentHeader, questionDate, questionBody }) 
 
         {/* 사용자 문의 내용 */}
         <div className={styles.body}>
-        
           {/* 문의 제목, 등록 날짜, 관리자 답변 버튼 */}
           <div className={styles.contentHeader}>
             <div>
-                <div className={styles.title}>{contentHeader}</div>
-                <div className={styles.date}>
-                    <Image alt="등록 날짜" src={UpdatedDate} width={20} height={20} />
-                    <p>Updated : {questionDate}</p>
-                </div>
+              <div className={styles.title}>{contentHeader}</div>
+              <div className={styles.date}>
+                <Image alt="등록 날짜" src={UpdatedDate} width={20} height={20} />
+                <p>Updated : {questionDate}</p>
+              </div>
             </div>
             <div className={styles.answerBtn}>
-                <button
-                  type="button"
-                  id="answerForm"
-                  className={`${styles.button} ${styles.blue}`}
-                  onClick={handleFormVisible}
-                >
-                {isFormVisible ? '등록하기' : '답변하기'}
-                </button>
+              <button
+                type="button"
+                id="answerForm"
+                className={`${styles.button} ${styles.blue}`}
+                onClick={handleFormVisible}
+              >
+                {isFormVisible ? "등록하기" : "답변하기"}
+              </button>
             </div>
           </div>
 
