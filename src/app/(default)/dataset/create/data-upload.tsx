@@ -142,7 +142,7 @@ export default function DataUpload({
 
     if (response.ok) {
       alert(`등록되었습니다.`);
-      router.push("/search-result");
+      return router.push("/search-result");
     }
 
     alert(`죄송합니다, 오류가 발생하여 등록에 실패했습니다. 다시 시도해주세요.`);
