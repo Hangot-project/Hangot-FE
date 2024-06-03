@@ -13,6 +13,7 @@ interface Props {
   defaultText?: string;
   style?: CSSProperties;
   width?: string | number;
+  maxHeight?: string;
 }
 
 export const SearchSortDropdown = ({
@@ -22,6 +23,7 @@ export const SearchSortDropdown = ({
   defaultText,
   style,
   width,
+  maxHeight = "20rem",
 }: Props) => {
   const dropdownRef = useRef(null);
 
@@ -60,7 +62,10 @@ export const SearchSortDropdown = ({
       </div>
 
       {isActive && (
-        <ul className={styles.listContainer} style={{ width: itemsWidth }}>
+        <ul
+          className={styles.listContainer}
+          style={{ width: itemsWidth, maxHeight: maxHeight, overflowY: "scroll" }}
+        >
           {items?.length ? (
             items.map((value, index) => (
               <li
