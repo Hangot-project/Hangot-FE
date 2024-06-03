@@ -148,8 +148,7 @@ export default function SearchResult({
       {/* //TODO */}
       <SearchBox
         boxstyle={{
-          marginTop: "3.75rem",
-          marginBottom: "6rem",
+          margin: "3.75rem 8rem 6rem 8rem",
         }}
         handleSubmit={handleSearchSubmit}
         initKeyword={searchParams.get(SERVER_PARAMS_KEY.KEYWORD)}
