@@ -1,5 +1,5 @@
 import { CreateDatasetBody } from "../../types/dataset";
-import { SERVER_API } from "../config";
+import { DATASET_API, SERVER_API } from "../config";
 import { CreateDatasetResponse } from "./type";
 
 type Props = {
@@ -50,6 +50,10 @@ export async function createDataset({ grantType, token, body, file }: Props) {
         body: formData,
       },
     );
+
+    await fetch(`${DATASET_API}/${res.result.datasetId}/resource/table`, {
+      method: "POST",
+    });
 
     return fileResponse;
   } catch (error) {
