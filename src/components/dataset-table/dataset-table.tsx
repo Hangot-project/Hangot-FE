@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { DatasetTableType } from "../../shared/types/dataset";
 import styles from "./dataset-table.module.css";
 import { getDatasetTable } from "../../shared/api/dataset-visual/getDatasetTable";
+import styled from "@emotion/styled";
 
 interface Props {
   datasetId: number;
@@ -31,28 +32,34 @@ export function DatasetTable({ datasetId }: Props) {
   return (
     <>
       {dataset && (
-        <table className={styles.table}>
-          <colgroup>
-            {new Array(dataset.label.length).fill(0).map((value, index) => (
-              <col key={`cg${index}`} width={`${colWidthPercent}%`} />
-            ))}
-          </colgroup>
-          {/* 1번 행 - 라벨 표시 */}
-          <tr>
-            {dataset.label.map((label, index) => (
-              <th key={index}>{label}</th>
-            ))}
-          </tr>
-          {/* 데이터 표시 영역 */}
-          {dataset.dataList.map((_, index) => (
-            <tr key={`row${index}`}>
-              {dataset.dataList[index].map((value, index) => (
-                <td key={`col${index}`}>{value}</td>
+        <Wrapper>
+          <table className={styles.table}>
+            <colgroup>
+              {new Array(dataset.label.length).fill(0).map((value, index) => (
+                <col key={`cg${index}`} width={`${colWidthPercent}%`} />
+              ))}
+            </colgroup>
+            {/* 1번 행 - 라벨 표시 */}
+            <tr>
+              {dataset.label.map((label, index) => (
+                <th key={index}>{label}</th>
               ))}
             </tr>
-          ))}
-        </table>
+            {/* 데이터 표시 영역 */}
+            {dataset.dataList.map((_, index) => (
+              <tr key={`row${index}`}>
+                {dataset.dataList[index].map((value, index) => (
+                  <td key={`col${index}`}>{value}</td>
+                ))}
+              </tr>
+            ))}
+          </table>
+        </Wrapper>
       )}
     </>
   );
 }
+
+const Wrapper = styled.div`
+  overflow-x: scroll;
+`;
