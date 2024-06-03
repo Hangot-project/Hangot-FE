@@ -120,13 +120,12 @@ const HeaderWrapper = styled.div`
   margin-top: 0.906rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const MenuWrapper = styled.ul`
   width: 46rem;
   height: 100%;
-  margin-left: 5rem;
   display: table;
   table-layout: fixed;
 `;

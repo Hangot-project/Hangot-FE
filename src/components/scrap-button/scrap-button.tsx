@@ -32,6 +32,11 @@ export function ScrapButton({
       return router.push("/login");
     }
 
+    if (session.user.role === "ROLE_ADMIN") {
+      alert("관리자는 이용할 수 없는 서비스입니다.");
+      return;
+    }
+
     const func = like ? deleteScrap : createScrap;
 
     const response = await func(
@@ -59,7 +64,9 @@ export function ScrapButton({
         },
       );
     }
-    fetchLike();
+    if (status === "authenticated" && session.user.role === "ROLE_USER") {
+      fetchLike();
+    }
   }, []);
 
   return (
