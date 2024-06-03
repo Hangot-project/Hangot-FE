@@ -11,36 +11,28 @@ import {
   TableActive,
   TableInactive,
 } from "../../../public/svgs";
-import { getDatasetAxis } from "../../shared/api/dataset-visual/getDatasetAxis";
 import { SearchSortDropdown } from "../drop-down/search-sort-dropdown";
+import styled from "@emotion/styled";
+import { DatasetAxisResult } from "../../shared/api/dataset-visual/type";
 
 export function DatasetViewer({
   datasetId,
+  axisResult,
   title,
   style,
 }: {
   datasetId: number;
+  axisResult: DatasetAxisResult;
   title: string;
   style?: CSSProperties;
 }) {
   const [isBarActive, setIsBarActive] = useState<boolean>(true);
-  const [axis, setAxis] = useState<string[]>([]);
   const [selectedAxis, setSelectedAxis] = useState<string>("");
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await getDatasetAxis(datasetId);
-
-      if (result === null) {
-        alert(`데이터 시각화 정보를 불러오는데 실패했습니다.`);
-        return;
-      }
-
-      setAxis(result.axis);
-      setSelectedAxis(result.axis[0]);
+    if (axisResult !== null) {
+      setSelectedAxis(axisResult.axis[0]);
     }
-
-    fetchData();
   }, []);
 
   //* 데이터 시각화 선택 버튼
@@ -105,9 +97,9 @@ export function DatasetViewer({
             display: "flex",
           }}
         >
-          {isBarActive && (
+          {axisResult !== null && isBarActive && (
             <SearchSortDropdown
-              items={axis}
+              items={axisResult.axis}
               selectedItem={selectedAxis}
               setSelectedItem={setSelectedAxis}
               width={"20rem"}
@@ -121,11 +113,29 @@ export function DatasetViewer({
       </div>
 
       {/* //* 그래프 */}
-      {isBarActive ? (
-        <BarChart datasetId={datasetId} colName={selectedAxis} />
-      ) : (
-        <DatasetTable datasetId={datasetId} />
+      {axisResult !== null &&
+        (isBarActive ? (
+          <BarChart datasetId={datasetId} colName={selectedAxis} />
+        ) : (
+          <DatasetTable datasetId={datasetId} />
+        ))}
+
+      {axisResult === null && (
+        <SuccessFailContainer>
+          <SuccessFailTitle>
+            ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
+          </SuccessFailTitle>
+        </SuccessFailContainer>
       )}
     </div>
   );
 }
+
+const SuccessFailContainer = styled.div`
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SuccessFailTitle = styled.h1``;

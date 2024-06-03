@@ -1,10 +1,14 @@
 import { DatasetTypeIcon, DatasetViewer, ScrapButton } from "../../../../components";
+import { getDatasetAxis } from "../../../../shared/api/dataset-visual/getDatasetAxis";
 import { getDatasetDetail } from "../../../../shared/api/dataset/getDatasetDetail";
 import styles from "./detail.module.css";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const datasetId = parseInt(params.id);
   const datasetDetail = await getDatasetDetail(datasetId);
+  const axisResult = await getDatasetAxis(datasetId);
+
+  const datasetExtension = datasetDetail.type;
 
   return (
     <div className={styles.root}>
@@ -68,8 +72,9 @@ export default async function Page({ params }: { params: { id: string } }) {
         <tr>
           <th>라이선스</th>
           <td colSpan={3}>
-            저작권자표시(BY) : 이용이나 변경 및 2차적 저작물의 작성을 포함한
-            자유이용을 허락합니다.
+            {/* 저작권자표시(BY) : 이용이나 변경 및 2차적 저작물의 작성을 포함한
+            자유이용을 허락합니다. */}
+            {datasetDetail.license}
           </td>
         </tr>
       </table>
@@ -86,13 +91,26 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <div className={styles.divisionLine} />
 
-      <DatasetViewer
-        datasetId={datasetDetail.datasetId}
-        title={datasetDetail.title}
-        style={{
-          marginTop: "3rem",
-        }}
-      />
+      {datasetExtension === "pdf" ? (
+        <embed
+          // src={`${datasetDetail.resourceUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+          src={`${datasetDetail.resourceUrl}`}
+          type="application/pdf"
+          style={{
+            width: "100%",
+            height: "50rem",
+          }}
+        />
+      ) : (
+        <DatasetViewer
+          datasetId={datasetDetail.datasetId}
+          axisResult={axisResult}
+          title={datasetDetail.title}
+          style={{
+            marginTop: "3rem",
+          }}
+        />
+      )}
     </div>
   );
 }
