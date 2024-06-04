@@ -10,7 +10,13 @@
   display: flex;
 }
 
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
+@media screen and (max-width: 680px) {
+  .container {
+    padding: 2.75rem 2.5rem;
+  }
+}
+
+@media screen and (min-width: 681px) and (max-width: 1919px) {
   .container {
     padding: 2.75rem 12rem;
   }
