@@ -114,7 +114,7 @@ export function DatasetViewer({
 
       {/* //* 그래프 */}
       {axisResult !== null &&
-        (isBarActive ? (
+        (isBarActive && selectedAxis ? (
           <BarChart datasetId={datasetId} colName={selectedAxis} />
         ) : (
           <DatasetTable datasetId={datasetId} />
