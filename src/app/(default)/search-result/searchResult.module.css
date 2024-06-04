@@ -17,6 +17,18 @@
   font-size: 0.875rem;
 }
 
+.searchBox {
+  margin: 3.75rem 8rem 6rem 8rem;
+}
+
+@media screen and (max-width: 768px) {
+  .searchBox {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
 .keywordTitle {
   font-size: 1.5rem;
   font-family: "NotoSansBold";

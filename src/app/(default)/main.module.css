@@ -14,6 +14,12 @@
   height: 24rem;
 }
 
+@media screen and (max-width: 768px) {
+  .main > img {
+    display: none;
+  }
+}
+
 .info_heading {
   font-family: "NotoSansMedium";
 
@@ -60,16 +66,28 @@
   grid-template-columns: repeat(9, 1fr);
   gap: 3px;
 
-  margin-bottom: 150px;
+  margin-bottom: 9.375rem;
+}
+
+@media screen and (max-width: 768px) {
+  .menuGrid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .menuGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .databoardGrid {
   display: grid;
-  gap: 140px;
+  gap: 8.75rem;
 
   max-width: 1200px;
-  padding: 0 20px;
-  padding-bottom: 100px;
+  padding: 0 1.25rem;
+  padding-bottom: 6.25rem;
   margin: 0 auto;
   overflow-x: hidden;
 }

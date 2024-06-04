@@ -87,6 +87,7 @@ export function DatasetViewer({
           display: "flex",
           justifyContent: "space-between",
           marginBottom: "2.5rem",
+          flexWrap: "wrap",
         }}
       >
         {/* //? 제목 */}
