@@ -42,8 +42,22 @@
 
 .dataBoard {
   display: grid;
-  gap: 32px;
+  gap: 2rem;
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 1024px) {
+  .dataBoard {
+    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dataBoard {
+    gap: 4rem;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .dataCard {
