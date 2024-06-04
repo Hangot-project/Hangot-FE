@@ -42,13 +42,15 @@ export function DataBoard({ title, url, dataList }: Props) {
               <div>
                 <h3 className={styles.dataTitle}>{dataset.title}</h3>
                 <LabelGroup>
-                  <TypeContainer
-                    color={hexToRgba(colorMatch[dataset.type.toUpperCase()], 0.2)}
-                  >
-                    <TypeText color={colorMatch[dataset.type.toUpperCase()]}>
-                      {dataset.type.toUpperCase()}
-                    </TypeText>
-                  </TypeContainer>
+                  {dataset.type && (
+                    <TypeContainer
+                      color={hexToRgba(colorMatch[dataset.type.toUpperCase()], 0.2)}
+                    >
+                      <TypeText color={colorMatch[dataset.type.toUpperCase()]}>
+                        {dataset.type.toUpperCase()}
+                      </TypeText>
+                    </TypeContainer>
+                  )}
                   {dataset.themeList.map((theme, index) => (
                     <TypeContainer
                       key={index}
