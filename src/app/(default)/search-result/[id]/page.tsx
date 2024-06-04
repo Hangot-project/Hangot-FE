@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <div className={styles.basicInfoContainer}>
           <div className={styles.titleContainer}>
             <h1 className={styles.title}>{datasetDetail.title}</h1>
-            <DatasetTypeIcon type={datasetDetail.type} />
+            {datasetDetail.type && <DatasetTypeIcon type={datasetDetail.type} />}
           </div>
           <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
         </div>
