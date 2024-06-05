@@ -1,3 +1,5 @@
+"use client";
+
 import styled from "@emotion/styled";
 
 import { Dispatch, SetStateAction, useState } from "react";
@@ -11,7 +13,7 @@ interface Props {
 }
 
 export function Admin({ setMenu }: Props) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const [selectedPopup, setSelectedPopup] = useState(null);
 
@@ -35,7 +37,7 @@ export function Admin({ setMenu }: Props) {
         <div className={styles.pwInfo}>
           <div className={styles.idInfo}>
             <div>
-              <p>{session.user.name}</p>
+              <p>{status === "authenticated" ? `${session.user.name}` : ""}</p>
             </div>
             <div>
               <button onClick={() => setMenu("데이터 다운로드 목록")}>
