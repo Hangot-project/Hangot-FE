@@ -1,15 +1,20 @@
+"use client";
+
 import styled from "@emotion/styled";
 
 import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./admin.module.css";
 import Nickname from "./nickname/nickname";
 import Password from "./password/password";
+import { useSession } from "next-auth/react";
 
 interface Props {
   setMenu?: Dispatch<SetStateAction<string>>;
 }
 
 export function Admin({ setMenu }: Props) {
+  const { data: session, status } = useSession();
+
   const [selectedPopup, setSelectedPopup] = useState(null);
 
   const handleNameChangeClick = () => {
@@ -32,9 +37,7 @@ export function Admin({ setMenu }: Props) {
         <div className={styles.pwInfo}>
           <div className={styles.idInfo}>
             <div>
-              <p>이정민</p>
-              <p>님</p>
-              <p>dalnimjm@naver.com</p>
+              <p>{status === "authenticated" ? `${session.user.name}` : ""}</p>
             </div>
             <div>
               <button onClick={() => setMenu("데이터 다운로드 목록")}>
