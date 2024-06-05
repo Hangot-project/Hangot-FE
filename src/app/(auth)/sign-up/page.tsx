@@ -21,7 +21,7 @@ export default function SignUp() {
 
   const [email, setEmail] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
-  const [verified, setVerified] = useState<boolean>(true);
+  const [verified, setVerified] = useState<boolean>(false);
   const validFormEmail = email !== "" && emailRegex.test(email);
   const emailMessage = validFormEmail ? "" : `이메일 형식이 올바르지 않습니다.`;
 
