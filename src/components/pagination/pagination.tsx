@@ -46,7 +46,7 @@ export function Pagination({
         >
           <Image src={PreviousButton} alt="이전 페이지 버튼" />
         </Link>
-        {getPageArray(currentPage, totalPage).map((num, index) => (
+        {getPageArray(currentPage, totalPage).map((num) => (
           <Link
             href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
             key={`page${num}`}

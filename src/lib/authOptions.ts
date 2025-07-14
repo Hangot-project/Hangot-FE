@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
         isAuto: { label: "isAuto" },
       },
 
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const _user = { id: credentials.username, name: credentials.username };
 
         // * 소셜 로그인

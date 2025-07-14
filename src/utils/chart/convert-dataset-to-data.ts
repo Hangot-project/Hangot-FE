@@ -1,7 +1,6 @@
 "use client";
 
 import { ChartData } from "chart.js";
-import _ from "lodash";
 import { DatasetChartType } from "../../shared/types/dataset";
 
 /**

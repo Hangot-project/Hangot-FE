@@ -64,7 +64,6 @@ export function SimpleDatasetCard({
         <div>
           <p>생성 일자:{createDate}</p>
         </div>
-
       </div>
 
       <div className={styles.hoverContainer}>

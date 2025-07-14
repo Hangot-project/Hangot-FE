@@ -64,7 +64,16 @@ export const ORGANIZATION_VALUES = [
   "입학처",
 ] as const;
 
-export const DATA_TYPES = ["csv", "xls", "xlsx", "pdf", "docx", "json","jpeg","png"] as const;
+export const DATA_TYPES = [
+  "csv",
+  "xls",
+  "xlsx",
+  "pdf",
+  "docx",
+  "json",
+  "jpeg",
+  "png",
+] as const;
 
 export const SORT_VALUES = [
   "최신순",

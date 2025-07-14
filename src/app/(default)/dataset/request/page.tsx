@@ -123,7 +123,7 @@ export default function DataRequest() {
                             id="inputEmail"
                             className={styles.inputText}
                             maxLength={50}
-                            value={'dalnimjm@naver.com'}
+                            value={"dalnimjm@naver.com"}
                             readOnly
                           />
                         </div>
@@ -150,7 +150,9 @@ export default function DataRequest() {
                         </label>
                       </th>
                       <td>
-                        <div className={`${styles.inputType} ${styles.inputDataName}`}>
+                        <div
+                          className={`${styles.inputType} ${styles.inputDataName}`}
+                        >
                           <input
                             type="text"
                             title="공공데이터 명칭 입력"
@@ -164,7 +166,7 @@ export default function DataRequest() {
                           type="button"
                           className={`${styles.button} ${styles.white} ${styles.SearchBtn}`}
                         >
-                        개방여부 확인
+                          개방여부 확인
                         </button>
                       </td>
                     </tr>
@@ -180,7 +182,9 @@ export default function DataRequest() {
                         </label>
                       </th>
                       <td>
-                        <div className={`${styles.inputType} ${styles.inputInsttName}`}>
+                        <div
+                          className={`${styles.inputType} ${styles.inputInsttName}`}
+                        >
                           <input
                             type="text"
                             title="기관명 입력"
@@ -194,7 +198,7 @@ export default function DataRequest() {
                           id="insttSearchBtn"
                           className={`${styles.button} ${styles.white} ${styles.SearchBtn}`}
                         >
-                        기관검색
+                          기관검색
                         </button>
                       </td>
                     </tr>

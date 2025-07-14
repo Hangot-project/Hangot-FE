@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from "./my-page.module.css";
 import { Admin } from "../../../page-src/my-page/admin/admin";
-import { DlownloadList } from "../../../page-src/my-page/download-list/dlownload-list";
+import { DownloadList } from "../../../page-src/my-page/download-list/download-list";
 import { RequestList } from "../../../page-src/my-page/request-list/request-list";
 import "../../../page-src/my-page/my-page.css";
 import { ScrapList } from "../../../page-src/my-page/scrap-list/scrap-list";
@@ -69,7 +69,7 @@ export default function MyPage() {
         {selectedMenu === "계정 관리" && <Admin setMenu={setSelectedMenu} />}
 
         {/* 데이터 다운로드 목록에 해당하는 섹션 */}
-        {selectedMenu === "데이터 다운로드 목록" && <DlownloadList />}
+        {selectedMenu === "데이터 다운로드 목록" && <DownloadList />}
 
         {/* 데이터 관심 목록에 해당하는 섹션 */}
         {selectedMenu === "데이터 관심 목록" && <ScrapList />}

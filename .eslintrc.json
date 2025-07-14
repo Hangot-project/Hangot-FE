@@ -5,14 +5,9 @@
     "es6": true,
     "node": true
   },
-  "parser": "@babel/eslint-parser",
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended",
-    "next/babel"
-  ],
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+  "ignorePatterns": ["node_modules/"],
   "settings": {
     "react": {
       "version": "detect"
@@ -26,12 +21,11 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "react/react-in-jsx-scope": 0,
-    "react/prefer-stateless-function": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "no-nested-ternary": 0
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   },
   "globals": {
     "React": "writable"

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const Role = {
   USER: "ROLE_USER",
@@ -33,7 +33,7 @@ export const auth = createSlice({
      * @param action
      * @returns
      */
-    login(_state, action: PayloadAction<string>) {
+    login() {
       return {
         value: {
           isActive: true,

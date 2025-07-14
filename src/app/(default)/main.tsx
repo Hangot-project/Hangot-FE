@@ -3,7 +3,6 @@
 import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
-import { useIncreaseCount } from "../../hooks";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -14,7 +13,7 @@ import { SortValueType } from "../../shared/types/dataset";
 
 const POPULAR_SORT_VALUE: SortValueType = "인기순";
 
-export default function Main({ populars, news }) {
+export default function Main({ populars }) {
   const router = useRouter();
 
   // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
