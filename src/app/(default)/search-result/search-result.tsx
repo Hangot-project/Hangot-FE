@@ -282,6 +282,7 @@ export default function SearchResult({
                 view={dataset.view}
                 type={dataset.type}
                 scrap={dataset.scrap}
+                createDate={dataset.createDate}
                 style={{
                   marginTop: "1rem",
                 }}

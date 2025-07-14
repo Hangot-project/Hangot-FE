@@ -2,8 +2,6 @@
 
 import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
-import Image from "next/image";
-import { Banner } from "../../../public/svgs";
 import { SearchBox, QuickMenu, DataBoard } from "../../components";
 import { useIncreaseCount } from "../../hooks";
 import { useRouter } from "next/navigation";
@@ -14,13 +12,9 @@ import {
 } from "../../constants/dataset-search-params";
 import { SortValueType } from "../../shared/types/dataset";
 
-const DATA_COUNT = 2379;
-
 const POPULAR_SORT_VALUE: SortValueType = "인기순";
 
 export default function Main({ populars, news }) {
-  const dataCount = useIncreaseCount(DATA_COUNT);
-
   const router = useRouter();
 
   // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
@@ -42,29 +36,20 @@ export default function Main({ populars, news }) {
       <main className={`noLayoutPadding ${styles.main}`}>
         <div>
           <p className={styles.info_heading}>
-            {dataCount.toLocaleString()} 개 데이터가
-            <br />
-            데이터 포털에 있습니다.
-          </p>
-          <p className={styles.info_text}>
-            한양대학교 ERICA 데이터포털에서는 <br />
-            한양대학교 ERICA에서 보유하고 있는 공공데이터를 <br />
-            발굴/개방하고 있습니다.
+            데이터포털은 대한민국 공공데이터를 한 곳에 모아 제공하고 있습니다.
           </p>
         </div>
-        <Image alt="메인 배너" src={Banner} />
       </main>
 
       {/* 검색창 */}
       <div className={`noLayout ${styles.searchbox}`}>
-        <div className={`${styles.line}`} />
         <SearchBox
           boxstyle={{
             position: "absolute",
             backgroundColor: "#ffffff",
-            borderRadius: "75px",
+            borderRadius: "20px",
             zIndex: 1,
-            width: "70%",
+            width: "40%",
           }}
           handleSubmit={handleSearchSubmit}
         />
@@ -93,9 +78,6 @@ export default function Main({ populars, news }) {
             dataList={populars}
             url={`search-result?${SERVER_PARAMS_KEY.SORT}=${POPULAR_SORT_VALUE}`}
           />
-
-          {/* 신규데이터 */}
-          <DataBoard title="신규 데이터" dataList={news} url={"search-result"} />
         </div>
       </section>
     </div>

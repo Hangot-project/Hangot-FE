@@ -1,6 +1,4 @@
 export * from "./vertical-divider/vertical-divider";
-export * from "./main-service-card/main-service-card";
-export * from "./list-board/list-board";
 export * from "./simple-dataset-card/simple-dataset-card";
 export * from "./search-box/search-box";
 export * from "./drop-down/search-sort-dropdown";

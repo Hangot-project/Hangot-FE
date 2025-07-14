@@ -5,4 +5,6 @@ export const colorMatch = Object.freeze({
   JSON: "#BA83FF",
   PDF: "#FF9061",
   DOCX: "#61D9FF",
+  JPEG: "#61D9FF",
+  PNG: "#61D9FF",
 });

@@ -11,17 +11,16 @@
 }
 
 .title {
-  font-family: "NotoSansBold";
+  font-family: "NotoSansMedium";
   color: #0f1317;
-  font-size: 1.625rem;
-  font-weight: 700;
+  font-size: 1.425rem;
   letter-spacing: -0.01em;
   line-height: 1.5;
   word-break: keep-all;
 }
 
 .headerContainer > a {
-  font-family: "NotoSansBold";
+  font-family: "NotoSansMedium";
 
   display: inline-flex;
   align-items: center;
@@ -42,7 +41,7 @@
 
 .dataBoard {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -89,9 +88,9 @@
 }
 
 .dataTitle {
-  font-family: "NotoSansBold";
+  font-family: "NotoSansMedium";
   color: #0f1317;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 
   margin-bottom: 1rem;
 }

@@ -51,6 +51,7 @@ export interface DatasetInfo {
   type: DataType;
   themeList: string[];
   scrap: number;
+  createDate: string;
 }
 
 export interface DatasetInfoBanner {

@@ -15,6 +15,7 @@ interface SimpleDatasetCardProps {
   from: Organization;
   view: number;
   scrap: number;
+  createDate: string;
   onClick?: () => any;
   style?: CSSProperties;
 }
@@ -31,6 +32,7 @@ export function SimpleDatasetCard({
   from,
   view,
   scrap,
+  createDate,
   onClick,
   style,
 }: SimpleDatasetCardProps) {
@@ -58,6 +60,11 @@ export function SimpleDatasetCard({
           />
           <p>{from}</p>
         </div>
+
+        <div>
+          <p>생성 일자:{createDate}</p>
+        </div>
+
       </div>
 
       <div className={styles.hoverContainer}>

@@ -8,12 +8,6 @@ import Facebook from "./facebook.svg";
 import Twitter from "./twitter.svg";
 import Kakao from "./Kakao.svg";
 
-// * examples (확정 아님)
-import ServiceAI from "./ex_service_ai.svg";
-import ServiceLife from "./ex_service_life.svg";
-import ServiceDaily from "./ex_service_daily.svg";
-import ServicePopluar from "./ex_service_popular.svg";
-import ServiceTop from "./ex_service_100.svg";
 
 // * icons
 import ArrowDown from "./arrow_down.svg";
@@ -31,7 +25,6 @@ import PW from "./pw_icon.svg";
 import Name from "./sign_up_name.svg";
 import SID from "./sign_up_id.svg";
 import SPW from "./sign_up_pw.svg";
-import Banner from "./banner_logo.svg";
 import LikeEmpty from "./like_empty.svg";
 import LikeFilled from "./like_filled.svg";
 import GraphActive from "./graph_active.svg";
@@ -57,14 +50,12 @@ export {
   MainLogo,
   MainLogoBlue,
   HYU,
-  Banner,
   Instagram,
   Youtube,
   Facebook,
   Twitter,
   Kakao,
 };
-export { ServiceAI, ServiceLife, ServiceDaily, ServicePopluar, ServiceTop };
 export {
   ArrowDown,
   ResetIcon,

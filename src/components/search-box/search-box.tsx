@@ -19,7 +19,7 @@ type Props = {
 export function SearchBox({
   handleSubmit,
   boxstyle,
-  placeholder = "검색어를 입력하세요.",
+  placeholder = "검색어를 입력해주세요.",
   inputstyle,
   iconstyle,
   initKeyword,

@@ -111,13 +111,12 @@ export function Header() {
 }
 
 const Container = styled.header`
-  padding-top: 2.125rem;
-  padding-bottom: 2.125rem;
+  padding-top: 1.125rem;
+  padding-bottom: 1.125rem;
   background-color: white;
 `;
 
 const HeaderWrapper = styled.div`
-  margin-top: 0.906rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

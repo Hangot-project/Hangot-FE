@@ -22,7 +22,7 @@ export function DataBoard({ title, url, dataList }: Props) {
     <div className={styles.container}>
       {/* 메인페이지 인기 및 신규데이터 파트 헤더 */}
       <hgroup className={styles.headerContainer}>
-        <h2 className={styles.title}>{title}</h2>
+        <div className={styles.title}>{title}</div>
         <Link href={`/${url}`}>
           <span className={styles.more}>더 보기 &gt;</span>
         </Link>
@@ -40,7 +40,7 @@ export function DataBoard({ title, url, dataList }: Props) {
             {/* TODO : 데이터 유형, 데이터 제공 기관 param에 추가 */}
             <section>
               <div>
-                <h3 className={styles.dataTitle}>{dataset.title}</h3>
+                <div className={styles.dataTitle}>{dataset.title}</div>
                 <LabelGroup>
                   {dataset.type && (
                     <TypeContainer
@@ -54,7 +54,7 @@ export function DataBoard({ title, url, dataList }: Props) {
                   {dataset.themeList.map((theme, index) => (
                     <TypeContainer
                       key={index}
-                      color={hexToRgba(THEME_TEXT_COLOR, 0.2)}
+                      color={hexToRgba(THEME_TEXT_COLOR, 0.1)}
                     >
                       <TypeText color={THEME_TEXT_COLOR}>{theme}</TypeText>
                     </TypeContainer>
