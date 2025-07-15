@@ -1,0 +1,59 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Abstract geometric shapes -->
+  <g opacity="0.1">
+    <!-- Large circles -->
+    <circle cx="150" cy="100" r="80" fill="#3b82f6"/>
+    <circle cx="650" cy="150" r="60" fill="#6366f1"/>
+    <circle cx="700" cy="450" r="100" fill="#8b5cf6"/>
+    <circle cx="100" cy="400" r="70" fill="#06b6d4"/>
+    
+    <!-- Polygons -->
+    <polygon points="300,50 350,100 300,150 250,100" fill="#3b82f6"/>
+    <polygon points="500,300 600,350 500,400 400,350" fill="#6366f1"/>
+    <polygon points="150,250 200,280 150,310 100,280" fill="#8b5cf6"/>
+    
+    <!-- Hexagons -->
+    <polygon points="550,80 580,95 580,125 550,140 520,125 520,95" fill="#06b6d4"/>
+    <polygon points="350,450 380,465 380,495 350,510 320,495 320,465" fill="#3b82f6"/>
+    
+    <!-- Triangles -->
+    <polygon points="400,100 450,150 350,150" fill="#6366f1"/>
+    <polygon points="600,500 650,550 550,550" fill="#8b5cf6"/>
+    <polygon points="50,200 100,250 0,250" fill="#06b6d4"/>
+  </g>
+  
+  <!-- Data-themed elements -->
+  <g opacity="0.08">
+    <!-- Chart bars -->
+    <rect x="450" y="200" width="20" height="80" fill="#3b82f6"/>
+    <rect x="480" y="180" width="20" height="100" fill="#6366f1"/>
+    <rect x="510" y="160" width="20" height="120" fill="#8b5cf6"/>
+    <rect x="540" y="140" width="20" height="140" fill="#06b6d4"/>
+    
+    <!-- Pie chart segments -->
+    <path d="M 200 300 L 200 250 A 50 50 0 0 1 235 285 Z" fill="#3b82f6"/>
+    <path d="M 200 300 L 235 285 A 50 50 0 0 1 200 350 Z" fill="#6366f1"/>
+    <path d="M 200 300 L 200 350 A 50 50 0 0 1 165 285 Z" fill="#8b5cf6"/>
+    <path d="M 200 300 L 165 285 A 50 50 0 0 1 200 250 Z" fill="#06b6d4"/>
+    
+    <!-- Network nodes -->
+    <circle cx="600" cy="300" r="8" fill="#3b82f6"/>
+    <circle cx="630" cy="280" r="6" fill="#6366f1"/>
+    <circle cx="620" cy="320" r="7" fill="#8b5cf6"/>
+    <circle cx="580" cy="290" r="5" fill="#06b6d4"/>
+    
+    <!-- Connection lines -->
+    <line x1="600" y1="300" x2="630" y2="280" stroke="#3b82f6" stroke-width="2"/>
+    <line x1="600" y1="300" x2="620" y2="320" stroke="#6366f1" stroke-width="2"/>
+    <line x1="600" y1="300" x2="580" y2="290" stroke="#8b5cf6" stroke-width="2"/>
+    <line x1="630" y1="280" x2="620" y2="320" stroke="#06b6d4" stroke-width="2"/>
+  </g>
+  
+  <!-- Dotted pattern overlay -->
+  <defs>
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="40" height="40">
+      <circle cx="20" cy="20" r="1" fill="#3b82f6" opacity="0.3"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#dots)"/>
+</svg>
