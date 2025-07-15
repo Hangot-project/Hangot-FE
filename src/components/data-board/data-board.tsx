@@ -44,9 +44,17 @@ export function DataBoard({ title, url, dataList }: Props) {
                 <LabelGroup>
                   {dataset.type && (
                     <TypeContainer
-                      color={hexToRgba(colorMatch[dataset.type.toUpperCase()], 0.2)}
+                      color={hexToRgba(
+                        colorMatch[dataset.type.toUpperCase()] ?? colorMatch.default,
+                        0.2,
+                      )}
                     >
-                      <TypeText color={colorMatch[dataset.type.toUpperCase()]}>
+                      <TypeText
+                        color={
+                          colorMatch[dataset.type.toUpperCase()] ??
+                          colorMatch.default
+                        }
+                      >
                         {dataset.type.toUpperCase()}
                       </TypeText>
                     </TypeContainer>
@@ -86,13 +94,16 @@ const LabelGroup = styled.div`
 
 const TypeContainer = styled.span<{ color: string }>`
   background-color: ${(props) => props.color};
-  padding: 4px 6px;
-  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid ${(props) => props.color.replace('0.2', '0.3')};
 `;
 
 const TypeText = styled.p<{ color: string }>`
-  font-family: "NotoSansMedium";
+  font-family: "NotoSansBold";
   color: ${(props) => props.color};
+  font-size: 0.8rem;
+  font-weight: 600;
 `;
 
 const ScrapContainer = styled.span`

@@ -18,9 +18,9 @@ export default function Layout({ children }) {
           <Providers>
             <div className={styles.container}>
               <Header />
-              <div className={`layoutPadding ${styles.child}`}>{children}</div>
+              <div className={styles.child}>{children}</div>
+              <Footer />
             </div>
-            <Footer />
           </Providers>
         </Suspense>
       </body>

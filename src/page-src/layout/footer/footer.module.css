@@ -1,40 +1,37 @@
 .container {
-  /* position: absolute;
-  bottom: 0; */
-
   width: 100%;
-  padding: 2.75rem 8rem;
-
+  padding: 1.5rem 8rem;
   background-color: #003b71;
-
   display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 680px) {
   .container {
-    padding: 2.75rem 2.5rem;
+    padding: 1.5rem 2.5rem;
   }
 }
 
 @media screen and (min-width: 681px) and (max-width: 1919px) {
   .container {
-    padding: 2.75rem 12rem;
+    padding: 1.5rem 12rem;
   }
 }
 
 @media screen and (min-width: 1920px) {
   .container {
-    padding: 2.75rem 20rem;
+    padding: 1.5rem 20rem;
   }
 }
 
 .navContainer {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .navContainer > * {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .divisionLine {
@@ -43,41 +40,24 @@
 
 .infoContainer {
   color: #bdbdbd;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .infoContainer > * {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
 }
 
 .infoContainer > * {
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
 
 .infoContainer > *:first-child {
   margin-top: 0;
 }
 
-.snsContainer {
-  margin-left: auto;
-
-  display: flex;
-}
-
-.snsContainer > * {
-  margin-left: 1rem;
-}
-
-.snsContainer > *:first-child {
-  margin-left: 0;
-}
-
 @media screen and (max-width: 640px) {
   .container {
     flex-direction: column;
-  }
-
-  .snsContainer {
-    margin: 0;
-    margin-top: 2rem;
   }
 }

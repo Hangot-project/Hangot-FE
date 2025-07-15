@@ -15,7 +15,6 @@ import { StickHorizonSmall } from "../../../../public/svgs";
 import Link from "next/link";
 import { useEffect } from "react";
 import {
-  THEME_VALUES,
   ORGANIZATION_VALUES,
   DATA_TYPES,
   SORT_VALUES,
@@ -179,25 +178,6 @@ export default function SearchResult({
           {/* //? division line */}
           <div className={styles.divisionLine} />
 
-          {/* //? 주제별 */}
-          <div className={styles.filterTitleWrapper}>
-            <h2 className={styles.sectionSubtitle}>주제별</h2>
-            <Image src={StickHorizonSmall} alt="-" />
-          </div>
-
-          <div>
-            {THEME_VALUES.map((value, index) => (
-              <FilterCheckButton
-                key={index}
-                isSelected={Array.from(searchParams.values()).includes(value)}
-                text={value}
-                handleClick={() => handleFilterClick(SERVER_PARAMS_KEY.THEME, value)}
-              />
-            ))}
-          </div>
-
-          {/* //? division line */}
-          <div className={styles.divisionLine} />
 
           {/* //? 조직별 */}
           <div className={styles.filterTitleWrapper}>

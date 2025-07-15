@@ -2,7 +2,6 @@ import {
   DATA_TYPES,
   ORGANIZATION_VALUES,
   SORT_VALUES,
-  THEME_VALUES,
 } from "../../constants";
 
 export type Organization = (typeof ORGANIZATION_VALUES)[number];
@@ -11,7 +10,6 @@ export type DataType = (typeof DATA_TYPES)[number];
 
 export type SortValueType = (typeof SORT_VALUES)[number];
 
-export type ThemeType = (typeof THEME_VALUES)[number];
 
 export interface DatasetChartType {
   x_axis_name: string;
@@ -59,7 +57,7 @@ export interface DatasetInfoBanner {
   title: string;
   type: DataType;
   organization: Organization;
-  themeList: ThemeType[];
+  themeList: string[];
   scrap: number;
 }
 
