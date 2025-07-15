@@ -46,7 +46,7 @@ export default function Main() {
                 <br />한 곳에서 찾아보세요
               </h1>
               <p className={styles.heroSubtitle}>
-                하이데이터는 대한민국 공공데이터를 크롤링하여 한 곳에 모아 제공합니다.
+                하이데이터는 대한민국 공공데이터를 수집하여 한 곳에 모아 제공합니다.
               </p>
             </div>
 
@@ -95,7 +95,8 @@ export default function Main() {
             <div className={styles.featureIcon}>🔍</div>
             <h3 className={styles.featureTitle}>통합 검색</h3>
             <p className={styles.featureDescription}>
-              수십만 개의 공공데이터를 한 번에 검색하고 필요한 정보를 빠르게 찾으세요.
+              수십만 개의 공공데이터를 한 번에 검색하고 필요한 정보를 빠르게
+              찾으세요.
             </p>
           </div>
 

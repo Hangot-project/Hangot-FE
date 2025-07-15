@@ -24,7 +24,39 @@ export default async function Page({ params }: { params: { id: string } }) {
               <p className={styles.description}>{datasetDetail.description}</p>
             </div>
             <div className={styles.actionSection}>
-              <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
+              <div className={styles.keywordSection}>
+                <h3 className={styles.keywordTitle}>키워드</h3>
+                <div className={styles.keywordTags}>
+                  {datasetDetail.theme.map((keyword, index) => (
+                    <span key={index} className={styles.keywordTag}>
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+                <div className={styles.metaInfo}>
+                  <div className={styles.metaItem}>
+                    <span className={styles.metaLabel}>조회수</span>
+                    <span className={styles.metaValue}>
+                      {datasetDetail.view?.toLocaleString() || 0}
+                    </span>
+                  </div>
+                  <div className={styles.metaItem}>
+                    <span className={styles.metaLabel}>스크랩</span>
+                    <span className={styles.metaValue}>
+                      {datasetDetail.scrap?.toLocaleString() || 0}
+                    </span>
+                  </div>
+                  <div className={styles.metaItem}>
+                    <span className={styles.metaLabel}>파일 형식</span>
+                    <span className={styles.metaValue}>
+                      {datasetDetail.type?.toUpperCase() || "N/A"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className={styles.scrapSection}>
+                <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
+              </div>
             </div>
           </div>
           <div className={styles.ctaSection}>
@@ -36,90 +68,84 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      {/* Dataset Information Cards */}
-      <div className={styles.contentSection}>
-        <h2 className={styles.sectionTitle}>데이터 정보</h2>
+      {/* Main Content Grid */}
+      <div className={styles.mainContent}>
+        {/* Left Column - Dataset Information */}
+        <div className={styles.leftColumn}>
+          <div className={styles.contentSection}>
+            <h2 className={styles.sectionTitle}>데이터 정보</h2>
 
-        <div className={styles.infoCards}>
-          <div className={styles.infoCard}>
-            <div className={styles.cardHeader}>
-              <span className={styles.cardIcon}>📅</span>
-              <h3 className={styles.cardTitle}>공개 정보</h3>
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.infoRow}>
-                <span className={styles.infoLabel}>공개일자</span>
-                <span className={styles.infoValue}>{datasetDetail.createdDate}</span>
+            <div className={styles.compactInfoGrid}>
+              <div className={styles.infoGroup}>
+                <h3 className={styles.infoGroupTitle}>📅 공개 정보</h3>
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>공개일자</span>
+                  <span className={styles.infoValue}>
+                    {datasetDetail.createdDate}
+                  </span>
+                </div>
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>최신수정일자</span>
+                  <span className={styles.infoValue}>
+                    {datasetDetail.updateDate || datasetDetail.createdDate}
+                  </span>
+                </div>
               </div>
-              <div className={styles.infoRow}>
-                <span className={styles.infoLabel}>최신수정일자</span>
-                <span className={styles.infoValue}>
-                  {datasetDetail.updateDate || datasetDetail.createdDate}
-                </span>
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.infoCard}>
-            <div className={styles.cardHeader}>
-              <span className={styles.cardIcon}>🏢</span>
-              <h3 className={styles.cardTitle}>제공 기관</h3>
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.infoRow}>
-                <span className={styles.infoLabel}>기관명</span>
-                <span className={styles.infoValue}>
-                  {datasetDetail.organization}
-                </span>
+              <div className={styles.infoGroup}>
+                <h3 className={styles.infoGroupTitle}>🏢 제공 기관</h3>
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>기관명</span>
+                  <span className={styles.infoValue}>
+                    {datasetDetail.organization}
+                  </span>
+                </div>
+                <div className={styles.infoItem}>
+                  <span className={styles.infoLabel}>키워드</span>
+                  <span className={styles.infoValue}>
+                    {datasetDetail.theme.join(", ")}
+                  </span>
+                </div>
               </div>
-              <div className={styles.infoRow}>
-                <span className={styles.infoLabel}>키워드</span>
-                <span className={styles.infoValue}>
-                  {datasetDetail.theme.join(", ")}
-                </span>
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.infoCard}>
-            <div className={styles.cardHeader}>
-              <span className={styles.cardIcon}>⚖️</span>
-              <h3 className={styles.cardTitle}>라이선스</h3>
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.licenseInfo}>
-                <span className={styles.infoValue}>{datasetDetail.license}</span>
+              <div className={styles.infoGroup}>
+                <h3 className={styles.infoGroupTitle}>⚖️ 라이선스</h3>
+                <div className={styles.licenseInfo}>
+                  <span className={styles.infoValue}>{datasetDetail.license}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Data Preview Section */}
-      <div className={styles.contentSection}>
-        <div className={styles.sheetHeader}>
-          <h2 className={styles.sectionTitle}>데이터 미리보기</h2>
-          <div className={styles.sheetBadge}>SHEET</div>
-        </div>
+        {/* Right Column - Data Preview */}
+        <div className={styles.rightColumn}>
+          <div className={styles.contentSection}>
+            <div className={styles.sheetHeader}>
+              <h2 className={styles.sectionTitle}>데이터 미리보기</h2>
+              <div className={styles.sheetBadge}>SHEET</div>
+            </div>
 
-        <div className={styles.previewContainer}>
-          {datasetExtension === "pdf" ? (
-            <div className={styles.pdfViewer}>
-              <embed
-                src={`${datasetDetail.resourceUrl}`}
-                type="application/pdf"
-                className={styles.pdfEmbed}
-              />
+            <div className={styles.previewContainer}>
+              {datasetExtension === "pdf" ? (
+                <div className={styles.pdfViewer}>
+                  <embed
+                    src={`${datasetDetail.resourceUrl}`}
+                    type="application/pdf"
+                    className={styles.pdfEmbed}
+                  />
+                </div>
+              ) : (
+                <div className={styles.dataViewer}>
+                  <DatasetViewer
+                    datasetId={datasetDetail.datasetId}
+                    axisResult={axisResult}
+                    title={datasetDetail.title}
+                  />
+                </div>
+              )}
             </div>
-          ) : (
-            <div className={styles.dataViewer}>
-              <DatasetViewer
-                datasetId={datasetDetail.datasetId}
-                axisResult={axisResult}
-                title={datasetDetail.title}
-              />
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

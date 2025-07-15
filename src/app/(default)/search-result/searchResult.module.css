@@ -7,18 +7,35 @@
 .navigateInfoContainer {
   padding-top: 1.125rem;
   padding-bottom: 1.125rem;
-
-  background-color: #f8f8f8;
-  border-bottom: solid 0.8px #dddddd;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-bottom: solid 1px rgba(226, 232, 240, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 .navigateInfoContainer > p {
-  color: #181818;
+  color: #1e293b;
   font-size: 0.875rem;
+  font-family: "NotoSansMedium";
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  position: relative;
+  z-index: 2;
 }
 
 .searchBox {
-  margin: 3.75rem 8rem 6rem 8rem;
+  max-width: 600px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2rem;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -32,77 +49,297 @@
 .keywordTitle {
   font-size: 1.5rem;
   font-family: "NotoSansBold";
+  color: #1e293b;
+  margin: 2rem 0;
+  padding: 0 1rem;
 }
 
 .keywordTitle > span {
   font-size: inherit;
   font-family: inherit;
-  color: #003b71;
+  color: #3b82f6;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.topFiltersContainer {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.topFiltersContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filterTitle {
+  font-size: 1.2rem;
+  font-family: "NotosansBold";
+  color: #1e293b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.filtersRow {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.filterGroup {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filterSubtitle {
+  font-size: 0.9rem;
+  font-family: "NotosansBold";
+  color: #1e293b;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.filterButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .mainContainer {
-  margin-top: 2.5rem;
-
-  /* display: grid;
-  grid-template-columns: 1fr 5.84fr;
-  column-gap: 2.25rem; */
-
-  display: flex;
-  justify-content: space-between;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
-.mainContainer > section:first-child {
-  width: 15%;
+.resultsSection {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  overflow: hidden;
 }
 
-.mainContainer > section:nth-child(2) {
-  width: 80%;
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
+
+.resultsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+}
+
 
 .sectionTitle {
   font-size: 1rem;
   font-family: "NotosansBold";
+  color: #1e293b;
+  font-weight: 700;
 }
 
 .sectionTitle > .highlightText {
   font-size: inherit;
   font-family: inherit;
-  color: #003b71;
+  color: #3b82f6;
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .sectionSubtitle {
   font-size: 0.875rem;
   font-family: "NotosansBold";
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .resetTextContainer {
   display: flex;
   cursor: pointer;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.resetTextContainer:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
 }
 
 .resetText {
   margin-left: 0.25rem;
-
   font-size: 0.75rem;
-  color: #767676;
+  color: #ef4444;
+  font-family: "NotoSansMedium";
+  font-weight: 500;
 }
 
 .sectionTitleWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   height: 3.5rem;
+  margin-bottom: 1rem;
 }
 
 .filterTitleWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 1.5rem 0 1rem 0;
 }
 
 .divisionLine {
-  background-color: #d5d5d5;
-  height: 0.8px;
+  background: linear-gradient(90deg, transparent 0%, #e2e8f0 50%, transparent 100%);
+  height: 1px;
   margin: 1rem 0;
+}
+
+/* Root container with gradient background */
+.root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: relative;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.root::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 59, 113, 0.05) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Add animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.keywordTitle {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.resultsSection {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.searchContainer {
+  animation: fadeInUp 0.8s ease-out 0.1s both;
+}
+
+.topFiltersContainer {
+  animation: fadeInUp 0.8s ease-out 0.15s both;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .searchContainer {
+    margin: 1.5rem 1rem;
+  }
+  
+  .searchBox {
+    padding: 0.3rem;
+  }
+  
+  .filtersRow {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .filterGroup {
+    min-width: auto;
+  }
+  
+  .topFiltersContainer {
+    margin: 1.5rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .resultsSection {
+    margin: 1.5rem 1rem;
+    padding: 1.5rem;
+  }
+  
+  .resultsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .keywordTitle {
+    font-size: 1.3rem;
+    margin: 1.5rem 1rem;
+  }
+  
+  .searchContainer {
+    margin: 1rem 0.5rem;
+  }
+  
+  .topFiltersContainer {
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+  
+  .resultsSection {
+    margin: 1rem 0.5rem;
+    padding: 1rem;
+  }
+  
+  .filterButtons {
+    gap: 0.3rem;
+  }
+  
+  .resultsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }

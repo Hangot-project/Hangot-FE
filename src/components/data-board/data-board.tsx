@@ -96,7 +96,7 @@ const TypeContainer = styled.span<{ color: string }>`
   background-color: ${(props) => props.color};
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  border: 1px solid ${(props) => props.color.replace('0.2', '0.3')};
+  border: 1px solid ${(props) => props.color.replace("0.2", "0.3")};
 `;
 
 const TypeText = styled.p<{ color: string }>`

@@ -7,7 +7,7 @@ import { Header } from "../../page-src/layout/header/header";
 import { Footer } from "../../page-src/layout/footer/footer";
 
 export const metadata = {
-  title: "한양대학교 데이터 포털",
+  title: "하이데이터 - 모든 공공데이터를 한 눈에",
 };
 
 export default function Layout({ children }) {

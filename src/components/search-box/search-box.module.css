@@ -1,6 +1,6 @@
 .searchbox_container {
   border-radius: 25px;
-  border: solid 0.220rem #003b71;
+  border: solid 0.20rem #003b71;
 
   text-align: center;
   padding: 0.875rem 2rem;
@@ -14,8 +14,7 @@
 
 .searchbox_input {
   width: 85%;
-
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .searchbox_input::placeholder {

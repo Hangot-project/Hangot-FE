@@ -1,16 +1,11 @@
-import SymbolLogo from "./HYU_symbol.svg";
-import MainLogo from "./HYU_main_logo.svg";
-import MainLogoBlue from "./HYU_main_logo_blue.svg";
 import DataPortalLogo from "./DataPortalLogo.svg";
 import BackgroundPattern from "./BackgroundPattern.svg";
 import DataIllustration from "./DataIllustration.svg";
-import HYU from "./HYU.svg";
 import Instagram from "./instagram.svg";
 import Youtube from "./youtube.svg";
 import Facebook from "./facebook.svg";
 import Twitter from "./twitter.svg";
 import Kakao from "./Kakao.svg";
-
 
 // * icons
 import ArrowDown from "./arrow_down.svg";
@@ -40,13 +35,9 @@ import ScreenClose from "./screen_close.svg";
 import UpdatedDate from "./updated_date.svg";
 
 export {
-  SymbolLogo,
-  MainLogo,
-  MainLogoBlue,
   DataPortalLogo,
   BackgroundPattern,
   DataIllustration,
-  HYU,
   Instagram,
   Youtube,
   Facebook,

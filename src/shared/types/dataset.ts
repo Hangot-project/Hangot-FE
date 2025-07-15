@@ -1,15 +1,8 @@
-import {
-  DATA_TYPES,
-  ORGANIZATION_VALUES,
-  SORT_VALUES,
-} from "../../constants";
+import { DATA_TYPES, ORGANIZATION_VALUES } from "../../constants";
 
 export type Organization = (typeof ORGANIZATION_VALUES)[number];
 
 export type DataType = (typeof DATA_TYPES)[number];
-
-export type SortValueType = (typeof SORT_VALUES)[number];
-
 
 export interface DatasetChartType {
   x_axis_name: string;
@@ -60,11 +53,3 @@ export interface DatasetInfoBanner {
   themeList: string[];
   scrap: number;
 }
-
-export type CreateDatasetBody = {
-  title: string;
-  description: string;
-  organization: string;
-  license: string;
-  theme: string[];
-};

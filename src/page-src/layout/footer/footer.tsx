@@ -11,7 +11,12 @@ export function Footer() {
       <div className={styles.infoContainer}>
         <ul className={styles.navContainer}>
           <li>
-            <Image alt="하이데이터 로고" src={DataPortalLogo} width={120} height={32} />
+            <Image
+              alt="하이데이터 로고"
+              src={DataPortalLogo}
+              width={120}
+              height={32}
+            />
           </li>
           <VerticalDivider
             style={{

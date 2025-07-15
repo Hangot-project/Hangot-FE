@@ -119,24 +119,6 @@ const HoverMenuWrapper = styled.ul`
   padding: 12px;
   border-radius: 8px;
 `;
-
-const HoverMenu = styled.li`
-  padding: 0.5rem 1rem;
-  text-align: left;
-
-  & > a {
-    color: #555555;
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  & > a:hover {
-    color: #0066ff;
-    font-weight: bolder;
-  }
-`;
-
 const HoverMenuContainer = styled.div`
   display: none;
   position: absolute;
