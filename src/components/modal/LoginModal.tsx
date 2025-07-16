@@ -1,0 +1,56 @@
+"use client";
+
+import { useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { KaKaoLogin } from "../../../public/images";
+import DataPortalLogo from "../../../public/svgs/DataPortalLogo.svg";
+import styles from "./LoginModal.module.css";
+
+interface LoginModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.closeButton} onClick={onClose}>
+          ×
+        </button>
+
+        <div className={styles.content}>
+          <Image
+            alt="데이터포털 로고"
+            src={DataPortalLogo}
+            className={styles.logo}
+          />
+
+          <div className={styles.social}>
+            <Link
+              className={styles.kakaoContainer}
+              href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`}
+            >
+              <Image alt="카카오 로그인" src={KaKaoLogin} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

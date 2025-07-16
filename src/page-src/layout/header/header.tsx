@@ -1,15 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import styles from "./header.module.css";
 import { DataPortalLogo } from "../../../../public/svgs";
 import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { userLogout } from "../../../shared/api/user/userLogout";
+import LoginModal from "../../../components/modal/LoginModal";
 import styled from "@emotion/styled";
 
 export function Header() {
   const { data: session, status } = useSession();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const onLogout = async () => {
     if (status === "unauthenticated") {
@@ -67,12 +70,22 @@ export function Header() {
               </Menu>
             ) : (
               <Menu>
-                <Link href={"/login"}>로그인</Link>
+                <div
+                  onClick={() => setIsLoginModalOpen(true)}
+                  style={{ cursor: "pointer" }}
+                >
+                  로그인
+                </div>
               </Menu>
             )}
           </MenuWrapper>
         </HeaderWrapper>
       </Container>
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
     </>
   );
 }

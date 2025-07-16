@@ -3,5 +3,5 @@
 // ? ex. import { Image1, Image2, ... } from "public/images";
 
 import Spinner from "./spinner.gif";
-import KakaoLoginLarge from "./kakao_login_large_wide.png";
-export { Spinner, KakaoLoginLarge };
+import KaKaoLogin from "./kakao_login_btn.png";
+export { Spinner, KaKaoLogin };

@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #888;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+}
+
+.content {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.social {
+  margin-top: 1.5rem;
+}
+
+.kakaoContainer {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+}
