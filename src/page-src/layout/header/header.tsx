@@ -5,31 +5,36 @@ import styles from "./header.module.css";
 import { DataPortalLogo } from "../../../../public/svgs";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { userLogout } from "../../../shared/api/user/userLogout";
 import LoginModal from "../../../components/modal/LoginModal";
 import styled from "@emotion/styled";
+import { useAuth } from "../../../hooks/useAuth";
 
 export function Header() {
-  const { data: session, status } = useSession();
+  const { isAuthenticated } = useAuth();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const onLogout = async () => {
-    if (status === "unauthenticated") {
+    if (!isAuthenticated) {
       alert("로그인 상태가 아닙니다.");
       return;
     }
 
-    const success = await userLogout(
-      session.user.grantType,
-      session.user.accessToken,
-    );
-    if (success) {
-      window.location.reload();
-      return;
-    }
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
 
-    alert("[error] 로그아웃 오류");
+      const result = await response.json();
+
+      if (result.success) {
+        window.location.reload();
+      } else {
+        alert("로그아웃 실패: " + result.message);
+      }
+    } catch (error) {
+      alert("로그아웃 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -59,10 +64,12 @@ export function Header() {
             <Menu>
               <Link href={"/search-result?sort=인기순"}>인기 데이터</Link>
             </Menu>
-            <Menu>
-              <Link href={"/my-page"}>마이페이지</Link>
-            </Menu>
-            {status === "authenticated" ? (
+            {isAuthenticated && (
+              <Menu>
+                <Link href={"/my-page"}>마이페이지</Link>
+              </Menu>
+            )}
+            {isAuthenticated ? (
               <Menu>
                 <div onClick={onLogout} style={{ cursor: "pointer" }}>
                   로그아웃

@@ -10,6 +10,5 @@ export * from "./dataset-type-icon/dataset-type-icon";
 export * from "./scrap-button/scrap-button";
 export * from "./post-list-card/post-list-card";
 export * from "./pagination/pagination";
-export * from "./data-board/data-board";
 export * from "./loading/loading";
 export * from "./accordion/accordion";

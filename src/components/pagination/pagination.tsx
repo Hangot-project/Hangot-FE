@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import React, { useCallback } from "react";
-import { getPageArray, updateQueryString } from "../../utils";
+import { getPageArray } from "../../utils";
+import { updateQueryString } from "../../utils/search/update-query-string";
 import Image from "next/image";
 import { NextButton, PreviousButton } from "../../../public/svgs";
 
@@ -26,7 +27,7 @@ export function Pagination({
         searchParams,
       });
     },
-    [searchParams, updateQueryString],
+    [searchParams],
   );
 
   return (
@@ -38,17 +39,19 @@ export function Pagination({
     >
       <div className="pagesWrapper">
         <Link
-          href={`${pathName}?${updateQuery(
-            "create",
-            "page",
-            Math.max(currentPage - 1, 0),
-          )}`}
+          href={{
+            pathname: pathName,
+            query: updateQuery("create", "page", Math.max(currentPage - 1, 0)),
+          }}
         >
           <Image src={PreviousButton} alt="이전 페이지 버튼" />
         </Link>
         {getPageArray(currentPage, totalPage).map((num) => (
           <Link
-            href={`${pathName}?${updateQuery("create", "page", num - 1)}`}
+            href={{
+              pathname: pathName,
+              query: updateQuery("create", "page", num - 1),
+            }}
             key={`page${num}`}
             className={`pageButton ${currentPage == num - 1 ? "active" : ""}`}
           >
@@ -56,11 +59,14 @@ export function Pagination({
           </Link>
         ))}
         <Link
-          href={`${pathName}?${updateQuery(
-            "create",
-            "page",
-            Math.min(totalPage - 1, currentPage + 1),
-          )}`}
+          href={{
+            pathname: pathName,
+            query: updateQuery(
+              "create",
+              "page",
+              Math.min(totalPage - 1, currentPage + 1),
+            ),
+          }}
         >
           <Image src={NextButton} alt="다음 페이지 버튼" />
         </Link>

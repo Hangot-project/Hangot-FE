@@ -16,6 +16,10 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      sessionStorage.setItem(
+        "prevPath",
+        window.location.pathname + window.location.search,
+      );
     } else {
       document.body.style.overflow = "unset";
     }
@@ -40,11 +44,10 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             src={DataPortalLogo}
             className={styles.logo}
           />
-
           <div className={styles.social}>
             <Link
               className={styles.kakaoContainer}
-              href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`}
+              href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${window.location.origin}/api/user/login/kakao`}
             >
               <Image alt="카카오 로그인" src={KaKaoLogin} />
             </Link>

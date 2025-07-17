@@ -1,32 +1,34 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
-import { parse } from "cookie";
-import { LoginResponse } from "../shared/api/user/type";
-import { userLogin } from "../shared/api/user/userLogin";
-import { Provider } from "../constants/oauth-provider";
-import { ROLE } from "../constants/role";
 import { getRole } from "../utils/jwt/get-role";
+import { getUserId } from "../utils/jwt/parse-jwt";
 
-function setCookie(response: Response) {
-  const apiCookies = response.headers.getSetCookie();
-  if (apiCookies && apiCookies.length > 0) {
-    apiCookies.forEach((cookie) => {
-      const parsedCookie = parse(cookie);
-      const [cookieName, cookieValue] = Object.entries(parsedCookie)[0] as string[];
+async function getSessionFromCookies() {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+  const grantType = cookieStore.get("grantType")?.value || "Bearer";
 
-      //@ts-ignore
-      cookies().set({
-        name: cookieName,
-        value: cookieValue,
-        httpOnly: cookie.includes("HttpOnly;"),
-        path: parsedCookie.Path,
-        sameSite: parsedCookie.SameSite,
-        secure: true,
-        domain: parsedCookie.Domain,
-      });
-    });
+  if (accessToken) {
+    try {
+      const role = getRole(accessToken);
+      const userId = getUserId(accessToken);
+
+      const sessionData = {
+        id: userId,
+        name: userId,
+        accessToken,
+        grantType,
+        role,
+        userId,
+      };
+      return sessionData;
+    } catch (error) {
+      return null;
+    }
   }
+
+  return null;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -44,60 +46,28 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
 
       credentials: {
-        provider: { label: "isSocial" },
-        grantType: { label: "grantType", type: "text" },
-        token: { label: "token", type: "text" },
-
-        username: { label: "email", type: "text", placeholder: "아이디" },
-        password: { label: "password", type: "password", placeholder: "비밀번호" },
-        role: { label: "role", type: "text" },
-        isAuto: { label: "isAuto" },
+        accessToken: { label: "accessToken", type: "text" },
       },
 
       async authorize(credentials) {
-        const _user = { id: credentials.username, name: credentials.username };
-
-        // * 소셜 로그인
-        if (credentials.provider) {
-          if (
-            credentials.grantType === undefined ||
-            credentials.token === undefined
-          ) {
-            throw new Error(`잘못된 접근`);
-          }
-          //@ts-ignore
-          if (!Object.values(Provider).includes(credentials.provider)) {
-            throw new Error("지원하지 않는 소셜 로그인");
-          }
-
-          return {
-            id: credentials.token,
-            name: credentials.provider,
-            grantType: credentials.grantType,
-            accessToken: credentials.token,
-            role: ROLE.USER,
-          };
+        if (!credentials?.accessToken) {
+          return null;
         }
 
-        // * 일반 로그인
-        const response = await userLogin({
-          email: credentials.username,
-          password: credentials.password,
-          //@ts-ignore
-          autoLogin: credentials.isAuto,
-        });
+        try {
+          const role = getRole(credentials.accessToken);
+          const userId = getUserId(credentials.accessToken);
+          const grantType = "Bearer";
 
-        const result: LoginResponse = await response.json();
-
-        if (result.success) {
-          const user = {
-            ..._user,
-            role: getRole(result.result.accessToken),
-            ...result.result,
+          return {
+            id: userId,
+            name: userId,
+            accessToken: credentials.accessToken,
+            grantType,
+            role,
+            userId,
           };
-          setCookie(response);
-          return user;
-        } else {
+        } catch (error) {
           return null;
         }
       },
@@ -106,6 +76,11 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, trigger, session }) {
+      console.log("=== JWT Callback ===");
+      console.log("trigger:", trigger);
+      console.log("user:", user ? "존재" : "없음");
+      console.log("token.accessToken:", token.accessToken ? "존재" : "없음");
+
       if (trigger === "update" && session !== null) {
         const { grantType, accessToken } = session as {
           grantType: string;
@@ -113,10 +88,28 @@ export const authOptions: NextAuthOptions = {
         };
         return { ...token, ...user, grantType, accessToken };
       }
+
+      // 쿠키에서 세션 복원
+      if (!user && !token.accessToken) {
+        const cookieUser = await getSessionFromCookies();
+        if (cookieUser) {
+          return { ...token, ...cookieUser };
+        }
+      }
+
       return { ...token, ...user };
     },
 
     async session({ session, token }) {
+      // 토큰이 없으면 쿠키에서 복원 시도
+      if (!token.accessToken) {
+        const cookieUser = await getSessionFromCookies();
+        if (cookieUser) {
+          session.user = cookieUser as any;
+          return session;
+        }
+      }
+
       session.user = token as any;
       return session;
     },
@@ -124,12 +117,11 @@ export const authOptions: NextAuthOptions = {
 
   events: {
     signOut() {
-      cookies().delete("refreshToken");
+      cookies().delete("accessToken");
     },
   },
 
   pages: {
     signIn: "/login",
-    newUser: "/sign-up",
   },
 };

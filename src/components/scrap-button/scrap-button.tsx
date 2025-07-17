@@ -29,7 +29,7 @@ export function ScrapButton({
   const handleLike = useCallback(async () => {
     if (status === "unauthenticated") {
       alert("로그인이 필요한 서비스입니다.");
-      return router.push("/login");
+      return router.push("/login" as any);
     }
 
     if (session.user.role === "ROLE_ADMIN") {

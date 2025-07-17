@@ -7,6 +7,11 @@ type JWT = {
   exp: number;
 };
 
+export const getUserId = (token: string): string => {
+  const jwt = parseJwt(token);
+  return jwt.sub;
+};
+
 export const parseJwt = (token: string): JWT => {
   const base64Url = token.split(".")[1];
   const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");

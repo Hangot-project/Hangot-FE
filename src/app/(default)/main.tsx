@@ -4,7 +4,6 @@ import React, { FormEvent, useCallback } from "react";
 import styles from "./main.module.css";
 import { SearchBox } from "../../components";
 import { useRouter } from "next/navigation";
-import { SERVER_PARAMS_KEY } from "../../constants/dataset-search-params";
 import Image from "next/image";
 import { BackgroundPattern, DataIllustration } from "../../../public/svgs";
 
@@ -17,7 +16,8 @@ export default function Main() {
       event.preventDefault();
 
       if (keyword) {
-        router.push(`search-result?${SERVER_PARAMS_KEY.KEYWORD}=${keyword}`);
+        const path = `/search-result?keyword=${keyword}` as const;
+        router.push(path);
         return;
       }
     },
