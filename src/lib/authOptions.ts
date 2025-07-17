@@ -14,7 +14,7 @@ async function getSessionFromCookies() {
       const role = getRole(accessToken);
       const userId = getUserId(accessToken);
 
-      const sessionData = {
+      return {
         id: userId,
         name: userId,
         accessToken,
@@ -22,7 +22,6 @@ async function getSessionFromCookies() {
         role,
         userId,
       };
-      return sessionData;
     } catch (error) {
       return null;
     }
@@ -76,11 +75,6 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, trigger, session }) {
-      console.log("=== JWT Callback ===");
-      console.log("trigger:", trigger);
-      console.log("user:", user ? "존재" : "없음");
-      console.log("token.accessToken:", token.accessToken ? "존재" : "없음");
-
       if (trigger === "update" && session !== null) {
         const { grantType, accessToken } = session as {
           grantType: string;
@@ -101,7 +95,6 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      // 토큰이 없으면 쿠키에서 복원 시도
       if (!token.accessToken) {
         const cookieUser = await getSessionFromCookies();
         if (cookieUser) {

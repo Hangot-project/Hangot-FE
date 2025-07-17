@@ -18,7 +18,6 @@ export function useAuth(): AuthState {
   });
 
   useEffect(() => {
-    // 서버에서 설정한 헤더 확인
     const checkAuth = async () => {
       try {
         const response = await fetch("/api/auth/check", {
@@ -36,7 +35,6 @@ export function useAuth(): AuthState {
           status: data.isAuthenticated ? "authenticated" : "unauthenticated",
         });
       } catch (error) {
-        console.error("Auth check failed:", error);
         setAuthState({
           isAuthenticated: false,
           userId: null,

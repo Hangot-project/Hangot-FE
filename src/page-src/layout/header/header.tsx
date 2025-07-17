@@ -8,6 +8,7 @@ import Link from "next/link";
 import LoginModal from "../../../components/modal/LoginModal";
 import styled from "@emotion/styled";
 import { useAuth } from "../../../hooks/useAuth";
+import { signOut } from "next-auth/react";
 
 export function Header() {
   const { isAuthenticated } = useAuth();
@@ -20,20 +21,24 @@ export function Header() {
     }
 
     try {
+      // API 라우트를 통해 쿠키 삭제
       const response = await fetch("/api/auth/logout", {
         method: "POST",
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (response.ok) {
+        // NextAuth 세션도 종료
+        await signOut({ redirect: false });
         window.location.reload();
       } else {
-        alert("로그아웃 실패: " + result.message);
+        alert("로그아웃에 실패했습니다.");
       }
     } catch (error) {
-      alert("로그아웃 중 오류가 발생했습니다.");
+      console.error("로그아웃 오류:", error);
+      alert("로그아웃에 실패했습니다.");
     }
   };
 

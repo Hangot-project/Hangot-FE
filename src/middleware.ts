@@ -6,7 +6,6 @@ import { getUserId } from "./utils/jwt/parse-jwt";
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
 
-  // 쿠키에서 accessToken 확인
   const accessToken = request.cookies.get("accessToken")?.value;
 
   if (accessToken) {
@@ -27,12 +26,7 @@ export function middleware(request: NextRequest) {
   }
 
   // 보호된 라우트 확인
-  const protectedRoutes = [
-    "/my-page",
-    "/dataset/request",
-    "/dataset/create",
-    "/qna/create",
-  ];
+  const protectedRoutes = ["/my-page"];
   if (protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))) {
     if (!accessToken) {
       return NextResponse.redirect(new URL("/login", request.url));

@@ -5,7 +5,6 @@ export async function POST() {
   try {
     const cookieStore = cookies();
 
-    // 쿠키 삭제
     cookieStore.delete("accessToken");
 
     return NextResponse.json({
