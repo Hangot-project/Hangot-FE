@@ -1,11 +1,6 @@
 import DataPortalLogo from "./DataPortalLogo.svg";
 import BackgroundPattern from "./BackgroundPattern.svg";
 import DataIllustration from "./DataIllustration.svg";
-import Instagram from "./instagram.svg";
-import Youtube from "./youtube.svg";
-import Facebook from "./facebook.svg";
-import Twitter from "./twitter.svg";
-import Kakao from "./Kakao.svg";
 
 // * icons
 import ArrowDown from "./arrow_down.svg";
@@ -34,16 +29,7 @@ import MinusToggle from "./minus_toggle.svg";
 import ScreenClose from "./screen_close.svg";
 import UpdatedDate from "./updated_date.svg";
 
-export {
-  DataPortalLogo,
-  BackgroundPattern,
-  DataIllustration,
-  Instagram,
-  Youtube,
-  Facebook,
-  Twitter,
-  Kakao,
-};
+export { DataPortalLogo, BackgroundPattern, DataIllustration };
 export {
   ArrowDown,
   ResetIcon,

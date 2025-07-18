@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { KaKaoLogin } from "../../../public/images";
+import { KaKaoLogin, MainLogo } from "../../../public/images";
 import DataPortalLogo from "../../../public/svgs/DataPortalLogo.svg";
 import styles from "./LoginModal.module.css";
 
@@ -41,10 +41,11 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
         <div className={styles.content}>
           <Image
             alt="데이터포털 로고"
-            src={DataPortalLogo}
+            src={MainLogo}
             className={styles.logo}
+            width={150}
           />
-          <div className={styles.social}>
+          <div>
             <Link
               className={styles.kakaoContainer}
               href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${window.location.origin}/api/user/login/kakao`}

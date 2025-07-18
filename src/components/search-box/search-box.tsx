@@ -34,11 +34,19 @@ export function SearchBox({
     [setInput],
   );
 
+  const handleFormSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      handleSubmit?.(e, input);
+      setInput("");
+    },
+    [handleSubmit, input],
+  );
+
   return (
     <form
       className={`${styles.searchbox_container} ${className}`}
       style={boxstyle}
-      onSubmit={(e) => handleSubmit(e, input)}
+      onSubmit={handleFormSubmit}
     >
       <input
         type="text"

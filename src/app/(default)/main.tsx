@@ -15,11 +15,11 @@ export default function Main() {
     (event: FormEvent<HTMLFormElement>, keyword: string) => {
       event.preventDefault();
 
-      if (keyword) {
-        const path = `/search-result?keyword=${keyword}` as const;
-        router.push(path);
-        return;
-      }
+      const path = keyword
+        ? `/search-result?keyword=${keyword}`
+        : ("/search-result" as const);
+      // @ts-ignore
+      router.push(path);
     },
     [],
   );
@@ -43,10 +43,11 @@ export default function Main() {
             <div className={styles.heroText}>
               <h1 className={styles.heroTitle}>
                 모든 공공데이터를
-                <br />한 곳에서 찾아보세요
+                <br />
+                <span className={styles.brandName}>한 곳</span>에서 찾아보세요
               </h1>
               <p className={styles.heroSubtitle}>
-                하이데이터는 대한민국 공공데이터를 수집하여 한 곳에 모아 제공합니다.
+                흩어져있는 대한민국 공공데이터를 실시간으로 수집하여 제공합니다.
               </p>
             </div>
 
@@ -74,6 +75,7 @@ export default function Main() {
                 width={600}
                 height={400}
                 className={styles.illustration}
+                style={{ objectFit: "contain" }}
               />
             </div>
           </div>
@@ -105,14 +107,6 @@ export default function Main() {
             <h3 className={styles.featureTitle}>데이터 시각화</h3>
             <p className={styles.featureDescription}>
               복잡한 데이터를 직관적인 차트와 그래프로 쉽게 이해할 수 있습니다.
-            </p>
-          </div>
-
-          <div className={styles.featureCard}>
-            <div className={styles.featureIcon}>⚡</div>
-            <h3 className={styles.featureTitle}>빠른 다운로드</h3>
-            <p className={styles.featureDescription}>
-              원하는 데이터를 다양한 형식으로 빠르게 다운로드할 수 있습니다.
             </p>
           </div>
         </div>

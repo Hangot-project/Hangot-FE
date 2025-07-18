@@ -24,7 +24,3 @@ export interface DatasetBannerResponse extends GeneralResponse {
     dataset: DatasetInfoBanner[];
   };
 }
-
-export interface CreateDatasetResponse extends GeneralResponse {
-  result: DatasetInfoDetail;
-}

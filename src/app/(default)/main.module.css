@@ -74,6 +74,7 @@
   width: 100%;
   height: auto;
   opacity: 0.8;
+  object-fit: contain;
 }
 
 .heroText {
@@ -84,17 +85,22 @@
 .heroTitle {
   font-family: "NotoSansMedium";
   font-size: 3.0rem;
-  color: #1e293b;
   margin: 0 0 1.5rem 0;
-  line-height: 1.1;
+  line-height: 1.3;
   letter-spacing: -0.03em;
   font-weight: 800;
+}
+
+.brandName {
+  color: #396ea3;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .heroSubtitle {
   font-family: "NotoSansMedium";
   font-size: 1.2rem;
-  color: #475569;
   margin: 0 auto 2rem auto;
   line-height: 1.5;
   max-width: 600px;

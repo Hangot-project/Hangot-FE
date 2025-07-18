@@ -57,7 +57,7 @@ export const SearchSortDropdown = ({
         onClick={handleButtonClick}
         ref={dropdownRef}
       >
-        <p>{selectedItem || defaultText || "항목선택"}</p>
+        <p>{selectedItem || defaultText || "최신순"}</p>
         <Image alt="드롭다운 화살표" src={ArrowDown} className={styles.arrow} />
       </div>
 

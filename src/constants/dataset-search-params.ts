@@ -1,16 +1,3 @@
-export const ORGANIZATION_VALUES = [
-  "소프트융합대학",
-  "공과대학",
-  "경상대학",
-  "과학기술융합대학",
-  "국제문화대학",
-  "디자인대학",
-  "약학대학",
-  "언론정보대학",
-  "예체능대학",
-  "입학처",
-] as const;
-
 export const DATA_TYPES = [
   "csv",
   "xls",
@@ -26,7 +13,6 @@ export const SORT_VALUES = [
   "최신순",
   "스크랩순",
   "조회순",
-  "다운로드순",
   "인기순",
 ] as const;
 

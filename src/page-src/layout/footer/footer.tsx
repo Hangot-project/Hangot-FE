@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./footer.module.css";
 import { VerticalDivider } from "../../../components";
-import { DataPortalLogo } from "../../../../public/svgs";
+import { MainLogo } from "../../../../public/images";
 
 export function Footer() {
   return (
@@ -11,12 +11,7 @@ export function Footer() {
       <div className={styles.infoContainer}>
         <ul className={styles.navContainer}>
           <li>
-            <Image
-              alt="하이데이터 로고"
-              src={DataPortalLogo}
-              width={120}
-              height={32}
-            />
+            <Image alt="하이데이터 로고" src={MainLogo} width={100} height={32} />
           </li>
           <VerticalDivider
             style={{

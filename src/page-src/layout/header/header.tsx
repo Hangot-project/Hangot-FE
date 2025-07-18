@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import styles from "./header.module.css";
-import { DataPortalLogo } from "../../../../public/svgs";
 import Image from "next/image";
 import Link from "next/link";
 import LoginModal from "../../../components/modal/LoginModal";
 import styled from "@emotion/styled";
 import { useAuth } from "../../../hooks/useAuth";
 import { signOut } from "next-auth/react";
+import { MainLogo } from "../../../../public/images";
 
 export function Header() {
   const { isAuthenticated } = useAuth();
@@ -54,9 +54,8 @@ export function Header() {
               <Image
                 alt="하이데이터 로고"
                 className={styles.logoImg}
-                src={DataPortalLogo}
-                width={180}
-                height={56}
+                src={MainLogo}
+                width={120}
               />
             </Link>
           </div>
@@ -103,8 +102,8 @@ export function Header() {
 }
 
 const Container = styled.header`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(20px);
@@ -118,8 +117,7 @@ const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 0 10%;
   width: 100%;
 `;
 

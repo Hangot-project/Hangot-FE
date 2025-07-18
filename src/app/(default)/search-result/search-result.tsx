@@ -11,7 +11,7 @@ import {
 import styles from "./searchResult.module.css";
 import Link from "next/link";
 import { SORT_VALUES } from "../../../constants";
-import { updateQueryString } from "../../../utils/search/update-query-string";
+import { updateQueryString } from "../../../utils";
 import { DatasetInfo } from "../../../shared/types/dataset";
 import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
 
@@ -74,10 +74,8 @@ export default function SearchResult({
         ? updateQuery("create", SERVER_PARAMS_KEY.KEYWORD, keyword, true)
         : updateQuery("remove", SERVER_PARAMS_KEY.KEYWORD);
 
-      router.push({
-        pathname: "/search-result" as const,
-        query: updatedQuery,
-      } as any);
+      const queryString = new URLSearchParams(updatedQuery).toString();
+      router.push(`/search-result${queryString ? `?${queryString}` : ""}` as any);
     },
     [router, pathName, updateQuery],
   );
@@ -89,15 +87,10 @@ export default function SearchResult({
         SERVER_PARAMS_KEY.SORT,
         selectedSort,
       );
-      router.push(
-        {
-          pathname: pathName,
-          query: updatedQuery,
-        } as any,
-        {
-          scroll: false,
-        },
-      );
+      const queryString = new URLSearchParams(updatedQuery).toString();
+      router.push(`${pathName}${queryString ? `?${queryString}` : ""}` as any, {
+        scroll: false,
+      });
     }
   }, [selectedSort, router, pathName, updateQuery]);
 
@@ -152,6 +145,7 @@ export default function SearchResult({
                   type={dataset.type}
                   scrap={dataset.scrap}
                   createDate={dataset.createDate}
+                  themeList={dataset.themeList}
                 />
               </Link>
             ))}

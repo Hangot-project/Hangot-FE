@@ -1,6 +1,4 @@
-import { DATA_TYPES, ORGANIZATION_VALUES } from "../../constants";
-
-export type Organization = (typeof ORGANIZATION_VALUES)[number];
+import { DATA_TYPES } from "../../constants";
 
 export type DataType = (typeof DATA_TYPES)[number];
 
@@ -20,15 +18,16 @@ export interface DatasetInfoDetail {
   datasetId: number;
   title: string;
   description: string;
-  organization: Organization;
+  organization: string;
   theme: string[];
   createdDate: string;
   updateDate: string;
   view: number;
   scrap: number;
-  download: number;
   resourceName: string;
   resourceUrl: string;
+  source: string;
+  sourceUrl: string;
   type: DataType;
   license: string;
 }
@@ -37,7 +36,7 @@ export interface DatasetInfo {
   datasetId: number;
   title: string;
   description: string;
-  organization: Organization;
+  organization: string;
   view: number;
   type: DataType;
   themeList: string[];
@@ -49,7 +48,7 @@ export interface DatasetInfoBanner {
   datasetId: number;
   title: string;
   type: DataType;
-  organization: Organization;
+  organization: string;
   themeList: string[];
   scrap: number;
 }

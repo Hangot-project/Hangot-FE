@@ -4,4 +4,5 @@
 
 import Spinner from "./spinner.gif";
 import KaKaoLogin from "./kakao_login_btn.png";
-export { Spinner, KaKaoLogin };
+import MainLogo from "./logo.png";
+export { Spinner, KaKaoLogin, MainLogo };

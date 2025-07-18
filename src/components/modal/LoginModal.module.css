@@ -23,8 +23,8 @@
 
 .closeButton {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.5rem;
+  right: 1.5rem;
   background: none;
   border: none;
   font-size: 2rem;
@@ -45,15 +45,15 @@
 
 .content {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
 .logo {
-  margin-bottom: 2rem;
-}
-
-.social {
-  margin-top: 1.5rem;
+  margin-bottom: 0;
 }
 
 .kakaoContainer {

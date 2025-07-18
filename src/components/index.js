@@ -8,7 +8,6 @@ export * from "./dataset-table/dataset-table";
 export * from "./dataset-viewer/dataset-viewer";
 export * from "./dataset-type-icon/dataset-type-icon";
 export * from "./scrap-button/scrap-button";
-export * from "./post-list-card/post-list-card";
 export * from "./pagination/pagination";
 export * from "./loading/loading";
 export * from "./accordion/accordion";

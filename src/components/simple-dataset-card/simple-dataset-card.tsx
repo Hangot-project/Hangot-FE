@@ -16,6 +16,7 @@ interface SimpleDatasetCardProps {
   view: number;
   scrap: number;
   createDate: string;
+  themeList?: string[];
   onClick?: () => any;
   style?: CSSProperties;
 }
@@ -33,6 +34,7 @@ export function SimpleDatasetCard({
   view,
   scrap,
   createDate,
+  themeList,
   onClick,
   style,
 }: SimpleDatasetCardProps) {
@@ -40,6 +42,20 @@ export function SimpleDatasetCard({
     <div onClick={onClick} className={styles.container} style={style}>
       <p className={styles.title}>{title}</p>
       <p className={styles.subtitle}>{subtitle}</p>
+      
+      {themeList && themeList.length > 0 && (
+        <div className={styles.tagContainer}>
+          {themeList.slice(0, 3).map((theme, index) => (
+            <span key={index} className={styles.tag}>
+              {theme}
+            </span>
+          ))}
+          {themeList.length > 3 && (
+            <span className={styles.moreTag}>+{themeList.length - 3}</span>
+          )}
+        </div>
+      )}
+      
       <div className={styles.infoContainer}>
         <div>
           <Image
