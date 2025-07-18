@@ -6,13 +6,13 @@ import {
   LikeFilled,
 } from "../../../public/svgs";
 import { CSSProperties } from "react";
-import { DataType, Organization } from "../../shared/types/dataset";
+import { DataType } from "../../shared/types/dataset";
 
 interface SimpleDatasetCardProps {
   title: string;
   subtitle: string;
   type: DataType;
-  from: Organization;
+  from: string;
   view: number;
   scrap: number;
   createDate: string;
@@ -42,7 +42,7 @@ export function SimpleDatasetCard({
     <div onClick={onClick} className={styles.container} style={style}>
       <p className={styles.title}>{title}</p>
       <p className={styles.subtitle}>{subtitle}</p>
-      
+
       {themeList && themeList.length > 0 && (
         <div className={styles.tagContainer}>
           {themeList.slice(0, 3).map((theme, index) => (
@@ -55,7 +55,7 @@ export function SimpleDatasetCard({
           )}
         </div>
       )}
-      
+
       <div className={styles.infoContainer}>
         <div>
           <Image

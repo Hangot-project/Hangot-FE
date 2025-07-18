@@ -1,4 +1,4 @@
-import { DataType, Organization } from "./dataset";
+import { DataType } from "./dataset";
 
 export interface Scrap {
   scrapId: number;
@@ -6,5 +6,5 @@ export interface Scrap {
   title: string;
   description: string;
   type: DataType;
-  organization: Organization;
+  organization: string;
 }

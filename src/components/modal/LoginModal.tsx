@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { KaKaoLogin, MainLogo } from "../../../public/images";
-import DataPortalLogo from "../../../public/svgs/DataPortalLogo.svg";
 import styles from "./LoginModal.module.css";
 
 interface LoginModalProps {
@@ -43,7 +42,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             alt="데이터포털 로고"
             src={MainLogo}
             className={styles.logo}
-            width={150}
+            width={130}
           />
           <div>
             <Link

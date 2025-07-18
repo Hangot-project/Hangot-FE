@@ -17,9 +17,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           <h1 className={styles.title}>{datasetDetail.title}</h1>
           {datasetDetail.type && <DatasetTypeIcon type={datasetDetail.type} />}
         </div>
-        
+
         <p className={styles.description}>{datasetDetail.description}</p>
-        
+
         <div className={styles.metaSection}>
           <div className={styles.leftMeta}>
             <div className={styles.keywordTags}>
