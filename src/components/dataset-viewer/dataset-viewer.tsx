@@ -129,15 +129,14 @@ export function DatasetViewer({
           ) : (
             <DatasetTable datasetId={datasetId} />
           ))}
+        {axisResult === null && (
+          <div className={styles.warningContainer} style={{ flex: 1 }}>
+            <h1 className={styles.warningTitle}>
+              ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
+            </h1>
+          </div>
+        )}
       </div>
-
-      {axisResult === null && (
-        <div className={styles.warningContainer} style={{ flex: 1 }}>
-          <h1 className={styles.warningTitle}>
-            ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
-          </h1>
-        </div>
-      )}
     </div>
   );
 }
