@@ -1,10 +1,10 @@
-import { DATASET_API } from "../config";
+import { BASE_URL } from "../config";
 import { DatasetTableResponse } from "./type";
 
 export async function getDatasetTable(datasetId: number) {
   try {
     const response: DatasetTableResponse = await fetch(
-      `${DATASET_API}/${datasetId}/chart/table`,
+      `${BASE_URL}/api/datastore/${datasetId}/chart/table`,
     ).then((res) => res.json());
 
     if (!response.success) {

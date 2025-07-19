@@ -1,4 +1,4 @@
-import { SERVER_API } from "../config";
+import { BASE_URL } from "../config";
 import { OrganizationListResponse } from "./type";
 import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
 
@@ -10,7 +10,7 @@ export async function getOrganizations(keyword?: string) {
     }
 
     const response: OrganizationListResponse = await fetch(
-      `${SERVER_API}/api/organizations?${params.toString()}`,
+      `${BASE_URL}/api/organizations?${params.toString()}`,
     ).then((res) => res.json());
 
     if (!response.success) {

@@ -2,6 +2,8 @@
 
 import React, { CSSProperties, useCallback, useEffect, useState } from "react";
 import { BarChart } from "../bar-chart/bar-chart";
+import { LineChart } from "../line-chart/line-chart";
+import { PieChart } from "../pie-chart/pie-chart";
 import styles from "./dataset-viewer.module.css";
 import { DatasetTable } from "../dataset-table/dataset-table";
 import Image from "next/image";
@@ -12,13 +14,11 @@ import {
   TableInactive,
 } from "../../../public/svgs";
 import { SearchSortDropdown } from "../drop-down/search-sort-dropdown";
-import styled from "@emotion/styled";
 import { DatasetAxisResult } from "../../shared/api/dataset-visual/type";
 
 export function DatasetViewer({
   datasetId,
   axisResult,
-  title,
   style,
 }: {
   datasetId: number;
@@ -28,6 +28,7 @@ export function DatasetViewer({
 }) {
   const [isBarActive, setIsBarActive] = useState<boolean>(true);
   const [selectedAxis, setSelectedAxis] = useState<string>("");
+  const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
 
   useEffect(() => {
     if (axisResult !== null) {
@@ -47,9 +48,6 @@ export function DatasetViewer({
             onClick={() => setIsBarActive(true)}
           />
           <Image
-            style={{
-              marginLeft: 8,
-            }}
             src={TableInactive}
             alt="표 비활성화"
             className={styles.selectBtn}
@@ -67,9 +65,6 @@ export function DatasetViewer({
           onClick={() => setIsBarActive(true)}
         />
         <Image
-          style={{
-            marginLeft: 8,
-          }}
           src={TableActive}
           alt="표 활성화"
           className={styles.selectBtn}
@@ -80,63 +75,69 @@ export function DatasetViewer({
   }, [isBarActive]);
 
   return (
-    <div style={{ ...style }}>
+    <div
+      style={{
+        ...style,
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* //* 제목 & 버튼 */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "2.5rem",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className={styles.headerContainer}>
         {/* //? 제목 */}
-        <h3 className={styles.sheetSubtitle}>{title}</h3>
+        <h3 className={styles.sheetSubtitle}>시각화 데이터</h3>
         {/* //? 버튼 */}
-        <div
-          style={{
-            display: "flex",
-          }}
-        >
+        <div className={styles.controlsContainer}>
           {axisResult !== null && isBarActive && (
-            <SearchSortDropdown
-              items={axisResult.axis}
-              selectedItem={selectedAxis}
-              setSelectedItem={setSelectedAxis}
-              width={"20rem"}
-              style={{
-                marginRight: "1rem",
-              }}
-            />
+            <>
+              <SearchSortDropdown
+                items={axisResult.axis}
+                selectedItem={selectedAxis}
+                setSelectedItem={setSelectedAxis}
+                width={"12rem"}
+              />
+              <SearchSortDropdown
+                items={["막대", "선", "파이"]}
+                selectedItem={chartType}
+                setSelectedItem={setChartType}
+                width={"8rem"}
+              />
+            </>
           )}
-          <Buttons />
+          <div className={styles.buttonsContainer}>
+            <Buttons />
+          </div>
         </div>
       </div>
 
       {/* //* 그래프 */}
-      {axisResult !== null &&
-        (isBarActive && selectedAxis ? (
-          <BarChart datasetId={datasetId} colName={selectedAxis} />
-        ) : (
-          <DatasetTable datasetId={datasetId} />
-        ))}
+      <div style={{ flex: 1 }}>
+        {axisResult !== null &&
+          (isBarActive && selectedAxis ? (
+            <>
+              {chartType === "막대" && (
+                <BarChart datasetId={datasetId} colName={selectedAxis} />
+              )}
+              {chartType === "선" && (
+                <LineChart datasetId={datasetId} colName={selectedAxis} />
+              )}
+              {chartType === "파이" && (
+                <PieChart datasetId={datasetId} colName={selectedAxis} />
+              )}
+            </>
+          ) : (
+            <DatasetTable datasetId={datasetId} />
+          ))}
+      </div>
 
       {axisResult === null && (
-        <SuccessFailContainer>
-          <SuccessFailTitle>
+        <div className={styles.warningContainer} style={{ flex: 1 }}>
+          <h1 className={styles.warningTitle}>
             ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
-          </SuccessFailTitle>
-        </SuccessFailContainer>
+          </h1>
+        </div>
       )}
     </div>
   );
 }
-
-const SuccessFailContainer = styled.div`
-  height: 20rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SuccessFailTitle = styled.h1``;

@@ -11,9 +11,3 @@ export interface OrganizationListResponse extends GeneralResponse {
     organizationList: string[];
   };
 }
-
-export interface LicenseListResponse extends GeneralResponse {
-  result: {
-    licensesList: string[];
-  };
-}

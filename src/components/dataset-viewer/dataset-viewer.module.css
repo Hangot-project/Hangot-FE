@@ -2,8 +2,52 @@
   font-family: "NotoSansMedium";
   font-size: 1.25rem;
   color: #474747;
+  margin: 0;
 }
 
 .selectBtn {
   cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.selectBtn:hover {
+  opacity: 0.7;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.controlsContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.warningContainer {
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+}
+
+.warningTitle {
+  font-size: 1.125rem;
+  color: #6c757d;
+  margin: 0;
+  text-align: center;
 }

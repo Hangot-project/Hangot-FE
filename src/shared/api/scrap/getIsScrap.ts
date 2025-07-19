@@ -1,9 +1,11 @@
-import { SERVER_API } from "../config";
+import { BASE_URL } from "../config";
 import { IsScrapResponse } from "./type";
 
 /**
  * 로그인 유저의 데이터셋 스크랩 여부
  * @param datasetId
+ * @param grantType
+ * @param token
  */
 export async function getIsScrap(
   datasetId: number,
@@ -11,7 +13,7 @@ export async function getIsScrap(
   token: string,
 ): Promise<boolean | null> {
   try {
-    const _result = await fetch(`${SERVER_API}/api/scrap/dataset/${datasetId}`, {
+    const _result = await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
       headers: {
         Authorization: `${grantType} ${token}`,
       },

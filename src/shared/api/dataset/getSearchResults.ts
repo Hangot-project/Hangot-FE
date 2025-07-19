@@ -1,5 +1,5 @@
 import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
-import { SERVER_API } from "../config";
+import { BASE_URL } from "../config";
 import { DatasetListResponse } from "./type";
 
 /**
@@ -51,7 +51,7 @@ export async function getSearchResults(
     }
 
     const result: DatasetListResponse = await fetch(
-      `${SERVER_API}/api/datasets?${params.toString()}`,
+      `${BASE_URL}/api/datasets?${params.toString()}`,
       {
         cache: "no-cache",
         headers: {

@@ -1,10 +1,10 @@
-import { DATASET_API } from "../config";
+import { BASE_URL } from "../config";
 import { DatasetAxisResponse } from "./type";
 
 export async function getDatasetAxis(datasetId: number) {
   try {
     const response: DatasetAxisResponse = await fetch(
-      `${DATASET_API}/${datasetId}/axis`,
+      `${BASE_URL}/api/datastore/${datasetId}/axis`,
     ).then((res) => res.json());
 
     if (!response.success) {

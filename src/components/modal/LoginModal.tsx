@@ -42,7 +42,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
             alt="데이터포털 로고"
             src={MainLogo}
             className={styles.logo}
-            width={130}
+            width={110}
           />
           <div>
             <Link

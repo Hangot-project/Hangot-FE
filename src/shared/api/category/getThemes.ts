@@ -1,9 +1,9 @@
-import { SERVER_API } from "../config";
+import { BASE_URL } from "../config";
 import { ThemeListResponse } from "./type";
 
 export async function getThemes() {
   try {
-    const response: ThemeListResponse = await fetch(`${SERVER_API}/api/themes`).then(
+    const response: ThemeListResponse = await fetch(`${BASE_URL}/api/themes`).then(
       (res) => res.json(),
     );
 

@@ -55,7 +55,7 @@ export function Header() {
                 alt="하이데이터 로고"
                 className={styles.logoImg}
                 src={MainLogo}
-                width={120}
+                width={100}
               />
             </Link>
           </div>

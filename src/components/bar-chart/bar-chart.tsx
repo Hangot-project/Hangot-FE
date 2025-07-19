@@ -1,16 +1,16 @@
 "use client";
 
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  BarChart as RechartsBarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
+  ResponsiveContainer,
   Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
-import { ConvertDatasetChartToData } from "../../utils";
+} from "recharts";
+import { useState, useEffect } from "react";
 import { getDatasetChart } from "../../shared/api/dataset-visual/getDatasetChart";
 
 interface Props {
@@ -18,49 +18,124 @@ interface Props {
   colName: string;
 }
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+export function BarChart({ datasetId, colName }: Props) {
+  const [dataset, setDataset] = useState<any>(null);
+  const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
 
-const default_options = {
-  maxBarThickness: 50,
-  interaction: {
-    mode: "index",
-  },
-  elements: {
-    bar: {
-      borderWidth: 0,
-    },
-  },
-  responsive: true,
-};
+  useEffect(() => {
+    getDatasetChart(datasetId, colName).then(setDataset);
+  }, [datasetId, colName]);
 
-export async function BarChart({ datasetId, colName }: Props) {
-  const dataset = await getDatasetChart(datasetId, colName);
+  // Convert dataset to recharts format
+  const rechartsData =
+    dataset?.x_label?.map((label, index) => {
+      const dataPoint: any = { name: label };
+      dataset.dataName.forEach((seriesName, seriesIndex) => {
+        dataPoint[seriesName] = dataset.dataList[seriesIndex][index];
+      });
+      return dataPoint;
+    }) || [];
 
-  const options = Object.assign(
-    {},
-    default_options,
-    dataset
-      ? {
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: dataset.x_axis_name,
-              },
-            },
-          },
-        }
-      : {},
-  );
+  const handleLegendClick = (dataKey: string) => {
+    const newHiddenSeries = new Set(hiddenSeries);
+    if (hiddenSeries.has(dataKey)) {
+      newHiddenSeries.delete(dataKey);
+    } else {
+      newHiddenSeries.add(dataKey);
+    }
+    setHiddenSeries(newHiddenSeries);
+  };
+
+  const renderCustomLegend = (props: any) => {
+    const { payload } = props;
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "16px",
+          marginTop: "16px",
+        }}
+      >
+        {payload.map((entry: any) => (
+          <div
+            key={entry.value}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              opacity: hiddenSeries.has(entry.value) ? 0.5 : 1,
+              textDecoration: hiddenSeries.has(entry.value)
+                ? "line-through"
+                : "none",
+            }}
+            onClick={() => handleLegendClick(entry.value)}
+          >
+            <div
+              style={{
+                width: "12px",
+                height: "12px",
+                backgroundColor: entry.color,
+                marginRight: "8px",
+              }}
+            />
+            <span>{entry.value}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <>
       {dataset && (
-        <Bar
-          //@ts-ignore
-          options={options}
-          data={ConvertDatasetChartToData(dataset)}
-        />
+        <div
+          style={{
+            height: "100%",
+            minHeight: "600px",
+            overflowX: "auto",
+            overflowY: "auto",
+            border: "1px solid #e0e0e0",
+            borderRadius: "8px",
+            padding: "16px",
+          }}
+        >
+          <div
+            style={{
+              minWidth: `${Math.max(800, (dataset.x_label?.length || 0) * 60)}px`,
+              height: "550px",
+            }}
+          >
+            <ResponsiveContainer width="100%" height="100%">
+              <RechartsBarChart
+                data={rechartsData}
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 20,
+                  bottom: 10,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
+                <YAxis tickFormatter={(value) => value.toLocaleString()} />
+                <Tooltip formatter={(value) => [value.toLocaleString(), ""]} />
+                <Legend content={renderCustomLegend} />
+                {dataset.dataName.map((seriesName, index) => (
+                  <Bar
+                    key={seriesName}
+                    dataKey={seriesName}
+                    fill={`hsl(${
+                      (index * 360) / dataset.dataName.length
+                    }, 70%, 50%)`}
+                    hide={hiddenSeries.has(seriesName)}
+                  />
+                ))}
+              </RechartsBarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       )}
     </>
   );

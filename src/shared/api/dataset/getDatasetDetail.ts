@@ -1,11 +1,11 @@
 import { DatasetInfoDetail } from "../../types/dataset";
-import { SERVER_API } from "../config";
 import { DatasetDetailResponse } from "./type";
+import { BASE_URL } from "../config";
 
 export async function getDatasetDetail(id: number): Promise<DatasetInfoDetail> {
   try {
     const result: DatasetDetailResponse = await fetch(
-      `${SERVER_API}/api/dataset/${id}`,
+      `${BASE_URL}/api/dataset/${id}`,
       { cache: "no-store" },
     ).then((res) => res.json());
 

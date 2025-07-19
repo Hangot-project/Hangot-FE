@@ -1,10 +1,10 @@
-import { SERVER_API } from "../config";
+import { BASE_URL } from "../config";
 import { LicenseListResponse } from "./type";
 
 export async function getLicense() {
   try {
     const response: LicenseListResponse = await fetch(
-      `${SERVER_API}/api/licenses`,
+      `${BASE_URL}/api/licenses`,
     ).then((res) => res.json());
 
     if (!response.success) {

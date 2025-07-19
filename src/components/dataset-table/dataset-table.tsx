@@ -61,5 +61,10 @@ export function DatasetTable({ datasetId }: Props) {
 }
 
 const Wrapper = styled.div`
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 100%;
+  min-height: 500px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
 `;
