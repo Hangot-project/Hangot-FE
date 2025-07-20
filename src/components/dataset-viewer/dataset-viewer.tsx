@@ -26,7 +26,7 @@ export function DatasetViewer({
   title: string;
   style?: CSSProperties;
 }) {
-  const [isBarActive, setIsBarActive] = useState<boolean>(true);
+  const [isBarActive, setIsBarActive] = useState<boolean>(false);
   const [selectedAxis, setSelectedAxis] = useState<string>("");
   const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
 
@@ -42,16 +42,16 @@ export function DatasetViewer({
       return (
         <>
           <Image
-            src={GraphActive}
-            alt="그래프 활성화"
-            className={styles.selectBtn}
-            onClick={() => setIsBarActive(true)}
-          />
-          <Image
             src={TableInactive}
             alt="표 비활성화"
             className={styles.selectBtn}
             onClick={() => setIsBarActive(false)}
+          />
+          <Image
+            src={GraphActive}
+            alt="그래프 활성화"
+            className={styles.selectBtn}
+            onClick={() => setIsBarActive(true)}
           />
         </>
       );
@@ -59,16 +59,16 @@ export function DatasetViewer({
     return (
       <>
         <Image
-          src={GraphInactive}
-          alt="그래프 비활성화"
-          className={styles.selectBtn}
-          onClick={() => setIsBarActive(true)}
-        />
-        <Image
           src={TableActive}
           alt="표 활성화"
           className={styles.selectBtn}
           onClick={() => setIsBarActive(false)}
+        />
+        <Image
+          src={GraphInactive}
+          alt="그래프 비활성화"
+          className={styles.selectBtn}
+          onClick={() => setIsBarActive(true)}
         />
       </>
     );
