@@ -19,12 +19,12 @@ jobs:
       # env 파일 생성
       - name: Generate env file
         run: |
-          echo "NEXT_PUBLIC_KAKAO_CLIENT_ID=$NEXT_PUBLIC_KAKAO_CLIENT_ID" >> .env
+          echo "KAKAO_CLIENT_ID=$KAKAO_CLIENT_ID" >> .env
           echo "NEXT_PUBLIC_SERVER_API=$NEXT_PUBLIC_SERVER_API" >> .env
           echo "NEXT_PUBLIC_DOMAIN=$NEXT_PUBLIC_DOMAIN" >> .env
           echo "NEXT_PUBLIC_DATASET_API=$NEXT_PUBLIC_DATASET_API" >> .env
         env:
-          NEXT_PUBLIC_KAKAO_CLIENT_ID: ${{secrets.NEXT_PUBLIC_KAKAO_CLIENT_ID}}
+          KAKAO_CLIENT_ID: ${{secrets.KAKAO_CLIENT_ID}}
           NEXT_PUBLIC_DATASET_API: ${{secrets.NEXT_PUBLIC_DATASET_API}}
           NEXT_PUBLIC_SERVER_API: ${{secrets.NEXT_PUBLIC_SERVER_API}}
           NEXT_PUBLIC_DOMAIN: ${{secrets.NEXT_PUBLIC_DOMAIN}}

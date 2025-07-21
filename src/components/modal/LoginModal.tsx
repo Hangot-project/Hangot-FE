@@ -47,7 +47,7 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
           <div>
             <Link
               className={styles.kakaoContainer}
-              href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${window.location.origin}/api/user/login/kakao`}
+              href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${window.location.origin}/api/user/login/kakao`}
             >
               <Image alt="카카오 로그인" src={KaKaoLogin} />
             </Link>
