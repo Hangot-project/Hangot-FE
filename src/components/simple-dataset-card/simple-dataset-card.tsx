@@ -37,12 +37,12 @@ export function SimpleDatasetCard({
 }: SimpleDatasetCardProps) {
   return (
     <div onClick={onClick} className={styles.container} style={style}>
-      <div className={styles.header}>
+      <div className={styles.body}>
         <div className={styles.titleRow}>
           <p className={styles.title}>{title}</p>
           <span className={styles.type}>{type}</span>
         </div>
-        <p className={styles.description}>{description.replace(/\n/g, " ")}</p>
+        <p className={styles.description}>{description}</p>
         <div className={styles.metadataRow}>
           <span className={styles.organization}>{from}</span>
           <span className={styles.separator}>•</span>
