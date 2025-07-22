@@ -41,7 +41,11 @@ export function Pagination({
         <Link
           href={{
             pathname: pathName,
-            query: updateQuery("create", "page", Math.max(currentPage - 1, 0)),
+            query: updateQuery(
+              "create",
+              "page",
+              Math.max(Math.floor(currentPage / 5) * 5 - 1, 0),
+            ),
           }}
         >
           <Image src={PreviousButton} alt="이전 페이지 버튼" />
@@ -64,7 +68,7 @@ export function Pagination({
             query: updateQuery(
               "create",
               "page",
-              Math.min(totalPage - 1, currentPage + 1),
+              Math.min(totalPage - 1, Math.floor(currentPage / 5) * 5 + 5),
             ),
           }}
         >
