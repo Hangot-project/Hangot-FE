@@ -1,8 +1,7 @@
 import styles from "./dataset-type-icon.module.css";
 import { colorMatch } from "../../constants";
-import { DataType } from "../../shared/types/dataset";
 
-export function DatasetTypeIcon({ type }: { type: DataType }) {
+export function DatasetTypeIcon({ type }: { type: string }) {
   const bgColor = colorMatch[type.toUpperCase()];
   return (
     <div

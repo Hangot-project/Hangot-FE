@@ -1,8 +1,4 @@
-import {
-  DatasetInfo,
-  DatasetInfoBanner,
-  DatasetInfoDetail,
-} from "../../types/dataset";
+import { DatasetInfo, DatasetInfoDetail } from "../../types/dataset";
 import { GeneralResponse } from "../config";
 
 export interface DatasetResult {
@@ -17,10 +13,4 @@ export interface DatasetListResponse extends GeneralResponse {
 
 export interface DatasetDetailResponse extends GeneralResponse {
   result: DatasetInfoDetail;
-}
-
-export interface DatasetBannerResponse extends GeneralResponse {
-  result: {
-    dataset: DatasetInfoBanner[];
-  };
 }

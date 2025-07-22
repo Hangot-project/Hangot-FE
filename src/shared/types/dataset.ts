@@ -19,7 +19,7 @@ export interface DatasetInfoDetail {
   title: string;
   description: string;
   organization: string;
-  theme: string[];
+  tag: string[];
   createdDate: string;
   updateDate: string;
   view: number;
@@ -28,27 +28,19 @@ export interface DatasetInfoDetail {
   resourceUrl: string;
   source: string;
   sourceUrl: string;
-  type: DataType;
+  type: string;
   license: string;
 }
 
 export interface DatasetInfo {
   datasetId: number;
   title: string;
-  description: string;
   organization: string;
   view: number;
-  type: DataType;
-  themeList: string[];
+  type: string;
+  tagList: string[];
   scrap: number;
   createDate: string;
-}
-
-export interface DatasetInfoBanner {
-  datasetId: number;
-  title: string;
-  type: DataType;
-  organization: string;
-  themeList: string[];
-  scrap: number;
+  updateDate: string;
+  description: string;
 }

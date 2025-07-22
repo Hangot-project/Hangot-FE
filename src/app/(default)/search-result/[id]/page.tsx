@@ -8,8 +8,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   const datasetDetail = await getDatasetDetail(datasetId);
   const axisResult = await getDatasetAxis(datasetId);
 
-  const datasetExtension = datasetDetail.type;
-
   return (
     <div className={styles.root}>
       <header className={styles.heroSection}>
@@ -32,7 +30,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div className={styles.metaSection}>
           <div className={styles.keywordTags}>
-            {datasetDetail.theme.map((keyword, index) => (
+            {datasetDetail.tag.map((keyword, index) => (
               <span key={index} className={styles.keywordTag}>
                 {keyword}
               </span>
@@ -82,19 +80,11 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <main className={styles.mainContent}>
         <section className={styles.previewSection}>
-          {datasetExtension === "pdf" ? (
-            <embed
-              src={datasetDetail.resourceUrl}
-              type="application/pdf"
-              className={styles.pdfEmbed}
-            />
-          ) : (
-            <DatasetViewer
-              datasetId={datasetDetail.datasetId}
-              axisResult={axisResult}
-              title={datasetDetail.title}
-            />
-          )}
+          <DatasetViewer
+            datasetId={datasetDetail.datasetId}
+            axisResult={axisResult}
+            title={datasetDetail.title}
+          />
         </section>
       </main>
     </div>

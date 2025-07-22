@@ -139,13 +139,14 @@ export default function SearchResult({
               >
                 <SimpleDatasetCard
                   title={dataset.title}
-                  subtitle={dataset.description}
                   from={dataset.organization}
                   view={dataset.view}
                   type={dataset.type}
                   scrap={dataset.scrap}
                   createDate={dataset.createDate}
-                  themeList={dataset.themeList}
+                  updateDate={dataset.updateDate}
+                  tagList={dataset.tagList}
+                  description={dataset.description}
                 />
               </Link>
             ))}
