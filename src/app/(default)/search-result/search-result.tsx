@@ -126,8 +126,6 @@ export default function SearchResult({
             </div>
           </div>
 
-          <div className={styles.divisionLine} style={{ marginBottom: "2rem" }} />
-
           <div className={styles.resultsGrid}>
             {results.map((dataset) => (
               <Link

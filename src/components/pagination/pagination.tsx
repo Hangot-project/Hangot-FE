@@ -34,7 +34,7 @@ export function Pagination({
     <div
       className="pagesContainer"
       style={{
-        margin: "3.5rem 0 9.75rem 0",
+        margin: "3.5rem 0 0 0",
       }}
     >
       <div className="pagesWrapper">
@@ -44,7 +44,7 @@ export function Pagination({
             query: updateQuery(
               "create",
               "page",
-              Math.max(Math.floor((currentPage - 1) / 5) * 5 + 1, 1),
+              Math.max(Math.floor((currentPage - 1) / 5) * 5 - 4, 1),
             ),
           }}
         >
