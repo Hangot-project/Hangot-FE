@@ -44,7 +44,7 @@ export function Pagination({
             query: updateQuery(
               "create",
               "page",
-              Math.max(Math.floor(currentPage / 5) * 5 - 1, 0),
+              Math.max(Math.floor((currentPage - 1) / 5) * 5 + 1, 1),
             ),
           }}
         >
@@ -54,10 +54,10 @@ export function Pagination({
           <Link
             href={{
               pathname: pathName,
-              query: updateQuery("create", "page", num - 1),
+              query: updateQuery("create", "page", num),
             }}
             key={`page${num}`}
-            className={`pageButton ${currentPage == num - 1 ? "active" : ""}`}
+            className={`pageButton ${currentPage == num ? "active" : ""}`}
           >
             {num}
           </Link>
@@ -68,7 +68,7 @@ export function Pagination({
             query: updateQuery(
               "create",
               "page",
-              Math.min(totalPage - 1, Math.floor(currentPage / 5) * 5 + 5),
+              Math.min(totalPage, Math.floor((currentPage - 1) / 5) * 5 + 6),
             ),
           }}
         >

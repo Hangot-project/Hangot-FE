@@ -9,7 +9,9 @@ export function getPageArray(
   totalPage: number,
   bound: number = 5,
 ): number[] {
-  const index = Math.floor(currentPage / bound);
+  // Use 1-based indexing
+  const adjustedCurrentPage = Math.max(currentPage, 1);
+  const index = Math.floor((adjustedCurrentPage - 1) / bound);
   const min = bound * index + 1;
   const max = Math.min(min + bound - 1, totalPage);
 
