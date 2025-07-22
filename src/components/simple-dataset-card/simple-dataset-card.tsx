@@ -42,7 +42,7 @@ export function SimpleDatasetCard({
           <p className={styles.title}>{title}</p>
           <span className={styles.type}>{type}</span>
         </div>
-        <p className={styles.description}>{description}</p>
+        <p className={styles.description}>{description.replace(/\n/g, " ")}</p>
         <div className={styles.metadataRow}>
           <span className={styles.organization}>{from}</span>
           <span className={styles.separator}>•</span>
