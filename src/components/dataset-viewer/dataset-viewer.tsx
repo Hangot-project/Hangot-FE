@@ -29,6 +29,7 @@ export function DatasetViewer({
   const [isBarActive, setIsBarActive] = useState<boolean>(false);
   const [selectedAxis, setSelectedAxis] = useState<string>("");
   const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
+  const [showNotSupported, setShowNotSupported] = useState<boolean>(false);
 
   useEffect(() => {
     if (axisResult !== null) {
@@ -113,7 +114,14 @@ export function DatasetViewer({
 
       {/* //* 그래프 */}
       <div style={{ flex: 1 }}>
-        {axisResult !== null &&
+        {showNotSupported ? (
+          <div className={styles.warningContainer} style={{ flex: 1 }}>
+            <h1 className={styles.warningTitle}>
+              ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
+            </h1>
+          </div>
+        ) : (
+          axisResult !== null &&
           (isBarActive && selectedAxis ? (
             <>
               {chartType === "막대" && (
@@ -127,14 +135,11 @@ export function DatasetViewer({
               )}
             </>
           ) : (
-            <DatasetTable datasetId={datasetId} />
-          ))}
-        {axisResult === null && (
-          <div className={styles.warningContainer} style={{ flex: 1 }}>
-            <h1 className={styles.warningTitle}>
-              ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
-            </h1>
-          </div>
+            <DatasetTable
+              datasetId={datasetId}
+              onNotSupported={() => setShowNotSupported(true)}
+            />
+          ))
         )}
       </div>
     </div>

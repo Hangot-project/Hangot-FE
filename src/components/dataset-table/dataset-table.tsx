@@ -8,9 +8,10 @@ import styled from "@emotion/styled";
 
 interface Props {
   datasetId: number;
+  onNotSupported?: () => void;
 }
 
-export function DatasetTable({ datasetId }: Props) {
+export function DatasetTable({ datasetId, onNotSupported }: Props) {
   const [dataset, setDataset] = useState<DatasetTableType>();
 
   useEffect(() => {
@@ -22,10 +23,22 @@ export function DatasetTable({ datasetId }: Props) {
         return;
       }
 
-      setDataset(res);
+      if (
+        res &&
+        typeof res === "object" &&
+        "error" in res &&
+        res.error === "NOT_SUPPORTED"
+      ) {
+        onNotSupported?.();
+        return;
+      }
+
+      if (res && typeof res === "object" && !("error" in res)) {
+        setDataset(res);
+      }
     }
     fetchData();
-  }, []);
+  }, [datasetId, onNotSupported]);
 
   const colWidthPercent = dataset ? 100 / dataset.label.length : 0;
 
