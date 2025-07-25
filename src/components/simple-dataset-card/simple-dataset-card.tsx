@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./simple-dataset-card.module.css";
 import { LikeFilled } from "../../../public/svgs";
 import { CSSProperties } from "react";
+import { colorMatch } from "../../constants/dataset-color";
 
 interface SimpleDatasetCardProps {
   title: string;
@@ -40,7 +41,15 @@ export function SimpleDatasetCard({
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <p className={styles.title}>{title}</p>
-          <span className={styles.type}>{type}</span>
+          <span 
+            className={styles.type}
+            style={{ 
+              backgroundColor: colorMatch[type as keyof typeof colorMatch] || colorMatch.default,
+              color: "black"
+            }}
+          >
+            {type}
+          </span>
         </div>
         <p className={styles.description}>{description}</p>
         <div className={styles.metadataRow}>
