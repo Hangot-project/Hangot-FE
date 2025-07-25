@@ -41,11 +41,12 @@ export function SimpleDatasetCard({
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <p className={styles.title}>{title}</p>
-          <span 
+          <span
             className={styles.type}
-            style={{ 
-              backgroundColor: colorMatch[type as keyof typeof colorMatch] || colorMatch.default,
-              color: "black"
+            style={{
+              backgroundColor:
+                colorMatch[type as keyof typeof colorMatch] || colorMatch.default,
+              color: "black",
             }}
           >
             {type}
