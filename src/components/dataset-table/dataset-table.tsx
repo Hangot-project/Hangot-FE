@@ -5,6 +5,7 @@ import { DatasetTableType } from "../../shared/types/dataset";
 import styles from "./dataset-table.module.css";
 import { getDatasetTable } from "../../shared/api/dataset-visual/getDatasetTable";
 import styled from "@emotion/styled";
+import { isApiError } from "../../shared/types/error";
 
 interface Props {
   datasetId: number;
@@ -17,25 +18,12 @@ export function DatasetTable({ datasetId, onNotSupported }: Props) {
   useEffect(() => {
     async function fetchData() {
       const res = await getDatasetTable(datasetId);
-
-      if (res === null) {
-        alert(`데이터 시각화 정보를 불러오는데 실패했습니다.`);
+      console.log(res);
+      if (isApiError(res)) {
+        if (res.status === 404) onNotSupported?.();
         return;
       }
-
-      if (
-        res &&
-        typeof res === "object" &&
-        "error" in res &&
-        res.error === "NOT_SUPPORTED"
-      ) {
-        onNotSupported?.();
-        return;
-      }
-
-      if (res && typeof res === "object" && !("error" in res)) {
-        setDataset(res);
-      }
+      setDataset(res);
     }
     fetchData();
   }, [datasetId, onNotSupported]);
@@ -76,8 +64,7 @@ export function DatasetTable({ datasetId, onNotSupported }: Props) {
 const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
-  height: 100%;
-  min-height: 500px;
+  height: 40rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
 `;

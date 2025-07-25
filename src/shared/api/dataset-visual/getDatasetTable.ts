@@ -1,27 +1,24 @@
 import { BASE_URL } from "../config";
 import { DatasetTableResponse } from "./type";
 import { DatasetTableType } from "../../types/dataset";
+import {
+  ApiError,
+  handleApiResponse,
+  isError,
+  safeApiCall,
+} from "../../types/error";
 
 export async function getDatasetTable(
   datasetId: number,
-): Promise<DatasetTableType | null | { error: string; status: number }> {
-  try {
+): Promise<DatasetTableType | null | ApiError> {
+  return safeApiCall(async () => {
     const res = await fetch(`${BASE_URL}/api/datastore/${datasetId}/chart/table`);
+    const result = await handleApiResponse<DatasetTableResponse>(res);
 
-    if (res.status === 404) {
-      return { error: "NOT_SUPPORTED", status: 404 };
+    if (isError(result)) {
+      return result;
     }
 
-    const response: DatasetTableResponse = await res.json();
-
-    if (!response.success) {
-      console.error(response.msg);
-      return null;
-    }
-
-    return response.result;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+    return result.result;
+  });
 }

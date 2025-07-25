@@ -12,13 +12,14 @@ export const metadata = {
     "한국의 모든 공공데이터를 한 곳에서 쉽게 찾고 활용하세요. 정부, 지자체의 다양한 데이터셋을 검색하고 분석할 수 있습니다.",
   keywords:
     "공공데이터, 오픈데이터, 정부데이터, 지자체데이터, 데이터포털, 빅데이터, 통계, 공공정보",
-  viewport: "width=device-width, initial-scale=1",
   robots: "index, follow",
   authors: [{ name: "한 곳 팀" }],
   icons: {
     icon: "/images/favicon.png",
   },
 };
+
+export const viewport = "width=device-width, initial-scale=1";
 
 export default function Layout({ children }) {
   return (

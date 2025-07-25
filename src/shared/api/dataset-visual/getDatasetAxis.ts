@@ -8,13 +8,11 @@ export async function getDatasetAxis(datasetId: number) {
     ).then((res) => res.json());
 
     if (!response.success) {
-      console.error(response.msg);
       return null;
     }
 
     return response.result;
   } catch (error) {
-    console.error(error);
     return null;
   }
 }

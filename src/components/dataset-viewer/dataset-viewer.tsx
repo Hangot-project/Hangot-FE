@@ -113,33 +113,30 @@ export function DatasetViewer({
       </div>
 
       {/* //* 그래프 */}
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, marginTop: "1.5rem" }}>
         {showNotSupported ? (
           <div className={styles.warningContainer} style={{ flex: 1 }}>
             <h1 className={styles.warningTitle}>
               ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
             </h1>
           </div>
+        ) : isBarActive && selectedAxis ? (
+          <>
+            {chartType === "막대" && (
+              <BarChart datasetId={datasetId} colName={selectedAxis} />
+            )}
+            {chartType === "선" && (
+              <LineChart datasetId={datasetId} colName={selectedAxis} />
+            )}
+            {chartType === "파이" && (
+              <PieChart datasetId={datasetId} colName={selectedAxis} />
+            )}
+          </>
         ) : (
-          axisResult !== null &&
-          (isBarActive && selectedAxis ? (
-            <>
-              {chartType === "막대" && (
-                <BarChart datasetId={datasetId} colName={selectedAxis} />
-              )}
-              {chartType === "선" && (
-                <LineChart datasetId={datasetId} colName={selectedAxis} />
-              )}
-              {chartType === "파이" && (
-                <PieChart datasetId={datasetId} colName={selectedAxis} />
-              )}
-            </>
-          ) : (
-            <DatasetTable
-              datasetId={datasetId}
-              onNotSupported={() => setShowNotSupported(true)}
-            />
-          ))
+          <DatasetTable
+            datasetId={datasetId}
+            onNotSupported={() => setShowNotSupported(true)}
+          />
         )}
       </div>
     </div>
