@@ -16,12 +16,6 @@ export default async function Page({ params }: { params: { id: string } }) {
             <h1 className={styles.title}>{datasetDetail.title}</h1>
             {datasetDetail.type && <DatasetTypeIcon type={datasetDetail.type} />}
           </div>
-          <div className={styles.actions}>
-            <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
-            <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
-              데이터 다운로드
-            </a>
-          </div>
         </div>
 
         <div className={styles.descriptionSection}>
@@ -38,8 +32,10 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
           <div className={styles.stats}>
             <span>조회수 {datasetDetail.view?.toLocaleString() || 0}</span>
-            <span>스크랩 {datasetDetail.scrap?.toLocaleString() || 0}</span>
-            <span>{datasetDetail.type?.toUpperCase()}</span>
+            <div className={styles.scrapStats}>
+              <span>스크랩 수 {datasetDetail.scrap?.toLocaleString() || 0}</span>
+              <ScrapButton datasetId={datasetId} scrap={datasetDetail.scrap} />
+            </div>
           </div>
         </div>
 
@@ -75,6 +71,13 @@ export default async function Page({ params }: { params: { id: string } }) {
               사이트 바로가기
             </a>
           </div>
+        </div>
+
+        <div className={styles.downloadSection}>
+          <span className={styles.fileName}>{datasetDetail.resourceName}</span>
+          <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
+            ⬇
+          </a>
         </div>
       </header>
 
