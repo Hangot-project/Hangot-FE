@@ -290,7 +290,6 @@
   font-family: "NotoSansMedium";
   font-size: 1rem;
   color: #1e293b;
-  max-width: 300px;
   word-break: break-all;
   flex: 1;
 }
