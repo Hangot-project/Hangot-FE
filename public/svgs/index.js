@@ -28,6 +28,7 @@ import PlusToggle from "./plus_toggle.svg";
 import MinusToggle from "./minus_toggle.svg";
 import ScreenClose from "./screen_close.svg";
 import UpdatedDate from "./updated_date.svg";
+import FilterIcon from "./filter_icon.svg";
 
 export { DataPortalLogo, BackgroundPattern, DataIllustration };
 export {
@@ -56,4 +57,5 @@ export {
   MinusToggle,
   ScreenClose,
   UpdatedDate,
+  FilterIcon,
 };

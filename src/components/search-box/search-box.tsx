@@ -3,44 +3,62 @@
 import Image from "next/image";
 import styles from "./search-box.module.css";
 import { SearchSymbol } from "../../../public/svgs";
-import { CSSProperties, FormEvent, useCallback, useState } from "react";
+import React, {
+  CSSProperties,
+  FormEvent,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 
 type Props = {
-  handleSubmit?: (event: FormEvent<HTMLFormElement>, keyword: string) => void;
+  value: string;
+  onSubmit: (value: string) => void;
+  onClear?: () => void;
   style?: CSSProperties;
   boxstyle?: CSSProperties;
   placeholder?: string;
   inputstyle?: CSSProperties;
   iconstyle?: CSSProperties;
-  initKeyword?: string;
   className?: string;
 };
 
 export function SearchBox({
-  handleSubmit,
+  value,
+  onSubmit,
+  onClear,
   boxstyle,
-  placeholder = "검색어를 입력해주세요.",
   inputstyle,
   iconstyle,
-  initKeyword,
   className,
 }: Props) {
-  const [input, setInput] = useState(initKeyword ? initKeyword : "");
+  const [inputValue, setInputValue] = useState(value);
 
-  const handleChange = useCallback(
-    (value) => {
-      setInput(value);
-    },
-    [setInput],
-  );
+  // value prop이 변경되면 내부 상태도 업데이트
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+  const handleChange = useCallback((newValue: string) => {
+    setInputValue(newValue);
+  }, []);
+
+  const handleSubmitAction = useCallback(() => {
+    const trimmedInput = inputValue.trim();
+    onSubmit(trimmedInput);
+    setInputValue(""); // 직접 초기화
+    onClear?.(); // 상위 컴포넌트에게도 알림
+  }, [onSubmit, inputValue, onClear]);
 
   const handleFormSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
-      handleSubmit?.(e, input);
-      setInput("");
+      e.preventDefault();
+      handleSubmitAction();
     },
-    [handleSubmit, input],
+    [handleSubmitAction],
   );
+
+  // 엔터 키는 자동으로 폼 제출을 트리거하므로 별도 처리 불필요
+  // handleKeyDown 제거하고 폼 제출만 사용
 
   return (
     <form
@@ -50,20 +68,14 @@ export function SearchBox({
     >
       <input
         type="text"
-        placeholder={placeholder}
+        placeholder="제목 검색 또는 #해시태그 추가"
         className={styles.searchbox_input}
         onChange={(e) => handleChange(e.target.value)}
-        value={input}
+        value={inputValue}
         style={inputstyle}
       />
-      <button type="submit">
-        <Image
-          alt="검색창 로고"
-          src={SearchSymbol}
-          width={27}
-          height={27}
-          style={iconstyle}
-        />
+      <button type="submit" className={styles.searchbox_button} style={iconstyle}>
+        <Image alt="검색창 로고" src={SearchSymbol} width={27} height={27} />
       </button>
     </form>
   );

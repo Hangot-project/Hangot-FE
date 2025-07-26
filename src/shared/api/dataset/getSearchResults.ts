@@ -6,18 +6,18 @@ import { DatasetListResponse } from "./type";
  * 검색 키워드에 해당하는 데이터셋 리스트를 불러온다.
  * @param keyword 검색 키워드
  * @param page 요청 페이지
- * @param theme 주제별 항목에서 선택한 내역
  * @param type 파일 유형 항목에서 선택한 내역
  * @param organization 조직 항목에서 선택한 내역
+ * @param tag
  * @param sort 정렬 기준
  * @returns
  */
 export async function getSearchResults(
   keyword: string | undefined,
   page: string | undefined,
-  theme: string[] | undefined,
   type: string[] | undefined,
   organization: string[] | undefined,
+  tag: string[] | undefined,
   sort: string | undefined,
 ): Promise<DatasetListResponse | null> {
   try {
@@ -31,16 +31,16 @@ export async function getSearchResults(
       params.append(SERVER_PARAMS_KEY.PAGE, page);
     }
 
-    theme?.forEach((themeStr) => {
-      params.append(SERVER_PARAMS_KEY.THEME, themeStr);
-    });
-
     type?.forEach((typeStr) => {
       params.append(SERVER_PARAMS_KEY.TYPE, typeStr.toLowerCase());
     });
 
     organization?.forEach((orgStr) => {
       params.append(SERVER_PARAMS_KEY.ORGANIZATION, orgStr);
+    });
+
+    tag?.forEach((tagStr) => {
+      params.append(SERVER_PARAMS_KEY.TAG, tagStr);
     });
 
     if (sort) {

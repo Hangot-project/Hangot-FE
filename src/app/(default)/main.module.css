@@ -2,7 +2,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   position: relative;
 }
 
@@ -111,15 +110,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
   width: 90%;
   max-width: 600px;
   position: relative;
   z-index: 3;
-  background: rgba(255, 255, 255, 0.9);
   border-radius: 2rem;
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -300,4 +297,94 @@
   .featureDescription {
     font-size: 0.9rem;
   }
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: #396ea3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(57, 110, 163, 0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.filterButton:hover {
+  background: #2d5a87;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(57, 110, 163, 0.3);
+}
+
+.filterIcon {
+  filter: brightness(0) invert(1);
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.tagItem {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.tagItem span {
+  margin-right: 0.25rem;
+}
+
+.removeTagButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.removeTagButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.filterBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border: 2px solid white;
 }

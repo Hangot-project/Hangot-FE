@@ -1,19 +1,23 @@
 "use client";
 
-import React, { useState, useCallback, FormEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
-  SearchBox,
   SearchSortDropdown,
   SimpleDatasetCard,
   Pagination,
 } from "../../../components";
+import { FilterModal } from "../../../components/filter-modal/filter-modal";
+import { SearchHeader } from "../../../components/search-header/search-header";
+import { FilterTags } from "../../../components/filter-tags/filter-tags";
+import { TagsContainer } from "../../../components/tags-container/tags-container";
 import styles from "./searchResult.module.css";
 import Link from "next/link";
 import { SORT_VALUES } from "../../../constants";
-import { updateQueryString } from "../../../utils";
 import { DatasetInfo } from "../../../shared/types/dataset";
 import { SERVER_PARAMS_KEY } from "../../../constants/dataset-search-params";
+import { useSearchFilters } from "../../../hooks/useSearchFilters";
+import { useSearchQuery } from "../../../hooks/useSearchQuery";
 
 interface Props {
   results: DatasetInfo[];
@@ -34,51 +38,68 @@ export default function SearchResult({
   const initSort = searchParams.get("sort");
 
   const [selectedSort, setSelectedSort] = useState(initSort);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
+  const [searchInput, setSearchInput] = useState<string>("");
 
-  /**
-   * URLSearchParams를 Record<string, string>으로 변환
-   */
-  const parseParamsToRecord = (params: string): Record<string, string> => {
-    const parsed = new URLSearchParams(params);
-    const result: Record<string, string> = {};
-    parsed.forEach((value, key) => {
-      result[key] = value;
+  const {
+    activeFiltersCount,
+    activeFilters,
+    handleFilterApply,
+    handleRemoveFilter,
+    handleClearAllFilters,
+    handleSearchSubmit,
+    updateQuery,
+  } = useSearchFilters();
+
+  const { currentKeyword } = useSearchQuery();
+
+  // 태그 관리
+  const handleRemoveTag = (tagToRemove: string) => {
+    const updatedTags = tags.filter((tag) => tag !== tagToRemove);
+    setTags(updatedTags);
+    handleFilterApply({
+      selectedTypes: activeFilters.types,
+      selectedOrganizations: activeFilters.organizations,
+      selectedTags: updatedTags,
     });
-    return result;
   };
 
-  const updateQuery = useCallback(
-    (
-      type: "create" | "append" | "remove",
-      name: string,
-      value?: any,
-      resetPage?: boolean,
-    ): Record<string, string> => {
-      const updated = updateQueryString({
-        type,
-        name,
-        value,
-        searchParams: searchParams.toString(),
-        resetPage,
-      });
-      return parseParamsToRecord(updated);
-    },
-    [searchParams],
-  );
+  // 검색 입력 처리
+  const handleSearchInputSubmit = (value: string) => {
+    const trimmedValue = value.trim();
 
-  const handleSearchSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>, keyword: string) => {
-      event.preventDefault();
+    if (trimmedValue.startsWith("#")) {
+      // 태그 검색 - URL을 통해 직접 처리
+      const tagName = trimmedValue.substring(1).trim();
+      if (tagName && !tags.includes(tagName)) {
+        const currentTags = [...tags, tagName];
+        setTags(currentTags); // 즉시 상태 업데이트
+        handleFilterApply({
+          selectedTypes: activeFilters.types,
+          selectedOrganizations: activeFilters.organizations,
+          selectedTags: currentTags,
+        });
+      }
+      setSearchInput(""); // 검색창 초기화
+    } else {
+      // 일반 키워드 검색 - 즉시 API 호출
+      const fakeEvent = {
+        preventDefault: () => {},
+      } as React.FormEvent<HTMLFormElement>;
+      handleSearchSubmit(fakeEvent, trimmedValue);
+      setSearchInput(""); // 검색창 초기화
+    }
+  };
 
-      const updatedQuery = keyword
-        ? updateQuery("create", SERVER_PARAMS_KEY.KEYWORD, keyword, true)
-        : updateQuery("remove", SERVER_PARAMS_KEY.KEYWORD);
-
-      const queryString = new URLSearchParams(updatedQuery).toString();
-      router.push(`/search-result${queryString ? `?${queryString}` : ""}` as any);
-    },
-    [router, pathName, updateQuery],
-  );
+  // 초기 로드 시 URL에서 태그 추출
+  useEffect(() => {
+    const tagParam = searchParams.get(SERVER_PARAMS_KEY.TAG);
+    if (tagParam) {
+      const tagNames = tagParam.split(",").filter((tag: string) => tag.trim());
+      setTags(tagNames);
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedSort) {
@@ -96,14 +117,26 @@ export default function SearchResult({
 
   return (
     <div className={styles.root}>
-      {/* 검색창 */}
-      <div className={styles.searchContainer}>
-        <SearchBox
-          className={styles.searchBox}
-          handleSubmit={handleSearchSubmit}
-          initKeyword={searchParams.get(SERVER_PARAMS_KEY.KEYWORD)}
-        />
-      </div>
+      <SearchHeader
+        searchValue={searchInput}
+        onSearchSubmit={handleSearchInputSubmit}
+        onSearchClear={() => setSearchInput("")}
+        onFilterClick={() => setIsFilterModalOpen(true)}
+        activeFiltersCount={activeFiltersCount}
+      />
+
+      <TagsContainer
+        tags={tags}
+        onRemoveTag={handleRemoveTag}
+        currentKeyword={currentKeyword}
+      />
+
+      <FilterTags
+        activeFilters={activeFilters}
+        activeFiltersCount={activeFiltersCount}
+        onRemoveFilter={handleRemoveFilter}
+        onClearAll={handleClearAllFilters}
+      />
 
       {/* 검색 결과 */}
       <main className={styles.mainContainer}>
@@ -160,6 +193,12 @@ export default function SearchResult({
           )}
         </section>
       </main>
+
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        onApply={handleFilterApply}
+      />
     </div>
   );
 }

@@ -8,27 +8,32 @@ import { MainLogo } from "../../../../public/images";
 export function Footer() {
   return (
     <div className={styles.container}>
-      <div className={styles.infoContainer}>
-        <ul className={styles.navContainer}>
-          <li>
-            <Image alt="하이데이터 로고" src={MainLogo} width={100} height={32} />
-          </li>
-          <VerticalDivider
-            style={{
-              backgroundColor: "#bdbdbb",
-            }}
-          />
-          <li>개인정보처리방침</li>
-          <VerticalDivider
-            style={{
-              backgroundColor: "#bdbdbb",
-            }}
-          />
-          <li>이용약관</li>
-        </ul>
-
-        <p>© 하이데이터. ALL RIGHTS RESERVED</p>
-      </div>
+      <ul className={styles.navContainer}>
+        <li>
+          <Image alt="한곳 로고" src={MainLogo} width={70} height={25} />
+        </li>
+        <VerticalDivider
+          style={{
+            backgroundColor: "#bdbdbb",
+          }}
+        />
+        <li>
+          <a
+            href="https://github.com/Hangot-project"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: "0.9rem" }}
+          >
+            Github
+          </a>
+        </li>
+        <VerticalDivider
+          style={{
+            backgroundColor: "#bdbdbb",
+          }}
+        />
+        <p>© 한 곳. ALL RIGHTS RESERVED</p>
+      </ul>
     </div>
   );
 }

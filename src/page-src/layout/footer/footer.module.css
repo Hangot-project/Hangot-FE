@@ -28,6 +28,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #bdbdbd;
 }
 
 .navContainer > * {
@@ -36,12 +37,6 @@
 
 .divisionLine {
   background-color: #bdbdbb;
-}
-
-.infoContainer {
-  color: #bdbdbd;
-  width: 100%;
-  max-width: 1200px;
 }
 
 .infoContainer > * {

@@ -1,28 +1,49 @@
 "use client";
 
-import React, { FormEvent, useCallback } from "react";
+import React, { useState } from "react";
 import styles from "./main.module.css";
 import { SearchBox } from "../../components";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { BackgroundPattern, DataIllustration } from "../../../public/svgs";
+import {
+  BackgroundPattern,
+  DataIllustration,
+  FilterIcon,
+} from "../../../public/svgs";
+import { FilterModal } from "../../components/filter-modal/filter-modal";
+import { useSearchFilters } from "../../hooks/useSearchFilters";
 
 export default function Main() {
   const router = useRouter();
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+  const [tags, setTags] = useState<string[]>([]);
 
-  // 검색 제출시 실행되는 함수. 파라미터는 search-box 컴포넌트 내에서 전달한다.
-  const handleSearchSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>, keyword: string) => {
-      event.preventDefault();
+  const { activeFiltersCount, handleFilterApply, handleSearchSubmit } =
+    useSearchFilters();
 
-      const path = keyword
-        ? `/search-result?keyword=${keyword}`
-        : ("/search-result" as const);
-      // @ts-ignore
-      router.push(path);
-    },
-    [],
-  );
+  // 검색 입력 처리 - search-result와 동일한 로직
+  const handleSearchInputSubmit = (value: string) => {
+    const trimmedValue = value.trim();
+
+    if (trimmedValue.startsWith("#")) {
+      // 태그 검색 - URL을 통해 직접 처리
+      const tagName = trimmedValue.substring(1).trim();
+      if (tagName && !tags.includes(tagName)) {
+        const currentTags = [...tags, tagName];
+        setTags(currentTags);
+        // 태그와 함께 검색 결과 페이지로 이동
+        router.push(
+          `/search-result?tags=${encodeURIComponent(currentTags.join(","))}`,
+        );
+      }
+    } else {
+      // 일반 키워드 검색
+      const fakeEvent = {
+        preventDefault: () => {},
+      } as React.FormEvent<HTMLFormElement>;
+      handleSearchSubmit(fakeEvent, trimmedValue);
+    }
+  };
 
   return (
     <div className={styles.root}>
@@ -54,16 +75,25 @@ export default function Main() {
             {/* Search Box */}
             <div className={styles.searchContainer}>
               <SearchBox
+                value=""
+                onSubmit={handleSearchInputSubmit}
                 boxstyle={{
                   position: "relative",
                   backgroundColor: "#ffffff",
                   borderRadius: "25px",
                   width: "100%",
-                  maxWidth: "600px",
                   boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 }}
-                handleSubmit={handleSearchSubmit}
               />
+              <button
+                className={styles.filterButton}
+                onClick={() => setIsFilterModalOpen(true)}
+              >
+                <Image src={FilterIcon} alt="필터" className={styles.filterIcon} />
+                {activeFiltersCount > 0 && (
+                  <span className={styles.filterBadge}>{activeFiltersCount}</span>
+                )}
+              </button>
             </div>
           </div>
 
@@ -111,6 +141,12 @@ export default function Main() {
           </div>
         </div>
       </section>
+
+      <FilterModal
+        isOpen={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        onApply={handleFilterApply}
+      />
     </div>
   );
 }

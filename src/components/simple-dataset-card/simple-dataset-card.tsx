@@ -73,9 +73,9 @@ export function SimpleDatasetCard({
         </div>
         {tagList && tagList.length > 0 && (
           <div className={styles.tagContainer}>
-            {tagList.map((theme, index) => (
+            {tagList.map((tag, index) => (
               <span key={index} className={styles.tag}>
-                {theme}
+                {tag}
               </span>
             ))}
           </div>

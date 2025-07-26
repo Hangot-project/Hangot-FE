@@ -14,8 +14,8 @@ export const SORT_VALUES = ["최신순", "스크랩순", "조회순", "인기순
 export const SERVER_PARAMS_KEY = {
   KEYWORD: "keyword",
   PAGE: "page",
-  THEME: "theme",
-  TYPE: "type",
-  ORGANIZATION: "organization",
+  TYPE: "types",
+  ORGANIZATION: "organizations",
+  TAG: "tags",
   SORT: "sort",
 } as const;
