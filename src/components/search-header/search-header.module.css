@@ -1,0 +1,48 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 10px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: #396ea3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(57, 110, 163, 0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.filterButton:hover {
+  background: #2d5a87;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(57, 110, 163, 0.3);
+}
+
+.filterIcon {
+  filter: brightness(0) invert(1);
+}
