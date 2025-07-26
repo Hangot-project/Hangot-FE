@@ -26,13 +26,16 @@ export function TagsContainer({
         </div>
       )}
       {tags.map((tag) => (
-        <button
-          key={tag}
-          className={styles.tagItem}
-          onClick={() => onRemoveTag(tag)}
-        >
-          #{tag}
-        </button>
+        <div key={tag} className={styles.tagItem}>
+          <span>#{tag}</span>
+          <button
+            className={styles.removeTagButton}
+            onClick={() => onRemoveTag(tag)}
+            aria-label={`${tag} 태그 제거`}
+          >
+            ×
+          </button>
+        </div>
       ))}
     </div>
   );
