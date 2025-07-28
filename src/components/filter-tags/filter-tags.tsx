@@ -19,7 +19,10 @@ export function FilterTags({
   onRemoveFilter,
   onClearAll,
 }: FilterTagsProps) {
-  if (activeFiltersCount === 0) {
+  if (
+    activeFiltersCount === 0 ||
+    (activeFilters.types.length === 0 && activeFilters.organizations.length === 0)
+  ) {
     return null;
   }
 
