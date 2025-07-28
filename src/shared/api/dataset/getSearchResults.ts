@@ -70,7 +70,7 @@ export async function getSearchResults(
   } catch (error) {
     logApiError(
       error instanceof Error ? error.message : String(error),
-      `${BASE_URL}/api/datasets?${params.toString()}`,
+      `${BASE_URL}/api/datasets?`,
     );
     return null;
   }

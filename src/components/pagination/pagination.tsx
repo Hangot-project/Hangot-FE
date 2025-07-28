@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React, { useCallback } from "react";
 import { getPageArray } from "../../utils";
-import { updateQueryString } from "../../utils/search/update-query-string";
+import { updateQueryString } from "../../utils";
 import Image from "next/image";
 import { NextButton, PreviousButton } from "../../../public/svgs";
 
