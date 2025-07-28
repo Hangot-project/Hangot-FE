@@ -1,13 +1,26 @@
 import { BASE_URL } from "../config";
 import { DatasetAxisResponse, DatasetAxisResult } from "./type";
+import { logApiError } from "../../../utils/api/error-handler";
 
-export async function getDatasetAxis(datasetId: number): Promise<DatasetAxisResult> {
-  const response = await fetch(`${BASE_URL}/api/datasets/${datasetId}/axis`);
-  const result: DatasetAxisResponse = await response.json();
+export async function getDatasetAxis(
+  datasetId: number,
+): Promise<DatasetAxisResult | null> {
+  try {
+    const endpoint = `${BASE_URL}/api/datasets/${datasetId}/axis`;
+    const response = await fetch(endpoint);
+    const result: DatasetAxisResponse = await response.json();
 
-  if (!result.success) {
-    throw new Error(result.msg);
+    if (!result.success) {
+      logApiError(result.msg, endpoint, response.status);
+      return null;
+    }
+
+    return result.result;
+  } catch (error) {
+    logApiError(
+      error instanceof Error ? error.message : String(error),
+      `${BASE_URL}/api/datasets/${datasetId}/axis`,
+    );
+    return null;
   }
-
-  return result.result;
 }

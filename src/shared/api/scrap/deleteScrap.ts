@@ -1,4 +1,5 @@
 import { BASE_URL } from "../config";
+import { logApiError } from "../../../utils/api/error-handler";
 
 /**
  * 유저의 스크랩 내역을 삭제하는 메서드
@@ -11,17 +12,31 @@ export async function deleteScrap(
   datasetId: number,
   grantType: string,
   token: string,
-): Promise<Response> {
-  const response = await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `${grantType} ${token}`,
-    },
-  });
+): Promise<Response | null> {
+  try {
+    const endpoint = `${BASE_URL}/api/scrap/dataset/${datasetId}`;
+    const response = await fetch(endpoint, {
+      method: "DELETE",
+      headers: {
+        Authorization: `${grantType} ${token}`,
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    if (!response.ok) {
+      logApiError(
+        `HTTP error! status: ${response.status}`,
+        endpoint,
+        response.status,
+      );
+      return null;
+    }
+
+    return response;
+  } catch (error) {
+    logApiError(
+      error instanceof Error ? error.message : String(error),
+      `${BASE_URL}/api/scrap/dataset/${datasetId}`,
+    );
+    return null;
   }
-
-  return response;
 }

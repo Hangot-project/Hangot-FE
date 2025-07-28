@@ -1,4 +1,5 @@
 import { BASE_URL } from "../config";
+import { logApiError } from "../../../utils/api/error-handler";
 
 interface TypesResponse {
   success: boolean;
@@ -6,13 +7,23 @@ interface TypesResponse {
   result: string[];
 }
 
-export async function getFilterTypes(): Promise<string[]> {
-  const response = await fetch(`${BASE_URL}/api/datasets/types`);
-  const result: TypesResponse = await response.json();
+export async function getFilterTypes(): Promise<string[] | null> {
+  try {
+    const endpoint = `${BASE_URL}/api/datasets/types`;
+    const response = await fetch(endpoint);
+    const result: TypesResponse = await response.json();
 
-  if (!result.success) {
-    throw new Error(result.msg);
+    if (!result.success) {
+      logApiError(result.msg, endpoint, response.status);
+      return null;
+    }
+
+    return result.result;
+  } catch (error) {
+    logApiError(
+      error instanceof Error ? error.message : String(error),
+      `${BASE_URL}/api/datasets/types`,
+    );
+    return null;
   }
-
-  return result.result;
 }
