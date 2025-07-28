@@ -44,3 +44,8 @@ export interface DatasetInfo {
   updateDate: string;
   description: string;
 }
+
+export interface DatasetPieChartType {
+  labels: string[];
+  count: number[];
+}

@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Legend,
 } from "recharts";
 import { useState, useEffect } from "react";
 import { getDatasetChart } from "../../shared/api/dataset-visual/getDatasetChart";
@@ -55,7 +54,10 @@ export function BarChart({ datasetId, colName }: Props) {
           flexWrap: "wrap",
           justifyContent: "center",
           gap: "16px",
-          marginTop: "16px",
+          marginBottom: "16px",
+          maxHeight: "120px",
+          overflowY: "auto",
+          padding: "8px",
         }}
       >
         {payload.map((entry: any) => (
@@ -99,41 +101,57 @@ export function BarChart({ datasetId, colName }: Props) {
             border: "1px solid #e0e0e0",
             borderRadius: "8px",
             padding: "16px",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <div
             style={{
               minWidth: `${Math.max(800, (dataset.x_label?.length || 0) * 60)}px`,
-              height: "550px",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            <ResponsiveContainer width="100%" height="100%">
-              <RechartsBarChart
-                data={rechartsData}
-                margin={{
-                  top: 20,
-                  right: 30,
-                  left: 20,
-                  bottom: 10,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
-                <YAxis tickFormatter={(value) => value.toLocaleString()} />
-                <Tooltip formatter={(value) => [value.toLocaleString(), ""]} />
-                <Legend content={renderCustomLegend} />
-                {dataset.dataName.map((seriesName, index) => (
-                  <Bar
-                    key={seriesName}
-                    dataKey={seriesName}
-                    fill={`hsl(${
-                      (index * 360) / dataset.dataName.length
-                    }, 70%, 50%)`}
-                    hide={hiddenSeries.has(seriesName)}
-                  />
-                ))}
-              </RechartsBarChart>
-            </ResponsiveContainer>
+            {/* 범례 */}
+            <div style={{ flexShrink: 0 }}>
+              {renderCustomLegend({
+                payload: dataset.dataName.map((name, index) => ({
+                  value: name,
+                  color: `hsl(${(index * 360) / dataset.dataName.length}, 70%, 50%)`,
+                })),
+              })}
+            </div>
+
+            {/* 차트 */}
+            <div style={{ flex: 1, minHeight: "400px" }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <RechartsBarChart
+                  data={rechartsData}
+                  margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 10,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} />
+                  <YAxis tickFormatter={(value) => value.toLocaleString()} />
+                  <Tooltip formatter={(value) => [value.toLocaleString(), ""]} />
+                  {dataset.dataName.map((seriesName, index) => (
+                    <Bar
+                      key={seriesName}
+                      dataKey={seriesName}
+                      fill={`hsl(${
+                        (index * 360) / dataset.dataName.length
+                      }, 70%, 50%)`}
+                      hide={hiddenSeries.has(seriesName)}
+                    />
+                  ))}
+                </RechartsBarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
         </div>
       )}

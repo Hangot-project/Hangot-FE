@@ -1,4 +1,8 @@
-import { DatasetChartType, DatasetTableType } from "../../types/dataset";
+import {
+  DatasetChartType,
+  DatasetPieChartType,
+  DatasetTableType,
+} from "../../types/dataset";
 import { GeneralResponse } from "../config";
 
 export interface DatasetAxisResult {
@@ -15,4 +19,8 @@ export interface DatasetChartResponse extends GeneralResponse {
 
 export interface DatasetTableResponse extends GeneralResponse {
   result: DatasetTableType;
+}
+
+export interface DatasetPieChartResponse extends GeneralResponse {
+  result: DatasetPieChartType;
 }

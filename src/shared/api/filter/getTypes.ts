@@ -1,10 +1,4 @@
 import { BASE_URL } from "../config";
-import {
-  ApiError,
-  handleApiResponse,
-  isError,
-  safeApiCall,
-} from "../../types/error";
 
 interface TypesResponse {
   success: boolean;
@@ -12,15 +6,13 @@ interface TypesResponse {
   result: string[];
 }
 
-export async function getFilterTypes(): Promise<string[] | null | ApiError> {
-  return safeApiCall(async () => {
-    const res = await fetch(`${BASE_URL}/api/datasets/types`);
-    const response = await handleApiResponse<TypesResponse>(res);
+export async function getFilterTypes(): Promise<string[]> {
+  const response = await fetch(`${BASE_URL}/api/datasets/types`);
+  const result: TypesResponse = await response.json();
 
-    if (isError(response)) {
-      return response;
-    }
+  if (!result.success) {
+    throw new Error(result.msg);
+  }
 
-    return response.result;
-  });
+  return result.result;
 }

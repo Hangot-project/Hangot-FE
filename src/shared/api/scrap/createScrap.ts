@@ -11,16 +11,17 @@ export async function createScrap(
   datasetId: number,
   grantType: string,
   token: string,
-) {
-  try {
-    return await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
-      method: "POST",
-      headers: {
-        Authorization: `${grantType} ${token}`,
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    return null;
+): Promise<Response> {
+  const response = await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
+    method: "POST",
+    headers: {
+      Authorization: `${grantType} ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  return response;
 }

@@ -6,15 +6,19 @@ import { BASE_URL } from "../config";
  * @param token
  * @returns
  */
-export async function getAllScrap(grantType: string, token: string) {
-  try {
-    return await fetch(`${BASE_URL}/api/scrap`, {
-      headers: {
-        Authorization: `${grantType} ${token}`,
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    return null;
+export async function getAllScrap(
+  grantType: string,
+  token: string,
+): Promise<Response> {
+  const response = await fetch(`${BASE_URL}/api/scrap`, {
+    headers: {
+      Authorization: `${grantType} ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  return response;
 }

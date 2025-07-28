@@ -1,18 +1,13 @@
 import { BASE_URL } from "../config";
-import { DatasetAxisResponse } from "./type";
+import { DatasetAxisResponse, DatasetAxisResult } from "./type";
 
-export async function getDatasetAxis(datasetId: number) {
-  try {
-    const response: DatasetAxisResponse = await fetch(
-      `${BASE_URL}/api/datasets/${datasetId}/axis`,
-    ).then((res) => res.json());
+export async function getDatasetAxis(datasetId: number): Promise<DatasetAxisResult> {
+  const response = await fetch(`${BASE_URL}/api/datasets/${datasetId}/axis`);
+  const result: DatasetAxisResponse = await response.json();
 
-    if (!response.success) {
-      return null;
-    }
-
-    return response.result;
-  } catch (error) {
-    return null;
+  if (!result.success) {
+    throw new Error(result.msg);
   }
+
+  return result.result;
 }

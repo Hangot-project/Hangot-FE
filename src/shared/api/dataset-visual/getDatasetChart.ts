@@ -1,20 +1,19 @@
 import { BASE_URL } from "../config";
 import { DatasetChartResponse } from "./type";
+import { DatasetChartType } from "../../types/dataset";
 
-export async function getDatasetChart(datasetId: number, colName: string) {
-  try {
-    const response: DatasetChartResponse = await fetch(
-      `${BASE_URL}/api/datasets/${datasetId}/chart?colName=${colName}`,
-    ).then((res) => res.json());
+export async function getDatasetChart(
+  datasetId: number,
+  colName: string,
+): Promise<DatasetChartType> {
+  const response = await fetch(
+    `${BASE_URL}/api/datasets/${datasetId}/chart?colName=${colName}`,
+  );
+  const result: DatasetChartResponse = await response.json();
 
-    if (!response.success) {
-      console.error(response.msg);
-      return null;
-    }
-
-    return response.result;
-  } catch (error) {
-    console.error(error);
-    return null;
+  if (!result.success) {
+    throw new Error(result.msg);
   }
+
+  return result.result;
 }

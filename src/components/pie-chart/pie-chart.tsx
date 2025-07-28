@@ -9,86 +9,52 @@ import {
   Legend,
 } from "recharts";
 import { useState, useEffect } from "react";
-import { getDatasetChart } from "../../shared/api/dataset-visual/getDatasetChart";
+import { getDatasetPieChart } from "../../shared/api/dataset-visual/getDatasetPieChart";
+import { DatasetPieChartType } from "../../shared/types/dataset";
 
 interface Props {
   datasetId: number;
   colName: string;
 }
 export function PieChart({ datasetId, colName }: Props) {
-  const [dataset, setDataset] = useState<any>(null);
-  const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
+  const [dataset, setDataset] = useState<DatasetPieChartType | null>(null);
 
   useEffect(() => {
-    getDatasetChart(datasetId, colName).then(setDataset);
+    const fetchData = async () => {
+      try {
+        const response = await getDatasetPieChart(datasetId, colName);
+        setDataset(response.result);
+      } catch (error) {
+        console.error("Failed to fetch pie chart data:", error);
+        setDataset(null);
+      }
+    };
+    fetchData();
   }, [datasetId, colName]);
 
-  // Convert dataset to recharts format for multiple series
+  // Convert dataset to recharts format
   const allData = [];
   if (dataset) {
-    for (let seriesIndex = 0; seriesIndex < dataset.dataName.length; seriesIndex++) {
-      if (!hiddenSeries.has(dataset.dataName[seriesIndex])) {
-        for (let i = 0; i < dataset.x_label.length; i++) {
-          allData.push({
-            name: `${dataset.dataName[seriesIndex]} - ${dataset.x_label[i]}`,
-            value: dataset.dataList[seriesIndex][i],
-            series: dataset.dataName[seriesIndex],
-          });
-        }
-      }
+    for (let i = 0; i < dataset.labels.length; i++) {
+      allData.push({
+        name: dataset.labels[i],
+        value: dataset.count[i],
+      });
     }
   }
 
-  const handleLegendClick = (dataKey: string) => {
-    const newHiddenSeries = new Set(hiddenSeries);
-    if (hiddenSeries.has(dataKey)) {
-      newHiddenSeries.delete(dataKey);
-    } else {
-      newHiddenSeries.add(dataKey);
-    }
-    setHiddenSeries(newHiddenSeries);
-  };
-
-  const renderCustomLegend = () => {
-    if (!dataset) return null;
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "16px",
-          marginTop: "16px",
-        }}
-      >
-        {dataset.dataName.map((seriesName, index) => (
-          <div
-            key={seriesName}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              cursor: "pointer",
-              opacity: hiddenSeries.has(seriesName) ? 0.5 : 1,
-              textDecoration: hiddenSeries.has(seriesName) ? "line-through" : "none",
-            }}
-            onClick={() => handleLegendClick(seriesName)}
-          >
-            <div
-              style={{
-                width: "12px",
-                height: "12px",
-                backgroundColor: `hsl(${
-                  (index * 360) / dataset.dataName.length
-                }, 70%, 50%)`,
-                marginRight: "8px",
-              }}
-            />
-            <span>{seriesName}</span>
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const colors = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff7c7c",
+    "#8dd1e1",
+    "#d084d0",
+    "#87d068",
+    "#ffc0cb",
+    "#ffb347",
+    "#98fb98",
+  ];
 
   return (
     <>
@@ -126,15 +92,12 @@ export function PieChart({ datasetId, colName }: Props) {
                   dataKey="value"
                 >
                   {allData.map((entry, index) => {
-                    const seriesIndex = dataset.dataName.indexOf(entry.series);
-                    const color = `hsl(${
-                      (seriesIndex * 360) / dataset.dataName.length
-                    }, 70%, 50%)`;
+                    const color = colors[index % colors.length];
                     return <Cell key={`cell-${index}`} fill={color} />;
                   })}
                 </Pie>
                 <Tooltip formatter={(value) => [value.toLocaleString(), ""]} />
-                <Legend content={renderCustomLegend} />
+                <Legend />
               </RechartsPieChart>
             </ResponsiveContainer>
           </div>

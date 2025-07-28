@@ -11,25 +11,22 @@ export async function getIsScrap(
   datasetId: number,
   grantType: string,
   token: string,
-): Promise<boolean | null> {
-  try {
-    const _result = await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
-      headers: {
-        Authorization: `${grantType} ${token}`,
-      },
-    });
+): Promise<boolean> {
+  const response = await fetch(`${BASE_URL}/api/scrap/dataset/${datasetId}`, {
+    headers: {
+      Authorization: `${grantType} ${token}`,
+    },
+  });
 
-    if (_result.status === 401) {
-      return false;
-    }
-    const result: IsScrapResponse = await _result.json();
-    if (!result.success) {
-      console.error(result.msg);
-      return null;
-    }
-    return result.result.scrap;
-  } catch (error) {
-    console.error(error);
-    return null;
+  if (response.status === 401) {
+    return false;
   }
+
+  const result: IsScrapResponse = await response.json();
+
+  if (!result.success) {
+    throw new Error(result.msg);
+  }
+
+  return result.result.scrap;
 }

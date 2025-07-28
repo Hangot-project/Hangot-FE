@@ -19,56 +19,48 @@ export async function getSearchResults(
   organization: string[] | undefined,
   tag: string[] | undefined,
   sort: string | undefined,
-): Promise<DatasetListResponse | null> {
-  try {
-    const params = new URLSearchParams();
+): Promise<DatasetListResponse> {
+  const params = new URLSearchParams();
 
-    if (keyword) {
-      params.append(SERVER_PARAMS_KEY.KEYWORD, keyword);
-    }
-
-    if (page) {
-      params.append(SERVER_PARAMS_KEY.PAGE, page);
-    }
-
-    type?.forEach((typeStr) => {
-      params.append(SERVER_PARAMS_KEY.TYPE, typeStr.toLowerCase());
-    });
-
-    organization?.forEach((orgStr) => {
-      params.append(SERVER_PARAMS_KEY.ORGANIZATION, orgStr);
-    });
-
-    tag?.forEach((tagStr) => {
-      params.append(SERVER_PARAMS_KEY.TAG, tagStr);
-    });
-
-    if (sort) {
-      if (sort[sort.length - 1] == "순") {
-        sort = sort.slice(0, sort.length - 1);
-      }
-      params.append(SERVER_PARAMS_KEY.SORT, sort);
-    }
-
-    const result: DatasetListResponse = await fetch(
-      `${BASE_URL}/api/datasets?${params.toString()}`,
-      {
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      },
-    ).then((res) => res.json());
-
-    if (!result.success) {
-      console.error(result.msg);
-      return null;
-    }
-
-    return result;
-  } catch (error) {
-    console.error(error);
-    return null;
+  if (keyword) {
+    params.append(SERVER_PARAMS_KEY.KEYWORD, keyword);
   }
+
+  if (page) {
+    params.append(SERVER_PARAMS_KEY.PAGE, page);
+  }
+
+  type?.forEach((typeStr) => {
+    params.append(SERVER_PARAMS_KEY.TYPE, typeStr.toLowerCase());
+  });
+
+  organization?.forEach((orgStr) => {
+    params.append(SERVER_PARAMS_KEY.ORGANIZATION, orgStr);
+  });
+
+  tag?.forEach((tagStr) => {
+    params.append(SERVER_PARAMS_KEY.TAG, tagStr);
+  });
+
+  if (sort) {
+    if (sort[sort.length - 1] == "순") {
+      sort = sort.slice(0, sort.length - 1);
+    }
+    params.append(SERVER_PARAMS_KEY.SORT, sort);
+  }
+
+  const response = await fetch(`${BASE_URL}/api/datasets?${params.toString()}`, {
+    cache: "no-cache",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  });
+  const result: DatasetListResponse = await response.json();
+
+  if (!result.success) {
+    throw new Error(result.msg);
+  }
+
+  return result;
 }
