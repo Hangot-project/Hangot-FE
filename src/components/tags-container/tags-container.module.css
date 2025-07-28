@@ -9,10 +9,10 @@
 
 .tagItem {
   background: rgba(79, 123, 173, 0.1);
-  color: #4f7bad;
+  color: #1e293b;
   border: 1px solid rgba(79, 123, 173, 0.2);
   border-radius: 12px;
-  padding: 6px 12px;
+  padding: 6px 10px;
   font-size: 13px;
   font-weight: 600;
   font-family: "NotoSansMedium";
