@@ -4,7 +4,7 @@ import { DatasetChartResponse } from "./type";
 export async function getDatasetChart(datasetId: number, colName: string) {
   try {
     const response: DatasetChartResponse = await fetch(
-      `${BASE_URL}/api/datastore/${datasetId}/chart?colName=${colName}`,
+      `${BASE_URL}/api/datasets/${datasetId}/chart?colName=${colName}`,
     ).then((res) => res.json());
 
     if (!response.success) {

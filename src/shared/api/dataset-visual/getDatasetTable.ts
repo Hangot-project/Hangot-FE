@@ -12,7 +12,7 @@ export async function getDatasetTable(
   datasetId: number,
 ): Promise<DatasetTableType | null | ApiError> {
   return safeApiCall(async () => {
-    const res = await fetch(`${BASE_URL}/api/datastore/${datasetId}/chart/table`);
+    const res = await fetch(`${BASE_URL}/api/datasets/${datasetId}/table`);
     const result = await handleApiResponse<DatasetTableResponse>(res);
 
     if (isError(result)) {
