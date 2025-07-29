@@ -10,23 +10,26 @@ import { isApiError } from "../../shared/types/error";
 interface Props {
   datasetId: number;
   onNotSupported?: () => void;
+  onLoadingChange?: (isLoading: boolean) => void;
 }
 
-export function DatasetTable({ datasetId, onNotSupported }: Props) {
+export function DatasetTable({ datasetId, onNotSupported, onLoadingChange }: Props) {
   const [dataset, setDataset] = useState<DatasetTableType>();
 
   useEffect(() => {
     async function fetchData() {
+      onLoadingChange?.(true);
       const res = await getDatasetTable(datasetId);
-      console.log(res);
       if (isApiError(res)) {
         if (res.status === 404) onNotSupported?.();
+        onLoadingChange?.(false);
         return;
       }
       setDataset(res);
+      onLoadingChange?.(false);
     }
     fetchData();
-  }, [datasetId, onNotSupported]);
+  }, [datasetId, onNotSupported, onLoadingChange]);
 
   const colWidthPercent = dataset ? 100 / dataset.label.length : 0;
 

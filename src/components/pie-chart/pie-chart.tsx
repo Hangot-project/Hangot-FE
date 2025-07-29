@@ -15,22 +15,26 @@ import { DatasetPieChartType } from "../../shared/types/dataset";
 interface Props {
   datasetId: number;
   colName: string;
+  onLoadingChange?: (isLoading: boolean) => void;
 }
-export function PieChart({ datasetId, colName }: Props) {
+export function PieChart({ datasetId, colName, onLoadingChange }: Props) {
   const [dataset, setDataset] = useState<DatasetPieChartType | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      onLoadingChange?.(true);
       try {
         const response = await getDatasetPieChart(datasetId, colName);
         setDataset(response.result);
       } catch (error) {
         console.error("Failed to fetch pie chart data:", error);
         setDataset(null);
+      } finally {
+        onLoadingChange?.(false);
       }
     };
     fetchData();
-  }, [datasetId, colName]);
+  }, [datasetId, colName, onLoadingChange]);
 
   // Convert dataset to recharts format
   const allData = [];

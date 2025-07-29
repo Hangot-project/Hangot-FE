@@ -41,6 +41,7 @@ export default function SearchResult({
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     activeFiltersCount,
@@ -56,6 +57,7 @@ export default function SearchResult({
 
   // 태그 관리
   const handleRemoveTag = (tagToRemove: string) => {
+    setIsLoading(true);
     const updatedTags = tags.filter((tag) => tag !== tagToRemove);
     setTags(updatedTags);
     handleFilterApply({
@@ -68,6 +70,7 @@ export default function SearchResult({
   // 검색 입력 처리
   const handleSearchInputSubmit = (value: string) => {
     const trimmedValue = value.trim();
+    setIsLoading(true);
 
     if (trimmedValue.startsWith("#")) {
       // 태그 검색 - URL을 통해 직접 처리
@@ -103,6 +106,7 @@ export default function SearchResult({
 
   useEffect(() => {
     if (selectedSort) {
+      setIsLoading(true);
       const updatedQuery = updateQuery(
         "create",
         SERVER_PARAMS_KEY.SORT,
@@ -114,6 +118,16 @@ export default function SearchResult({
       });
     }
   }, [selectedSort, router, pathName, updateQuery]);
+
+  // 페이지 로드 완료 시 로딩 해제
+  useEffect(() => {
+    setIsLoading(false);
+  }, [searchParams, results]);
+
+  // 컴포넌트 마운트 시 로딩 해제
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   return (
     <div className={styles.root}>
@@ -159,7 +173,12 @@ export default function SearchResult({
             </div>
           </div>
 
-          <div className={styles.resultsGrid}>
+          <div className={styles.resultsGrid} style={{ position: "relative" }}>
+            {isLoading && (
+              <div className={styles.loadingOverlay}>
+                <div className={styles.spinner} />
+              </div>
+            )}
             {results.map((dataset) => (
               <Link
                 key={dataset.datasetId}
@@ -197,7 +216,10 @@ export default function SearchResult({
       <FilterModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
-        onApply={handleFilterApply}
+        onApply={(filters) => {
+          setIsLoading(true);
+          handleFilterApply(filters);
+        }}
       />
     </div>
   );

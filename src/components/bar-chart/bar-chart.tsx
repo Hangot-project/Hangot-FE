@@ -15,15 +15,20 @@ import { getDatasetChart } from "../../shared/api/dataset-visual/getDatasetChart
 interface Props {
   datasetId: number;
   colName: string;
+  onLoadingChange?: (isLoading: boolean) => void;
 }
 
-export function BarChart({ datasetId, colName }: Props) {
+export function BarChart({ datasetId, colName, onLoadingChange }: Props) {
   const [dataset, setDataset] = useState<any>(null);
   const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    getDatasetChart(datasetId, colName).then(setDataset);
-  }, [datasetId, colName]);
+    onLoadingChange?.(true);
+    getDatasetChart(datasetId, colName).then((data) => {
+      setDataset(data);
+      onLoadingChange?.(false);
+    });
+  }, [datasetId, colName, onLoadingChange]);
 
   // Convert dataset to recharts format
   const rechartsData =

@@ -30,6 +30,7 @@ export function DatasetViewer({
   const [selectedAxis, setSelectedAxis] = useState<string>("");
   const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
   const [showNotSupported, setShowNotSupported] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (axisResult !== null) {
@@ -113,7 +114,13 @@ export function DatasetViewer({
       </div>
 
       {/* //* 그래프 */}
-      <div style={{ flex: 1, marginTop: "1.5rem" }}>
+      <div style={{ flex: 1, marginTop: "1.5rem", position: "relative" }}>
+        {isLoading && (
+          <div className={styles.loadingOverlay}>
+            <div className={styles.spinner} />
+          </div>
+        )}
+
         {showNotSupported ? (
           <div className={styles.warningContainer} style={{ flex: 1 }}>
             <h1 className={styles.warningTitle}>
@@ -123,19 +130,32 @@ export function DatasetViewer({
         ) : isBarActive && selectedAxis ? (
           <>
             {chartType === "막대" && (
-              <BarChart datasetId={datasetId} colName={selectedAxis} />
+              <BarChart
+                datasetId={datasetId}
+                colName={selectedAxis}
+                onLoadingChange={setIsLoading}
+              />
             )}
             {chartType === "선" && (
-              <LineChart datasetId={datasetId} colName={selectedAxis} />
+              <LineChart
+                datasetId={datasetId}
+                colName={selectedAxis}
+                onLoadingChange={setIsLoading}
+              />
             )}
             {chartType === "파이" && (
-              <PieChart datasetId={datasetId} colName={selectedAxis} />
+              <PieChart
+                datasetId={datasetId}
+                colName={selectedAxis}
+                onLoadingChange={setIsLoading}
+              />
             )}
           </>
         ) : (
           <DatasetTable
             datasetId={datasetId}
             onNotSupported={() => setShowNotSupported(true)}
+            onLoadingChange={setIsLoading}
           />
         )}
       </div>
