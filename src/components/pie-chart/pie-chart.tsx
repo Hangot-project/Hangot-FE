@@ -22,16 +22,9 @@ export function PieChart({ datasetId, colName, onLoadingChange }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      onLoadingChange?.(true);
-      try {
-        const response = await getDatasetPieChart(datasetId, colName);
-        setDataset(response.result);
-      } catch (error) {
-        console.error("Failed to fetch pie chart data:", error);
-        setDataset(null);
-      } finally {
-        onLoadingChange?.(false);
-      }
+      const response = await getDatasetPieChart(datasetId, colName);
+      setDataset(response.result);
+      onLoadingChange?.(false);
     };
     fetchData();
   }, [datasetId, colName, onLoadingChange]);

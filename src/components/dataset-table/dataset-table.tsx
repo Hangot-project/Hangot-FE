@@ -18,7 +18,6 @@ export function DatasetTable({ datasetId, onNotSupported, onLoadingChange }: Pro
 
   useEffect(() => {
     async function fetchData() {
-      onLoadingChange?.(true);
       const res = await getDatasetTable(datasetId);
       if (isApiError(res)) {
         if (res.status === 404) onNotSupported?.();

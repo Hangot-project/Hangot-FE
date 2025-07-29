@@ -30,7 +30,7 @@ export function DatasetViewer({
   const [selectedAxis, setSelectedAxis] = useState<string>("");
   const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
   const [showNotSupported, setShowNotSupported] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (axisResult !== null) {
