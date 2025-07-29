@@ -107,9 +107,11 @@ export function DatasetViewer({
               />
             </>
           )}
-          <div className={styles.buttonsContainer}>
-            <Buttons />
-          </div>
+          {axisResult !== null && (
+            <div className={styles.buttonsContainer}>
+              <Buttons />
+            </div>
+          )}
         </div>
       </div>
 
@@ -121,7 +123,7 @@ export function DatasetViewer({
           </div>
         )}
 
-        {showNotSupported ? (
+        {showNotSupported || axisResult === null ? (
           <div className={styles.warningContainer} style={{ flex: 1 }}>
             <h1 className={styles.warningTitle}>
               ⚠️ 시각화 기능이 지원되지 않는 데이터 입니다.
