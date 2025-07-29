@@ -38,6 +38,12 @@ export function DatasetViewer({
     }
   }, []);
 
+  useEffect(() => {
+    if (showNotSupported || axisResult === null) {
+      setIsLoading(false);
+    }
+  }, [showNotSupported, axisResult]);
+
   //* 데이터 시각화 선택 버튼
   const Buttons = useCallback(() => {
     if (isBarActive) {
