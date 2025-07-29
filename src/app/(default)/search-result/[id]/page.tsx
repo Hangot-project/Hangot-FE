@@ -74,10 +74,18 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
 
         <div className={styles.downloadSection}>
-          <span className={styles.fileName}>{datasetDetail.resourceName}</span>
-          <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
-            ⬇
-          </a>
+          {datasetDetail.resourceUrl ? (
+            <>
+              <span className={styles.fileName}>{datasetDetail.resourceName}</span>
+              <a className={styles.downloadBtn} href={datasetDetail.resourceUrl}>
+                ⬇
+              </a>
+            </>
+          ) : (
+            <span className={styles.noDownload}>
+              파일을 제공하지 않습니다.(출처 사이트 확인)
+            </span>
+          )}
         </div>
       </header>
 

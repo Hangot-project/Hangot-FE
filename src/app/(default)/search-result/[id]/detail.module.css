@@ -287,6 +287,13 @@
   margin: 0 auto;
 }
 
+.noDownload {
+  font-family: "NotoSansRegular";
+  font-size: 0.95rem;
+  color: #64748b;
+  font-weight: 400;
+}
+
 .fileName {
   font-family: "NotoSansMedium";
   font-size: 1rem;
