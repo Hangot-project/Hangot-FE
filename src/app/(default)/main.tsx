@@ -81,7 +81,8 @@ export default function Main() {
                   position: "relative",
                   backgroundColor: "#ffffff",
                   borderRadius: "25px",
-                  width: "100%",
+                  width: "30rem",
+                  maxWidth: "100%",
                   boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 }}
               />
