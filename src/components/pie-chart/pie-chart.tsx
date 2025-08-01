@@ -22,6 +22,7 @@ export function PieChart({ datasetId, colName, onLoadingChange }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
+      onLoadingChange?.(true);
       const response = await getDatasetPieChart(datasetId, colName);
       setDataset(response.result);
       onLoadingChange?.(false);

@@ -15,6 +15,9 @@ import {
 } from "../../../public/svgs";
 import { SearchSortDropdown } from "../drop-down/search-sort-dropdown";
 import { DatasetAxisResult } from "../../shared/api/dataset-visual/type";
+import { getDatasetTable } from "../../shared/api/dataset-visual/getDatasetTable";
+import { DatasetTableType } from "../../shared/types/dataset";
+import { isApiError } from "../../shared/types/error";
 
 export function DatasetViewer({
   datasetId,
@@ -31,12 +34,27 @@ export function DatasetViewer({
   const [chartType, setChartType] = useState<"막대" | "선" | "파이">("막대");
   const [showNotSupported, setShowNotSupported] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [tableData, setTableData] = useState<DatasetTableType | null>(null);
 
   useEffect(() => {
     if (axisResult !== null) {
       setSelectedAxis(axisResult.axis[0]);
     }
   }, []);
+
+  useEffect(() => {
+    async function fetchTableData() {
+      const res = await getDatasetTable(datasetId);
+      if (isApiError(res)) {
+        if (res.status === 404) setShowNotSupported(true);
+        setIsLoading(false);
+        return;
+      }
+      setTableData(res);
+      setIsLoading(false);
+    }
+    fetchTableData();
+  }, [datasetId]);
 
   useEffect(() => {
     if (showNotSupported || axisResult === null) {
@@ -160,11 +178,7 @@ export function DatasetViewer({
             )}
           </>
         ) : (
-          <DatasetTable
-            datasetId={datasetId}
-            onNotSupported={() => setShowNotSupported(true)}
-            onLoadingChange={setIsLoading}
-          />
+          <DatasetTable tableData={tableData} />
         )}
       </div>
     </div>

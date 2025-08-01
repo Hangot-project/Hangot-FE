@@ -23,6 +23,7 @@ export function LineChart({ datasetId, colName, onLoadingChange }: Props) {
   const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
 
   useEffect(() => {
+    onLoadingChange?.(true);
     getDatasetChart(datasetId, colName).then((data) => {
       setDataset(data);
       onLoadingChange?.(false);
